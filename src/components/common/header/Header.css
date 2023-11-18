@@ -1,0 +1,45 @@
+.active-link {
+  color: #000;
+  font-weight: 500;
+}
+
+.header .menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.header .menu-toggle:focus {
+  outline: none;
+}
+
+.header .menu-toggle svg {
+  fill: #333; /* Change the color as needed */
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in;
+}
+
+/* Ensure visibility on mobile */
+@media screen and (max-width: 768px) {
+  .header .menu-toggle {
+    display: flex;
+  }
+}
