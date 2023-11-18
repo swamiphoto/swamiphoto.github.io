@@ -1,9 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.358d4bf8.css",
-    "main.js": "/static/js/main.e7aae8f5.js",
+    "main.css": "/static/css/main.79cb7a33.css",
+    "main.js": "/static/js/main.14db8318.js",
     "static/js/787.90cb7f38.chunk.js": "/static/js/787.90cb7f38.chunk.js",
+    "static/media/falltrees.jpg": "/static/media/falltrees.91b728a3e5f89b94b5a7.jpg",
+    "static/media/fuzzyfall.jpg": "/static/media/fuzzyfall.24cf9d250b574e7350d7.jpg",
+    "static/media/astro.jpg": "/static/media/astro.b152be9d1b48d3bfd6e3.jpg",
+    "static/media/kerala.jpg": "/static/media/kerala.88954b5701c5b9b60275.jpg",
+    "static/media/fog.jpg": "/static/media/fog.d372830ede6bdf526970.jpg",
     "static/media/avatar_camera.jpg": "/static/media/avatar_camera.5199f138919a9fe6588c.jpg",
+    "static/media/bbridge.jpg": "/static/media/bbridge.707bc0c3fef4fb61b843.jpg",
     "static/media/Geist-UltraBlack.otf": "/static/media/Geist-UltraBlack.b5219c949c41f49cc34b.otf",
     "static/media/Geist-Bold.otf": "/static/media/Geist-Bold.69afd26d14abc82836b2.otf",
     "static/media/Geist-Black.otf": "/static/media/Geist-Black.4f08221378c119aaf6df.otf",
@@ -41,12 +47,12 @@
     "static/media/GeistMono-Thin.woff2": "/static/media/GeistMono-Thin.ba451ef0a7f09fedca65.woff2",
     "static/media/Geist-Thin.woff2": "/static/media/Geist-Thin.ecab465892339ba4cf96.woff2",
     "index.html": "/index.html",
-    "main.358d4bf8.css.map": "/static/css/main.358d4bf8.css.map",
-    "main.e7aae8f5.js.map": "/static/js/main.e7aae8f5.js.map",
+    "main.79cb7a33.css.map": "/static/css/main.79cb7a33.css.map",
+    "main.14db8318.js.map": "/static/js/main.14db8318.js.map",
     "787.90cb7f38.chunk.js.map": "/static/js/787.90cb7f38.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.358d4bf8.css",
-    "static/js/main.e7aae8f5.js"
+    "static/css/main.79cb7a33.css",
+    "static/js/main.14db8318.js"
   ]
 }
