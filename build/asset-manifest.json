@@ -1,20 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.cbac1729.css",
-    "main.js": "/static/js/main.187548da.js",
-    "static/js/787.841f5db4.chunk.js": "/static/js/787.841f5db4.chunk.js",
-    "static/media/avatar2.png": "/static/media/avatar2.550bd0cf665c3c1fcd33.png",
-    "static/media/journaling.png": "/static/media/journaling.f13a322be92e7d527d7b.png",
-    "static/media/kitchen-timer.png": "/static/media/kitchen-timer.f9da31c1785f02297c07.png",
-    "static/media/Projects5.png": "/static/media/Projects5.1688d1cfcda8528d48e3.png",
-    "static/media/QTR Logo Dark.png": "/static/media/QTR Logo Dark.cd97859ac14957648f20.png",
-    "static/media/Logo Icon.png": "/static/media/Logo Icon.02654a82ea77fb0eb100.png",
-    "static/media/Daily Review.png": "/static/media/Daily Review.6c277a5a6944d3079282.png",
-    "static/media/Days.png": "/static/media/Days.3898ddf2dc0084c6b5c8.png",
-    "static/media/goals 3.png": "/static/media/goals 3.7c3a81ac3e408dedd88a.png",
-    "static/media/Today3.png": "/static/media/Today3.6e149ca17f009cc4063b.png",
-    "static/media/rachel.jpeg": "/static/media/rachel.5ec7e52c11f7bb097f2a.jpeg",
-    "static/media/journal2.png": "/static/media/journal2.b4b3255a47422cb591b7.png",
+    "main.css": "/static/css/main.358d4bf8.css",
+    "main.js": "/static/js/main.e7aae8f5.js",
+    "static/js/787.90cb7f38.chunk.js": "/static/js/787.90cb7f38.chunk.js",
+    "static/media/avatar_camera.jpg": "/static/media/avatar_camera.5199f138919a9fe6588c.jpg",
     "static/media/Geist-UltraBlack.otf": "/static/media/Geist-UltraBlack.b5219c949c41f49cc34b.otf",
     "static/media/Geist-Bold.otf": "/static/media/Geist-Bold.69afd26d14abc82836b2.otf",
     "static/media/Geist-Black.otf": "/static/media/Geist-Black.4f08221378c119aaf6df.otf",
@@ -33,7 +22,6 @@
     "static/media/GeistMono-Light.otf": "/static/media/GeistMono-Light.e49204145e52fb68d9e7.otf",
     "static/media/GeistMono-Thin.otf": "/static/media/GeistMono-Thin.7150b565296d2aa0af3d.otf",
     "static/media/Geist-Thin.otf": "/static/media/Geist-Thin.78d571ed05d986d33cff.otf",
-    "static/media/Logos.png": "/static/media/Logos.1ac8c489d125f2a0f06f.png",
     "static/media/Geist-UltraBlack.woff2": "/static/media/Geist-UltraBlack.e4274a14695532a43f2b.woff2",
     "static/media/GeistMono-UltraBlack.woff2": "/static/media/GeistMono-UltraBlack.55451a9a707205651f6e.woff2",
     "static/media/Geist-Black.woff2": "/static/media/Geist-Black.9dc75999ab6e4a0b89f3.woff2",
@@ -50,16 +38,15 @@
     "static/media/Geist-Light.woff2": "/static/media/Geist-Light.40d2f4f41bcd296e9b00.woff2",
     "static/media/Geist-Regular.woff2": "/static/media/Geist-Regular.92288878efa7b59a9bb6.woff2",
     "static/media/Geist-UltraLight.woff2": "/static/media/Geist-UltraLight.d8f765fd8e53336869d2.woff2",
-    "static/media/michael.jpeg": "/static/media/michael.53ae1069effbb2afb110.jpeg",
     "static/media/GeistMono-Thin.woff2": "/static/media/GeistMono-Thin.ba451ef0a7f09fedca65.woff2",
     "static/media/Geist-Thin.woff2": "/static/media/Geist-Thin.ecab465892339ba4cf96.woff2",
     "index.html": "/index.html",
-    "main.cbac1729.css.map": "/static/css/main.cbac1729.css.map",
-    "main.187548da.js.map": "/static/js/main.187548da.js.map",
-    "787.841f5db4.chunk.js.map": "/static/js/787.841f5db4.chunk.js.map"
+    "main.358d4bf8.css.map": "/static/css/main.358d4bf8.css.map",
+    "main.e7aae8f5.js.map": "/static/js/main.e7aae8f5.js.map",
+    "787.90cb7f38.chunk.js.map": "/static/js/787.90cb7f38.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cbac1729.css",
-    "static/js/main.187548da.js"
+    "static/css/main.358d4bf8.css",
+    "static/js/main.e7aae8f5.js"
   ]
 }
