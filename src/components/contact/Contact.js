@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Contact.css";
 import SectionHeader from "../section-header/SectionHeader";
 import CustomButton from "../custom-button/CustomButton";
@@ -6,6 +6,8 @@ import { notification, Button } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 
 const Contact = () => {
+  const formRef = useRef(null); // Create a ref for the form
+
   const openNotification = (type, message, description) => {
     notification[type]({
       message,
@@ -42,13 +44,15 @@ const Contact = () => {
     } catch (error) {
       console.error("Error sending email:", error);
       openNotification("error", "Error", "Sorry, there was an issue sending your message. Please reach me at (602) 561-7190.");
+    } finally {
+      formRef.current.reset();
     }
   };
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <SectionHeader title="Get in touch" description="Let me know what you need, and I'll get back to you ASAP." />
-      <form onSubmit={handleSubmit} action="" className="mx-auto mb-0 mt-8 max-w-lg space-y-4">
+      <form ref={formRef} onSubmit={handleSubmit} action="" className="mx-auto mb-0 mt-8 max-w-lg space-y-4">
         <div>
           <label htmlFor="name" className="sr-only">
             Name
