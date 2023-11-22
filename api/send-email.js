@@ -1,28 +1,36 @@
-// api/send-email.js
 const nodemailer = require("nodemailer");
 
 module.exports = async (req, res) => {
-  const { name, email, message } = req.body; // Adjust these fields based on your form
+  // Add CORS headers
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Adjust this in production
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Headers, Content-Type, Authorization, Origin, Accept");
 
-  // Set up Nodemailer transporter
+  // OPTIONS request handling
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  const { name, email, message } = req.body;
+
   const transporter = nodemailer.createTransport({
-    // Configure with your SMTP server details
     host: "smtp.postale.io",
     port: 587,
     secure: false,
     auth: {
-      user: "swami@swamiphoto.com", // Your email
-      pass: "PhqQF5STHpUt", // Your password
+      user: "swami@swamiphoto.com",
+      pass: "PhqQF5STHpUt",
     },
   });
 
   try {
     await transporter.sendMail({
-      from: "swami@swamiphoto.com", // Sender address
-      to: "swami@swamiphoto.com", // Replace with recipient email
+      from: "swami@swamiphoto.com",
+      to: "swami@swamiphoto.com",
       subject: `New message from ${name}`,
-      text: message, // Plain text body
-      html: `<p>${message}</p>`, // HTML body
+      text: message,
+      html: `<p>${message}</p>`,
     });
 
     res.status(200).send({ message: "Email sent successfully" });
