@@ -4,10 +4,41 @@ import SectionHeader from "../section-header/SectionHeader";
 import CustomButton from "../custom-button/CustomButton";
 
 const Contact = () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+      message: event.target.message.value,
+    };
+
+    try {
+      const response = await fetch("https://swamiphoto-github-io.vercel.app/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log("Email sent successfully");
+        // Handle successful email sending (e.g., showing a message to the user)
+      } else {
+        console.log("Failed to send email");
+        // Handle failure
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      // Handle error
+    }
+  };
+
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <SectionHeader title="Get in touch" description="Let me know what you need, and I'll get back to you ASAP." />
-      <form action="" className="mx-auto mb-0 mt-8 max-w-lg space-y-4">
+      <form onSubmit={handleSubmit} action="" className="mx-auto mb-0 mt-8 max-w-lg space-y-4">
         <div>
           <label htmlFor="name" className="sr-only">
             Name
@@ -40,7 +71,7 @@ const Contact = () => {
           Submit
         </button> */}
 
-        <CustomButton label="Send" className="w-full rounded" />
+        <CustomButton type="submit" label="Send" className="w-full rounded" />
       </form>
     </div>
   );
