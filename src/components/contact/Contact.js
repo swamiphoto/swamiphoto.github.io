@@ -2,8 +2,18 @@ import React from "react";
 import "./Contact.css";
 import SectionHeader from "../section-header/SectionHeader";
 import CustomButton from "../custom-button/CustomButton";
+import { notification, Button } from "antd";
+import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 
 const Contact = () => {
+  const openNotification = (type, message, description) => {
+    notification[type]({
+      message,
+      description,
+      icon: type === "success" ? <SmileOutlined style={{ color: "#108ee9" }} /> : <FrownOutlined style={{ color: "#ff4d4f" }} />,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -24,14 +34,14 @@ const Contact = () => {
 
       if (response.ok) {
         console.log("Email sent successfully");
-        // Handle successful email sending (e.g., showing a message to the user)
+        openNotification("success", "Email sent!", "Thanks for reaching out. I'll reply ASAP.");
       } else {
-        console.log("Failed to send email");
-        // Handle failure
+        console.log("Error sending email");
+        openNotification("error", "Error", "Sorry, there was an issue sending your message. Please reach me at (602) 561-7190.");
       }
     } catch (error) {
       console.error("Error sending email:", error);
-      // Handle error
+      openNotification("error", "Error", "Sorry, there was an issue sending your message. Please reach me at (602) 561-7190.");
     }
   };
 
