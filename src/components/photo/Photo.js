@@ -3,7 +3,7 @@ import React from "react";
 function Photo({ src, alt }) {
   return (
     <div className="flex justify-center items-center">
-      <img src={src} alt={alt} className="max-w-full h-auto border border-gray-300 shadow" />
+      <img src={src} alt={alt} className="max-w-full h-auto border border-gray-300 shadow-md mb-10" />
     </div>
   );
 }
