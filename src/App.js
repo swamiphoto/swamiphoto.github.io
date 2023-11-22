@@ -13,7 +13,7 @@ import Tennis from "./components/pages/tennis/Tennis";
 function App() {
   return (
     <Router>
-      <div className="App bg-gray-200">
+      <div className="App">
         <Header />
         <div className="px-4 md:px-0">
           <Routes>

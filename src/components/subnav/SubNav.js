@@ -20,7 +20,7 @@ const SubNav = () => {
 
   return (
     <div>
-      <ul className="hidden sm:flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-geist-mono">
+      <ul className="hidden md:flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-geist-mono">
         {navLinks.map((link, index) => (
           <li key={index}>
             <a className={`text-gray-800 transition hover:text-gray-900 font-medium ${location.pathname === link.path ? "text-red-500" : ""}`} href={link.path}>
@@ -29,7 +29,7 @@ const SubNav = () => {
           </li>
         ))}
       </ul>
-      <Select className="sm:hidden w-3/5" defaultValue={location.pathname} onChange={handleChange}>
+      <Select className="md:hidden w-3/5" defaultValue={location.pathname} onChange={handleChange} size="large">
         {navLinks.map((link, index) => (
           <Option key={index} value={link.path}>
             {link.name}

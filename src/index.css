@@ -141,6 +141,7 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
   scroll-behavior: smooth;
+  @apply bg-gray-200;
 }
 
 code {

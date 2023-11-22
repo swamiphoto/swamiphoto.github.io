@@ -19,8 +19,8 @@ const Home = () => {
           <a href="https://dribbble.com/swamiphoto" target="_blank">
             designer
           </a>
-          , and <a href="">photographer</a>. I've enjoyed shooting <a href="/bollywood">Bollywood</a> stars and tennis icons like <a href="/tennis">Federer</a>. I'm now focusing on <a href="/headshots">business headshots</a>, <a href="/portraits">portraits</a>, and{" "}
-          <a href="/landscapes">landscapes</a>. Hope you enjoy my collection.
+          , and photographer. I've enjoyed shooting <a href="/bollywood">Bollywood</a> stars and tennis icons like <a href="/tennis">Federer</a>. I'm now focusing on <a href="/headshots">business headshots</a>, <a href="/portraits">portraits</a>, and <a href="/landscapes">landscapes</a>. Hope you
+          enjoy my collection.
         </p>
       </Hero>
 
