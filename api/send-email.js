@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     await transporter.sendMail({
       from: "swami@swamiphoto.com",
       to: "swami@swamiphoto.com",
-      subject: `New message from ${name}`,
+      subject: `Headshot enquiry from ${name}`,
       text: message,
       html: `<p>${message}</p>`,
     });

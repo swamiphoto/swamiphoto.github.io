@@ -151,6 +151,6 @@ a {
   @apply text-gray-800 hover:underline;
 }
 
-.hero a {
+.underlined-links a {
   @apply underline hover:text-red-500;
 }

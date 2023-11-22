@@ -15,15 +15,17 @@ function App() {
     <Router>
       <div className="App bg-gray-200">
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/portraits" element={<Portraits />} />
-          <Route path="/bollywood" element={<Bollwood />} />
-          <Route path="/tennis" element={<Tennis />} />
-          <Route path="/headshots" element={<Headshots />} />
-          <Route path="/about" element={<About />} />
-          {/* You can add a 404 Not Found page here */}
-        </Routes>
+        <div className="px-4 md:px-0">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/portraits" element={<Portraits />} />
+            <Route path="/bollywood" element={<Bollwood />} />
+            <Route path="/tennis" element={<Tennis />} />
+            <Route path="/headshots" element={<Headshots />} />
+            <Route path="/about" element={<About />} />
+            {/* You can add a 404 Not Found page here */}
+          </Routes>
+        </div>
         <Footer />
       </div>
     </Router>
