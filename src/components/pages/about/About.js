@@ -30,18 +30,18 @@ const About = () => {
           <a href="https://www.swamiphoto.com/blog/a-day-in-st-andrews-malawi" target="_blank" rel="noopener noreferrer">
             those recordings
           </a>{" "}
-          have become my most precious memories of Africa. Here’s a clip of my chemistry teacher getting pissed of at me for recording him while he was trying to explaining ligands.
+          have become my most precious memories of Africa. Here’s Mt. Studd getting pissed of at me with the camera while he was trying to explaining ligands.
         </p>
         <p>
           <iframe src="https://www.youtube.com/embed/J6FmpEuDBWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="w-full aspect-video"></iframe>
         </p>
 
         <p>
-          I'm currenty focuced on shooting <a href="/headshots">premium headshots</a> in my garage studio, <a href="portraits">portraits</a>, and <a href="/landscapes">landscapes</a>. I've also done <a href="/bollywood">Bollywood concerts</a> and{" "}
+          I'm currenty focusing on landscapes and portraits, espeically <a href="/headshots">business headshots</a> (if you need one, let me know). I've shot <a href="/bollywood">Bollywood concerts</a> and{" "}
           <a href="/tennis" target="_blank" rel="noopener noreferrer">
             sports
           </a>
-          , mainly tennis tournaments. In 2018, I was one of the official photographer at the BNP Paribas Open in Indian Wells.
+          , mainly tennis tournaments. In 2018, I was an official photographer at the BNP Paribas Open in Indian Wells.
         </p>
 
         <p>
@@ -53,15 +53,25 @@ const About = () => {
         </p>
 
         <p>
-          Being an engineer with multiple interests and side hustles, I’ve had to learn the hard way how to manage time effectively. I share these lessons on{" "}
+          Being a full-time engineer with multiple interests and side hustles, I’ve had to learn the hard way how to manage time effectively. I share these lessons on{" "}
           <a href="https://swamiphoto.medium.com" target="_blank" rel="noopener noreferrer">
             Medium
           </a>
-          .
+          . These lessons have now become the foundation of a tool that I've created called{" "}
+          <a href="https://qtr.ai" target="_blank" rel="noopener noreferrer">
+            QTR
+          </a>
+          . It's a simple, yet powerful tool that helps you manage your time well and achieve your goals faster.
         </p>
 
         <p>Thanks for stopping by. Hope you find something here that inspires you.</p>
-        <p className="font-bold">— Swami</p>
+        <p className="font-bold">
+          Swami Venkataramani
+          <br />
+          <a href="mailto:swami@swamiphoto.com" className="text-gray-500 font-normal">
+            swami@swamiphoto.com
+          </a>
+        </p>
       </div>
     </div>
   );
