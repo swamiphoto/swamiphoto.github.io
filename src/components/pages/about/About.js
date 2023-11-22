@@ -30,7 +30,7 @@ const About = () => {
           <a href="https://www.swamiphoto.com/blog/a-day-in-st-andrews-malawi" target="_blank" rel="noopener noreferrer">
             those recordings
           </a>{" "}
-          are my most precious memories of Africa. Here’s a clip of my chemistry teacher getting pissed of at me for recording him while he was trying to explaining ligands.
+          have become my most precious memories of Africa. Here’s a clip of my chemistry teacher getting pissed of at me for recording him while he was trying to explaining ligands.
         </p>
         <p>
           <iframe src="https://www.youtube.com/embed/J6FmpEuDBWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="w-full aspect-video"></iframe>
