@@ -24,7 +24,7 @@ const Contact = () => {
     };
 
     try {
-      const response = await fetch("https://swamiphoto-github-io.vercel.app/api/send-email", {
+      const response = await fetch("https://cors-anywhere.herokuapp.com/https://swamiphoto-github-io.vercel.app/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
