@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // Adjust this in production
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Headers, Content-Type, Authorization, Origin, Accept");
+  res.setHeader("Access-Control-Allow-Origin", "https://www.swamiphoto.com");
 
   // OPTIONS request handling
   if (req.method === "OPTIONS") {
