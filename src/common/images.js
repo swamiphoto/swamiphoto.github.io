@@ -1,4 +1,4 @@
-const bucketUrl = "https://storage.googleapis.com/swamiphoto";
+const bucketUrl = "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto";
 
 const IMAGES = {
   landscapes: {
