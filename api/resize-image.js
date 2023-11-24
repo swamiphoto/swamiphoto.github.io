@@ -1,5 +1,5 @@
+import fetch from "node-fetch";
 const sharp = require("sharp");
-const fetch = require("node-fetch"); // You'll need to install node-fetch if you don't already have it
 
 module.exports = async (req, res) => {
   // Add CORS headers
