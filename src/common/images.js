@@ -1,4 +1,4 @@
-const bucketUrl = "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto";
+const bucketUrl = "https://storage.googleapis.com/swamiphoto";
 
 const IMAGES = {
   landscapes: {
@@ -45,20 +45,22 @@ const IMAGES = {
     shreya: `${bucketUrl}/photos/bollywood/shreya.jpeg`,
   },
   tennis: {
-    fed1: `${bucketUrl}/photos/tennis/federer/fed1.jpg`,
-    fed2: `${bucketUrl}/photos/tennis/federer/fed2.jpg`,
-    fed3: `${bucketUrl}/photos/tennis/federer/fed3.jpg`,
-    fed4: `${bucketUrl}/photos/tennis/federer/fed4.jpg`,
-    fed5: `${bucketUrl}/photos/tennis/federer/fed5.jpg`,
-    fed6: `${bucketUrl}/photos/tennis/federer/fed6.jpeg`,
-    fed7: `${bucketUrl}/photos/tennis/federer/fed7.jpeg`,
-    fed8: `${bucketUrl}/photos/tennis/federer/fed8.jpeg`,
-    fed9: `${bucketUrl}/photos/tennis/federer/fed9.jpeg`,
-    fed10: `${bucketUrl}/photos/tennis/federer/fed10.jpeg`,
-    fed11: `${bucketUrl}/photos/tennis/federer/fed11.jpeg`,
-    fed12: `${bucketUrl}/photos/tennis/federer/fed12.jpeg`,
-    fed13: `${bucketUrl}/photos/tennis/federer/fed13.jpeg`,
-    fed14: `${bucketUrl}/photos/tennis/federer/fed14.jpeg`,
+    federer: {
+      fed1: `${bucketUrl}/photos/tennis/federer/fed1.jpg`,
+      fed2: `${bucketUrl}/photos/tennis/federer/fed2.jpg`,
+      fed3: `${bucketUrl}/photos/tennis/federer/fed3.jpg`,
+      fed4: `${bucketUrl}/photos/tennis/federer/fed4.jpg`,
+      fed5: `${bucketUrl}/photos/tennis/federer/fed5.jpg`,
+      fed6: `${bucketUrl}/photos/tennis/federer/fed6.jpeg`,
+      fed7: `${bucketUrl}/photos/tennis/federer/fed7.jpeg`,
+      fed8: `${bucketUrl}/photos/tennis/federer/fed8.jpeg`,
+      fed9: `${bucketUrl}/photos/tennis/federer/fed9.jpeg`,
+      fed10: `${bucketUrl}/photos/tennis/federer/fed10.jpeg`,
+      fed11: `${bucketUrl}/photos/tennis/federer/fed11.jpeg`,
+      fed12: `${bucketUrl}/photos/tennis/federer/fed12.jpeg`,
+      fed13: `${bucketUrl}/photos/tennis/federer/fed13.jpeg`,
+      fed14: `${bucketUrl}/photos/tennis/federer/fed14.jpeg`,
+    },
     novak: `${bucketUrl}/photos/tennis/novak.jpeg`,
     osaka: `${bucketUrl}/photos/tennis/osaka.jpeg`,
     dimitrov: `${bucketUrl}/photos/tennis/dimitrov.jpeg`,
