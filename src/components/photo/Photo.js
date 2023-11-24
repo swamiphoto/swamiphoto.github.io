@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function Photo({ src, alt }) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const srcResized = src + "?height=1000";
+  const srcResized = src + "?width=1300";
 
   return (
     <div className={`flex justify-center items-center  ${!isLoaded ? "animate-pulse" : ""}`}>
