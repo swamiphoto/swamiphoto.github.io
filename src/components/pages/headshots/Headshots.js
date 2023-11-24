@@ -13,14 +13,16 @@ const Headshots = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <Hero title="Premium Headshots" showSubNav={false}>
-        <p>Having shot Bollywood stars and sports icons like Roger Federer, I'm confident I can create a premium headshot for you that will transform your career. Only $200. 100% guarantee. Just do it, you'll thank me in 10 years.</p>
+        <p>Having shot Bollywood stars and sports icons like Roger Federer, I'm confident I can create a premium headshot for you that will transform your career.</p>
 
         <CTA className="mt-6 mb-2" />
       </Hero>
 
+      <Photo src={IMAGES.headshots.ashwini} alt="Photo 1" />
+
       <Gallery layout="verticalPair">
-        <Photo src={IMAGES.headshots.ashwini} alt="Photo 1" />
         <Photo src={IMAGES.headshots.searce5} alt="Photo 2" />
+        <Photo src={IMAGES.headshots.raj} alt="Photo 1" />
       </Gallery>
 
       <Testimonial

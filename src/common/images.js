@@ -62,6 +62,7 @@ import ashwini from "./../assets/images/photos/headshots/ashwini.jpg";
 import ashwini2 from "./../assets/images/photos/headshots/ashwini2.jpeg";
 import vijay from "./../assets/images/photos/headshots/vijay.jpg";
 import vmirpuri from "./../assets/images/photos/headshots/vmirpuri.jpg";
+import raj from "./../assets/images/photos/headshots/raj.jpg";
 import searce1 from "./../assets/images/photos/headshots/searce1.jpg";
 import searce2 from "./../assets/images/photos/headshots/searce2.jpg";
 import searce3 from "./../assets/images/photos/headshots/searce3.jpg";
@@ -147,6 +148,7 @@ const IMAGES = {
     ashwini2,
     vijay,
     vmirpuri,
+    raj,
     searce1,
     searce2,
     searce3,
