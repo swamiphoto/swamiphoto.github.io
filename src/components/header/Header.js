@@ -36,6 +36,11 @@ const Header = () => {
                 </a>
               </li>
               <li>
+                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/store")}`} href="https://store.swamiphoto.com/landscapes" target="_blank" rel="noreferrer">
+                  Store
+                </a>
+              </li>
+              <li>
                 <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/podcast")}`} href="https://swamiphoto.substack.com" target="_blank" rel="noreferrer">
                   Podcast
                 </a>

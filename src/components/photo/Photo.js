@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Photo.css";
 
 function Photo({ src, alt }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -6,7 +7,7 @@ function Photo({ src, alt }) {
 
   return (
     <div className={`flex justify-center items-center  ${!isLoaded ? "animate-pulse" : ""}`}>
-      <img src={srcResized} alt={alt} loading="lazy" className={`transition-opacity duration-500 ease-in-out max-w-full h-auto border border-gray-300 shadow-md mb-4 md:mb-10 ${isLoaded ? "opacity-100" : "opacity-0"}`} onLoad={() => setIsLoaded(true)} />
+      <img src={srcResized} alt={alt} loading="lazy" className={`photo transition-opacity duration-500 ease-in-out max-w-full h-auto mb-4 md:mb-10 ${isLoaded ? "opacity-100" : "opacity-0"}`} onLoad={() => setIsLoaded(true)} />
     </div>
   );
 }

@@ -10,7 +10,7 @@ const About = () => {
         <h2 className="text-2xl font-bold mt-20 mb-6">Hello friends.</h2>
 
         <p>
-          I’m Swami. I’m an engineer, designer, and photographer, and co-founder of{" "}
+          Welcome to my site! I’m Swami. I’m an engineer, designer, and photographer, and co-founder of{" "}
           <a href="https://qtr.ai" target="_blank" rel="noopener noreferrer">
             QTR
           </a>
