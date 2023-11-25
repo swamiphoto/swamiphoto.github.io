@@ -1,8 +1,8 @@
 import React from "react";
-import Photo from "../../photo/Photo";
-import IMAGES from "../../../common/images";
-import Gallery from "../../gallery/Gallery";
-import Hero from "../../hero/Hero";
+import Photo from "../../components/photo/Photo";
+import IMAGES from "../../common/images";
+import Gallery from "../../components/gallery/Gallery";
+import Hero from "../../components/hero/Hero";
 
 const Tennis = () => {
   return (

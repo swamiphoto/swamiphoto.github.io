@@ -4,6 +4,7 @@ import "./Header.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { TfiClose } from "react-icons/tfi";
 import IMAGES from "../../common/images";
+import { useScrollContext } from "../ScrollContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,8 +16,10 @@ const Header = () => {
 
   const linkStyle = (path) => (location.pathname === path ? "font-bold underline" : "text-gray-500");
 
+  const { isScrolled } = useScrollContext();
+
   return (
-    <header className="bg-gray-200 sticky top-0 z-20 w-full header">
+    <header className="w-full header">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 w-full">
         <a className="block text-teal-600" href="/">
           <img src="logo.png" alt="Logo" className="h-4" />

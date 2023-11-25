@@ -5,6 +5,16 @@
   background-size: cover;
 }
 
+body {
+  transition: background-color 1.7s ease, color 1.7s ease; /* Smooth transition for background and color */
+}
+
+.body-dark {
+  background-color: #000;
+  color: #fff;
+  transition: background-color 1.7s ease, color 1.7s ease;
+}
+
 @keyframes typewriter {
   from {
     width: 0;

@@ -1,7 +1,6 @@
 import React from "react";
 import "./About.css";
-import IMAGES from "../../../common/images";
-import Photo from "../../photo/Photo";
+import IMAGES from "../../common/images";
 
 const About = () => {
   return (

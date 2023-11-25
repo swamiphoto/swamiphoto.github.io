@@ -1,13 +1,13 @@
 import React from "react";
-import Photo from "../../photo/Photo";
-import IMAGES from "../../../common/images";
-import Gallery from "../../gallery/Gallery";
-import Feature from "../../features/Features";
-import Hero from "../../hero/Hero";
-import CTA from "../../cta/CTA";
-import Contact from "../../contact/Contact";
+import Photo from "../../components/photo/Photo";
+import IMAGES from "../../common/images";
+import Gallery from "../../components/gallery/Gallery";
+import Feature from "../../components/features/Features";
+import Hero from "../../components/hero/Hero";
+import CTA from "../../components/cta/CTA";
+import Contact from "../../components/contact/Contact";
 import "./Headshots.css";
-import Testimonial from "../../testimonial/Testimonial";
+import Testimonial from "../../components/testimonial/Testimonial";
 
 const Headshots = () => {
   return (
