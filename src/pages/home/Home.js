@@ -10,8 +10,14 @@ const Home = () => {
   const { isScrolled, setIsScrolled } = useScrollContext();
 
   const handleScroll = () => {
-    const threshold = 50; // Adjust this value based on your preference
-    setIsScrolled(window.scrollY > threshold);
+    const threshold = 50;
+    const bottomReached = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold;
+
+    if (bottomReached) {
+      setIsScrolled(false); // Reset when bottom is reached
+    } else {
+      setIsScrolled(window.scrollY > threshold);
+    }
   };
 
   useEffect(() => {
