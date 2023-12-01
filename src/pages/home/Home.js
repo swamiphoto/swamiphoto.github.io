@@ -2,47 +2,12 @@ import React, { useEffect } from "react";
 import Hero from "../../components/hero/Hero";
 import Photo from "../../components/photo/Photo";
 import IMAGES from "../../common/images";
-import Gallery from "../../components/gallery/Gallery";
+import Photos from "../../components/photos/Photos";
 import "./Home.css";
-import { useScrollContext } from "../../components/ScrollContext";
+import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Home = () => {
-  const { isScrolled, setIsScrolled } = useScrollContext();
-
-  const handleScroll = () => {
-    const threshold = 50;
-    const bottomReached = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold;
-
-    if (bottomReached) {
-      setIsScrolled(false); // Reset when bottom is reached
-    } else {
-      setIsScrolled(window.scrollY > threshold);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [setIsScrolled]);
-
-  useEffect(() => {
-    if (isScrolled) {
-      document.body.style.backgroundColor = "#343a40"; // Dark background color
-      document.body.style.color = "#343a40"; // Light text color
-      Array.from(document.links).forEach((link) => {
-        link.style.color = "#343a40"; // Light color for links
-      });
-    } else {
-      document.body.style.backgroundColor = ""; // Reset to original styles
-      document.body.style.color = ""; // Reset to original text color
-      Array.from(document.links).forEach((link) => {
-        link.style.color = ""; // Reset links to original color
-      });
-    }
-  }, [isScrolled]);
+  useDarkenOnScroll();
 
   return (
     <main className="max-w-7xl mx-auto">
@@ -61,24 +26,24 @@ const Home = () => {
         </p>
       </Hero>
 
-      <Gallery layout="verticalPair">
+      <Photos layout="verticalPair">
         <Photo src={IMAGES.landscapes.comet} alt="Photo 1" />
         <Photo src={IMAGES.landscapes.astro} alt="Photo 2" />
-      </Gallery>
+      </Photos>
       <Photo src={IMAGES.landscapes.mac} alt="" />
       <Photo src={IMAGES.landscapes.fog} alt="" />
       <Photo src={IMAGES.landscapes.paris} alt="" />
 
-      <Gallery layout="verticalPair">
+      <Photos layout="verticalPair">
         <Photo src={IMAGES.landscapes.hotcreek} alt="Photo 1" />
         <Photo src={IMAGES.landscapes.falltrees} alt="Photo 2" />
-      </Gallery>
+      </Photos>
       <Photo src={IMAGES.landscapes.fuzzyfall} alt="" />
       <Photo src={IMAGES.landscapes.ghost} alt="" />
-      <Gallery layout="verticalPair">
+      <Photos layout="verticalPair">
         <Photo src={IMAGES.landscapes.walton} alt="Photo 1" />
         <Photo src={IMAGES.landscapes.kerala} alt="Photo 2" />
-      </Gallery>
+      </Photos>
       <Photo src={IMAGES.landscapes.pastel} alt="" />
       <Photo src={IMAGES.landscapes.alviso} alt="" />
       <Photo src={IMAGES.landscapes.alviso2} alt="" />

@@ -18,6 +18,7 @@ const IMAGES = {
     walton: `${bucketUrl}/photos/landscapes/walton.jpeg`,
     alviso: `${bucketUrl}/photos/landscapes/alviso.jpeg`,
     alviso2: `${bucketUrl}/photos/landscapes/alviso2.jpeg`,
+    gateway: `${bucketUrl}/photos/landscapes/gatewayofindia.jpg`,
   },
   portraits: {
     amrita: `${bucketUrl}/photos/portraits/amrita.jpeg`,

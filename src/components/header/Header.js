@@ -4,7 +4,7 @@ import "./Header.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { TfiClose } from "react-icons/tfi";
 import IMAGES from "../../common/images";
-import { useScrollContext } from "../ScrollContext";
+import { useScrollContext } from "../../hooks/ScrollContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,8 +39,8 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/store")}`} href="https://store.swamiphoto.com/landscapes" target="_blank" rel="noreferrer">
-                  Store
+                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/wallprints")}`} href="/wallprints">
+                  Wall Prints
                 </a>
               </li>
               <li>

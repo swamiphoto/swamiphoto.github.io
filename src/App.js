@@ -9,7 +9,8 @@ import Headshots from "./pages/headshots/Headshots";
 import Portraits from "./pages/portraits/Portraits";
 import Bollwood from "./pages/bollywood/Bollywood";
 import Tennis from "./pages/tennis/Tennis";
-import { ScrollProvider } from "./components/ScrollContext";
+import { ScrollProvider } from "./hooks/ScrollContext";
+import Prints from "./pages/prints/Prints";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/tennis" element={<Tennis />} />
               <Route path="/headshots" element={<Headshots />} />
               <Route path="/about" element={<About />} />
+              <Route path="/wallprints" element={<Prints />} />
               {/* You can add a 404 Not Found page here */}
             </Routes>
           </div>

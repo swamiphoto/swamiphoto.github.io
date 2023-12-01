@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Gallery = ({ layout, children }) => {
+const Photos = ({ layout, children }) => {
   const renderPhotos = () => {
     switch (layout) {
       case "verticalPair":
@@ -26,9 +26,9 @@ const Gallery = ({ layout, children }) => {
   return <div className="gallery-container">{renderPhotos()}</div>;
 };
 
-Gallery.propTypes = {
+Photos.propTypes = {
   layout: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default Gallery;
+export default Photos;

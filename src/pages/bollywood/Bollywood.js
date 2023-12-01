@@ -1,10 +1,13 @@
 import React from "react";
 import Photo from "../../components/photo/Photo";
 import IMAGES from "../../common/images";
-import Gallery from "../../components/gallery/Gallery";
+import Photos from "../../components/photos/Photos";
 import Hero from "../../components/hero/Hero";
+import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Bollwood = () => {
+  useDarkenOnScroll();
+
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Bollywood">
@@ -21,10 +24,10 @@ const Bollwood = () => {
 
       <Photo src={IMAGES.bollywood.katrina2} alt="Photo 1" />
 
-      <Gallery layout="verticalPair">
+      <Photos layout="verticalPair">
         <Photo src={IMAGES.bollywood.nargis} alt="" />
         <Photo src={IMAGES.bollywood.alia} alt="Photo 2" />
-      </Gallery>
+      </Photos>
 
       <Photo src={IMAGES.bollywood.bollywood} alt="" />
       <Photo src={IMAGES.bollywood.atif} alt="" />

@@ -1,10 +1,12 @@
 import React from "react";
 import Photo from "../../components/photo/Photo";
 import IMAGES from "../../common/images";
-import Gallery from "../../components/gallery/Gallery";
 import Hero from "../../components/hero/Hero";
+import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Tennis = () => {
+  useDarkenOnScroll();
+
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Tennis">

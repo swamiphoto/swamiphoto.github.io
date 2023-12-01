@@ -1,7 +1,7 @@
 import React from "react";
 import Photo from "../../components/photo/Photo";
 import IMAGES from "../../common/images";
-import Gallery from "../../components/gallery/Gallery";
+import Photos from "../../components/photos/Photos";
 import Feature from "../../components/features/Features";
 import Hero from "../../components/hero/Hero";
 import CTA from "../../components/cta/CTA";
@@ -20,10 +20,10 @@ const Headshots = () => {
 
       <Photo src={IMAGES.headshots.ashwini} alt="Photo 1" />
 
-      <Gallery layout="verticalPair">
+      <Photos layout="verticalPair">
         <Photo src={IMAGES.headshots.searce5} alt="Photo 2" />
         <Photo src={IMAGES.headshots.raj} alt="Photo 1" />
-      </Gallery>
+      </Photos>
 
       <Testimonial
         imageSrc={IMAGES.headshots.vmirpuri}
