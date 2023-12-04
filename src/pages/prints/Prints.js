@@ -53,8 +53,16 @@ const Prints = () => {
         layout="print"
         orientation="vertical"
         title="Kerala"
-        caption="Captured on a tranquil evening in Kumarakom, Kerala, this photo was taken with my Ricoh camera while on a boat ride with my parents. The earthly purple tones, I believe, really stand out in large prints."
+        caption="Captured on a tranquil evening in Kumarakom, Kerala, this photo was taken with my Ricoh camera while on a boat ride with my parents. The harmony of cold and warm tones here will look really nice in large prints."
         alt="A tranquil evening in Kumarakom, Kerala"
+        url="https://store.swamiphoto.com/wallprints/"
+      />
+      <Photo
+        src={IMAGES.landscapes.kerala2}
+        layout="print"
+        title="Kerala"
+        caption="Another simple scene in Kerala that will look nice in a large matted frame. I love the subtle purple tones produced by my Ricoh camera."
+        alt="Another simple scene in Kerala"
         url="https://store.swamiphoto.com/wallprints/"
       />
     </main>

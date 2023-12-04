@@ -8,6 +8,7 @@ const IMAGES = {
     bbridge: `${bucketUrl}/photos/landscapes/bbridge.jpg`,
     falltrees: `${bucketUrl}/photos/landscapes/falltrees.jpg`,
     kerala: `${bucketUrl}/photos/landscapes/kerala.jpg`,
+    kerala2: `${bucketUrl}/photos/landscapes/kerala2.jpg`,
     mac: `${bucketUrl}/photos/landscapes/mac.jpg`,
     pastel: `${bucketUrl}/photos/landscapes/pastel.jpg`,
     ghost: `${bucketUrl}/photos/landscapes/ghost.jpg`,
