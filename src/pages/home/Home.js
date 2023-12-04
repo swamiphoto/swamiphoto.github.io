@@ -47,6 +47,7 @@ const Home = () => {
       <Photo src={IMAGES.landscapes.pastel} alt="" />
       <Photo src={IMAGES.landscapes.alviso} alt="" />
       <Photo src={IMAGES.landscapes.alviso2} alt="" />
+      <Photo src={IMAGES.landscapes.kerala2} alt="" />
     </main>
   );
 };

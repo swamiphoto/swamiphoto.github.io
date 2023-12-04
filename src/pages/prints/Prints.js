@@ -6,7 +6,7 @@ import Hero from "../../components/hero/Hero";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Prints = () => {
-  //useDarkenOnScroll();
+  useDarkenOnScroll();
 
   return (
     <main className="max-w-7xl mx-auto">
@@ -53,7 +53,7 @@ const Prints = () => {
         layout="print"
         orientation="vertical"
         title="Kerala"
-        caption="Captured on a tranquil evening in Kumarakom, Kerala, this photo was taken with my Ricoh camera while on a boat ride with my parents. The harmony of cold and warm tones here will look really nice in large prints."
+        caption="Captured on a tranquil evening in Kumarakom, Kerala, this photo was taken with my Ricoh camera while on a boat ride with my parents. The harmony of cold and warm tones here will look really nice in a large print."
         alt="A tranquil evening in Kumarakom, Kerala"
         url="https://store.swamiphoto.com/wallprints/"
       />
