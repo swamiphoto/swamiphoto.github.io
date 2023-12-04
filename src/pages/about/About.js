@@ -29,7 +29,7 @@ const About = () => {
           <a href="https://www.swamiphoto.com/blog/a-day-in-st-andrews-malawi" target="_blank" rel="noopener noreferrer">
             those recordings
           </a>{" "}
-          have become my most precious memories of Africa. Here’s Mt. Studd getting pissed of at me with the camera while he was trying to explaining ligands.
+          have become my most precious memories of Africa. Here’s Mr. Studd getting pissed of at me with the camera while trying to explain ligands.
         </p>
         <p>
           <iframe src="https://www.youtube.com/embed/J6FmpEuDBWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="w-full aspect-video"></iframe>
@@ -56,7 +56,7 @@ const About = () => {
           <a href="https://swamiphoto.medium.com" target="_blank" rel="noopener noreferrer">
             Medium
           </a>
-          . These lessons have now become the foundation of a tool that I've created called{" "}
+          . These lessons have now become the foundation of a tool I've created called{" "}
           <a href="https://qtr.ai" target="_blank" rel="noopener noreferrer">
             QTR
           </a>
