@@ -11,7 +11,7 @@ const Prints = () => {
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Wall Prints" showSubNav={false}>
-        <p>I'd be be honored to have one of my photos in your living room. I picked out my favorite shots that I think would look great on your wall.</p>
+        <p>I'd be honored to have one of my photos in your living room. I picked out my favorite shots that I think would look great on your wall.</p>
       </Hero>
 
       <Photo
@@ -60,7 +60,7 @@ const Prints = () => {
       <Photo
         src={IMAGES.landscapes.kerala2}
         layout="print"
-        title="Kerala"
+        title="Kumarakom"
         caption="Another simple scene in Kerala that will look nice in a large matted frame. I love the subtle purple tones produced by my Ricoh camera."
         alt="Another simple scene in Kerala"
         url="https://store.swamiphoto.com/wallprints/"
