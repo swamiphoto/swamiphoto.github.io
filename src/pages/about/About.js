@@ -29,14 +29,14 @@ const About = () => {
           <a href="https://www.swamiphoto.com/blog/a-day-in-st-andrews-malawi" target="_blank" rel="noopener noreferrer">
             those recordings
           </a>{" "}
-          have become my most precious memories of Africa. Here’s Mr. Studd getting pissed of at me with the camera while trying to explain ligands.
+          have become my most precious memories of Africa. Here’s Mr. Studd getting annoyed with the camera while trying to explain ligands.
         </p>
         <p>
           <iframe src="https://www.youtube.com/embed/J6FmpEuDBWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="w-full aspect-video"></iframe>
         </p>
 
         <p>
-          I'm currenty focusing on landscapes and portraits, espeically <a href="/headshots">business headshots</a> (if you need one, let me know). I've shot <a href="/bollywood">Bollywood concerts</a> and{" "}
+          I'm currenty focusing on landscapes and portraits, especially <a href="/headshots">business headshots</a> (if you need one, let me know). I've shot <a href="/bollywood">Bollywood concerts</a> and{" "}
           <a href="/tennis" target="_blank" rel="noopener noreferrer">
             sports
           </a>
