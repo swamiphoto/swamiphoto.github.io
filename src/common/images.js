@@ -70,6 +70,9 @@ const IMAGES = {
     venus: `${bucketUrl}/photos/tennis/venus.jpeg`,
   },
   headshots: {
+    naga: `${bucketUrl}/photos/headshots/naga.jpg`,
+    naga2: `${bucketUrl}/photos/headshots/naga2.jpg`,
+    naga3: `${bucketUrl}/photos/headshots/naga3.jpg`,
     ashwini: `${bucketUrl}/photos/headshots/ashwini.jpg`,
     ashwini2: `${bucketUrl}/photos/headshots/ashwini2.jpeg`,
     vijay: `${bucketUrl}/photos/headshots/vijay.jpg`,

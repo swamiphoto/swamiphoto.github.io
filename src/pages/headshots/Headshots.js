@@ -18,11 +18,9 @@ const Headshots = () => {
         <CTA className="mt-6 mb-2" />
       </Hero>
 
-      <Photo src={IMAGES.headshots.ashwini} alt="Photo 1" />
-
       <Photos layout="verticalPair">
-        <Photo src={IMAGES.headshots.searce5} alt="Photo 2" />
-        <Photo src={IMAGES.headshots.raj} alt="Photo 1" />
+        <Photo src={IMAGES.headshots.ashwini} alt="Ashwini" />
+        <Photo src={IMAGES.headshots.naga} alt="Naga" />
       </Photos>
 
       <Testimonial
@@ -31,6 +29,18 @@ const Headshots = () => {
         testimony="Swami is easily one of the best photographers in the Bay Area. Having collaborated with him several times, I can vouch for the outstanding quality of his photos and his ability to make the sessions a fun experience. You won't find a more honest and reliable photographer. If you have the opportunity to work with him, just do it."
         name="Vijay Mirpuri"
         role=""
+      />
+
+      <Photos layout="verticalPair">
+        <Photo src={IMAGES.headshots.searce5} alt="Photo 2" />
+        <Photo src={IMAGES.headshots.raj} alt="Photo 1" />
+      </Photos>
+
+      <Feature
+        title="Command respect. Skyrocket your career."
+        description="Most people don't realize how much a high-end headshot impacts their career. Studies show we make split-second decisions on who to collaborate with based just on how people appear!"
+        imageUrl={IMAGES.headshots.searce1}
+        reverse={false}
       />
 
       <Testimonial
@@ -42,19 +52,12 @@ const Headshots = () => {
         reverse={true}
       />
 
-      <Feature
-        title="Command respect. Skyrocket your career."
-        description="Most people don't realize how much a high-end headshot impacts their career. Studies show we make split-second decisions on who to collaborate with based just on how people appear!"
-        imageUrl={IMAGES.headshots.searce1}
-        reverse={false}
-      />
-
       <Feature title="100% refund if you don't absolutely love it." description="I take pride in my work. If you don't absolutely love how you look, you'll get a refund, no questions asked." imageUrl={IMAGES.headshots.searce6} reverse={true} />
       <Feature title="Look trustworthy, genuine, and authentic." description="No cringeworthy smiles or artificial expressions. We'll work together to bring out your most genuine, authentic, and confident self." imageUrl={IMAGES.headshots.searce7} reverse={false} />
       <Feature
         title="Why work with me?"
         description="Anyone can buy a camera, master lighting and composition, and make a hi-res image. That isn't photography. When you work with me, it's never about my setup. It's about you. I've honed a unique style that blends three things: my connection with you, my artistic experience, and a deep understanding of what resonates in the corporate world."
-        imageUrl={IMAGES.headshots.ashwini2}
+        imageUrl={IMAGES.headshots.naga2}
         reverse={true}
       />
 
