@@ -19,8 +19,8 @@ const Headshots = () => {
       </Hero>
 
       <Photos layout="verticalPair">
-        <Photo src={IMAGES.headshots.ashwini} alt="Ashwini" />
-        <Photo src={IMAGES.headshots.naga} alt="Naga" />
+        <Photo src={IMAGES.headshots.mala} alt="Mala" />
+        <Photo src={IMAGES.headshots.naga2} alt="Naga" />
       </Photos>
 
       <Testimonial
@@ -32,8 +32,8 @@ const Headshots = () => {
       />
 
       <Photos layout="verticalPair">
-        <Photo src={IMAGES.headshots.searce5} alt="Photo 2" />
-        <Photo src={IMAGES.headshots.raj} alt="Photo 1" />
+        <Photo src={IMAGES.headshots.searce5} alt="Searce" />
+        <Photo src={IMAGES.headshots.sudha} alt="Sudha" />
       </Photos>
 
       <Feature
@@ -57,7 +57,7 @@ const Headshots = () => {
       <Feature
         title="Why work with me?"
         description="Anyone can buy a camera, master lighting and composition, and make a hi-res image. That isn't photography. When you work with me, it's never about my setup. It's about you. I've honed a unique style that blends three things: my connection with you, my artistic experience, and a deep understanding of what resonates in the corporate world."
-        imageUrl={IMAGES.headshots.naga2}
+        imageUrl={IMAGES.headshots.mala2}
         reverse={true}
       />
 
