@@ -1,0 +1,69 @@
+/* src/components/image-gallery/ImageGallery.css */
+@keyframes slideOutLeft {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--rotate));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-150%, -50%) rotate(calc(var(--rotate) - 20deg));
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--rotate));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(150%, -50%) rotate(calc(var(--rotate) + 20deg));
+    opacity: 0;
+  }
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slideshow-image {
+  position: absolute;
+  width: auto;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(var(--rotate));
+  transition: transform 1s ease, opacity 1s ease;
+  border: 10px solid white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.slideshow-image.hidden {
+  opacity: 0;
+}
+
+.slideshow-image.visible {
+  opacity: 1;
+}
+
+.slideshow-image.stacked {
+  opacity: 1;
+}
+
+.slideshow-image.slide-out-left {
+  animation: slideOutLeft 1s forwards;
+}
+
+.slideshow-image.slide-out-right {
+  animation: slideOutRight 1s forwards;
+}
+
+.film-photo {
+  border: 15px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

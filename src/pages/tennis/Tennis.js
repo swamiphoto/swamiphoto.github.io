@@ -10,7 +10,7 @@ const Tennis = () => {
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Tennis">
-        <p>Most of these images were taken in 2018 at the BNP Paribas Open in Indian Wells, where I was one of the official photographers.</p>
+        <p>Most of these images were shot in 2018 at the BNP Paribas Open in Indian Wells, where I was one of the official photographers.</p>
       </Hero>
 
       <Photo src={IMAGES.tennis.federer.fed1} alt="" />

@@ -21,8 +21,7 @@ const Home = () => {
           <a href="https://dribbble.com/swamiphoto" target="_blank" rel="noopener noreferrer">
             designer
           </a>
-          , and photographer. I've enjoyed shooting <a href="/bollywood">Bollywood</a> stars and tennis icons like <a href="/tennis">Federer</a>. I'm now focusing on <a href="/headshots">business headshots</a>, <a href="/portraits">portraits</a>, and <a href="/landscapes">landscapes</a>. Hope you
-          enjoy my collection.
+          , and photographer. My heart has always been in <a href="/landscapes">landscapes</a> and nature, but I also enjoy <a href="/portraits">portraits</a>, and my past work includes photographing <a href="/bollywood">Bollywood stars</a> and <a href="/tennis">tennis icons</a>.{" "}
         </p>
       </Hero>
 

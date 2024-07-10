@@ -12,7 +12,7 @@ const Bollwood = () => {
     <main className="max-w-7xl mx-auto">
       <Hero title="Bollywood">
         <p>
-          I've had the previlige of shooting some of the most talented and famous Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it{" "}
+          I was fortunate to shoot some talented Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it{" "}
           <a href="https://swamiphoto.medium.com/the-power-of-writing-down-efefb72a1f3a" target="_blank">
             here
           </a>
