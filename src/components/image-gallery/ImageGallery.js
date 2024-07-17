@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { FaHome, FaMusic } from "react-icons/fa"; // Example icons
+import React, { useEffect, useState, useRef } from "react";
+import { FaHome, FaPlay, FaPause } from "react-icons/fa"; // Example icons
+import { SlMusicToneAlt } from "react-icons/sl"; // Music icon
+import { FiPlay, FiPause } from "react-icons/fi";
+import { HiOutlinePause } from "react-icons/hi2";
+import { VscPlay } from "react-icons/vsc";
 import useYouTubePlayer from "./useYouTubePlayer"; // Import the custom hook
 import "./ImageGallery.css"; // Ensure you have the CSS imported for animations
 
@@ -19,7 +23,9 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const [direction, setDirection] = useState("left");
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
+  const [slideshowPlaying, setSlideshowPlaying] = useState(true);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
+  const slideshowInterval = useRef(null);
 
   const fetchImageUrls = async (folder) => {
     try {
@@ -69,19 +75,24 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
 
   useEffect(() => {
     if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0) {
-      const interval = setInterval(() => {
-        setTransitioning(true);
-        setDirection(Math.random() > 0.5 ? "left" : "right");
-        setTimeout(() => {
-          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
-          setTransitioning(false);
-        }, 2000); // Animation duration
-      }, 4000); // Display duration
-      return () => clearInterval(interval);
+      startSlideshow();
+      return () => clearInterval(slideshowInterval.current);
     }
   }, [layout, imagesLoaded, imageUrls]);
 
-  const handlePlayPause = () => {
+  const startSlideshow = () => {
+    clearInterval(slideshowInterval.current);
+    slideshowInterval.current = setInterval(() => {
+      setTransitioning(true);
+      setDirection(Math.random() > 0.5 ? "left" : "right");
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
+        setTransitioning(false);
+      }, 2000); // Animation duration
+    }, 4000); // Display duration
+  };
+
+  const handlePlayPauseAudio = () => {
     if (playerRef.current) {
       if (audioPlaying) {
         playerRef.current.pauseVideo();
@@ -90,6 +101,15 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       }
       setAudioPlaying(!audioPlaying);
     }
+  };
+
+  const handlePlayPauseSlideshow = () => {
+    if (slideshowPlaying) {
+      clearInterval(slideshowInterval.current);
+    } else {
+      startSlideshow();
+    }
+    setSlideshowPlaying(!slideshowPlaying);
   };
 
   const renderPhotos = () => {
@@ -121,14 +141,21 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
 
   return (
     <div className="flex h-screen">
-      <div className="flex flex-col justify-between items-center w-16 bg-gray-300 font-geist-mono text-gray-800 p-2 shadow-lg">
+      <div className="flex flex-col justify-between items-center w-16 border-r border-gray-100 font-geist-mono text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center">
-          <FaHome className="mb-4 cursor-pointer" size={24} />
-          <FaMusic className="mb-4 cursor-pointer" size={24} onClick={handlePlayPause} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
-          {/* Add more icons as needed */}
+          {slideshowPlaying ? <HiOutlinePause className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} /> : <VscPlay className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />}
+          <SlMusicToneAlt className="mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
         </div>
-        <div className="vertical-text mb-4">
-          <div className="text-lg">{title}</div>
+        <div className="flex flex-col items-center mt-auto mb-4">
+          <div className="vertical-text mb-2">
+            <div className=" text-gray-500">{title}</div>
+          </div>
+          <div className="vertical-text mb-2">
+            <div className=" text-gray-500"> / </div>
+          </div>
+          <div className="vertical-text">
+            <div className="uppercase">Swamiphoto</div>
+          </div>
         </div>
       </div>
       <main className="flex-grow flex justify-center items-center relative">
