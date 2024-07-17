@@ -34,6 +34,7 @@ const MainContent = () => {
           {/* You can add a 404 Not Found page here */}
         </Routes>
       </div>
+      {!noHeaderPaths.includes(location.pathname) && <Footer />}
     </>
   );
 };
@@ -44,7 +45,6 @@ function App() {
       <Router>
         <div className="App">
           <MainContent />
-          <Footer />
         </div>
       </Router>
     </ScrollProvider>
