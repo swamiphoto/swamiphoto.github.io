@@ -150,7 +150,8 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     <div className="flex h-screen">
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
-          <div className="overlay absolute inset-0 bg-black opacity-80 z-10"></div>
+          <img src={imageUrls[5]} alt="Cover" className="absolute inset-0 w-full h-full object-cover z-0" />
+          <div className="overlay absolute inset-0 bg-black opacity-60 z-10"></div>
           <div className="text-center text-white p-4 z-20">
             <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
             <p className="text-xl mb-4">{subtitle}</p>
