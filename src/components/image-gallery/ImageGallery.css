@@ -133,3 +133,7 @@
     transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ)) translateX(0) translateY(0);
   }
 }
+
+.overlay {
+  background-color: rgba(0, 0, 0, 2);
+}
