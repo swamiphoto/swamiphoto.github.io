@@ -10,7 +10,7 @@ import "./ImageGallery.css"; // Ensure you have the CSS imported for animations
 const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
 const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
 
-const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl }) => {
+const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle" }) => {
   const [imageUrls, setImageUrls] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
@@ -23,7 +23,8 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const [direction, setDirection] = useState("left");
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [slideshowPlaying, setSlideshowPlaying] = useState(true);
+  const [slideshowPlaying, setSlideshowPlaying] = useState(false); // Initially set to false
+  const [showCover, setShowCover] = useState(true);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
 
@@ -74,11 +75,11 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   }, [folder]);
 
   useEffect(() => {
-    if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0) {
+    if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
       startSlideshow();
       return () => clearInterval(slideshowInterval.current);
     }
-  }, [layout, imagesLoaded, imageUrls]);
+  }, [layout, imagesLoaded, imageUrls, slideshowPlaying]);
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
@@ -112,6 +113,12 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     setSlideshowPlaying(!slideshowPlaying);
   };
 
+  const handleStartClick = () => {
+    setShowCover(false);
+    handlePlayPauseAudio();
+    setSlideshowPlaying(true); // Start slideshow when the start button is clicked
+  };
+
   const renderPhotos = () => {
     if (!imagesLoaded) {
       return <div>Loading...</div>; // Display a loading message or spinner
@@ -141,23 +148,30 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
 
   return (
     <div className="flex h-screen">
-      <div className="flex flex-col justify-between items-center w-16 border-r border-gray-100 font-geist-mono text-gray-800 p-2 shadow-sm">
+      {showCover && (
+        <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
+          <div className="text-center text-white p-4 bg-black bg-opacity-70 w-full h-full flex flex-col items-center justify-center">
+            <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
+            <p className="text-xl mb-4">{subtitle}</p>
+            <button onClick={handleStartClick} className="bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 font-geist-mono mt-7">
+              Start Slideshow
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center">
           {slideshowPlaying ? <HiOutlinePause className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} /> : <VscPlay className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />}
           <SlMusicToneAlt className="mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
         </div>
-        <div className="flex flex-col items-center mt-auto mb-4">
+        <div className="flex flex-col mt-auto mb-4 items-start">
           <div className="vertical-text mb-2">
-            <div className=" text-gray-500">{title}</div>
-          </div>
-          <div className="vertical-text mb-2">
-            <div className=" text-gray-500"> / </div>
-          </div>
-          <div className="vertical-text">
-            <div className="uppercase">Swamiphoto</div>
+            <div className="text-gray-900 font-semibold text-lg text-left">{title}</div>
+            <div className="uppercase text-xs text-left">Photos by Swami Venkataramani</div>
           </div>
         </div>
       </div>
+
       <main className="flex-grow flex justify-center items-center relative">
         {renderPhotos()}
         {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
