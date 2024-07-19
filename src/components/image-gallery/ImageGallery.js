@@ -11,7 +11,7 @@ const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud A
 
 const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle" }) => {
   const [imageUrls, setImageUrls] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(10);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [tilts, setTilts] = useState([]);
   const [zTilts, setZTilts] = useState([]);
@@ -39,7 +39,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   if (imageUrls.length > 0) {
     customDurations[imageUrls.length - 1] = 60000;
     captions[imageUrls.length - 1] =
-      "Happy Birthday, Naga! Moving to Pleasanton has been incredible, and our friendship has been a big highlight. I admire how you crush your fitness goals, chase your dreams, and live life with a playful spirit. Have an amazing year! I hope we get to celebrate your 43rd birthday in the Warm Heart of Africa ;) — Swami";
+      "Happy Birthday, Naga! Moving to Pleasanton has been incredible, and our friendship has been a big highlight. I admire how you crush your fitness goals, chase your dreams, and live life with a playful spirit. Have an amazing year! I hope we get to celebrate your 43rd birthday in the Warm Heart of Africa ;) Swami";
   }
 
   const fetchImageUrls = async (folder) => {
@@ -204,9 +204,13 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
           <div className="text-center text-white p-4 z-20">
             <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
             <p className="text-xl mb-4">{subtitle}</p>
-            <button onClick={handleStartClick} className="bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 font-geist-mono mt-7">
+            <button onClick={handleStartClick} className="hidden md:inline-block bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 font-geist-mono mt-7">
               Start Slideshow
             </button>
+
+            <div className="block md:hidden fixed inset-0 flex items-center justify-center bg-gray-800 text-gray-300 text-lg font-geist-mono p-4">
+              <p className="text-center">This gallery is not available on mobile yet. Please view on a computer.</p>
+            </div>
           </div>
         </div>
       )}
