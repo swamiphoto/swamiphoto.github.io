@@ -35,8 +35,9 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const slideshowInterval = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [totalImageCount, setTotalImageCount] = useState(0);
+  const [currentBatch, setCurrentBatch] = useState(1); // Track the current batch
 
-  // Define custom durations for specific image indices (in milliseconds)
   const customDurations = {
     2: 6000,
   };
@@ -44,7 +45,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const captions = {
     2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
     4: "Btw...do you have your sound on? 🎶",
-    6: "View in fullscreen for the best experience! 🌟",
+    6: "View in fullscreen for the best experience!",
   };
 
   if (imageUrls.length > 0) {
@@ -53,14 +54,20 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       "Happy Birthday, Naga! I hope you have a fantastic day and a wonderful year ahead. I'm grateful for your friendship and I admire how you chase your dreams, crush your fitness goals, and live life with a playful spirit. Here's to many more adventures together! 🎉🎂🎈 Let's celebrate your 43rd birthday in the Warm Heart of Africa ;) Swami";
   }
 
-  const fetchImageUrls = async (folder) => {
+  const fetchImageUrls = async (folder, batch) => {
     try {
       const response = await fetch(`https://storage.googleapis.com/storage/v1/b/swamiphoto/o?prefix=photos/${folder}/&key=${apiKey}`);
       const data = await response.json();
+      const totalCount = data.items.length;
+      setTotalImageCount(totalCount);
+
       const urls = data.items
         .filter((item) => item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
         .map((item) => `${bucketUrl}/${item.name}`);
-      return urls;
+
+      const startIndex = (batch - 1) * 10;
+      const endIndex = Math.min(startIndex + 10, urls.length);
+      return urls.slice(startIndex, endIndex);
     } catch (error) {
       console.error("Error fetching image URLs:", error);
       return [];
@@ -83,14 +90,14 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   }, []);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const urls = await fetchImageUrls(folder);
-      setImageUrls(urls);
-      setTilts(urls.map(() => Math.random() * 12 - 6)); // Precompute tilts for each image
-      setZTilts(urls.map(() => Math.random() * 20 - 10)); // Precompute z-tilts for each image
-      setMoveXs(urls.map(() => `${Math.random() * 15 - 5}px`)); // Precompute x-axis movements for each image
-      setMoveYs(urls.map(() => `${Math.random() * 20 - 5}px`)); // Precompute y-axis movements for each image
-      setDurations(urls.map(() => `${Math.random() * 2 + 3}s`)); // Precompute durations for each image
+    const fetchImages = async (batch) => {
+      const urls = await fetchImageUrls(folder, batch);
+      setImageUrls((prevUrls) => [...prevUrls, ...urls]);
+      setTilts((prevTilts) => [...prevTilts, ...urls.map(() => Math.random() * 12 - 6)]); // Precompute tilts for each image
+      setZTilts((prevZTilts) => [...prevZTilts, ...urls.map(() => Math.random() * 20 - 10)]); // Precompute z-tilts for each image
+      setMoveXs((prevMoveXs) => [...prevMoveXs, ...urls.map(() => `${Math.random() * 15 - 5}px`)]); // Precompute x-axis movements for each image
+      setMoveYs((prevMoveYs) => [...prevMoveYs, ...urls.map(() => `${Math.random() * 20 - 5}px`)]); // Precompute y-axis movements for each image
+      setDurations((prevDurations) => [...prevDurations, ...urls.map(() => `${Math.random() * 2 + 3}s`)]); // Precompute durations for each image
 
       // Fetch image dimensions to determine aspect ratios
       const aspectRatios = await Promise.all(
@@ -107,12 +114,12 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
           });
         })
       );
-      setAspectRatios(aspectRatios);
+      setAspectRatios((prevRatios) => [...prevRatios, ...aspectRatios]);
       setImagesLoaded(true);
     };
 
-    fetchImages();
-  }, [folder]);
+    fetchImages(currentBatch);
+  }, [folder, currentBatch]);
 
   useEffect(() => {
     if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
@@ -132,6 +139,9 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   useEffect(() => {
     if (slideshowPlaying) {
       startSlideshow(); // Restart the slideshow with the correct duration when the current image index changes
+      if (currentImageIndex % 10 === 7 && currentBatch * 10 < totalImageCount) {
+        setCurrentBatch((prevBatch) => prevBatch + 1);
+      }
     }
   }, [currentImageIndex]);
 
@@ -288,7 +298,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
           ) : (
             <>
               <div className="absolute inset-0 w-full h-full bg-black z-10"></div> {/* Fullscreen black layer */}
-              <img src={imageUrls[5]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
+              <img src={imageUrls[4]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
               <div className="overlay absolute inset-0 bg-black opacity-60 z-30"></div>
               <div className="text-center text-white p-4 z-40 fade-in">
                 <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
