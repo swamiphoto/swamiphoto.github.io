@@ -3,6 +3,9 @@ import { FaHome, FaPlay, FaPause } from "react-icons/fa"; // Example icons
 import { SlMusicToneAlt } from "react-icons/sl"; // Music icon
 import { HiOutlinePause } from "react-icons/hi2";
 import { VscPlay } from "react-icons/vsc";
+import { FaExpand, FaCompress } from "react-icons/fa";
+import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
+
 import useYouTubePlayer from "./useYouTubePlayer"; // Import the custom hook
 import "./ImageGallery.css"; // Ensure you have the CSS imported for animations
 
@@ -27,20 +30,23 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Define custom durations for specific image indices (in milliseconds)
   const customDurations = {
-    // 1: 60000,
+    2: 6000,
   };
 
   const captions = {
-    // 1: "Happy Birthday, Naga! Moving to Pleasanton has been incredible, and our friendship has been the true highlight. I admire the way you crush your fitness goals, chase your dreams, and live life with a playful spirit. Have an amazing year! I hope we get to celebrate your 43rd birthday in the Warm Heart of Africa :) Swami",
+    2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
+    4: "Btw...do you have your sound on? 🎶",
+    6: "Trying viewing in fullscreen for the best experience! 🌟",
   };
 
   if (imageUrls.length > 0) {
     customDurations[imageUrls.length - 1] = 60000;
     captions[imageUrls.length - 1] =
-      "Happy Birthday, Naga! Moving to Pleasanton has been incredible, and our friendship has been a big highlight. I admire how you crush your fitness goals, chase your dreams, and live life with a playful spirit. Have an amazing year! I hope we get to celebrate your 43rd birthday in the Warm Heart of Africa ;) Swami";
+      "Happy Birthday, Naga! I hope you have a fantastic day and a wonderful year ahead. I'm grateful for your friendship and I admire how you chase your dreams, crush your fitness goals, and live life with a playful spirit. Here's to many more adventures together! 🎉🎂🎈 Let's celebrate your 43rd birthday in the Warm Heart of Africa ;) Swami";
   }
 
   const fetchImageUrls = async (folder) => {
@@ -157,12 +163,44 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       startSlideshow();
     }
     setSlideshowPlaying(!slideshowPlaying);
+    handlePlayPauseAudio();
   };
 
   const handleStartClick = () => {
     setShowCover(false);
     handlePlayPauseAudio();
     setSlideshowPlaying(true); // Start slideshow when the start button is clicked
+  };
+
+  const handleToggleFullscreen = () => {
+    if (!isFullscreen) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        // Firefox
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        // Chrome, Safari and Opera
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        // IE/Edge
+        document.documentElement.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+    setIsFullscreen(!isFullscreen);
   };
 
   const renderPhotos = () => {
@@ -241,6 +279,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
         <div className="flex flex-col items-center">
           {slideshowPlaying ? <HiOutlinePause className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} /> : <VscPlay className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />}
           <SlMusicToneAlt className="mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
+          {isFullscreen ? <RxExitFullScreen className="mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} /> : <RxEnterFullScreen className="mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />}
         </div>
         <div className="flex flex-col mt-auto mb-4 items-start">
           <div className="vertical-text mb-2">
