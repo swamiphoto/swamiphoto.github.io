@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import { FaHome, FaPlay, FaPause } from "react-icons/fa"; // Example icons
+import { FaHome, FaPlay, FaPause, FaTh } from "react-icons/fa"; // Example icons
+import { PiGridNineLight } from "react-icons/pi";
 import { SlMusicToneAlt } from "react-icons/sl"; // Music icon
 import { HiOutlinePause } from "react-icons/hi2";
 import { VscPlay } from "react-icons/vsc";
 import { FaExpand, FaCompress } from "react-icons/fa";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
+import { IoMusicalNotesOutline } from "react-icons/io5";
 
 import useYouTubePlayer from "./useYouTubePlayer"; // Import the custom hook
 import "./ImageGallery.css"; // Ensure you have the CSS imported for animations
@@ -27,6 +29,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [slideshowPlaying, setSlideshowPlaying] = useState(false); // Initially set to false
   const [showCover, setShowCover] = useState(true);
+  const [viewMode, setViewMode] = useState("slideshow"); // Added state for view mode
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -164,6 +167,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     }
     setSlideshowPlaying(!slideshowPlaying);
     handlePlayPauseAudio();
+    setViewMode("slideshow"); // Switch to slideshow mode
   };
 
   const handleStartClick = () => {
@@ -203,9 +207,27 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     setIsFullscreen(!isFullscreen);
   };
 
+  const handleGridView = () => {
+    setViewMode("grid"); // Switch to grid view
+    clearInterval(slideshowInterval.current); // Stop slideshow if it is running
+    setSlideshowPlaying(false); // Ensure slideshow state is off
+  };
+
   const renderPhotos = () => {
     if (!imagesLoaded) {
       return <div>Loading...</div>; // Display a loading message or spinner
+    }
+
+    if (viewMode === "grid") {
+      return (
+        <div className="grid-container">
+          {imageUrls.map((url, index) => (
+            <div key={index} className="grid-item shadow-lg">
+              <img src={url} alt={`Image ${index + 1}`} className="object-cover w-full h-auto" />
+            </div>
+          ))}
+        </div>
+      );
     }
 
     return (
@@ -277,9 +299,10 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       )}
 
       <div className="flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center text-gray-700">
           {slideshowPlaying ? <HiOutlinePause className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} /> : <VscPlay className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />}
-          <SlMusicToneAlt className="mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
+          <IoMusicalNotesOutline className="mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
+          <PiGridNineLight className="mt-4 cursor-pointer" size={20} onClick={handleGridView} style={{ opacity: 1 }} /> {/* Grid view icon */}
           {isFullscreen ? <RxExitFullScreen className="mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} /> : <RxEnterFullScreen className="mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />}
         </div>
         <div className="flex flex-col mt-auto mb-4 items-start">
