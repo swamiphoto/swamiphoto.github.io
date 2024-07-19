@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FaHome, FaPlay, FaPause } from "react-icons/fa"; // Example icons
 import { SlMusicToneAlt } from "react-icons/sl"; // Music icon
-import { FiPlay, FiPause } from "react-icons/fi";
 import { HiOutlinePause } from "react-icons/hi2";
 import { VscPlay } from "react-icons/vsc";
 import useYouTubePlayer from "./useYouTubePlayer"; // Import the custom hook
@@ -27,6 +26,11 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const [showCover, setShowCover] = useState(true);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
+
+  // Define custom durations for specific image indices (in milliseconds)
+  const customDurations = {
+    1: 20000,
+  };
 
   const fetchImageUrls = async (folder) => {
     try {
@@ -76,21 +80,37 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
 
   useEffect(() => {
     if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
+      // Start the slideshow with the current image's custom duration
       startSlideshow();
       return () => clearInterval(slideshowInterval.current);
     }
   }, [layout, imagesLoaded, imageUrls, slideshowPlaying]);
 
+  useEffect(() => {
+    if (slideshowPlaying) {
+      startSlideshow(); // Start the slideshow initially
+      return () => clearInterval(slideshowInterval.current); // Clean up the interval on unmount or when slideshowPlaying changes
+    }
+  }, [slideshowPlaying]);
+
+  useEffect(() => {
+    if (slideshowPlaying) {
+      startSlideshow(); // Restart the slideshow with the correct duration when the current image index changes
+    }
+  }, [currentImageIndex]);
+
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
-    slideshowInterval.current = setInterval(() => {
+    const duration = customDurations[currentImageIndex] || 4000; // Use custom duration if available, otherwise default to 4 seconds
+    slideshowInterval.current = setTimeout(() => {
       setTransitioning(true);
       setDirection(Math.random() > 0.5 ? "left" : "right");
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
         setTransitioning(false);
+        startSlideshow(); // Restart the slideshow with the new image's duration
       }, 2000); // Animation duration
-    }, 4000); // Display duration
+    }, duration - 2000); // Display duration minus animation duration
   };
 
   const handlePlayPauseAudio = () => {
