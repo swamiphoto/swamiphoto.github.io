@@ -26,6 +26,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const [showCover, setShowCover] = useState(true);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Define custom durations for specific image indices (in milliseconds)
   const customDurations = {
@@ -55,6 +56,21 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       return [];
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -199,21 +215,28 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     <div className="flex h-screen">
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
-          <img src={imageUrls[5]} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
-          <div className="overlay absolute inset-0 bg-black opacity-60 z-10"></div>
-          <div className="text-center text-white p-4 z-20">
-            <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
-            <p className="text-xl mb-4">{subtitle}</p>
-            <button onClick={handleStartClick} className="hidden md:inline-block bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 font-geist-mono mt-7">
-              Start Slideshow
-            </button>
-
-            <div className="block md:hidden fixed inset-0 flex items-center justify-center bg-gray-800 text-gray-300 text-lg font-geist-mono p-4">
+          {isMobile ? (
+            <div className="block md:hidden fixed inset-0 flex items-center justify-center bg-black text-gray-300 text-lg font-geist-mono p-4">
               <p className="text-center">This gallery is not available on mobile yet. Please view on a computer.</p>
             </div>
-          </div>
+          ) : !imagesLoaded ? (
+            <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl">Preparing your stack of photos...please turn your sound on!</div>
+          ) : (
+            <>
+              <img src={imageUrls[5]} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
+              <div className="overlay absolute inset-0 bg-black opacity-60 z-10"></div>
+              <div className="text-center text-white p-4 z-20">
+                <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
+                <p className="text-xl mb-4">{subtitle}</p>
+                <button onClick={handleStartClick} className="hidden md:inline-block bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 mt-7">
+                  View Photos
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
+
       <div className="flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center">
           {slideshowPlaying ? <HiOutlinePause className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} /> : <VscPlay className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />}
