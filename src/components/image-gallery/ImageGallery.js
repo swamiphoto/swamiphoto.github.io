@@ -40,7 +40,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const captions = {
     2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
     4: "Btw...do you have your sound on? 🎶",
-    6: "Trying viewing in fullscreen for the best experience! 🌟",
+    6: "View in fullscreen for the best experience! 🌟",
   };
 
   if (imageUrls.length > 0) {
@@ -258,15 +258,16 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
               <p className="text-center">This gallery is not available on mobile yet. Please view on a computer.</p>
             </div>
           ) : !imagesLoaded ? (
-            <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl">Preparing your show...please turn your sound on!</div>
+            <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl font-geist-mono">Preparing your show...please turn your sound on!</div>
           ) : (
             <>
-              <img src={imageUrls[5]} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
-              <div className="overlay absolute inset-0 bg-black opacity-60 z-10"></div>
-              <div className="text-center text-white p-4 z-20">
+              <div className="absolute inset-0 w-full h-full bg-black z-10"></div> {/* Fullscreen black layer */}
+              <img src={imageUrls[5]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
+              <div className="overlay absolute inset-0 bg-black opacity-60 z-30"></div>
+              <div className="text-center text-white p-4 z-40 fade-in">
                 <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
                 <p className="text-xl mb-4 text-gray-300">{subtitle}</p>
-                <button onClick={handleStartClick} className="hidden md:inline-block bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 mt-7">
+                <button onClick={handleStartClick} className="hidden md:inline-block bg-white text-black text-2xl px-10 py-4 rounded-full opacity-60 hover:opacity-75 mt-7">
                   Start the Show
                 </button>
               </div>
