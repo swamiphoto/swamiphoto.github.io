@@ -11,7 +11,7 @@ const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud A
 
 const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle" }) => {
   const [imageUrls, setImageUrls] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(10);
   const [transitioning, setTransitioning] = useState(false);
   const [tilts, setTilts] = useState([]);
   const [zTilts, setZTilts] = useState([]);
@@ -29,8 +29,18 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
 
   // Define custom durations for specific image indices (in milliseconds)
   const customDurations = {
-    1: 20000,
+    // 1: 60000,
   };
+
+  const captions = {
+    // 1: "Happy Birthday, Naga! Moving to Pleasanton has been incredible, and our friendship has been the true highlight. I admire the way you crush your fitness goals, chase your dreams, and live life with a playful spirit. Have an amazing year! I hope we get to celebrate your 43rd birthday in the Warm Heart of Africa :) Swami",
+  };
+
+  if (imageUrls.length > 0) {
+    customDurations[imageUrls.length - 1] = 60000;
+    captions[imageUrls.length - 1] =
+      "Happy Birthday, Naga! Moving to Pleasanton has been incredible, and our friendship has been a big highlight. I admire how you crush your fitness goals, chase your dreams, and live life with a playful spirit. Have an amazing year! I hope we get to celebrate your 43rd birthday in the Warm Heart of Africa :) Swami";
+  }
 
   const fetchImageUrls = async (folder) => {
     try {
@@ -147,10 +157,8 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     return (
       <div className="slideshow-container">
         {imageUrls.map((url, index) => (
-          <img
+          <div
             key={index}
-            src={url}
-            alt={`Image ${index + 1}`}
             className={`slideshow-image ${aspectRatios[index] > 1 ? "horizontal" : "vertical"} ${index === currentImageIndex ? (transitioning ? `slide-out-${direction}` : "visible") : index > currentImageIndex ? "stacked" : "hidden"}`}
             style={{
               "--rotate": `${tilts[index]}deg`,
@@ -159,8 +167,29 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
               "--moveY": moveYs[index],
               "--duration": durations[index],
               zIndex: imageUrls.length - index,
-            }}
-          />
+            }}>
+            <img src={url} alt={`Image ${index + 1}`} />
+            {captions[index] && (
+              <div className="absolute top-10 left-4 w-3/5 p-5">
+                <div
+                  className="text-left bg-yellow-200 font-geist-mono shadow-lg transform rotate-1"
+                  style={{
+                    backgroundImage: "url('images/paper2.jpg')",
+                    backgroundSize: "cover",
+                    boxShadow: "2px 2px 8px rgba(0,0,0,0.2)",
+                    clipPath: "url(#torn-edge-clip)",
+                    padding: "10px",
+                  }}>
+                  {captions[index]}
+                </div>
+                <svg width="0" height="0">
+                  <clipPath id="torn-edge-clip" clipPathUnits="objectBoundingBox">
+                    <path d="M0,0 h1 v0.5 l-0.1,0.05 l0.05,0.05 l-0.05,0.05 l0.1,0.05 v0.5 h-1 z" />
+                  </clipPath>
+                </svg>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     );
