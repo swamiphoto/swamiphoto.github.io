@@ -165,9 +165,12 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       clearInterval(slideshowInterval.current);
     } else {
       startSlideshow();
+      if (playerRef.current && !audioPlaying) {
+        playerRef.current.playVideo();
+        setAudioPlaying(true);
+      }
     }
     setSlideshowPlaying(!slideshowPlaying);
-    handlePlayPauseAudio();
     setViewMode("slideshow"); // Switch to slideshow mode
   };
 
