@@ -15,7 +15,7 @@ import "./ImageGallery.css"; // Ensure you have the CSS imported for animations
 const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
 const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
 
-const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle" }) => {
+const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", batchSize = 10, fetchEvery = 7 }) => {
   const [imageUrls, setImageUrls] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
@@ -65,8 +65,8 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
         .filter((item) => item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
         .map((item) => `${bucketUrl}/${item.name}`);
 
-      const startIndex = (batch - 1) * 10;
-      const endIndex = Math.min(startIndex + 10, urls.length);
+      const startIndex = (batch - 1) * batchSize;
+      const endIndex = Math.min(startIndex + batchSize, urls.length);
       return urls.slice(startIndex, endIndex);
     } catch (error) {
       console.error("Error fetching image URLs:", error);
@@ -119,7 +119,7 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
     };
 
     fetchImages(currentBatch);
-  }, [folder, currentBatch]);
+  }, [folder, currentBatch, batchSize]);
 
   useEffect(() => {
     if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
@@ -139,11 +139,11 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   useEffect(() => {
     if (slideshowPlaying) {
       startSlideshow(); // Restart the slideshow with the correct duration when the current image index changes
-      if (currentImageIndex % 10 === 7 && currentBatch * 10 < totalImageCount) {
+      if (currentImageIndex % fetchEvery === fetchEvery - 1 && currentBatch * batchSize < totalImageCount) {
         setCurrentBatch((prevBatch) => prevBatch + 1);
       }
     }
-  }, [currentImageIndex]);
+  }, [currentImageIndex, fetchEvery, batchSize, currentBatch, totalImageCount, slideshowPlaying]);
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
