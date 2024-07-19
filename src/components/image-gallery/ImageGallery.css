@@ -37,14 +37,14 @@
   //filter: sepia(0.3) contrast(1.1);
   backface-visibility: hidden;
 
-  &.vertical {
-    height: 80vh;
-    width: auto;
+  &.horizontal {
+    height: auto;
+    width: 80vw;
   }
 
-  &.horizontal {
-    width: 70vw;
-    height: auto;
+  &.vertical {
+    width: auto;
+    height: 100vh;
   }
 
   &.hidden {
