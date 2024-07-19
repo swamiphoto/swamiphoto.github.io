@@ -220,16 +220,16 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
               <p className="text-center">This gallery is not available on mobile yet. Please view on a computer.</p>
             </div>
           ) : !imagesLoaded ? (
-            <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl">Preparing your stack of photos...please turn your sound on!</div>
+            <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl">Preparing your show...please turn your sound on!</div>
           ) : (
             <>
               <img src={imageUrls[5]} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
               <div className="overlay absolute inset-0 bg-black opacity-60 z-10"></div>
               <div className="text-center text-white p-4 z-20">
                 <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
-                <p className="text-xl mb-4">{subtitle}</p>
+                <p className="text-xl mb-4 text-gray-300">{subtitle}</p>
                 <button onClick={handleStartClick} className="hidden md:inline-block bg-white text-black text-xl px-10 py-4 rounded-full opacity-70 hover:opacity-75 mt-7">
-                  View Photos
+                  Start the Show
                 </button>
               </div>
             </>
