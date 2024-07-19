@@ -5,6 +5,7 @@ import { SlMusicToneAlt } from "react-icons/sl"; // Music icon
 import { HiOutlinePause } from "react-icons/hi2";
 import { VscPlay } from "react-icons/vsc";
 import { FaExpand, FaCompress } from "react-icons/fa";
+import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 
@@ -222,8 +223,8 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       return (
         <div className="grid-container">
           {imageUrls.map((url, index) => (
-            <div key={index} className="grid-item shadow-lg">
-              <img src={url} alt={`Image ${index + 1}`} className="object-cover w-full h-auto" />
+            <div key={index} className={`grid-item ${aspectRatios[index] >= 1 ? "horizontal" : "vertical"} shadow-lg`}>
+              <img src={url} alt={`Image ${index + 1}`} className="object-cover" />
             </div>
           ))}
         </div>
@@ -299,16 +300,29 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       )}
 
       <div className="flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
-        <div className="flex flex-col items-center text-gray-700">
-          {slideshowPlaying ? <HiOutlinePause className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} /> : <VscPlay className="mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />}
-          <IoMusicalNotesOutline className="mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
-          <PiGridNineLight className="mt-4 cursor-pointer" size={20} onClick={handleGridView} style={{ opacity: 1 }} /> {/* Grid view icon */}
-          {isFullscreen ? <RxExitFullScreen className="mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} /> : <RxEnterFullScreen className="mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />}
+        <div className="flex flex-col items-center text-gray-700 ">
+          {slideshowPlaying ? (
+            <HiOutlinePause className="hover:text-red-500 mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
+          ) : (
+            <AiOutlinePlayCircle className="hover:text-red-500 mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
+          )}
+          <IoMusicalNotesOutline className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
+          <PiGridNineLight className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleGridView} style={{ opacity: viewMode === "grid" ? 0.3 : 1 }} /> {/* Grid view icon */}
+          {isFullscreen ? (
+            <RxExitFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
+          ) : (
+            <RxEnterFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
+          )}
         </div>
         <div className="flex flex-col mt-auto mb-4 items-start">
           <div className="vertical-text mb-2">
             <div className="text-gray-900 font-semibold text-lg text-left">{title}</div>
-            <div className="uppercase text-xs text-left">Photos by Swami Venkataramani</div>
+            <div className="uppercase text-xs text-left text-gray-500">
+              Photos by{" "}
+              <a href="https://swamiphoto.com" className="hover:text-red-500 transition-colors duration-300">
+                Swami Venkataramani
+              </a>
+            </div>
           </div>
         </div>
       </div>
