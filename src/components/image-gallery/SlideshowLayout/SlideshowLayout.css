@@ -1,0 +1,66 @@
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slideshow-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ));
+  transition: transform 1s ease, opacity 1s ease;
+  animation: slightMove var(--duration) ease-in-out infinite;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), inset -1px -1px 3px rgba(0, 0, 0, 0.1), 0 8px 15px rgba(0, 0, 0, 0.3);
+  backface-visibility: hidden;
+}
+
+.horizontal {
+  height: auto;
+  width: 70vw;
+}
+
+.vertical {
+  width: auto;
+  height: 70vh;
+  margin-top: -40px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.slide-out {
+  animation: slideOut 1s forwards;
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(150%, -50%) rotate(calc(var(--rotate) + 20deg)) rotateZ(var(--rotateZ));
+    opacity: 0;
+  }
+}
+
+@keyframes slightMove {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ)) translateX(0) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ)) translateX(var(--moveX)) translateY(var(--moveY));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ)) translateX(0) translateY(0);
+  }
+}

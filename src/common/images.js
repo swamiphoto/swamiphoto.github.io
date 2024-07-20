@@ -1,4 +1,5 @@
-const bucketUrl = "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto";
+const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
+const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
 
 const IMAGES = {
   landscapes: {
@@ -94,4 +95,19 @@ const IMAGES = {
   me: `${bucketUrl}/photos/me.jpeg`,
 };
 
+const fetchImageUrls = async (folder) => {
+  try {
+    const response = await fetch(`https://storage.googleapis.com/storage/v1/b/swamiphoto/o?prefix=photos/${folder}/&key=${apiKey}`);
+    const data = await response.json();
+    const urls = data.items
+      .filter((item) => item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
+      .map((item) => `${bucketUrl}/${item.name}`);
+    return urls;
+  } catch (error) {
+    console.error("Error fetching image URLs:", error);
+    return [];
+  }
+};
+
 export default IMAGES;
+export { fetchImageUrls };

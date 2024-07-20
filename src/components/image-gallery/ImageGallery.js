@@ -1,22 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-import { FaHome, FaPlay, FaPause, FaTh } from "react-icons/fa"; // Example icons
-import { PiGridNineLight } from "react-icons/pi";
-import { SlMusicToneAlt } from "react-icons/sl"; // Music icon
 import { HiOutlinePause } from "react-icons/hi2";
-import { VscPlay } from "react-icons/vsc";
-import { FaExpand, FaCompress } from "react-icons/fa";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
+import { PiGridNineLight } from "react-icons/pi";
 
-import useYouTubePlayer from "./useYouTubePlayer"; // Import the custom hook
-import "./ImageGallery.css"; // Ensure you have the CSS imported for animations
+import useYouTubePlayer from "./useYouTubePlayer";
+import "./ImageGallery.css";
 
-const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
-const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
-
-const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", batchSize = 10, fetchEvery = 7 }) => {
-  const [imageUrls, setImageUrls] = useState([]);
+const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {} }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [tilts, setTilts] = useState([]);
@@ -35,44 +27,6 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   const slideshowInterval = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [totalImageCount, setTotalImageCount] = useState(0);
-  const [currentBatch, setCurrentBatch] = useState(1); // Track the current batch
-
-  const customDurations = {
-    2: 6000,
-  };
-
-  const captions = {
-    2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
-    4: "Btw...do you have your sound on? 🎶",
-    6: "View in fullscreen for the best experience!",
-  };
-
-  if (imageUrls.length > 0) {
-    customDurations[imageUrls.length - 1] = 60000;
-    captions[imageUrls.length - 1] =
-      "Happy Birthday, Naga! I hope you have a fantastic day and a wonderful year ahead. I'm grateful for your friendship and I admire how you chase your dreams, crush your fitness goals, and live life with a playful spirit. Here's to many more adventures together! 🎉🎂🎈 Let's celebrate your 43rd birthday in the Warm Heart of Africa ;) Swami";
-  }
-
-  const fetchImageUrls = async (folder, batch) => {
-    try {
-      const response = await fetch(`https://storage.googleapis.com/storage/v1/b/swamiphoto/o?prefix=photos/${folder}/&key=${apiKey}`);
-      const data = await response.json();
-      const totalCount = data.items.length;
-      setTotalImageCount(totalCount);
-
-      const urls = data.items
-        .filter((item) => item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
-        .map((item) => `${bucketUrl}/${item.name}`);
-
-      const startIndex = (batch - 1) * batchSize;
-      const endIndex = Math.min(startIndex + batchSize, urls.length);
-      return urls.slice(startIndex, endIndex);
-    } catch (error) {
-      console.error("Error fetching image URLs:", error);
-      return [];
-    }
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -90,18 +44,16 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
   }, []);
 
   useEffect(() => {
-    const fetchImages = async (batch) => {
-      const urls = await fetchImageUrls(folder, batch);
-      setImageUrls((prevUrls) => [...prevUrls, ...urls]);
-      setTilts((prevTilts) => [...prevTilts, ...urls.map(() => Math.random() * 12 - 6)]); // Precompute tilts for each image
-      setZTilts((prevZTilts) => [...prevZTilts, ...urls.map(() => Math.random() * 20 - 10)]); // Precompute z-tilts for each image
-      setMoveXs((prevMoveXs) => [...prevMoveXs, ...urls.map(() => `${Math.random() * 15 - 5}px`)]); // Precompute x-axis movements for each image
-      setMoveYs((prevMoveYs) => [...prevMoveYs, ...urls.map(() => `${Math.random() * 20 - 5}px`)]); // Precompute y-axis movements for each image
-      setDurations((prevDurations) => [...prevDurations, ...urls.map(() => `${Math.random() * 2 + 3}s`)]); // Precompute durations for each image
+    if (imageUrls.length > 0) {
+      setTilts(imageUrls.map(() => Math.random() * 12 - 6)); // Precompute tilts for each image
+      setZTilts(imageUrls.map(() => Math.random() * 20 - 10)); // Precompute z-tilts for each image
+      setMoveXs(imageUrls.map(() => `${Math.random() * 15 - 5}px`)); // Precompute x-axis movements for each image
+      setMoveYs(imageUrls.map(() => `${Math.random() * 20 - 5}px`)); // Precompute y-axis movements for each image
+      setDurations(imageUrls.map(() => `${Math.random() * 2 + 3}s`)); // Precompute durations for each image
 
       // Fetch image dimensions to determine aspect ratios
-      const aspectRatios = await Promise.all(
-        urls.map((url) => {
+      Promise.all(
+        imageUrls.map((url) => {
           return new Promise((resolve) => {
             const img = new Image();
             img.onload = () => {
@@ -113,13 +65,12 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
             img.src = url;
           });
         })
-      );
-      setAspectRatios((prevRatios) => [...prevRatios, ...aspectRatios]);
-      setImagesLoaded(true);
-    };
-
-    fetchImages(currentBatch);
-  }, [folder, currentBatch, batchSize]);
+      ).then((aspectRatios) => {
+        setAspectRatios(aspectRatios);
+        setImagesLoaded(true);
+      });
+    }
+  }, [imageUrls]);
 
   useEffect(() => {
     if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
@@ -135,15 +86,6 @@ const ImageGallery = ({ folder, layout = "default", title = "Gallery Title", you
       return () => clearInterval(slideshowInterval.current); // Clean up the interval on unmount or when slideshowPlaying changes
     }
   }, [slideshowPlaying]);
-
-  useEffect(() => {
-    if (slideshowPlaying) {
-      startSlideshow(); // Restart the slideshow with the correct duration when the current image index changes
-      if (currentImageIndex % fetchEvery === fetchEvery - 1 && currentBatch * batchSize < totalImageCount) {
-        setCurrentBatch((prevBatch) => prevBatch + 1);
-      }
-    }
-  }, [currentImageIndex, fetchEvery, batchSize, currentBatch, totalImageCount, slideshowPlaying]);
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);

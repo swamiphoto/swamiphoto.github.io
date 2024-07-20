@@ -41,9 +41,7 @@
   }
 
   &.vertical {
-    width: auto;
-    height: 70vh;
-    margin-top: -40px;
+    width: 550px;
   }
 
   &.hidden {
