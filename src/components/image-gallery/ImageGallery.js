@@ -122,6 +122,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         setAudioPlaying(true);
       }
     }
+    handlePlayPauseAudio();
     setSlideshowPlaying(!slideshowPlaying);
     setViewMode("slideshow"); // Switch to slideshow mode
   };
