@@ -232,11 +232,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
     <div className="flex h-screen">
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
-          {isMobile ? (
-            <div className="block md:hidden fixed inset-0 flex items-center justify-center bg-black text-gray-300 text-lg font-geist-mono p-4">
-              <p className="text-center">This gallery is not available on mobile yet. Please view on a computer.</p>
-            </div>
-          ) : !imagesLoaded ? (
+          {!imagesLoaded ? (
             <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl font-geist-mono">Preparing your show...please turn your sound on!</div>
           ) : (
             <>
@@ -255,7 +251,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         </div>
       )}
 
-      <div className="flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
+      <div className="hidden md:flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center text-gray-700 ">
           {slideshowPlaying ? (
             <HiOutlinePause className="hover:text-red-500 mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
