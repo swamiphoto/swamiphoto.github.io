@@ -10,10 +10,11 @@ import Bollywood from "./pages/bollywood/Bollywood";
 import Tennis from "./pages/tennis/Tennis";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import Prints from "./pages/prints/Prints";
-import Naga from "./pages/portraits/galleries/Naga";
+import NagaBday from "./pages/portraits/galleries/NagaBday";
 import "./App.css";
+import Naga from "./pages/portraits/galleries/Naga";
 
-const noHeaderPaths = ["/naga", "/anotherPathWithoutHeader", "/oneMorePath"]; // Add more paths as needed
+const noHeaderPaths = ["/naga", "/nagabday"]; // Add more paths as needed
 
 const MainContent = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const MainContent = () => {
           <Route path="/headshots" element={<Headshots />} />
           <Route path="/about" element={<About />} />
           <Route path="/wallprints" element={<Prints />} />
+          <Route path="/nagabday" element={<NagaBday />} />
           <Route path="/naga" element={<Naga />} />
           {/* You can add a 404 Not Found page here */}
         </Routes>
