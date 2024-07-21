@@ -48,9 +48,9 @@ const Naga = () => {
 
   if (!imagesLoaded || !minDisplayTimeElapsed) {
     return (
-      <div className="flex flex-col items-center justify-center w-full h-screen bg-black text-gray-200 text-2xl font-geist-mono">
-        <div>Loading your show...please have your sound on!</div>
-        <div className="text-sm text-gray-400 mt-2 uppercase">Design and concept by Swami Venkataramani</div>
+      <div className="flex flex-col items-center justify-center w-full h-screen bg-black text-gray-200 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
+        <div>Preparing your show...please turn your sound on!</div>
+        <div className="text-sm text-gray-400 mt-2">Designed and conceptualized by Swami Venkataramani</div>
       </div>
     );
   }
