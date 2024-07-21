@@ -1,23 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ImageGallery from "../../../components/image-gallery/ImageGallery";
-import { fetchImageUrls } from "../../../common/images"; // Import the utility function
+import { fetchImageUrls } from "../../../common/images";
+import Loading from "../../../components/image-gallery/Loading/Loading";
 
 const NagaBday = () => {
   const [imageUrls, setImageUrls] = useState([]);
-  const [customDurations, setCustomDurations] = useState({
-    2: 6000,
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [randomYouTubeLink, setRandomYouTubeLink] = useState("");
+  const [customDurations, setCustomDurations] = useState({});
+  const [captions, setCaptions] = useState({
+    9: "Btw...do you have your sound on? 🎶",
+    11: "View in fullscreen for the best experience!",
   });
 
-  const [captions, setCaptions] = useState({
-    2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
-    4: "Btw...do you have your sound on? 🎶",
-    6: "View in fullscreen for the best experience!",
-  });
+  const youtubeLinks = ["https://www.youtube.com/watch?v=1GWKhpN1KyA"];
+
+  const getRandomYouTubeLink = () => {
+    const randomIndex = Math.floor(Math.random() * youtubeLinks.length);
+    return youtubeLinks[randomIndex];
+  };
 
   useEffect(() => {
-    const fetchAndSetImageUrls = async () => {
+    setRandomYouTubeLink(getRandomYouTubeLink());
+
+    const fetchImages = async () => {
       const urls = await fetchImageUrls("portraits/naga-sunflowers");
       setImageUrls(urls);
+      const imageLoadPromises = urls.map((url) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = url;
+        });
+      });
+      await Promise.all(imageLoadPromises);
+      setImagesLoaded(true);
 
       // Set custom duration and caption for the last image
       setCustomDurations((prevDurations) => ({
@@ -32,22 +50,16 @@ const NagaBday = () => {
       }));
     };
 
-    fetchAndSetImageUrls();
+    fetchImages();
   }, []);
 
   return (
-    <div className="bg-gray-200">
-      <ImageGallery
-        imageUrls={imageUrls}
-        layout="slideshow"
-        title="Sunflower Soundarya"
-        subtitle="A dreamy evening with the sunflowers in Woodland."
-        youtubeUrl="https://www.youtube.com/watch?v=-XTAK0avUEw"
-        customDurations={customDurations}
-        captions={captions}
-        coverImageIndex={4}
-        mobileCoverImageIndex={3}
-      />
+    <div>
+      {imagesLoaded ? (
+        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ImageGallery from "../../../components/image-gallery/ImageGallery";
 import { fetchImageUrls } from "../../../common/images";
+import Loading from "../../../components/image-gallery/Loading/Loading";
 
 const Naga = () => {
   const [imageUrls, setImageUrls] = useState([]);
@@ -51,14 +52,11 @@ const Naga = () => {
   }, []);
 
   return (
-    <div className="bg-gray-200">
+    <div>
       {imagesLoaded ? (
-        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={4} />
+        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
       ) : (
-        <div className="flex flex-col items-center justify-center w-full h-screen text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
-          <div>Loading your show</div>
-          <div className="text-sm text-gray-500 mt-2">Design and concept by Swami Venkataramani</div>
-        </div>
+        <Loading />
       )}
     </div>
   );
