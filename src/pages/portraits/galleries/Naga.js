@@ -1,24 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ImageGallery from "../../../components/image-gallery/ImageGallery";
-import { fetchImageUrls } from "../../../common/images"; // Import the utility function
+import { fetchImageUrls } from "../../../common/images";
 
-const NagaBday = () => {
+const Naga = () => {
   const [imageUrls, setImageUrls] = useState([]);
-  const [customDurations, setCustomDurations] = useState({});
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  const [captions, setCaptions] = useState({
-    4: "Do you have your sound on? 🎶",
-    7: "View in fullscreen for a nicer experience!",
-  });
+  const customDurations = {
+    2: 6000,
+  };
+
+  const captions = {
+    2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
+    4: "Btw...do you have your sound on? 🎶",
+    6: "View in fullscreen for the best experience!",
+  };
 
   useEffect(() => {
-    const fetchAndSetImageUrls = async () => {
+    const fetchImages = async () => {
       const urls = await fetchImageUrls("portraits/naga-sunflowers");
       setImageUrls(urls);
+      setImagesLoaded(true);
     };
 
-    fetchAndSetImageUrls();
+    fetchImages();
   }, []);
+
+  if (!imagesLoaded) {
+    return <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl font-geist-mono">Preparing your show...please turn your sound on!</div>;
+  }
 
   return (
     <div className="bg-gray-200">
@@ -31,10 +41,10 @@ const NagaBday = () => {
         customDurations={customDurations}
         captions={captions}
         coverImageIndex={4}
-        mobileCoverImageIndex={3}
+        mobileCoverImageIndex={4}
       />
     </div>
   );
 };
 
-export default NagaBday;
+export default Naga;

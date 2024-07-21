@@ -19,7 +19,6 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const [moveYs, setMoveYs] = useState([]);
   const [durations, setDurations] = useState([]);
   const [direction, setDirection] = useState("left");
-  const [imagesLoaded, setImagesLoaded] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [slideshowPlaying, setSlideshowPlaying] = useState(false);
   const [showCover, setShowCover] = useState(true);
@@ -58,17 +57,16 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         })
       ).then((aspectRatios) => {
         setAspectRatios(aspectRatios);
-        setImagesLoaded(true);
       });
     }
   }, [imageUrls]);
 
   useEffect(() => {
-    if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
+    if (layout === "slideshow" && imageUrls.length > 0 && slideshowPlaying) {
       startSlideshow();
       return () => clearInterval(slideshowInterval.current);
     }
-  }, [layout, imagesLoaded, imageUrls, slideshowPlaying]);
+  }, [layout, imageUrls, slideshowPlaying]);
 
   useEffect(() => {
     if (slideshowPlaying) {
@@ -153,10 +151,6 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   };
 
   const renderPhotos = () => {
-    if (!imagesLoaded) {
-      return <div>Loading...</div>;
-    }
-
     if (viewMode === "grid") {
       return (
         <div className="grid-container">
@@ -214,22 +208,18 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
     <div className="flex h-screen">
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
-          {!imagesLoaded ? (
-            <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl font-geist-mono">Preparing your show...please turn your sound on!</div>
-          ) : (
-            <>
-              <div className="absolute inset-0 w-full h-full bg-black z-10"></div>
-              <img src={imageUrls[isMobile ? mobileCoverImageIndex : coverImageIndex]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
-              <div className="overlay absolute inset-0 bg-black opacity-60 z-30"></div>
-              <div className="text-center text-white p-4 z-40 fade-in">
-                <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
-                <p className="text-xl mb-4 text-gray-300">{subtitle}</p>
-                <button onClick={handleStartClick} className="inline-block bg-white text-black text-2xl px-10 py-4 rounded-full opacity-60 hover:opacity-75 mt-7">
-                  Start the Show
-                </button>
-              </div>
-            </>
-          )}
+          <>
+            <div className="absolute inset-0 w-full h-full bg-black z-10"></div>
+            <img src={imageUrls[isMobile ? mobileCoverImageIndex : coverImageIndex]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
+            <div className="overlay absolute inset-0 bg-black opacity-60 z-30"></div>
+            <div className="text-center text-white p-4 z-40 fade-in">
+              <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
+              <p className="text-xl mb-4 text-gray-300">{subtitle}</p>
+              <button onClick={handleStartClick} className="inline-block bg-white text-black text-2xl px-10 py-4 rounded-full opacity-60 hover:opacity-75 mt-7">
+                Start the Show
+              </button>
+            </div>
+          </>
         </div>
       )}
 
