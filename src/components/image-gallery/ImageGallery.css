@@ -44,6 +44,16 @@
     width: 550px;
   }
 
+  @media (max-width: 768px) {
+    .horizontal {
+      width: 110vw;
+    }
+
+    .vertical {
+      width: 350px;
+    }
+  }
+
   &.hidden {
     opacity: 0;
   }
