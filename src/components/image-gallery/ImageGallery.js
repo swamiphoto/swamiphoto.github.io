@@ -25,16 +25,22 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const [viewMode, setViewMode] = useState("slideshow"); // Added state for view mode
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const resizeTimeout = useRef(null);
+  const prevIsMobile = useRef(isMobile);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      clearTimeout(resizeTimeout.current);
+      resizeTimeout.current = setTimeout(() => {
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile !== prevIsMobile.current) {
+          setIsMobile(newIsMobile);
+          prevIsMobile.current = newIsMobile;
+        }
+      }, 150);
     };
-
-    // Initial check
-    handleResize();
 
     // Add event listener
     window.addEventListener("resize", handleResize);
