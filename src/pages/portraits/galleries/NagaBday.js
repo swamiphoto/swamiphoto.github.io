@@ -56,7 +56,7 @@ const NagaBday = () => {
   return (
     <div>
       {imagesLoaded ? (
-        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
+        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Happy Birthday, Naga!" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
       ) : (
         <Loading />
       )}
