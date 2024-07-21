@@ -45,11 +45,11 @@
   }
 
   @media (max-width: 768px) {
-    .horizontal {
-      width: 110vw;
+    &.horizontal {
+      width: 100vw;
     }
 
-    .vertical {
+    &.vertical {
       width: 350px;
     }
   }
