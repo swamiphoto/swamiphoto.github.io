@@ -6,7 +6,7 @@ import { IoMusicalNotesOutline } from "react-icons/io5";
 import { PiGridNineLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
 
-//import useYouTubePlayer from "./useYouTubePlayer";
+import useYouTubePlayer from "./useYouTubePlayer";
 import "./ImageGallery.css";
 
 const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0 }) => {
@@ -23,7 +23,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const [slideshowPlaying, setSlideshowPlaying] = useState(false);
   const [showCover, setShowCover] = useState(true);
   const [viewMode, setViewMode] = useState("slideshow");
-  //const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
+  const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -253,7 +253,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
       <main className="flex-grow flex justify-center items-center relative">
         {renderPhotos()}
-        {/* {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>} */}
+        {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
       </main>
     </div>
   );
