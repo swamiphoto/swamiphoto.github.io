@@ -10,8 +10,8 @@ const Naga = () => {
   const customDurations = {};
 
   const captions = {
-    7: "Btw...do you have your sound on? 🎶",
-    9: "View in fullscreen for the best experience!",
+    9: "Btw...do you have your sound on? 🎶",
+    11: "View in fullscreen for the best experience!",
   };
 
   const youtubeLinks = [
@@ -55,9 +55,9 @@ const Naga = () => {
 
   if (!imagesLoaded) {
     return (
-      <div className="flex flex-col items-center justify-center w-full h-screen bg-black text-gray-200 text-2xl font-geist-mono overflow-hidden m-0 p-0">
+      <div className="flex flex-col items-center justify-center w-full h-screen  text-gray-800 text-2xl font-geist-mono overflow-hidden m-0 p-0">
         <div>Preparing your show...please turn your sound on!</div>
-        <div className="text-sm text-gray-400 mt-2">Designed and conceptualized by Swami Venkataramani</div>
+        <div className="text-sm text-gray-500 mt-2">Designed and conceptualized by Swami Venkataramani</div>
       </div>
     );
   }
