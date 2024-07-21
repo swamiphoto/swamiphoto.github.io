@@ -22,7 +22,17 @@ const NagaBday = () => {
 
   return (
     <div className="bg-gray-200">
-      <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl="https://www.youtube.com/watch?v=-XTAK0avUEw" customDurations={customDurations} captions={captions} />
+      <ImageGallery
+        imageUrls={imageUrls}
+        layout="slideshow"
+        title="Sunflower Soundarya"
+        subtitle="A dreamy evening with the sunflowers in Woodland."
+        youtubeUrl="https://www.youtube.com/watch?v=-XTAK0avUEw"
+        customDurations={customDurations}
+        captions={captions}
+        coverImageIndex={4}
+        mobileCoverImageIndex={3}
+      />
     </div>
   );
 };
