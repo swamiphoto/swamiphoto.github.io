@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import useYouTubePlayer from "./useYouTubePlayer";
 import "./ImageGallery.css";
 
-const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0 }) => {
+const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [tilts, setTilts] = useState([]);
@@ -178,7 +178,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
               zIndex: imageUrls.length - index,
             }}>
             <img src={url} alt={`Image ${index + 1}`} />
-            {captions[index] && (
+            {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
               <div className="absolute top-10 left-4 w-3/5 p-5">
                 <div
                   className="text-left bg-yellow-200 font-geist-mono shadow-lg transform rotate-1"
