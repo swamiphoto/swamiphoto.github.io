@@ -4,9 +4,8 @@ import { fetchImageUrls } from "../../../common/images";
 
 const Naga = () => {
   const [imageUrls, setImageUrls] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [coverVisible, setCoverVisible] = useState(true);
   const [randomYouTubeLink, setRandomYouTubeLink] = useState("");
-  const [minDisplayTimeElapsed, setMinDisplayTimeElapsed] = useState(false);
 
   const customDurations = {};
 
@@ -44,22 +43,20 @@ const Naga = () => {
           img.src = url;
         });
       });
-      await Promise.all(imageLoadPromises);
-      setImagesLoaded(true);
+
+      const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 4000));
+
+      await Promise.all([...imageLoadPromises, minDisplayTime]);
+
+      setCoverVisible(false);
     };
 
     fetchImages();
-
-    const timer = setTimeout(() => {
-      setMinDisplayTimeElapsed(true);
-    }, 4000);
-
-    return () => clearTimeout(timer);
   }, []);
 
-  if (!imagesLoaded || !minDisplayTimeElapsed) {
+  if (coverVisible) {
     return (
-      <div className="flex flex-col items-center justify-center w-full h-screen text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
+      <div className="flex flex-col items-center justify-center w-full h-screen  text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
         <div>Preparing your show...please turn your sound on!</div>
         <div className="text-sm text-gray-500 mt-2">Design and concept by Swami Venkataramani</div>
       </div>
