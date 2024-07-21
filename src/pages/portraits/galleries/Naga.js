@@ -7,6 +7,7 @@ const Naga = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [randomYouTubeLink, setRandomYouTubeLink] = useState("");
   const [minDisplayTimeElapsed, setMinDisplayTimeElapsed] = useState(false);
+  const [loadingState, setLoadingState] = useState("initial"); // 'initial', 'loading', 'loaded'
 
   const customDurations = {};
 
@@ -25,7 +26,6 @@ const Naga = () => {
     "https://www.youtube.com/watch?v=tyBQ_EHEpqI",
   ];
 
-  // Function to get a random YouTube link
   const getRandomYouTubeLink = () => {
     const randomIndex = Math.floor(Math.random() * youtubeLinks.length);
     return youtubeLinks[randomIndex];
@@ -35,6 +35,7 @@ const Naga = () => {
     setRandomYouTubeLink(getRandomYouTubeLink());
 
     const fetchImages = async () => {
+      setLoadingState("loading");
       const urls = await fetchImageUrls("portraits/naga-sunflowers");
       setImageUrls(urls);
       const imageLoadPromises = urls.map((url) => {
@@ -47,13 +48,14 @@ const Naga = () => {
       });
       await Promise.all(imageLoadPromises);
       setImagesLoaded(true);
+      setLoadingState("loaded");
     };
 
     fetchImages();
 
     const timer = setTimeout(() => {
       setMinDisplayTimeElapsed(true);
-    }, 7000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
