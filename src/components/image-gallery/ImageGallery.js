@@ -4,6 +4,7 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { PiGridNineLight } from "react-icons/pi";
+import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
 import "./ImageGallery.css";
@@ -25,29 +26,8 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const [viewMode, setViewMode] = useState("slideshow"); // Added state for view mode
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const resizeTimeout = useRef(null);
-  const prevIsMobile = useRef(isMobile);
-
-  useEffect(() => {
-    const handleResize = () => {
-      clearTimeout(resizeTimeout.current);
-      resizeTimeout.current = setTimeout(() => {
-        const newIsMobile = window.innerWidth <= 768;
-        if (newIsMobile !== prevIsMobile.current) {
-          setIsMobile(newIsMobile);
-          prevIsMobile.current = newIsMobile;
-        }
-      }, 150);
-    };
-
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener on component unmount
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     if (imageUrls.length > 0) {
