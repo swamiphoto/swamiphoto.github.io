@@ -27,7 +27,7 @@ const Naga = () => {
   }, []);
 
   if (!imagesLoaded) {
-    return <div className="flex items-center justify-center w-full h-full bg-black text-gray-300 text-2xl font-geist-mono">Preparing your show...please turn your sound on!</div>;
+    return <div className="flex items-center justify-center w-full h-screen bg-black text-gray-300 text-2xl font-geist-mono">Preparing your show...please turn your sound on!</div>;
   }
 
   return (
