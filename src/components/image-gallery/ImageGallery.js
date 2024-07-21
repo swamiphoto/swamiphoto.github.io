@@ -164,7 +164,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
     }
 
     return (
-      <div className="slideshow-container">
+      <div className="slideshow-container mt-8 md:mt-0">
         {imageUrls.map((url, index) => (
           <div
             key={index}
