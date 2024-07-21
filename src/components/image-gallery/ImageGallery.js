@@ -31,11 +31,17 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
   useEffect(() => {
     if (imageUrls.length > 0) {
-      setTilts(imageUrls.map(() => Math.random() * 12 - 6)); // Precompute tilts for each image
-      setZTilts(imageUrls.map(() => Math.random() * 20 - 10)); // Precompute z-tilts for each image
-      setMoveXs(imageUrls.map(() => `${Math.random() * 15 - 5}px`)); // Precompute x-axis movements for each image
-      setMoveYs(imageUrls.map(() => `${Math.random() * 20 - 5}px`)); // Precompute y-axis movements for each image
-      setDurations(imageUrls.map(() => `${Math.random() * 2 + 3}s`)); // Precompute durations for each image
+      const newTilts = imageUrls.map(() => Math.random() * 12 - 6); // Precompute tilts for each image
+      const newZTilts = imageUrls.map(() => Math.random() * 20 - 10); // Precompute z-tilts for each image
+      const newMoveXs = imageUrls.map(() => `${Math.random() * 15 - 5}px`); // Precompute x-axis movements for each image
+      const newMoveYs = imageUrls.map(() => `${Math.random() * 20 - 5}px`); // Precompute y-axis movements for each image
+      const newDurations = imageUrls.map(() => `${Math.random() * 2 + 3}s`); // Precompute durations for each image
+
+      setTilts(newTilts);
+      setZTilts(newZTilts);
+      setMoveXs(newMoveXs);
+      setMoveYs(newMoveYs);
+      setDurations(newDurations);
 
       // Fetch image dimensions to determine aspect ratios
       Promise.all(
@@ -108,9 +114,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         setAudioPlaying(true);
       }
     }
-    handlePlayPauseAudio();
     setSlideshowPlaying(!slideshowPlaying);
-    setViewMode("slideshow"); // Switch to slideshow mode
   };
 
   const handleStartClick = () => {
