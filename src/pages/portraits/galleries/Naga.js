@@ -4,7 +4,7 @@ import { fetchImageUrls } from "../../../common/images";
 
 const Naga = () => {
   const [imageUrls, setImageUrls] = useState([]);
-  const [coverVisible, setCoverVisible] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const [randomYouTubeLink, setRandomYouTubeLink] = useState("");
 
   const customDurations = {};
@@ -43,29 +43,23 @@ const Naga = () => {
           img.src = url;
         });
       });
-
-      const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 4000));
-
-      await Promise.all([...imageLoadPromises, minDisplayTime]);
-
-      setCoverVisible(false);
+      await Promise.all(imageLoadPromises);
+      setImagesLoaded(true);
     };
 
     fetchImages();
   }, []);
 
-  if (coverVisible) {
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-screen  text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
-        <div>Preparing your show...please turn your sound on!</div>
-        <div className="text-sm text-gray-500 mt-2">Design and concept by Swami Venkataramani</div>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-gray-200">
-      <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={4} />
+      {imagesLoaded ? (
+        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={4} />
+      ) : (
+        <div className="flex flex-col items-center justify-center w-full h-screen text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
+          <div>Loading your show</div>
+          <div className="text-sm text-gray-500 mt-2">Design and concept by Swami Venkataramani</div>
+        </div>
+      )}
     </div>
   );
 };
