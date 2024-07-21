@@ -6,6 +6,7 @@ const Naga = () => {
   const [imageUrls, setImageUrls] = useState([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [randomYouTubeLink, setRandomYouTubeLink] = useState("");
+  const [minDisplayTimeElapsed, setMinDisplayTimeElapsed] = useState(false);
 
   const customDurations = {};
 
@@ -19,8 +20,6 @@ const Naga = () => {
     "https://www.youtube.com/watch?v=ITswHbJPHhQ",
     "https://www.youtube.com/watch?v=jx92a0f_gnA",
     "https://www.youtube.com/watch?v=3yJBhahjQ20",
-    "https://www.youtube.com/watch?v=sc7HiznLyoU",
-    "https://www.youtube.com/watch?v=sc7HiznLyoU",
     "https://www.youtube.com/watch?v=sc7HiznLyoU",
     "https://www.youtube.com/watch?v=HzjE33U_gy8",
     "https://www.youtube.com/watch?v=tyBQ_EHEpqI",
@@ -51,11 +50,17 @@ const Naga = () => {
     };
 
     fetchImages();
+
+    const timer = setTimeout(() => {
+      setMinDisplayTimeElapsed(true);
+    }, 7000);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  if (!imagesLoaded) {
+  if (!imagesLoaded || !minDisplayTimeElapsed) {
     return (
-      <div className="flex flex-col items-center justify-center w-full h-screen  text-gray-800 text-2xl font-geist-mono overflow-hidden m-0 p-0">
+      <div className="flex flex-col items-center justify-center w-full h-screen text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
         <div>Preparing your show...please turn your sound on!</div>
         <div className="text-sm text-gray-500 mt-2">Designed and conceptualized by Swami Venkataramani</div>
       </div>
