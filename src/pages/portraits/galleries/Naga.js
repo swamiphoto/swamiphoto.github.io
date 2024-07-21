@@ -11,29 +11,24 @@ const Naga = () => {
   };
 
   const captions = {
-    2: "Hello Naga! Make sure to watch till the end for a special message. 🎉",
     4: "Btw...do you have your sound on? 🎶",
     6: "View in fullscreen for the best experience!",
   };
 
   useEffect(() => {
     const fetchImages = async () => {
-      try {
-        const urls = await fetchImageUrls("portraits/naga-sunflowers");
-        setImageUrls(urls);
-        const imageLoadPromises = urls.map((url) => {
-          return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(url);
-            img.onerror = () => reject(url);
-            img.src = url;
-          });
+      const urls = await fetchImageUrls("portraits/naga-sunflowers");
+      setImageUrls(urls);
+      const imageLoadPromises = urls.map((url) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = url;
         });
-        await Promise.allSettled(imageLoadPromises);
-        setImagesLoaded(true);
-      } catch (error) {
-        console.error("Error loading images:", error);
-      }
+      });
+      await Promise.all(imageLoadPromises);
+      setImagesLoaded(true);
     };
 
     fetchImages();
