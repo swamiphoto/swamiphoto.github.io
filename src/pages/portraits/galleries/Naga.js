@@ -62,7 +62,7 @@ const Naga = () => {
     return (
       <div className="flex flex-col items-center justify-center w-full h-screen text-gray-800 md:text-2xl font-geist-mono overflow-hidden m-0 p-0">
         <div>Preparing your show...please turn your sound on!</div>
-        <div className="text-sm text-gray-500 mt-2">Designed and conceptualized by Swami Venkataramani</div>
+        <div className="text-sm text-gray-500 mt-2">Design and concept by Swami Venkataramani</div>
       </div>
     );
   }
