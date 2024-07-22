@@ -10,7 +10,7 @@ const Sunol = () => {
 
   const customDurations = { 24: 7000 };
 
-  const captions = { 24: "Photographer's favorite. Possibly my all time favorite" };
+  const captions = { 24: "Photographer's favorite. Possibly my all time favorite." };
 
   const youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU", "https://www.youtube.com/watch?v=qj4RiKoARPk", "https://www.youtube.com/watch?v=AGmQHSBq2E4", "https://www.youtube.com/watch?v=7vkkgD6LCIw", "https://www.youtube.com/watch?v=6P5zx_rxlhI"];
 
