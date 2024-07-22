@@ -14,8 +14,9 @@ import NagaBday from "./pages/portraits/galleries/NagaBday";
 import "./App.css";
 import Naga from "./pages/portraits/galleries/Naga";
 import Sunol from "./pages/portraits/galleries/Sunol";
+import Sunol2 from "./pages/portraits/galleries/Sunol2";
 
-const noHeaderPaths = ["/naga", "/nagabday", "/sunol"]; // Add more paths as needed
+const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2"];
 
 const MainContent = () => {
   const location = useLocation();
@@ -35,6 +36,7 @@ const MainContent = () => {
           <Route path="/nagabday" element={<NagaBday />} />
           <Route path="/naga" element={<Naga />} />
           <Route path="/sunol" element={<Sunol />} />
+          <Route path="/sunol2" element={<Sunol2 />} />
           {/* You can add a 404 Not Found page here */}
         </Routes>
       </div>
