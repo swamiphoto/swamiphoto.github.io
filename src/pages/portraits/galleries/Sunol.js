@@ -43,7 +43,7 @@ const Sunol = () => {
   return (
     <div>
       {imagesLoaded ? (
-        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunol Ridge" subtitle="An evening hike with Naga, Bharath, Sathya, and Sriman." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={24} mobileCoverImageIndex={0} />
+        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunol Ridge" subtitle="An evening hike with Naga, Bharath, Sathya, and Sriman." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={24} mobileCoverImageIndex={21} />
       ) : (
         <Loading />
       )}

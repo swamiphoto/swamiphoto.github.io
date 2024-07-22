@@ -12,7 +12,7 @@ const Sunol2 = () => {
 
   const captions = {};
 
-  const youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU", "https://www.youtube.com/watch?v=qj4RiKoARPk", "https://www.youtube.com/watch?v=AGmQHSBq2E4", "https://www.youtube.com/watch?v=7vkkgD6LCIw", "https://www.youtube.com/watch?v=6P5zx_rxlhI"];
+  const youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU", "https://www.youtube.com/watch?v=qj4RiKoARPk", "https://www.youtube.com/watch?v=AGmQHSBq2E4", "https://www.youtube.com/watch?v=6P5zx_rxlhI"];
 
   const getRandomYouTubeLink = () => {
     const randomIndex = Math.floor(Math.random() * youtubeLinks.length);
@@ -43,7 +43,7 @@ const Sunol2 = () => {
   return (
     <div>
       {imagesLoaded ? (
-        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunol Ridge (Set 2)" subtitle="An evening hike with Naga, Bharath, Sathya, and Sriman 🌄✨" youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={20} mobileCoverImageIndex={3} />
+        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunol Ridge (Set 2)" subtitle="An evening hike with Naga, Bharath, Sathya, and Sriman." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={19} mobileCoverImageIndex={3} />
       ) : (
         <Loading />
       )}
