@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { HiOutlinePause } from "react-icons/hi2";
+import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
-import { RxEnterFullScreen, RxExitFullScreen, RxHamburgerMenu } from "react-icons/rx";
+import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight, PiHamburgerMenuLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
@@ -261,6 +261,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
           </>
         </div>
       )}
+
       <div className="hidden md:flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center text-gray-700">
           {slideshowPlaying ? (
@@ -290,23 +291,26 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
           </div>
         </div>
       </div>
+
       <main className="flex-grow flex justify-center items-center relative">
         {renderPhotos()}
         {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
       </main>
+
       {/* Mobile Top Bar */}
       {isMobile && (
-        <div className="fixed top-0 left-0 right-0 flex items-center justify-between bg-black text-white p-4 z-50">
+        <div className="fixed top-0 left-0 right-0 flex items-center justify-between bg-gray-300 text-gray-900 border-b border-gray-300 p-4 z-50">
           <div>
             <h1 className="text-lg font-bold">{title}</h1>
             <p className="text-xs">Photos by Swami Venkataramani</p>
           </div>
-          <RxHamburgerMenu size={24} />
+          <PiHamburgerMenuLight size={24} className="text-gray-900" />
         </div>
       )}
+
       {/* Mobile Floating Buttons */}
       {isMobile && (
-        <div className="fixed bottom-4 left-0 right-0 flex items-center justify-between px-4 z-50">
+        <div className="fixed bottom-4 left-0 right-0 flex items-center justify-around px-4 z-50">
           <PiArrowLeftLight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
           {slideshowPlaying ? (
             <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
