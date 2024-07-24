@@ -3,8 +3,7 @@ import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-i
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
-import { PiGridNineLight } from "react-icons/pi";
-import { PiArrowLeftLight, PiArrowRightLight } from "react-icons/pi";
+import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight, PiHamburgerMenuLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
@@ -170,13 +169,23 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
   const handlePreviousPhoto = () => {
     if (currentImageIndex > 0) {
-      setCurrentImageIndex((prevIndex) => prevIndex - 1);
+      setTransitioning(true);
+      setDirection("right");
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => prevIndex - 1);
+        setTransitioning(false);
+      }, 2000);
     }
   };
 
   const handleNextPhoto = () => {
     if (currentImageIndex < imageUrls.length - 1) {
-      setCurrentImageIndex((prevIndex) => prevIndex + 1);
+      setTransitioning(true);
+      setDirection("left");
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => prevIndex + 1);
+        setTransitioning(false);
+      }, 2000);
     }
   };
 
@@ -287,6 +296,30 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         {renderPhotos()}
         {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
       </main>
+
+      {/* Mobile Top Bar */}
+      {isMobile && (
+        <div className="fixed top-0 left-0 right-0 flex items-center justify-between bg-black text-white p-4 z-50">
+          <div>
+            <h1 className="text-lg font-bold">{title}</h1>
+            <p className="text-xs">Photos by Swami Venkataramani</p>
+          </div>
+          <PiHamburgerMenuLight size={24} />
+        </div>
+      )}
+
+      {/* Mobile Floating Buttons */}
+      {isMobile && (
+        <div className="fixed bottom-4 left-0 right-0 flex items-center justify-between px-4 z-50">
+          <PiArrowLeftLight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
+          {slideshowPlaying ? (
+            <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
+          ) : (
+            <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
+          )}
+          <PiArrowRightLight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} />
+        </div>
+      )}
     </div>
   );
 };
