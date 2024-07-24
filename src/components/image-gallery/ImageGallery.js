@@ -298,7 +298,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
       </main>
 
       {/* Mobile Top Bar */}
-      {isMobile && (
+      {!showCover && isMobile && (
         <div className="fixed top-0 left-0 right-0 flex items-center justify-between bg-gray-300 text-gray-900 border-b border-gray-300 p-4 z-50">
           <div>
             <h1 className="text-lg font-bold">{title}</h1>
@@ -309,7 +309,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
       )}
 
       {/* Mobile Floating Buttons */}
-      {isMobile && (
+      {!showCover && isMobile && (
         <div className="fixed-bottom">
           <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
             <PiArrowLeftLight size={24} />
