@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen, RxHamburgerMenu } from "react-icons/rx";
-import { IoMusicalNotesOutline } from "react-icons/io5";
+import { IoMusicalNotesOutline, IoPlaySharp } from "react-icons/io5";
 import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight, PiHamburgerMenuLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
 
@@ -314,7 +314,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
           <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
             <PiArrowLeftLight size={24} />
           </button>
-          <button onClick={handlePlayPauseSlideshow}>{slideshowPlaying ? <HiOutlinePause size={24} /> : <AiOutlinePlayCircle size={24} />}</button>
+          <button onClick={handlePlayPauseSlideshow}>{slideshowPlaying ? <HiOutlinePause size={24} /> : <IoPlaySharp size={24} />}</button>
           <button className={`${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }}>
             <PiArrowRightLight size={24} />
           </button>
