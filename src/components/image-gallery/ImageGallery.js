@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { HiOutlinePause } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
-import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
+import { RxEnterFullScreen, RxExitFullScreen, RxHamburgerMenu } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight, PiHamburgerMenuLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
@@ -301,7 +301,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
             <h1 className="text-lg font-bold">{title}</h1>
             <p className="text-xs">Photos by Swami Venkataramani</p>
           </div>
-          <PiHamburgerMenuLight size={24} />
+          <RxHamburgerMenu size={24} />
         </div>
       )}
       {/* Mobile Floating Buttons */}
