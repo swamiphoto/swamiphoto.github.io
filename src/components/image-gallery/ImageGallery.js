@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { HiOutlinePause } from "react-icons/hi2";
+import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { PiGridNineLight } from "react-icons/pi";
+import { PiArrowLeftLight, PiArrowRightLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
@@ -23,11 +24,12 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const [slideshowPlaying, setSlideshowPlaying] = useState(false);
   const [showCover, setShowCover] = useState(true);
   const [viewMode, setViewMode] = useState("slideshow");
-  const [imagesLoaded, setImagesLoaded] = useState(false); // Add this line
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-  const [isFullscreen, setIsFullscreen] = useState(false);
+
   useEffect(() => {
     if (imageUrls.length > 0) {
       const newTilts = imageUrls.map(() => Math.random() * 12 - 6);
@@ -63,11 +65,11 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   }, [imageUrls]);
 
   useEffect(() => {
-    if (layout === "slideshow" && imageUrls.length > 0 && slideshowPlaying) {
+    if (layout === "slideshow" && imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
       startSlideshow();
       return () => clearInterval(slideshowInterval.current);
     }
-  }, [layout, imageUrls, slideshowPlaying]);
+  }, [layout, imagesLoaded, imageUrls, slideshowPlaying]);
 
   useEffect(() => {
     if (slideshowPlaying) {
@@ -75,6 +77,21 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
       return () => clearInterval(slideshowInterval.current);
     }
   }, [slideshowPlaying]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowLeft") {
+        handlePreviousPhoto();
+      } else if (event.key === "ArrowRight") {
+        handleNextPhoto();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [currentImageIndex]);
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
@@ -149,6 +166,18 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
     setViewMode("grid");
     clearInterval(slideshowInterval.current);
     setSlideshowPlaying(false);
+  };
+
+  const handlePreviousPhoto = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
+  const handleNextPhoto = () => {
+    if (currentImageIndex < imageUrls.length - 1) {
+      setCurrentImageIndex((prevIndex) => prevIndex + 1);
+    }
   };
 
   const renderPhotos = () => {
@@ -238,6 +267,8 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
           ) : (
             <RxEnterFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
           )}
+          <PiArrowLeftLight className={`hover:text-red-500 mt-4 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
+          <PiArrowRightLight className={`hover:text-red-500 mt-4 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} />
         </div>
         <div className="flex flex-col mt-auto mb-4 items-start">
           <div className="vertical-text mb-2">

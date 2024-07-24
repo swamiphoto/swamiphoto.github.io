@@ -12,17 +12,15 @@
   perspective: 1000px;
   width: fit-content;
   height: fit-content;
+}
 
-  &.flipped {
-    .slideshow-image {
-      transform: rotateY(180deg);
-    }
+.photo-container.flipped .slideshow-image {
+  transform: rotateY(180deg);
+}
 
-    .photo-caption {
-      display: block;
-      transform: rotateY(180deg) translate(-50%, -50%);
-    }
-  }
+.photo-container.flipped .photo-caption {
+  display: block;
+  transform: rotateY(180deg) translate(-50%, -50%);
 }
 
 .slideshow-image {
