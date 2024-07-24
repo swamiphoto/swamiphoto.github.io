@@ -23,11 +23,11 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const [slideshowPlaying, setSlideshowPlaying] = useState(false);
   const [showCover, setShowCover] = useState(true);
   const [viewMode, setViewMode] = useState("slideshow");
+  const [imagesLoaded, setImagesLoaded] = useState(false); // Add this line
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isFullscreen, setIsFullscreen] = useState(false);
-
   useEffect(() => {
     if (imageUrls.length > 0) {
       const newTilts = imageUrls.map(() => Math.random() * 12 - 6);
@@ -57,6 +57,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         })
       ).then((aspectRatios) => {
         setAspectRatios(aspectRatios);
+        setImagesLoaded(true); // Ensure this is set after all images are loaded
       });
     }
   }, [imageUrls]);

@@ -87,7 +87,7 @@
     opacity: 1;
   }
   100% {
-    transform: translate(-150%, -50%) rotate(calc(var(--rotate) - 20deg)) rotateZ(var(--rotateZ));
+    transform: translate(calc(-50% - 100vw), -50%) rotate(calc(var(--rotate) - 20deg)) rotateZ(var(--rotateZ));
     opacity: 0;
   }
 }
@@ -98,7 +98,7 @@
     opacity: 1;
   }
   100% {
-    transform: translate(150%, -50%) rotate(calc(var(--rotate) + 20deg)) rotateZ(var(--rotateZ));
+    transform: translate(calc(-50% + 100vw), -50%) rotate(calc(var(--rotate) + 20deg)) rotateZ(var(--rotateZ));
     opacity: 0;
   }
 }
