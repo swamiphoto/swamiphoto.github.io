@@ -310,14 +310,14 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
       {/* Mobile Floating Buttons */}
       {isMobile && (
-        <div className="fixed bottom-4 left-0 right-0 flex items-center justify-around px-4 z-50">
-          <PiArrowLeftLight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
-          {slideshowPlaying ? (
-            <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
-          ) : (
-            <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
-          )}
-          <PiArrowRightLight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} />
+        <div className="fixed-bottom">
+          <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
+            <PiArrowLeftLight size={24} />
+          </button>
+          <button onClick={handlePlayPauseSlideshow}>{slideshowPlaying ? <HiOutlinePause size={24} /> : <AiOutlinePlayCircle size={24} />}</button>
+          <button className={`${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }}>
+            <PiArrowRightLight size={24} />
+          </button>
         </div>
       )}
     </div>
