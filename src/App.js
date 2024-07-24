@@ -11,20 +11,21 @@ import Tennis from "./pages/tennis/Tennis";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import Prints from "./pages/prints/Prints";
 import NagaBday from "./pages/portraits/galleries/NagaBday";
-import "./App.css";
 import Naga from "./pages/portraits/galleries/Naga";
 import Sunol from "./pages/portraits/galleries/Sunol";
 import Sunol2 from "./pages/portraits/galleries/Sunol2";
+import "./App.css";
 
 const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2"];
 
 const MainContent = () => {
   const location = useLocation();
+  const isNoHeaderPath = noHeaderPaths.includes(location.pathname);
 
   return (
     <>
-      {!noHeaderPaths.includes(location.pathname) && <Header />}
-      <div className="px-4 md:px-0">
+      {!isNoHeaderPath && <Header />}
+      <div className={`${isNoHeaderPath ? "" : "px-4 md:px-0"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/portraits" element={<Portraits />} />
@@ -40,7 +41,7 @@ const MainContent = () => {
           {/* You can add a 404 Not Found page here */}
         </Routes>
       </div>
-      {!noHeaderPaths.includes(location.pathname) && <Footer />}
+      {!isNoHeaderPath && <Footer />}
     </>
   );
 };

@@ -299,7 +299,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
       {/* Mobile Top Bar */}
       {!showCover && isMobile && (
-        <div className="fixed top-0 left-0 right-0 flex items-center justify-between bg-gray-300 text-gray-900 border-b border-gray-300 p-4 z-50">
+        <div className="fixed top-0 left-0 right-0 flex items-left justify-between bg-gray-200 text-gray-900 border-b border-gray-300 p-4 z-50">
           <div>
             <h1 className="text-lg font-bold">{title}</h1>
             <p className="text-xs">Photos by Swami Venkataramani</p>
