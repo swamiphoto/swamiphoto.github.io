@@ -7,6 +7,7 @@ import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight, PiHamburgerMenuLi
 import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
+import "./ImageGallery.css";
 
 const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = true }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -191,10 +192,10 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   const renderPhotos = () => {
     if (viewMode === "grid") {
       return (
-        <div className="flex flex-col items-center gap-10 p-10 overflow-y-auto h-full w-full">
+        <div className="grid-container">
           {imageUrls.map((url, index) => (
-            <div key={index} className={`flex justify-center items-center shadow-lg ${aspectRatios[index] >= 1 ? "w-4/5" : "h-screen"}`}>
-              <img src={url} alt={`Image ${index + 1}`} className="object-cover max-w-full max-h-full" />
+            <div key={index} className={`grid-item ${aspectRatios[index] >= 1 ? "horizontal" : "vertical"} shadow-lg`}>
+              <img src={url} alt={`Image ${index + 1}`} className="object-cover" />
             </div>
           ))}
         </div>
@@ -202,22 +203,24 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
     }
 
     return (
-      <div className="relative w-full h-full flex justify-center items-center">
+      <div className="slideshow-container mt-8 md:mt-0">
         {imageUrls.map((url, index) => (
           <div
             key={index}
-            className={`absolute top-1/2 left-1/2 transition-transform duration-1000 ease-in-out ${aspectRatios[index] > 1 ? "horizontal" : "vertical"} ${
-              index === currentImageIndex ? (transitioning ? `slide-out-${direction}` : "translate-x-0 translate-y-0") : index > currentImageIndex ? "opacity-0" : "hidden"
-            }`}
+            className={`slideshow-image ${aspectRatios[index] > 1 ? "horizontal" : "vertical"} ${index === currentImageIndex ? (transitioning ? `slide-out-${direction}` : "visible") : index > currentImageIndex ? "stacked" : "hidden"}`}
             style={{
-              transform: `translate(-50%, -50%) rotate(${tilts[index]}deg) rotateZ(${zTilts[index]}deg)`,
+              "--rotate": `${tilts[index]}deg`,
+              "--rotateZ": `${zTilts[index]}deg`,
+              "--moveX": moveXs[index],
+              "--moveY": moveYs[index],
+              "--duration": durations[index],
               zIndex: imageUrls.length - index,
             }}>
-            <img src={url} alt={`Image ${index + 1}`} className="max-w-full max-h-full" />
+            <img src={url} alt={`Image ${index + 1}`} />
             {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
               <div className="absolute top-10 left-4 w-3/5 p-5">
                 <div
-                  className="text-left bg-yellow-200 shadow-lg transform rotate-1"
+                  className="text-left bg-yellow-200 font-geist-mono shadow-lg transform rotate-1"
                   style={{
                     backgroundImage: "url('images/paper2.jpg')",
                     backgroundSize: "cover",
@@ -241,13 +244,13 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   };
 
   return (
-    <div className="fixed inset-0 flex h-screen overflow-hidden">
+    <div className="flex h-screen">
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
           <>
             <div className="absolute inset-0 w-full h-full bg-black z-10"></div>
             <img src={imageUrls[isMobile ? mobileCoverImageIndex : coverImageIndex]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
-            <div className="absolute inset-0 bg-black opacity-60 z-30"></div>
+            <div className="overlay absolute inset-0 bg-black opacity-60 z-30"></div>
             <div className="text-center text-white p-4 z-40 fade-in">
               <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
               <p className="text-xl mb-4 text-gray-300">{subtitle}</p>
@@ -307,14 +310,12 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
       {/* Mobile Floating Buttons */}
       {!showCover && isMobile && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-around w-4/5 bg-black bg-opacity-85 rounded-md p-2 z-50">
-          <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"} bg-black bg-opacity-85 text-white rounded-full p-2`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
+        <div className="fixed-bottom">
+          <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
             <PiArrowLeftLight size={24} />
           </button>
-          <button className="bg-black bg-opacity-85 text-white rounded-full p-2" onClick={handlePlayPauseSlideshow}>
-            {slideshowPlaying ? <HiOutlinePause size={24} /> : <IoPlaySharp size={24} />}
-          </button>
-          <button className={`${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"} bg-black bg-opacity-85 text-white rounded-full p-2`} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }}>
+          <button onClick={handlePlayPauseSlideshow}>{slideshowPlaying ? <HiOutlinePause size={24} /> : <IoPlaySharp size={24} />}</button>
+          <button className={`${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }}>
             <PiArrowRightLight size={24} />
           </button>
         </div>
