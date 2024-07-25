@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
-import { IoMusicalNotesOutline, IoPlaySharp } from "react-icons/io5";
-import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight } from "react-icons/pi";
+import { IoMusicalNotesOutline, IoPlaySharp, IoGridOutline } from "react-icons/io5";
+import { PiGridFourLight, PiArrowLeftLight, PiArrowRightLight, PiGridFourThin } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
@@ -277,7 +277,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
       <div className="hidden md:flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center text-gray-700">
-          <PiGridNineLight className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleGridView} style={{ opacity: viewMode === "grid" ? 0.3 : 1 }} />
+          <IoGridOutline className="hover:text-red-500 mt-4 cursor-pointer" size={18} onClick={handleGridView} style={{ opacity: viewMode === "grid" ? 0.3 : 1 }} />
           {isFullscreen ? (
             <RxExitFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
           ) : (
