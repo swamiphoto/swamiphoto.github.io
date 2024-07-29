@@ -244,7 +244,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   };
 
   return (
-    <div className="flex h-screen">
+    <div className={`flex ${viewMode === "grid" ? "min-h-screen" : "h-screen"} overflow-hidden`}>
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
           <>
