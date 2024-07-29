@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
-import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
-import { IoMusicalNotesOutline, IoPlaySharp, IoGridOutline } from "react-icons/io5";
-import { PiGridFourLight, PiArrowLeftLight, PiArrowRightLight, PiGridFourThin } from "react-icons/pi";
+import { RxEnterFullScreen, RxExitFullScreen, RxHamburgerMenu } from "react-icons/rx";
+import { IoMusicalNotesOutline, IoPlaySharp } from "react-icons/io5";
+import { PiGridNineLight, PiArrowLeftLight, PiArrowRightLight, PiHamburgerMenuLight } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
@@ -101,7 +101,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
         setTransitioning(false);
-        if (slideshowPlaying) startSlideshow();
+        startSlideshow();
       }, 2000);
     }, duration - 2000);
   };
@@ -118,29 +118,16 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   };
 
   const handlePlayPauseSlideshow = () => {
-    if (viewMode === "grid") {
-      setViewMode("slideshow");
-      setSlideshowPlaying(true);
+    if (slideshowPlaying) {
+      clearInterval(slideshowInterval.current);
+    } else {
       startSlideshow();
       if (playerRef.current && !audioPlaying) {
         playerRef.current.playVideo();
         setAudioPlaying(true);
       }
-    } else {
-      if (slideshowPlaying) {
-        clearInterval(slideshowInterval.current);
-        if (playerRef.current) playerRef.current.pauseVideo();
-        setSlideshowPlaying(false);
-        setAudioPlaying(false);
-      } else {
-        startSlideshow();
-        if (playerRef.current && !audioPlaying) {
-          playerRef.current.playVideo();
-          setAudioPlaying(true);
-        }
-        setSlideshowPlaying(true);
-      }
     }
+    setSlideshowPlaying(!slideshowPlaying);
   };
 
   const handleStartClick = () => {
@@ -257,7 +244,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   };
 
   return (
-    <div className={`flex ${viewMode === "grid" ? "min-h-screen" : "h-screen"} overflow-hidden`}>
+    <div className="flex h-screen">
       {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
           <>
@@ -277,23 +264,20 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
 
       <div className="hidden md:flex flex-col justify-between items-center w-16 border-r border-gray-300 text-gray-800 p-2 shadow-sm">
         <div className="flex flex-col items-center text-gray-700">
-          <IoGridOutline className="hover:text-red-500 mt-4 cursor-pointer" size={18} onClick={handleGridView} style={{ opacity: viewMode === "grid" ? 0.3 : 1 }} />
-          {isFullscreen ? (
-            <RxExitFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
-          ) : (
-            <RxEnterFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
-          )}
           {slideshowPlaying ? (
             <HiOutlinePause className="hover:text-red-500 mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
           ) : (
             <AiOutlinePlayCircle className="hover:text-red-500 mt-4 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} style={{ opacity: 1 }} />
           )}
-          {viewMode === "slideshow" && (
-            <>
-              <PiArrowLeftLight className={`hover:text-red-500 mt-4 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
-              <PiArrowRightLight className={`hover:text-red-500 mt-4 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} />
-            </>
+          <IoMusicalNotesOutline className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handlePlayPauseAudio} style={{ opacity: audioPlaying ? 1 : 0.3 }} />
+          <PiGridNineLight className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleGridView} style={{ opacity: viewMode === "grid" ? 0.3 : 1 }} />
+          {isFullscreen ? (
+            <RxExitFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
+          ) : (
+            <RxEnterFullScreen className="hover:text-red-500 mt-4 cursor-pointer" size={20} onClick={handleToggleFullscreen} style={{ opacity: 1 }} />
           )}
+          <PiArrowLeftLight className={`hover:text-red-500 mt-4 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
+          <PiArrowRightLight className={`hover:text-red-500 mt-4 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} />
         </div>
         <div className="flex flex-col mt-auto mb-4 items-start">
           <div className="vertical-text mb-2">
@@ -318,6 +302,7 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
         <div className="fixed top-0 left-0 right-0 flex flex-col items-center bg-gray-200 text-gray-900 border-b border-gray-300 p-3 z-50">
           <h1 className="text-xl font-bold">{title}</h1>
           <div className="text-xs">Photos by Swami Venkataramani</div>
+          {/* <RxHamburgerMenu size={24} className="text-gray-900" /> */}
         </div>
       )}
 
