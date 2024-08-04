@@ -7,9 +7,9 @@ import { PiGridFourLight, PiArrowLeftLight, PiArrowRightLight, PiGridFourThin } 
 import { useMediaQuery } from "react-responsive";
 
 import useYouTubePlayer from "./useYouTubePlayer";
-import "./ImageGallery.css";
+import "./Slideshow.css";
 
-const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = true }) => {
+const Slideshow = ({ imageUrls, layout = "default", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = true }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [tilts, setTilts] = useState([]);
@@ -337,4 +337,4 @@ const ImageGallery = ({ imageUrls, layout = "default", title = "Gallery Title", 
   );
 };
 
-export default ImageGallery;
+export default Slideshow;

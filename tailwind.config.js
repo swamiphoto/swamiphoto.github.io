@@ -88,5 +88,20 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".scrollbar-hidden": {
+            "scrollbar-width": "none" /* Firefox */,
+            "-ms-overflow-style": "none" /* IE 10+ */,
+          },
+          ".scrollbar-hidden::-webkit-scrollbar": {
+            display: "none" /* Safari and Chrome */,
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ImageGallery from "../../../components/image-gallery/ImageGallery";
+import Slideshow from "../../../components/slideshow/Slideshow";
 import { fetchImageUrls } from "../../../common/images";
-import Loading from "../../../components/image-gallery/Loading/Loading";
+import Loading from "../../../components/slideshow/Loading/Loading";
 
 const Naga = () => {
   const [imageUrls, setImageUrls] = useState([]);
@@ -54,7 +54,7 @@ const Naga = () => {
   return (
     <div>
       {imagesLoaded ? (
-        <ImageGallery imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
+        <Slideshow imageUrls={imageUrls} layout="slideshow" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
       ) : (
         <Loading />
       )}

@@ -10,13 +10,14 @@ import Bollywood from "./pages/bollywood/Bollywood";
 import Tennis from "./pages/tennis/Tennis";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import Prints from "./pages/prints/Prints";
-import NagaBday from "./pages/portraits/galleries/NagaBday";
-import Naga from "./pages/portraits/galleries/Naga";
-import Sunol from "./pages/portraits/galleries/Sunol";
-import Sunol2 from "./pages/portraits/galleries/Sunol2";
+import NagaBday from "./pages/portraits/slideshows/NagaBday";
+import Naga from "./pages/portraits/slideshows/Naga";
+import Sunol from "./pages/portraits/slideshows/Sunol";
+import Sunol2 from "./pages/portraits/slideshows/Sunol2";
 import "./App.css";
+import Recent from "./pages/recent/Recent";
 
-const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2"];
+const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/recent"];
 
 const MainContent = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const MainContent = () => {
           <Route path="/tennis" element={<Tennis />} />
           <Route path="/headshots" element={<Headshots />} />
           <Route path="/about" element={<About />} />
+          <Route path="/recent" element={<Recent />} />
           <Route path="/wallprints" element={<Prints />} />
           <Route path="/nagabday" element={<NagaBday />} />
           <Route path="/naga" element={<Naga />} />
