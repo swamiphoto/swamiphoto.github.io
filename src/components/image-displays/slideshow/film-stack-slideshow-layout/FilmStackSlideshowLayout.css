@@ -1,3 +1,4 @@
+/* Film-Stack Layout Styles */
 .film-stack-image {
   position: absolute;
   top: 50%;
@@ -30,7 +31,6 @@
 
 .film-stack-image.hidden {
   opacity: 0;
-  z-index: -1;
 }
 
 .film-stack-image.visible {
@@ -38,7 +38,7 @@
 }
 
 .film-stack-image.stacked {
-  opacity: 0;
+  opacity: 1;
 }
 
 .film-stack-image.slide-out-left {
@@ -57,17 +57,6 @@
   }
   100% {
     transform: translate(calc(-50% - 100vw), -50%) rotate(calc(var(--rotate) - 20deg)) rotateZ(var(--rotateZ));
-    opacity: 0;
-  }
-}
-
-@keyframes film-stack-slideOutRight {
-  0% {
-    transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ));
-    opacity: 1;
-  }
-  100% {
-    transform: translate(calc(-50% + 100vw), -50%) rotate(calc(var(--rotate) + 20deg)) rotateZ(var(--rotateZ));
     opacity: 0;
   }
 }

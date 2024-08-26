@@ -54,7 +54,7 @@ const Naga = () => {
   return (
     <div>
       {imagesLoaded ? (
-        <Slideshow imageUrls={imageUrls} layout="film-single" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
+        <Slideshow imageUrls={imageUrls} layout="film-stack" title="Sunflower Soundarya" subtitle="A dreamy evening with the sunflowers in Woodland." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={4} mobileCoverImageIndex={3} />
       ) : (
         <Loading />
       )}

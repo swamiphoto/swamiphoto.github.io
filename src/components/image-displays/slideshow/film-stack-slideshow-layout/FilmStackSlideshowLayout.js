@@ -9,7 +9,6 @@ const FilmStackSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning,
   const [moveXs, setMoveXs] = useState([]);
   const [moveYs, setMoveYs] = useState([]);
   const [durations, setDurations] = useState([]);
-  const [direction, setDirection] = useState("left");
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   useEffect(() => {
@@ -28,56 +27,43 @@ const FilmStackSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning,
     }
   }, [imageUrls]);
 
-  useEffect(() => {
-    setDirection(Math.random() > 0.5 ? "left" : "right");
-  }, [currentImageIndex]);
-
   return (
     <div className="slideshow-container mt-8 md:mt-0">
-      {imageUrls.map((url, index) => {
-        const isCurrentImage = index === currentImageIndex;
-        const isTransitioningOut = isCurrentImage && transitioning;
-        const isPreviousImage = index < currentImageIndex;
-        const isNextImage = index > currentImageIndex;
-
-        const className = `film-stack-image ${aspectRatios[index] > 1 ? "horizontal" : "vertical"} ${isCurrentImage ? (transitioning ? `slide-out-${direction}` : "visible") : isPreviousImage ? "hidden" : "stacked"}`;
-
-        return (
-          <div
-            key={index}
-            className={className}
-            style={{
-              "--rotate": `${tilts[index]}deg`,
-              "--rotateZ": `${zTilts[index]}deg`,
-              "--moveX": moveXs[index],
-              "--moveY": moveYs[index],
-              "--duration": durations[index],
-              zIndex: imageUrls.length - index,
-            }}>
-            <img src={url} alt={`Image ${index + 1}`} />
-            {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
-              <div className="absolute top-10 left-4 w-3/5 p-5">
-                <div
-                  className="text-left bg-yellow-200 font-geist-mono shadow-lg transform rotate-1"
-                  style={{
-                    backgroundImage: "url('images/paper2.jpg')",
-                    backgroundSize: "cover",
-                    boxShadow: "2px 2px 8px rgba(0,0,0,0.2)",
-                    clipPath: "url(#torn-edge-clip)",
-                    padding: "20px",
-                  }}>
-                  {captions[index]}
-                </div>
-                <svg width="0" height="0">
-                  <clipPath id="torn-edge-clip" clipPathUnits="objectBoundingBox">
-                    <path d="M0,0 h1 v0.7 l-0.1,0.05 l0.05,0.05 l-0.05,0.05 l0.1,0.05 v0.7 h-1 z" />
-                  </clipPath>
-                </svg>
+      {imageUrls.map((url, index) => (
+        <div
+          key={index}
+          className={`film-stack-image ${aspectRatios[index] > 1 ? "horizontal" : "vertical"} ${index === currentImageIndex ? (transitioning ? "slide-out-left" : "visible") : index > currentImageIndex ? "stacked" : "hidden"}`}
+          style={{
+            "--rotate": `${tilts[index]}deg`,
+            "--rotateZ": `${zTilts[index]}deg`,
+            "--moveX": moveXs[index],
+            "--moveY": moveYs[index],
+            "--duration": durations[index],
+            zIndex: imageUrls.length - index,
+          }}>
+          <img src={url} alt={`Image ${index + 1}`} />
+          {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
+            <div className="absolute top-10 left-4 w-3/5 p-5">
+              <div
+                className="text-left bg-yellow-200 font-geist-mono shadow-lg transform rotate-1"
+                style={{
+                  backgroundImage: "url('images/paper2.jpg')",
+                  backgroundSize: "cover",
+                  boxShadow: "2px 2px 8px rgba(0,0,0,0.2)",
+                  clipPath: "url(#torn-edge-clip)",
+                  padding: "20px",
+                }}>
+                {captions[index]}
               </div>
-            )}
-          </div>
-        );
-      })}
+              <svg width="0" height="0">
+                <clipPath id="torn-edge-clip" clipPathUnits="objectBoundingBox">
+                  <path d="M0,0 h1 v0.7 l-0.1,0.05 l0.05,0.05 l-0.05,0.05 l0.1,0.05 v0.7 h-1 z" />
+                </clipPath>
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
