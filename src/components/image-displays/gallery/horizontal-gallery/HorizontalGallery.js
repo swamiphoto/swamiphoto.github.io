@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { fetchImageUrls } from "../../../../common/images";
-import { HiOutlineArrowRight } from "react-icons/hi";
 import "./HorizontalGallery.css";
 
 const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
@@ -47,6 +46,7 @@ const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
         setIsCoverScreen(false);
       } else {
         setIsCoverScreen(true);
+        setCursorType("default"); // Reset cursor to default when returning to cover screen
       }
     }
   };
@@ -61,13 +61,17 @@ const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
   };
 
   const handleMouseMove = (event) => {
-    const containerWidth = window.innerWidth;
-    const mouseX = event.clientX;
+    if (!isCoverScreen) {
+      const containerWidth = window.innerWidth;
+      const mouseX = event.clientX;
 
-    if (mouseX < containerWidth / 2 && !isCoverScreen) {
-      setCursorType("left");
+      if (mouseX < containerWidth / 2) {
+        setCursorType("left");
+      } else {
+        setCursorType("right");
+      }
     } else {
-      setCursorType("right");
+      setCursorType("default");
     }
   };
 
@@ -81,6 +85,10 @@ const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
         left: container.scrollLeft - container.clientWidth,
         behavior: "smooth",
       });
+      if (container.scrollLeft <= window.innerWidth) {
+        setIsCoverScreen(true);
+        setCursorType("default"); // Reset cursor to default when returning to cover screen
+      }
     } else {
       container.scrollTo({
         left: container.scrollLeft + container.clientWidth,
@@ -97,7 +105,7 @@ const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       style={{
-        cursor: cursorType === "left" ? 'url("/left-arrow.svg") 24 24, auto' : cursorType === "right" ? 'url("/right-arrow.svg") 24 24, auto' : "default",
+        cursor: isCoverScreen ? "default" : cursorType === "left" ? 'url("/left-arrow.svg") 24 24, auto' : cursorType === "right" ? 'url("/right-arrow.svg") 24 24, auto' : "default",
       }}>
       <div
         className="flex-grow flex items-center justify-start overflow-y-hidden horizontal-scroll"
@@ -108,14 +116,12 @@ const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
         <div className="relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
           <h1 className="text-4xl font-bold mb-2">{name}</h1>
           <p className="text-lg mb-6">{description}</p>
-          <div className="absolute right-10 bottom-10">
-            <div className="bg-gray-700 opacity-30 hover:opacity-40 rounded-full p-3">
-              <HiOutlineArrowRight className="h-12 w-12 cursor-pointer" onClick={handleStartClick} />
-            </div>
-          </div>
+          <button onClick={handleStartClick} className="text-gray-900 bg-white px-10 py-3 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
+            View Gallery
+          </button>
         </div>
         {images.map((image, index) => (
-          <img key={index} data-src={image} className="max-h-[calc(100vh-40px)] object-cover mx-2 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
+          <img key={index} data-src={image} className="max-h-[calc(100vh-40px)] object-cover mx-3 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
         ))}
       </div>
     </div>

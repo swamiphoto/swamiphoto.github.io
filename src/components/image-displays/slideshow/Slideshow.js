@@ -189,11 +189,11 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
           <>
             <div className="absolute inset-0 w-full h-full bg-black z-10"></div>
             <img src={imageUrls[isMobile ? mobileCoverImageIndex : coverImageIndex]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
-            <div className="overlay absolute inset-0 bg-black opacity-60 z-30"></div>
-            <div className="text-center text-white p-4 z-40 fade-in">
-              <h1 className="text-6xl mb-2 font-extrabold tracking-tight">{title}</h1>
-              <p className="text-xl mb-4 text-gray-300">{subtitle}</p>
-              <button onClick={handleStartClick} className="inline-block bg-white text-black text-2xl px-10 py-4 rounded-full opacity-60 hover:opacity-75 mt-7">
+            <div className="overlay absolute inset-0 bg-black opacity-70 z-30"></div>
+            <div className="text-center text-gray-200 p-4 z-40 fade-in">
+              <h1 className="text-4xl font-bold mb-2">{title}</h1>
+              <p className="text-lg mb-6">{subtitle}</p>
+              <button onClick={handleStartClick} className="inline-block text-gray-900 bg-white px-10 py-3 mt-7 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
                 Start the Show
               </button>
             </div>
