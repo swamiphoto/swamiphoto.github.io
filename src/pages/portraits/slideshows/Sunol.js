@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Slideshow from "../../../components/slideshow/Slideshow";
+import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import { fetchImageUrls } from "../../../common/images";
-import Loading from "../../../components/slideshow/Loading/Loading";
+import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
 
 const Sunol = () => {
   const [imageUrls, setImageUrls] = useState([]);
@@ -43,7 +43,7 @@ const Sunol = () => {
   return (
     <div>
       {imagesLoaded ? (
-        <Slideshow imageUrls={imageUrls} layout="slideshow-kenburns" title="Sunol Ridge" subtitle="An evening hike with Naga, Bharath, Sathya, and Sriman." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={24} mobileCoverImageIndex={21} />
+        <Slideshow imageUrls={imageUrls} layout="kenburns" title="Sunol Ridge" subtitle="An evening hike with Naga, Bharath, Sathya, and Sriman." youtubeUrl={randomYouTubeLink} customDurations={customDurations} captions={captions} coverImageIndex={24} mobileCoverImageIndex={21} />
       ) : (
         <Loading />
       )}

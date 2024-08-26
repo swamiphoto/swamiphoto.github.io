@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Hero from "../../components/hero/Hero";
-import Photo from "../../components/photo/Photo";
+import Photo from "../../components/image-displays/photo/Photo";
 import IMAGES from "../../common/images";
-import Photos from "../../components/photos/Photos";
+import Photos from "../../components/image-displays/photos/Photos";
 import "./Home.css";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 

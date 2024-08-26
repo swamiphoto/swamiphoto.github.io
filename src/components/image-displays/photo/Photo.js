@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Photo.css";
-import CustomButton from "../custom-button/CustomButton";
-import { useScrollContext } from "../../hooks/ScrollContext";
+import CustomButton from "../../custom-button/CustomButton";
+import { useScrollContext } from "../../../hooks/ScrollContext";
 
 function Photo({ src, alt = "", layout = "default", caption = "", title = "", orientation = "horizontal", url = "#" }) {
   const [isLoaded, setIsLoaded] = useState(false);

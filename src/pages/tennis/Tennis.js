@@ -1,5 +1,5 @@
 import React from "react";
-import Photo from "../../components/photo/Photo";
+import Photo from "../../components/image-displays/photo/Photo";
 import IMAGES from "../../common/images";
 import Hero from "../../components/hero/Hero";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";

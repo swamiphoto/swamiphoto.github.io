@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { fetchImageUrls } from "../../common/images";
+import { fetchImageUrls } from "../../../../common/images";
 import { HiOutlineArrowRight } from "react-icons/hi";
+import "./HorizontalGallery.css";
 
-const Gallery = ({ name, imagesFolderUrl, description }) => {
+const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
   const [images, setImages] = useState([]);
   const [cursorType, setCursorType] = useState("default");
   const [isCoverScreen, setIsCoverScreen] = useState(true);
@@ -23,7 +24,7 @@ const Gallery = ({ name, imagesFolderUrl, description }) => {
         if (entry.isIntersecting) {
           entry.target.src = entry.target.dataset.src;
           entry.target.onload = () => entry.target.classList.add("loaded");
-          entry.target.onerror = () => entry.target.classList.add("error");
+          entry.target.onerror = () => entry.target.classList.add("hidden");
           observer.current.unobserve(entry.target);
         }
       });
@@ -91,7 +92,7 @@ const Gallery = ({ name, imagesFolderUrl, description }) => {
 
   return (
     <div
-      className="h-screen flex overflow-hidden bg-gray-500"
+      className="horizontal-gallery h-screen flex overflow-hidden bg-gray-500"
       onWheel={handleWheel}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
@@ -114,34 +115,11 @@ const Gallery = ({ name, imagesFolderUrl, description }) => {
           </div>
         </div>
         {images.map((image, index) => (
-          <img
-            key={index}
-            data-src={image}
-            className="max-h-[calc(100vh-40px)] object-cover mx-2 lazy-load transition-opacity duration-500 ease-in shadow-lg"
-            onError={(e) => e.target.classList.add("hidden")}
-            style={{
-              "::-webkit-scrollbar": {
-                height: "8px",
-              },
-              "::-webkit-scrollbar-track": {
-                background: "#6b7280" /* Tailwind bg-gray-500 */,
-                borderRadius: "10px",
-              },
-              "::-webkit-scrollbar-thumb": {
-                background: "#4b5563" /* Tailwind bg-gray-700 */,
-                borderRadius: "10px",
-                transition: "background-color 0.2s, height 0.2s",
-              },
-              "::-webkit-scrollbar-thumb:hover": {
-                background: "#1f2937" /* Tailwind bg-gray-900 */,
-                height: "20px" /* Thicker on hover */,
-              },
-            }}
-          />
+          <img key={index} data-src={image} className="max-h-[calc(100vh-40px)] object-cover mx-2 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
         ))}
       </div>
     </div>
   );
 };
 
-export default Gallery;
+export default HorizontalGallery;

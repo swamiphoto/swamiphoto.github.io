@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Slideshow from "../../../components/slideshow/Slideshow";
+import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import { fetchImageUrls } from "../../../common/images";
-import Loading from "../../../components/slideshow/Loading/Loading";
+import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
 
 const Sunol2 = () => {
   const [imageUrls, setImageUrls] = useState([]);

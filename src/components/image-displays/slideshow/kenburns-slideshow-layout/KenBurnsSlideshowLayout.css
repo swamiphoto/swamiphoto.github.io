@@ -1,0 +1,66 @@
+/* Debugging Styles */
+.kenburns-image.vertical img {
+  width: 550px; /* Set a fixed width for testing */
+  height: auto; /* Adjust height automatically */
+  object-fit: cover;
+  border: 5px solid red; /* Add a red border for visibility */
+  margin: 500px; /* Add margin for testing placement */
+  background-color: yellow; /* Add background color for visibility */
+}
+
+.kenburns-image.horizontal img {
+  width: 100%; /* Ensure horizontal images take full width */
+  height: auto; /* Adjust height automatically */
+  object-fit: cover;
+  border: 5px solid blue; /* Add a blue border for visibility */
+  background-color: green; /* Add background color for visibility */
+}
+
+/* Ken Burns Layout Styles */
+.kenburns-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kenburns-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.kenburns-image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.kenburns-visible {
+  opacity: 1;
+}
+
+.kenburns-slide-out {
+  opacity: 0;
+}
+
+/* Ken Burns zoom effect */
+@keyframes kenburns-zoom {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
