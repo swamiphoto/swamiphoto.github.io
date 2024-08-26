@@ -10,18 +10,7 @@ import FilmSingleSlideshowLayout from "./film-single-slideshow-layout/FilmSingle
 import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlideshowLayout";
 import "./Slideshow.css";
 
-const Slideshow = ({
-  imageUrls,
-  title = "Gallery Title",
-  youtubeUrl,
-  subtitle = "Subtitle",
-  customDurations = {},
-  captions = {},
-  coverImageIndex = 0,
-  mobileCoverImageIndex = 0,
-  hideCaptionsOnMobile = true,
-  layout = "film-stack", // Updated to include Ken Burns layout
-}) => {
+const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = true, layout = "film-stack" }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -36,23 +25,29 @@ const Slideshow = ({
 
   useEffect(() => {
     if (imageUrls.length > 0) {
-      Promise.all(
-        imageUrls.map((url) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => {
-              resolve(img.width / img.height);
-            };
-            img.onerror = () => {
-              resolve(1);
-            };
-            img.src = url;
-          });
-        })
-      ).then((aspectRatios) => {
-        setAspectRatios(aspectRatios);
+      const calculateAspectRatios = async () => {
+        const ratios = await Promise.all(
+          imageUrls.map((url) => {
+            return new Promise((resolve) => {
+              const img = new Image();
+              img.onload = () => {
+                const aspectRatio = img.width / img.height;
+                console.log(`Loaded image ${url} with aspect ratio: ${aspectRatio}`);
+                resolve(aspectRatio);
+              };
+              img.onerror = () => {
+                console.error(`Failed to load image ${url}`);
+                resolve(1); // default to 1 if there's an error
+              };
+              img.src = url;
+            });
+          })
+        );
+        setAspectRatios(ratios);
         setImagesLoaded(true);
-      });
+      };
+
+      calculateAspectRatios();
     }
   }, [imageUrls]);
 
@@ -181,9 +176,9 @@ const Slideshow = ({
       case "film-stack":
         return <FilmStackSlideshowLayout imageUrls={imageUrls} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "film-single":
-        return <FilmSingleSlideshowLayout imageUrls={imageUrls} currentImageIndex={currentImageIndex} transitioning={transitioning} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmSingleSlideshowLayout imageUrls={imageUrls} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "kenburns":
-        return <KenBurnsSlideshowLayout imageUrls={imageUrls} currentImageIndex={currentImageIndex} transitioning={transitioning} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <KenBurnsSlideshowLayout imageUrls={imageUrls} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       default:
         return null;
     }
@@ -213,7 +208,6 @@ const Slideshow = ({
         {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
       </main>
 
-      {/* Floating Bottom-Left Bar */}
       {!showCover && !isMobile && (
         <div className="fixed bottom-4 left-4 flex space-x-4 bg-white bg-opacity-90 p-3 shadow-lg rounded-lg z-50">
           {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
@@ -223,7 +217,6 @@ const Slideshow = ({
         </div>
       )}
 
-      {/* Mobile Floating Buttons */}
       {!showCover && isMobile && (
         <div className="fixed-bottom">
           <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
