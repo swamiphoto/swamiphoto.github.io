@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 3s ease-in-out; /* Increased transition duration for longer crossfade */
 }
 
 .kenburns-image img {
@@ -30,24 +30,26 @@
 
 .kenburns-image.vertical img {
   width: auto;
-  height: calc(100% - 40px); /* Fit the viewport with some padding */
+  height: calc(100% - 40px);
   object-fit: contain;
-  animation: kenburns-zoom-vertical 20s ease-in-out infinite; /* Custom animation for vertical images */
+  animation: kenburns-zoom-vertical 20s ease-in-out infinite;
 }
 
 .kenburns-image.horizontal img {
   width: 100%;
   height: auto;
   object-fit: cover;
-  animation: kenburns-zoom-horizontal 20s ease-in-out infinite; /* Custom animation for horizontal images */
+  animation: kenburns-zoom-horizontal 20s ease-in-out infinite;
 }
 
 .kenburns-visible {
   opacity: 1;
+  transition: opacity 7s ease-in-out; /* Increased transition duration for longer crossfade */
 }
 
 .kenburns-slide-out {
   opacity: 0;
+  transition: opacity 7s ease-in-out; /* Increased transition duration for longer crossfade */
 }
 
 /* Ken Burns zoom effect for horizontal images */

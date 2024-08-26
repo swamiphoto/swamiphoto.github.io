@@ -82,15 +82,13 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
-    const duration = customDurations[currentImageIndex] || 4000;
+    const duration = customDurations[currentImageIndex] || 10000; // Increase this if you want the crossfade to start earlier
     slideshowInterval.current = setTimeout(() => {
       setTransitioning(true);
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
-        setTransitioning(false);
-        if (slideshowPlaying) startSlideshow();
-      }, 2000);
-    }, duration - 2000);
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
+      setTransitioning(false);
+      if (slideshowPlaying) startSlideshow();
+    }, duration - 2000); // Adjust this timing as needed for your desired effect
   };
 
   const handlePlayPauseAudio = () => {
