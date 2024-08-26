@@ -45,7 +45,7 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
   };
 
   const breakpointColumnsObj = {
-    default: 2,
+    default: 3,
     700: 1,
   };
 
@@ -56,17 +56,15 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
           <div className="cover relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
             <h1 className="text-4xl font-bold mb-2">{name}</h1>
             <p className="text-lg mb-6">{description}</p>
-            <div className="absolute right-10 bottom-10">
-              <div className="bg-gray-700 opacity-30 hover:opacity-40 rounded-full p-3">
-                <HiOutlineArrowDown className="h-12 w-12 cursor-pointer" onClick={handleDownClick} />
-              </div>
-            </div>
+            <button onClick={handleDownClick} className="text-gray-900 bg-white px-10 py-3 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
+              View Gallery
+            </button>
           </div>
         )}
         <div ref={masonryRef}>
-          <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-4" columnClassName="pl-4">
+          <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
             {images.map((image, index) => (
-              <div key={index} className="mb-4">
+              <div key={index} className="mb-5">
                 <img data-src={image} className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
               </div>
             ))}
