@@ -25,18 +25,21 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
   object-fit: cover;
+  animation: kenburns-zoom 20s ease-in-out infinite;
 }
 
 .kenburns-image.vertical img {
   width: auto;
-  height: calc(100% - 40px); /* Fit the viewport with some padding on top and bottom */
+  height: calc(100% - 40px); /* Fit the viewport with some padding */
   object-fit: contain;
+  animation: kenburns-zoom-vertical 20s ease-in-out infinite; /* Custom animation for vertical images */
 }
 
 .kenburns-image.horizontal img {
   width: 100%;
   height: auto;
   object-fit: cover;
+  animation: kenburns-zoom-horizontal 20s ease-in-out infinite; /* Custom animation for horizontal images */
 }
 
 .kenburns-visible {
@@ -47,8 +50,21 @@
   opacity: 0;
 }
 
-/* Ken Burns zoom effect */
-@keyframes kenburns-zoom {
+/* Ken Burns zoom effect for horizontal images */
+@keyframes kenburns-zoom-horizontal {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Ken Burns zoom effect for vertical images */
+@keyframes kenburns-zoom-vertical {
   0% {
     transform: translate(-50%, -50%) scale(1);
   }
