@@ -14,8 +14,9 @@ import NagaBday from "./pages/portraits/slideshows/NagaBday";
 import Naga from "./pages/portraits/slideshows/Naga";
 import Sunol from "./pages/portraits/slideshows/Sunol";
 import Sunol2 from "./pages/portraits/slideshows/Sunol2";
-import "./App.css";
 import Recent from "./pages/recent/Recent";
+import Lightbox from "./components/image-displays/lightbox/Lightbox"; // Import Lightbox
+import "./App.css";
 
 const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/recent"];
 
@@ -40,6 +41,7 @@ const MainContent = () => {
           <Route path="/naga" element={<Naga />} />
           <Route path="/sunol" element={<Sunol />} />
           <Route path="/sunol2" element={<Sunol2 />} />
+          <Route path="/image/:imagePath*" element={<Lightbox />} />
           {/* You can add a 404 Not Found page here */}
         </Routes>
       </div>

@@ -95,6 +95,34 @@ const IMAGES = {
   me: `${bucketUrl}/photos/me.jpeg`,
 };
 
+// Generate a deterministic unique ID for each image based on its key and category
+const generateUniqueId = (key) => {
+  return key; // Simply return the key as the unique ID
+};
+
+// Generate a mapping of unique IDs to image URLs
+const generateImageMapping = (images) => {
+  const mapping = {};
+
+  const createMapping = (imageObj) => {
+    Object.keys(imageObj).forEach((key) => {
+      if (typeof imageObj[key] === "string") {
+        const uniqueId = generateUniqueId(key); // Use the key directly
+        mapping[uniqueId] = imageObj[key];
+      } else {
+        createMapping(imageObj[key]);
+      }
+    });
+  };
+
+  Object.keys(images).forEach((category) => {
+    createMapping(images[category]);
+  });
+
+  return mapping;
+};
+const imageMapping = generateImageMapping(IMAGES);
+
 const fetchImageUrls = async (folder) => {
   try {
     const response = await fetch(`https://storage.googleapis.com/storage/v1/b/swamiphoto/o?prefix=photos/${folder}/&key=${apiKey}`);
@@ -110,4 +138,4 @@ const fetchImageUrls = async (folder) => {
 };
 
 export default IMAGES;
-export { fetchImageUrls };
+export { imageMapping, fetchImageUrls, generateUniqueId };

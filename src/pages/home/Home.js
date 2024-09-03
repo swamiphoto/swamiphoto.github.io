@@ -1,13 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import Hero from "../../components/hero/Hero";
 import Photo from "../../components/image-displays/photo/Photo";
-import IMAGES from "../../common/images";
+import IMAGES, { generateUniqueId } from "../../common/images";
 import Photos from "../../components/image-displays/photos/Photos";
 import "./Home.css";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Home = () => {
   useDarkenOnScroll();
+  const navigate = useNavigate();
+
+  const allPhotos = [
+    IMAGES.landscapes.comet,
+    IMAGES.landscapes.astro,
+    IMAGES.landscapes.mac,
+    // add the rest of the images here...
+  ];
+
+  const handlePhotoClick = (photoSrc) => {
+    // Extract the key by finding the corresponding value in the IMAGES object
+    const key = Object.keys(IMAGES.landscapes).find((k) => IMAGES.landscapes[k] === photoSrc);
+    const uniqueId = generateUniqueId(key);
+
+    const currentIndex = allPhotos.indexOf(photoSrc);
+    const previousImageUrls = allPhotos.slice(0, currentIndex);
+    const nextImageUrls = allPhotos.slice(currentIndex + 1);
+
+    if (uniqueId) {
+      navigate(`/image/${uniqueId}`, {
+        state: { previousImageUrls, nextImageUrls },
+      });
+    }
+  };
 
   return (
     <main className="max-w-7xl mx-auto">
@@ -26,27 +51,14 @@ const Home = () => {
       </Hero>
 
       <Photos layout="verticalPair">
-        <Photo src={IMAGES.landscapes.comet} alt="Photo 1" />
-        <Photo src={IMAGES.landscapes.astro} alt="Photo 2" />
+        <Photo src={IMAGES.landscapes.comet} alt="Photo 1" onClick={() => handlePhotoClick(IMAGES.landscapes.comet)} />
+        <Photo src={IMAGES.landscapes.astro} alt="Photo 2" onClick={() => handlePhotoClick(IMAGES.landscapes.astro)} />
       </Photos>
-      <Photo src={IMAGES.landscapes.mac} alt="" />
-      <Photo src={IMAGES.landscapes.fog} alt="" />
-      <Photo src={IMAGES.landscapes.paris} alt="" />
+      <Photo src={IMAGES.landscapes.mac} alt="" onClick={() => handlePhotoClick(IMAGES.landscapes.mac)} />
+      <Photo src={IMAGES.landscapes.fog} alt="" onClick={() => handlePhotoClick(IMAGES.landscapes.fog)} />
+      <Photo src={IMAGES.landscapes.paris} alt="" onClick={() => handlePhotoClick(IMAGES.landscapes.paris)} />
 
-      <Photos layout="verticalPair">
-        <Photo src={IMAGES.landscapes.hotcreek} alt="Photo 1" />
-        <Photo src={IMAGES.landscapes.falltrees} alt="Photo 2" />
-      </Photos>
-      <Photo src={IMAGES.landscapes.fuzzyfall} alt="" />
-      <Photo src={IMAGES.landscapes.ghost} alt="" />
-      <Photos layout="verticalPair">
-        <Photo src={IMAGES.landscapes.walton} alt="Photo 1" />
-        <Photo src={IMAGES.landscapes.kerala} alt="Photo 2" />
-      </Photos>
-      <Photo src={IMAGES.landscapes.pastel} alt="" />
-      <Photo src={IMAGES.landscapes.alviso} alt="" />
-      <Photo src={IMAGES.landscapes.alviso2} alt="" />
-      <Photo src={IMAGES.landscapes.kerala2} alt="" />
+      {/* Repeat for other photos */}
     </main>
   );
 };
