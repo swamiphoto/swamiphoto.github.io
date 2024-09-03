@@ -8,7 +8,7 @@ import "./Home.css";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Home = () => {
-  useDarkenOnScroll();
+  // useDarkenOnScroll();
   const navigate = useNavigate();
 
   // Array containing all photo URLs from the landscapes category
