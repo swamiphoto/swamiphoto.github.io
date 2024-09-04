@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const galleryData = [
-  { name: "Portraits", image: "/path/to/portrait-thumbnail.jpg", link: "/galleries/portraits" },
-  { name: "Landscapes", image: "/path/to/landscape-thumbnail.jpg", link: "/galleries/landscapes" },
-  { name: "Urban", image: "/path/to/urban-thumbnail.jpg", link: "/galleries/urban" },
-  // Add more galleries here
+  { name: "Sunflowers with Naga", image: "/path/to/portrait-thumbnail.jpg", link: "/galleries/naga-sunflowers" },
+  { name: "Evening Hike with Naga and Bharath", image: "/path/to/landscape-thumbnail.jpg", link: "/galleries/naga-sunol" },
 ];
 
 const Galleries = () => {

@@ -14,11 +14,12 @@ import NagaBday from "./pages/portraits/slideshows/NagaBday";
 import Naga from "./pages/portraits/slideshows/Naga";
 import Sunol from "./pages/portraits/slideshows/Sunol";
 import Sunol2 from "./pages/portraits/slideshows/Sunol2";
-import Recent from "./pages/recent/Recent";
+import NagaSunol from "./pages/galleries/naga-sunol";
+import NagaSunflowers from "./pages/galleries/naga-sunflowers";
 import Lightbox from "./components/image-displays/lightbox/Lightbox"; // Import Lightbox
 import "./App.css";
 
-const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/recent"];
+const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/naga-sunflowers", "/naga-sunol"];
 
 const MainContent = () => {
   const location = useLocation();
@@ -35,7 +36,8 @@ const MainContent = () => {
           <Route path="/tennis" element={<Tennis />} />
           <Route path="/headshots" element={<Headshots />} />
           <Route path="/about" element={<About />} />
-          <Route path="/recent" element={<Recent />} />
+          <Route path="/naga-sunol" element={<NagaSunol />} />
+          <Route path="/naga-sunflowers" element={<NagaSunflowers />} />
           <Route path="/wallprints" element={<Prints />} />
           <Route path="/nagabday" element={<NagaBday />} />
           <Route path="/naga" element={<Naga />} />
