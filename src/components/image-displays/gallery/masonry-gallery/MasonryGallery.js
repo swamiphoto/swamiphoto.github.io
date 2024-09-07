@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { fetchImageUrls, handleImageClick } from "../../../../common/images"; // Import the common functions
-import { HiOutlineArrowDown } from "react-icons/hi";
 import Masonry from "react-masonry-css";
 import { useNavigate } from "react-router-dom";
 import "./MasonryGallery.css";
@@ -10,11 +9,21 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
   const observer = useRef(null);
   const masonryRef = useRef(null); // Ref for the Masonry container
   const navigate = useNavigate();
+  const shuffledImagesRef = useRef(null); // To store shuffled images across renders
+
+  // Function to shuffle the array of images
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
 
   useEffect(() => {
     const fetchImages = async () => {
       const urls = await fetchImageUrls(imagesFolderUrl);
-      setImages(urls);
+      if (!shuffledImagesRef.current) {
+        // Shuffle and store in ref only once on component mount
+        shuffledImagesRef.current = shuffleArray(urls);
+      }
+      setImages(shuffledImagesRef.current); // Use the shuffled images stored in ref
     };
 
     fetchImages();
