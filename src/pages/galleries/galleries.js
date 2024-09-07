@@ -5,13 +5,13 @@ import Hero from "../../components/hero/Hero";
 
 const galleryData = [
   {
-    name: "Evening Hike with Naga and Bharath",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/sunol/AR501463.jpg`,
+    name: "Hike with Naga and Bharath",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/sunol/AR501526.jpg?width=1300`,
     link: "/naga-sunol",
   },
   {
-    name: "Naga with Sunflowers",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sunflowers/AR500795-Edit-Edit.jpg`,
+    name: "Sunflowers with Naga",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sunflowers/AR500896.jpg`,
     link: "/naga-sunflowers",
   },
 ];
@@ -33,7 +33,7 @@ const Galleries = () => {
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" // Taller height
               />
             </div>
-            <p className="text-center mt-2 text-lg font-medium">{gallery.name}</p>
+            <p className="text-center mt-2 text-md font-geist-mono tracking-tighter text-gray-600">{gallery.name}</p>
           </Link>
         ))}
       </div>
