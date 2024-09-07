@@ -46,11 +46,17 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
     }
   };
 
+  const base64Encode = (str) => {
+    return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  };
+
   const handleImageClick = (imageUrl, index) => {
+    const encodedUrl = base64Encode(imageUrl); // URL-safe Base64 encode the image URL
+
     const previousImageUrls = images.slice(0, index); // Get all previous images
     const nextImageUrls = images.slice(index + 1); // Get all next images
 
-    navigate(`/image/${encodeURIComponent(imageUrl)}`, {
+    navigate(`/image/${encodedUrl}`, {
       state: { previousImageUrls, nextImageUrls }, // Pass previous and next images as state
     });
   };

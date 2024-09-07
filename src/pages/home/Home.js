@@ -5,10 +5,13 @@ import Photo from "../../components/image-displays/photo/Photo";
 import IMAGES, { generateUniqueId } from "../../common/images";
 import Photos from "../../components/image-displays/photos/Photos";
 import "./Home.css";
-import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
+
+// Helper function to encode Base64 (URL-safe)
+const base64Encode = (str) => {
+  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+};
 
 const Home = () => {
-  // useDarkenOnScroll();
   const navigate = useNavigate();
 
   // Array containing all photo URLs from the landscapes category
@@ -38,7 +41,7 @@ const Home = () => {
 
     // Find the unique key for the current image
     const key = Object.keys(IMAGES.landscapes).find((k) => IMAGES.landscapes[k] === photoSrc);
-    const uniqueId = generateUniqueId(key); // Generate unique ID based on the key
+    const uniqueId = base64Encode(generateUniqueId(key)); // Generate Base64 encoded unique ID
 
     if (uniqueId) {
       // Navigate to the Lightbox with previous and next image URLs
@@ -76,6 +79,7 @@ const Home = () => {
           onClick={() => handlePhotoClick(IMAGES.landscapes.astro)} // Pass click handler
         />
       </Photos>
+
       <Photo
         src={IMAGES.landscapes.mac}
         alt="Mac"
@@ -104,6 +108,7 @@ const Home = () => {
           onClick={() => handlePhotoClick(IMAGES.landscapes.falltrees)} // Pass click handler
         />
       </Photos>
+
       <Photo
         src={IMAGES.landscapes.fuzzyfall}
         alt="Fuzzy Fall"

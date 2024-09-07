@@ -13,15 +13,28 @@ const Lightbox = () => {
   const [cursorType, setCursorType] = useState("default");
   const [isMiddleSection, setIsMiddleSection] = useState(false);
 
-  // Determine if the image is hardcoded or dynamic based on imageMapping availability
+  const base64Encode = (str) => {
+    return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  };
+
+  // Helper function to decode Base64 (URL-safe)
+  const base64Decode = (str) => {
+    let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
+    // Add padding back if necessary
+    while (base64.length % 4) {
+      base64 += "=";
+    }
+    return atob(base64);
+  };
+
   useEffect(() => {
-    const matchingImage = imageMapping[imagePath]; // Check if it's a hardcoded image
+    const decodedImageUrl = base64Decode(imagePath); // Decode Base64 URL to get the image path
+
+    const matchingImage = imageMapping[decodedImageUrl]; // Check if it's a hardcoded image
     if (matchingImage) {
-      // If hardcoded image, use the mapped URL
       setCurrentImage(matchingImage);
     } else {
-      // If not found in hardcoded images, assume it's a dynamic image URL
-      setCurrentImage(decodeURIComponent(imagePath));
+      setCurrentImage(decodedImageUrl); // Set the dynamic image URL
     }
   }, [imagePath]);
 
@@ -60,18 +73,20 @@ const Lightbox = () => {
   const handleClick = () => {
     if (cursorType === "left" && previousImageUrls.length > 0) {
       const previousImage = previousImageUrls[previousImageUrls.length - 1];
-      const previousKey = Object.keys(imageMapping).find((key) => imageMapping[key] === previousImage);
-      const uniqueId = previousKey ? generateUniqueId(previousKey) : encodeURIComponent(previousImage);
+      const encodedPreviousImage = base64Encode(previousImage); // Encode the previous image URL
 
-      navigate(`/image/${uniqueId}`, { state: { previousImageUrls: previousImageUrls.slice(0, -1), nextImageUrls: [currentImage, ...nextImageUrls] } });
+      navigate(`/image/${encodedPreviousImage}`, {
+        state: { previousImageUrls: previousImageUrls.slice(0, -1), nextImageUrls: [currentImage, ...nextImageUrls] },
+      });
     }
 
     if (cursorType === "right" && nextImageUrls.length > 0) {
       const nextImage = nextImageUrls[0];
-      const nextKey = Object.keys(imageMapping).find((key) => imageMapping[key] === nextImage);
-      const uniqueId = nextKey ? generateUniqueId(nextKey) : encodeURIComponent(nextImage);
+      const encodedNextImage = base64Encode(nextImage); // Encode the next image URL
 
-      navigate(`/image/${uniqueId}`, { state: { previousImageUrls: [...previousImageUrls, currentImage], nextImageUrls: nextImageUrls.slice(1) } });
+      navigate(`/image/${encodedNextImage}`, {
+        state: { previousImageUrls: [...previousImageUrls, currentImage], nextImageUrls: nextImageUrls.slice(1) },
+      });
     }
   };
 
