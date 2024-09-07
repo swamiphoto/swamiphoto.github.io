@@ -1,20 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Hero from "../../components/hero/Hero";
 import Photo from "../../components/image-displays/photo/Photo";
-import IMAGES, { generateUniqueId } from "../../common/images";
 import Photos from "../../components/image-displays/photos/Photos";
+import IMAGES from "../../common/images";
 import "./Home.css";
 
-// Helper function to encode Base64 (URL-safe)
-const base64Encode = (str) => {
-  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-};
-
 const Home = () => {
-  const navigate = useNavigate();
-
-  // Array containing all photo URLs from the landscapes category
   const allPhotos = [
     IMAGES.landscapes.comet,
     IMAGES.landscapes.astro,
@@ -33,24 +24,6 @@ const Home = () => {
     IMAGES.landscapes.kerala2,
   ];
 
-  // Handle photo click and calculate previous/next images
-  const handlePhotoClick = (photoSrc) => {
-    const currentIndex = allPhotos.indexOf(photoSrc); // Find the index of the clicked photo
-    const previousImageUrls = allPhotos.slice(0, currentIndex); // Get previous images
-    const nextImageUrls = allPhotos.slice(currentIndex + 1); // Get next images
-
-    // Find the unique key for the current image
-    const key = Object.keys(IMAGES.landscapes).find((k) => IMAGES.landscapes[k] === photoSrc);
-    const uniqueId = base64Encode(generateUniqueId(key)); // Generate Base64 encoded unique ID
-
-    if (uniqueId) {
-      // Navigate to the Lightbox with previous and next image URLs
-      navigate(`/image/${uniqueId}`, {
-        state: { previousImageUrls, nextImageUrls },
-      });
-    }
-  };
-
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Hi, I'm Swami.">
@@ -68,90 +41,31 @@ const Home = () => {
       </Hero>
 
       <Photos layout="verticalPair">
-        <Photo
-          src={IMAGES.landscapes.comet}
-          alt="Photo 1"
-          onClick={() => handlePhotoClick(IMAGES.landscapes.comet)} // Pass click handler
-        />
-        <Photo
-          src={IMAGES.landscapes.astro}
-          alt="Photo 2"
-          onClick={() => handlePhotoClick(IMAGES.landscapes.astro)} // Pass click handler
-        />
+        <Photo src={IMAGES.landscapes.comet} alt="Photo 1" allPhotos={allPhotos} />
+        <Photo src={IMAGES.landscapes.astro} alt="Photo 2" allPhotos={allPhotos} />
       </Photos>
 
-      <Photo
-        src={IMAGES.landscapes.mac}
-        alt="Mac"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.mac)} // Pass click handler
-      />
-      <Photo
-        src={IMAGES.landscapes.fog}
-        alt="Fog"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.fog)} // Pass click handler
-      />
-      <Photo
-        src={IMAGES.landscapes.paris}
-        alt="Paris"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.paris)} // Pass click handler
-      />
+      <Photo src={IMAGES.landscapes.mac} alt="Mac" allPhotos={allPhotos} />
+      <Photo src={IMAGES.landscapes.fog} alt="Fog" allPhotos={allPhotos} />
+      <Photo src={IMAGES.landscapes.paris} alt="Paris" allPhotos={allPhotos} />
 
       <Photos layout="verticalPair">
-        <Photo
-          src={IMAGES.landscapes.hotcreek}
-          alt="Hot Creek"
-          onClick={() => handlePhotoClick(IMAGES.landscapes.hotcreek)} // Pass click handler
-        />
-        <Photo
-          src={IMAGES.landscapes.falltrees}
-          alt="Fall Trees"
-          onClick={() => handlePhotoClick(IMAGES.landscapes.falltrees)} // Pass click handler
-        />
+        <Photo src={IMAGES.landscapes.hotcreek} alt="Hot Creek" allPhotos={allPhotos} />
+        <Photo src={IMAGES.landscapes.falltrees} alt="Fall Trees" allPhotos={allPhotos} />
       </Photos>
 
-      <Photo
-        src={IMAGES.landscapes.fuzzyfall}
-        alt="Fuzzy Fall"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.fuzzyfall)} // Pass click handler
-      />
-      <Photo
-        src={IMAGES.landscapes.ghost}
-        alt="Ghost"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.ghost)} // Pass click handler
-      />
+      <Photo src={IMAGES.landscapes.fuzzyfall} alt="Fuzzy Fall" allPhotos={allPhotos} />
+      <Photo src={IMAGES.landscapes.ghost} alt="Ghost" allPhotos={allPhotos} />
 
       <Photos layout="verticalPair">
-        <Photo
-          src={IMAGES.landscapes.walton}
-          alt="Walton"
-          onClick={() => handlePhotoClick(IMAGES.landscapes.walton)} // Pass click handler
-        />
-        <Photo
-          src={IMAGES.landscapes.kerala}
-          alt="Kerala"
-          onClick={() => handlePhotoClick(IMAGES.landscapes.kerala)} // Pass click handler
-        />
+        <Photo src={IMAGES.landscapes.walton} alt="Walton" allPhotos={allPhotos} />
+        <Photo src={IMAGES.landscapes.kerala} alt="Kerala" allPhotos={allPhotos} />
       </Photos>
-      <Photo
-        src={IMAGES.landscapes.pastel}
-        alt="Pastel"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.pastel)} // Pass click handler
-      />
-      <Photo
-        src={IMAGES.landscapes.alviso}
-        alt="Alviso"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.alviso)} // Pass click handler
-      />
-      <Photo
-        src={IMAGES.landscapes.alviso2}
-        alt="Alviso 2"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.alviso2)} // Pass click handler
-      />
-      <Photo
-        src={IMAGES.landscapes.kerala2}
-        alt="Kerala 2"
-        onClick={() => handlePhotoClick(IMAGES.landscapes.kerala2)} // Pass click handler
-      />
+
+      <Photo src={IMAGES.landscapes.pastel} alt="Pastel" allPhotos={allPhotos} />
+      <Photo src={IMAGES.landscapes.alviso} alt="Alviso" allPhotos={allPhotos} />
+      <Photo src={IMAGES.landscapes.alviso2} alt="Alviso 2" allPhotos={allPhotos} />
+      <Photo src={IMAGES.landscapes.kerala2} alt="Kerala 2" allPhotos={allPhotos} />
     </main>
   );
 };

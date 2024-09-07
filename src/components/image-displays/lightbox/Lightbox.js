@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { HiOutlineX } from "react-icons/hi";
-import { imageMapping, generateUniqueId } from "../../../common/images";
+import { imageMapping, base64Encode, base64Decode } from "../../../common/images"; // Import base64Encode and base64Decode
 
 const Lightbox = () => {
   const { imagePath } = useParams(); // Get the imagePath from the URL params
@@ -13,22 +13,9 @@ const Lightbox = () => {
   const [cursorType, setCursorType] = useState("default");
   const [isMiddleSection, setIsMiddleSection] = useState(false);
 
-  const base64Encode = (str) => {
-    return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  };
-
-  // Helper function to decode Base64 (URL-safe)
-  const base64Decode = (str) => {
-    let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
-    // Add padding back if necessary
-    while (base64.length % 4) {
-      base64 += "=";
-    }
-    return atob(base64);
-  };
-
+  // Handle decoding and finding the image URL
   useEffect(() => {
-    const decodedImageUrl = base64Decode(imagePath); // Decode Base64 URL to get the image path
+    const decodedImageUrl = base64Decode(imagePath); // Decode the Base64-encoded image URL
 
     const matchingImage = imageMapping[decodedImageUrl]; // Check if it's a hardcoded image
     if (matchingImage) {
@@ -69,7 +56,7 @@ const Lightbox = () => {
     };
   }, [previousImageUrls, nextImageUrls]);
 
-  // Handle image navigation on click
+  // Handle image navigation on click (left or right)
   const handleClick = () => {
     if (cursorType === "left" && previousImageUrls.length > 0) {
       const previousImage = previousImageUrls[previousImageUrls.length - 1];

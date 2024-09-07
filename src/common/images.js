@@ -95,6 +95,36 @@ const IMAGES = {
   me: `${bucketUrl}/photos/me.jpeg`,
 };
 
+// Helper function to encode Base64 (URL-safe)
+export const base64Encode = (str) => {
+  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+};
+
+// Helper function to decode Base64 (URL-safe)
+export const base64Decode = (str) => {
+  let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
+  while (base64.length % 4) {
+    base64 += "=";
+  }
+  return atob(base64);
+};
+
+// Common function to handle photo clicks and navigate to the lightbox
+export const handleImageClick = (imageUrl, allPhotos, navigate) => {
+  const currentIndex = allPhotos.indexOf(imageUrl); // Find the index of the clicked photo
+  const previousImageUrls = allPhotos.slice(0, currentIndex); // Get previous images
+  const nextImageUrls = allPhotos.slice(currentIndex + 1); // Get next images
+
+  const uniqueId = base64Encode(imageUrl); // Base64 encode the image URL
+
+  if (uniqueId) {
+    // Navigate to the Lightbox with previous and next image URLs
+    navigate(`/image/${uniqueId}`, {
+      state: { previousImageUrls, nextImageUrls },
+    });
+  }
+};
+
 // Generate a deterministic unique ID for each image based on its key and category
 const generateUniqueId = (key) => {
   return key; // Simply return the key as the unique ID

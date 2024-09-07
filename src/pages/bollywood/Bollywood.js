@@ -4,11 +4,9 @@ import IMAGES from "../../common/images";
 import Photos from "../../components/image-displays/photos/Photos";
 import Hero from "../../components/hero/Hero";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
-import { useNavigate } from "react-router-dom";
 
 const Bollywood = () => {
   useDarkenOnScroll();
-  const navigate = useNavigate();
 
   const allPhotos = [
     IMAGES.bollywood.katrina,
@@ -24,20 +22,6 @@ const Bollywood = () => {
     IMAGES.bollywood.shreya,
   ];
 
-  const handlePhotoClick = (photoSrc) => {
-    const currentIndex = allPhotos.indexOf(photoSrc);
-    const previousImageUrls = allPhotos.slice(0, currentIndex);
-    const nextImageUrls = allPhotos.slice(currentIndex + 1);
-
-    const uniqueId = Object.keys(IMAGES.bollywood).find((key) => IMAGES.bollywood[key] === photoSrc);
-
-    if (uniqueId) {
-      navigate(`/image/${uniqueId}`, {
-        state: { previousImageUrls, nextImageUrls },
-      });
-    }
-  };
-
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Bollywood">
@@ -50,21 +34,21 @@ const Bollywood = () => {
         </p>
       </Hero>
 
-      <Photo src={IMAGES.bollywood.katrina} alt="Katrina" onClick={() => handlePhotoClick(IMAGES.bollywood.katrina)} />
-      <Photo src={IMAGES.bollywood.katrina2} alt="Katrina 2" onClick={() => handlePhotoClick(IMAGES.bollywood.katrina2)} />
+      <Photo src={IMAGES.bollywood.katrina} alt="Katrina" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.katrina2} alt="Katrina 2" allPhotos={allPhotos} />
 
       <Photos layout="verticalPair">
-        <Photo src={IMAGES.bollywood.nargis} alt="Nargis" onClick={() => handlePhotoClick(IMAGES.bollywood.nargis)} />
-        <Photo src={IMAGES.bollywood.alia} alt="Alia" onClick={() => handlePhotoClick(IMAGES.bollywood.alia)} />
+        <Photo src={IMAGES.bollywood.nargis} alt="Nargis" allPhotos={allPhotos} />
+        <Photo src={IMAGES.bollywood.alia} alt="Alia" allPhotos={allPhotos} />
       </Photos>
 
-      <Photo src={IMAGES.bollywood.bollywood} alt="Bollywood" onClick={() => handlePhotoClick(IMAGES.bollywood.bollywood)} />
-      <Photo src={IMAGES.bollywood.atif} alt="Atif" onClick={() => handlePhotoClick(IMAGES.bollywood.atif)} />
-      <Photo src={IMAGES.bollywood.nargis2} alt="Nargis 2" onClick={() => handlePhotoClick(IMAGES.bollywood.nargis2)} />
-      <Photo src={IMAGES.bollywood.glamour} alt="Glamour" onClick={() => handlePhotoClick(IMAGES.bollywood.glamour)} />
-      <Photo src={IMAGES.bollywood.nargis3} alt="Nargis 3" onClick={() => handlePhotoClick(IMAGES.bollywood.nargis3)} />
-      <Photo src={IMAGES.bollywood.prabhu} alt="Prabhu" onClick={() => handlePhotoClick(IMAGES.bollywood.prabhu)} />
-      <Photo src={IMAGES.bollywood.shreya} alt="Shreya" onClick={() => handlePhotoClick(IMAGES.bollywood.shreya)} />
+      <Photo src={IMAGES.bollywood.bollywood} alt="Bollywood" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.atif} alt="Atif" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.nargis2} alt="Nargis 2" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.glamour} alt="Glamour" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.nargis3} alt="Nargis 3" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.prabhu} alt="Prabhu" allPhotos={allPhotos} />
+      <Photo src={IMAGES.bollywood.shreya} alt="Shreya" allPhotos={allPhotos} />
     </main>
   );
 };

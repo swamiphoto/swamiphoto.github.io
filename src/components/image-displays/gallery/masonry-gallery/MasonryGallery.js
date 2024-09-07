@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { fetchImageUrls } from "../../../../common/images";
+import { fetchImageUrls, handleImageClick } from "../../../../common/images"; // Import the common functions
 import { HiOutlineArrowDown } from "react-icons/hi";
 import Masonry from "react-masonry-css";
 import { useNavigate } from "react-router-dom";
@@ -46,21 +46,6 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
     }
   };
 
-  const base64Encode = (str) => {
-    return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  };
-
-  const handleImageClick = (imageUrl, index) => {
-    const encodedUrl = base64Encode(imageUrl); // URL-safe Base64 encode the image URL
-
-    const previousImageUrls = images.slice(0, index); // Get all previous images
-    const nextImageUrls = images.slice(index + 1); // Get all next images
-
-    navigate(`/image/${encodedUrl}`, {
-      state: { previousImageUrls, nextImageUrls }, // Pass previous and next images as state
-    });
-  };
-
   const breakpointColumnsObj = {
     default: 3,
     700: 1,
@@ -86,7 +71,7 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
                   data-src={image}
                   className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg"
                   onError={(e) => e.target.classList.add("hidden")}
-                  onClick={() => handleImageClick(image, index)} // Add click handler for images
+                  onClick={() => handleImageClick(image, images, navigate)} // Use the common function
                 />
               </div>
             ))}

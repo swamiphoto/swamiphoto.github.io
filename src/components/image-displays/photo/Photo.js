@@ -1,22 +1,33 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // For navigating to Lightbox
+import { useNavigate } from "react-router-dom";
 import "./Photo.css";
 import { useScrollContext } from "../../../hooks/ScrollContext";
-import { generateUniqueId, imageMapping } from "../../../common/images"; // Import unique ID generator and image mapping
+import { generateUniqueId, imageMapping, base64Encode } from "../../../common/images"; // Ensure correct imports
 
-function Photo({ src, alt = "", layout = "default", caption = "", title = "", orientation = "horizontal", url = "#", onClick }) {
+function Photo({ src, alt = "", layout = "default", caption = "", title = "", orientation = "horizontal", allPhotos = [] }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const { isScrolled } = useScrollContext();
   const navigate = useNavigate();
 
-  // Default click handler for opening the image in Lightbox
+  // Click handler for opening the image in Lightbox
   const defaultClickHandler = () => {
-    // Find the unique key for the current image
     const key = Object.keys(imageMapping).find((k) => imageMapping[k] === src);
     const uniqueId = generateUniqueId(key);
 
     if (uniqueId) {
-      navigate(`/image/${uniqueId}`, { state: { previousImageUrls: [], nextImageUrls: [] } }); // You can modify previous/next URLs if needed
+      let previousImageUrls = [];
+      let nextImageUrls = [];
+
+      // Only calculate previous/next images if allPhotos is provided
+      if (allPhotos.length > 0) {
+        const currentIndex = allPhotos.indexOf(src);
+        previousImageUrls = allPhotos.slice(0, currentIndex); // Previous images
+        nextImageUrls = allPhotos.slice(currentIndex + 1); // Next images
+      }
+
+      // Use navigate with properly encoded URL
+      const encodedUniqueId = base64Encode(uniqueId);
+      navigate(`/image/${encodedUniqueId}`, { state: { previousImageUrls, nextImageUrls } });
     }
   };
 
@@ -30,7 +41,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
       loading="lazy"
       className={`transition-opacity duration-500 ease-in-out ${imageClass} mb-4 md:mb-10 ${isLoaded ? "opacity-100" : "opacity-0"}`}
       onLoad={() => setIsLoaded(true)}
-      onClick={onClick || defaultClickHandler} // Use custom handler if provided, otherwise use default handler
+      onClick={defaultClickHandler} // Use default handler
       style={{ cursor: "pointer" }}
     />
   );
@@ -45,7 +56,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
             loading="lazy"
             className={`xl:max-h-screen shadow-lg transition-opacity duration-500 ease-in-out ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"}`}
             onLoad={() => setIsLoaded(true)}
-            onClick={onClick || defaultClickHandler} // Use custom handler if provided, otherwise use default handler
+            onClick={defaultClickHandler} // Use default handler
             style={{ cursor: "pointer" }}
           />
         </div>
