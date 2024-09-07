@@ -119,6 +119,7 @@ const generateImageMapping = (images) => {
     createMapping(images[category]);
   });
 
+  console.log(mapping);
   return mapping;
 };
 const imageMapping = generateImageMapping(IMAGES);

@@ -2,12 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { fetchImageUrls } from "../../../../common/images";
 import { HiOutlineArrowDown } from "react-icons/hi";
 import Masonry from "react-masonry-css";
+import { useNavigate } from "react-router-dom";
 import "./MasonryGallery.css";
 
 const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }) => {
   const [images, setImages] = useState([]);
   const observer = useRef(null);
   const masonryRef = useRef(null); // Ref for the Masonry container
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -44,6 +46,15 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
     }
   };
 
+  const handleImageClick = (imageUrl, index) => {
+    const previousImageUrls = images.slice(0, index); // Get all previous images
+    const nextImageUrls = images.slice(index + 1); // Get all next images
+
+    navigate(`/image/${encodeURIComponent(imageUrl)}`, {
+      state: { previousImageUrls, nextImageUrls }, // Pass previous and next images as state
+    });
+  };
+
   const breakpointColumnsObj = {
     default: 3,
     700: 1,
@@ -65,7 +76,12 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
           <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
             {images.map((image, index) => (
               <div key={index} className="mb-5">
-                <img data-src={image} className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
+                <img
+                  data-src={image}
+                  className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg"
+                  onError={(e) => e.target.classList.add("hidden")}
+                  onClick={() => handleImageClick(image, index)} // Add click handler for images
+                />
               </div>
             ))}
           </Masonry>
