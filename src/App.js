@@ -18,6 +18,7 @@ import NagaSunol from "./pages/galleries/naga-sunol";
 import NagaSunflowers from "./pages/galleries/naga-sunflowers";
 import Lightbox from "./components/image-displays/lightbox/Lightbox"; // Import Lightbox
 import "./App.css";
+import Galleries from "./pages/galleries/galleries";
 
 const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/naga-sunflowers", "/naga-sunol"];
 
@@ -44,6 +45,7 @@ const MainContent = () => {
           <Route path="/sunol" element={<Sunol />} />
           <Route path="/sunol2" element={<Sunol2 />} />
           <Route path="/image/:imagePath*" element={<Lightbox />} />
+          <Route path="/galleries" element={<Galleries />} />
           {/* You can add a 404 Not Found page here */}
         </Routes>
       </div>

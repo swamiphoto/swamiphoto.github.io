@@ -1,4 +1,4 @@
-const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
+export const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
 const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
 
 const IMAGES = {
