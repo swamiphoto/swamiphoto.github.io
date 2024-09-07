@@ -14,6 +14,16 @@ const galleryData = [
     thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sunflowers/AR500896.jpg`,
     link: "/naga-sunflowers",
   },
+  {
+    name: "Golden Gate Bridge in Fog",
+    thumbnailUrl: `${bucketUrl}/photos/landscapes/LFE/AR501858.jpg`,
+    link: "/lfe",
+  },
+  {
+    name: "Fog in Mt Tam",
+    thumbnailUrl: `${bucketUrl}/photos/landscapes/mttam/AR500633.jpg`,
+    link: "/mttam",
+  },
 ];
 
 const Galleries = () => {

@@ -19,8 +19,10 @@ import NagaSunflowers from "./pages/galleries/naga-sunflowers";
 import Lightbox from "./components/image-displays/lightbox/Lightbox"; // Import Lightbox
 import "./App.css";
 import Galleries from "./pages/galleries/galleries";
+import LFE from "./pages/galleries/lfe";
+import MtTam from "./pages/galleries/mttam";
 
-const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/naga-sunflowers", "/naga-sunol"];
+const noHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2", "/naga-sunflowers", "/naga-sunol", "/lfe", "/mttam"];
 
 const MainContent = () => {
   const location = useLocation();
@@ -39,6 +41,8 @@ const MainContent = () => {
           <Route path="/about" element={<About />} />
           <Route path="/naga-sunol" element={<NagaSunol />} />
           <Route path="/naga-sunflowers" element={<NagaSunflowers />} />
+          <Route path="/lfe" element={<LFE />} />
+          <Route path="/mttam" element={<MtTam />} />
           <Route path="/wallprints" element={<Prints />} />
           <Route path="/nagabday" element={<NagaBday />} />
           <Route path="/naga" element={<Naga />} />

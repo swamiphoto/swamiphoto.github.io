@@ -34,8 +34,8 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/headshots")}`} href="/headshots">
-                  Headshots
+                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/galleries")}`} href="/galleries">
+                  Galleries
                 </a>
               </li>
               <li>
