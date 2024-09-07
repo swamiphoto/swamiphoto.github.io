@@ -12,6 +12,17 @@ const galleryData = [
     imagesFolderUrl: "portraits/sunol",
     layout: "masonry",
     showCover: false,
+    enableSlideshow: true,
+    slideshowSettings: {
+      customDurations: { 24: 7000 },
+      youtubeLinks: ["https://www.youtube.com/watch?v=PYujyluMxMU", "https://www.youtube.com/watch?v=qj4RiKoARPk"],
+      captions: {
+        24: "Photographer's favorite. Possibly my all time favorite.",
+      },
+      coverImageIndex: 24,
+      mobileCoverImageIndex: 21,
+      layout: "kenburns",
+    },
   },
   {
     name: "Sunflowers with Naga",
@@ -21,6 +32,11 @@ const galleryData = [
     imagesFolderUrl: "portraits/naga-sunflowers",
     layout: "masonry",
     showCover: false,
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
+      layout: "film-stack",
+    },
   },
   {
     name: "Golden Gate Bridge in Fog",
@@ -39,6 +55,7 @@ const galleryData = [
     imagesFolderUrl: "landscapes/altamont-sunset",
     layout: "horizontal",
     showCover: false,
+    enableSlideshow: true,
   },
   {
     name: "Lavender Fields with Naga",
@@ -48,6 +65,7 @@ const galleryData = [
     imagesFolderUrl: "portraits/naga-lavendar",
     layout: "masonry",
     showCover: false,
+    enableSlideshow: true,
   },
   {
     name: "Japan",

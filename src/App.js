@@ -17,7 +17,15 @@ import "./App.css";
 
 // Define noHeaderPaths for galleries and other pages
 const otherNoHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2"];
-const noHeaderPaths = [...galleryData.map((gallery) => `/galleries/${gallery.slug}`), ...otherNoHeaderPaths];
+const noHeaderPaths = [
+  ...galleryData
+    .flatMap((gallery) => [
+      `/galleries/${gallery.slug}`, // Gallery view
+      gallery.enableSlideshow ? `/galleries/${gallery.slug}/slideshow` : null, // Slideshow view if enabled
+    ])
+    .filter(Boolean), // Filter out null values
+  ...otherNoHeaderPaths,
+];
 
 const MainContent = () => {
   const location = useLocation();
@@ -34,7 +42,7 @@ const MainContent = () => {
           <Route path="/tennis" element={<Tennis />} />
           <Route path="/galleries" element={<Galleries />} />
           <Route path="/headshots" element={<Headshots />} />
-          <Route path="/galleries/:gallerySlug" element={<SingleGallery />} />
+          <Route path="/galleries/:gallerySlug/:view?" element={<SingleGallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/wallprints" element={<Prints />} />
           <Route path="/image/:imagePath*" element={<Lightbox />} />
