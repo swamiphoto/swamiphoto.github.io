@@ -8,7 +8,7 @@ import { fetchImageUrls } from "../../common/images";
 
 const DEFAULT_LAYOUT = "masonry"; // Default layout for gallery
 const DEFAULT_SLIDESHOW_LAYOUT = "kenburns"; // Default layout for slideshow
-const DEFAULT_YOUTUBE_LINK = "https://www.youtube.com/watch?v=PYujyluMxMU"; // Default YouTube link
+const DEFAULT_YOUTUBE_LINK = "https://www.youtube.com/watch?v=PYujyluMxMU";
 const DEFAULT_SHOW_COVER = true; // Default to show the cover
 const DEFAULT_ENABLE_SLIDESHOW = false; // Default slideshow is disabled
 
