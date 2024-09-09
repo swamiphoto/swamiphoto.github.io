@@ -8,7 +8,7 @@ import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx"; // Fullscr
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
 
-const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, slug, showCover = true, enableSlideshow = false }) => {
+const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, slug, showCover = false, enableSlideshow = false }) => {
   const [images, setImages] = useState([]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const observer = useRef(null);

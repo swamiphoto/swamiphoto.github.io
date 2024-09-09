@@ -9,7 +9,7 @@ import { fetchImageUrls } from "../../common/images";
 const DEFAULT_LAYOUT = "masonry"; // Default layout for gallery
 const DEFAULT_SLIDESHOW_LAYOUT = "kenburns"; // Default layout for slideshow
 const DEFAULT_YOUTUBE_LINK = "https://www.youtube.com/watch?v=PYujyluMxMU";
-const DEFAULT_SHOW_COVER = true; // Default to show the cover
+const DEFAULT_SHOW_COVER = false; // Default to show the cover
 const DEFAULT_ENABLE_SLIDESHOW = false; // Default slideshow is disabled
 
 const SingleGallery = () => {
@@ -65,7 +65,7 @@ const SingleGallery = () => {
   // Destructure gallery-level settings with defaults
   const {
     layout = DEFAULT_LAYOUT, // Default to "masonry"
-    showCover = DEFAULT_SHOW_COVER, // Default to true
+    showCover = DEFAULT_SHOW_COVER, // Default to false
     enableSlideshow = DEFAULT_ENABLE_SLIDESHOW, // Default to false
   } = gallery;
 
@@ -97,7 +97,7 @@ const SingleGallery = () => {
       layout={layout} // Default to "masonry" if no layout is provided
       imagesFolderUrl={gallery.imagesFolderUrl}
       showCover={showCover} // Default to true if not provided
-      enableSlideshow={true}
+      enableSlideshow={enableSlideshow}
       slug={gallerySlug}
     />
   );

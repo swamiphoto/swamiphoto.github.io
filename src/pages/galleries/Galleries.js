@@ -11,7 +11,6 @@ const galleryData = [
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
     layout: "masonry",
-    showCover: false,
     enableSlideshow: true,
     slideshowSettings: {
       customDurations: { 24: 7000 },
@@ -31,7 +30,6 @@ const galleryData = [
     slug: "naga-sunflowers",
     imagesFolderUrl: "portraits/naga-sunflowers",
     layout: "masonry",
-    showCover: false,
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
@@ -45,7 +43,7 @@ const galleryData = [
     slug: "lfe",
     imagesFolderUrl: "landscapes/LFE",
     layout: "horizontal",
-    showCover: true,
+    showCover: false,
   },
   {
     name: "Sunset among the Windmills",
@@ -54,8 +52,6 @@ const galleryData = [
     description: "A beautiful sunset with windmills at Altamont Pass.",
     imagesFolderUrl: "landscapes/altamont-sunset",
     layout: "horizontal",
-    showCover: false,
-    enableSlideshow: true,
   },
   {
     name: "Lavender Fields with Naga",
@@ -64,7 +60,6 @@ const galleryData = [
     description: "A purple evening with Naga's fmaily in the lavender fields.",
     imagesFolderUrl: "portraits/naga-lavendar",
     layout: "masonry",
-    showCover: false,
     enableSlideshow: true,
   },
   {
@@ -74,8 +69,6 @@ const galleryData = [
     description: "A collection of images from Japan.",
     imagesFolderUrl: "landscapes/japan",
     layout: "horizontal",
-    showCover: false,
-    enableSlideshow: true,
   },
 ];
 
