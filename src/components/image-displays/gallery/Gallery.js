@@ -102,7 +102,7 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
               size={20}
               onClick={() => navigate("/galleries")} // Navigate back to the galleries page
             />
-            {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
+            {/* Fullscreen icon is only visible on desktop */}
           </div>
           {enableSlideshow && (
             <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">

@@ -84,6 +84,7 @@ const SingleGallery = () => {
         captions={captions}
         coverImageIndex={coverImageIndex}
         mobileCoverImageIndex={mobileCoverImageIndex}
+        slug={gallerySlug}
       />
     );
   }

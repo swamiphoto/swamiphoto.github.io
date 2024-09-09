@@ -11,7 +11,7 @@ import FilmSingleSlideshowLayout from "./film-single-slideshow-layout/FilmSingle
 import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlideshowLayout";
 import "./Slideshow.css";
 
-const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = true, layout = "film-stack" }) => {
+const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0, hideCaptionsOnMobile = true, layout = "film-stack", slug }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -34,11 +34,9 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
               const img = new Image();
               img.onload = () => {
                 const aspectRatio = img.width / img.height;
-                console.log(`Loaded image ${url} with aspect ratio: ${aspectRatio}`);
                 resolve(aspectRatio);
               };
               img.onerror = () => {
-                console.error(`Failed to load image ${url}`);
                 resolve(1); // default to 1 if there's an error
               };
               img.src = url;
@@ -84,13 +82,13 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
-    const duration = customDurations[currentImageIndex] || 10000; // Increase this if you want the crossfade to start earlier
+    const duration = customDurations[currentImageIndex] || 10000;
     slideshowInterval.current = setTimeout(() => {
       setTransitioning(true);
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
       setTransitioning(false);
       if (slideshowPlaying) startSlideshow();
-    }, duration - 2000); // Adjust this timing as needed for your desired effect
+    }, duration - 2000);
   };
 
   const handlePlayPauseAudio = () => {
@@ -210,41 +208,23 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
 
       {!showCover && !isMobile && (
         <div className="fixed top-4 left-4 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
-          {/* Back button */}
-          <HiOutlineArrowLeft
-            className="hover:text-red-500 cursor-pointer"
-            size={24}
-            onClick={() => navigate("/galleries")} // Go back to the previous page
-          />
-
-          {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
-
+          <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => navigate("/galleries")} />
           {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
-
-          {/* <HiOutlineArrowLeft className={`hover:text-red-500 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
-
-          <HiOutlineArrowRight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} /> */}
-
-          {/* "View Gallery" link */}
-          <button
-            className="hover:text-red-500 cursor-pointer tracking-wider text-sm"
-            onClick={() => {
-              const galleryPath = window.location.pathname.replace("/slideshow", ""); // Remove /slideshow from the path
-              window.location.href = galleryPath;
-            }}>
+          {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
+          <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
             View Gallery
           </button>
         </div>
       )}
 
       {!showCover && isMobile && (
-        <div className="fixed-bottom">
-          <button className={`${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }}>
-            <HiOutlineArrowLeft size={24} />
-          </button>
-          <button onClick={handlePlayPauseSlideshow}>{slideshowPlaying ? <HiOutlinePause size={24} /> : <AiOutlinePlayCircle size={24} />}</button>
-          <button className={`${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }}>
-            <HiOutlineArrowRight size={24} />
+        <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-300 z-50">
+          <div className="flex items-center space-x-4">
+            <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => navigate("/galleries")} />
+            {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
+          </div>
+          <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
+            View Gallery
           </button>
         </div>
       )}
