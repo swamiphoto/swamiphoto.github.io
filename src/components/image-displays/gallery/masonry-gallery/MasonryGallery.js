@@ -7,7 +7,7 @@ import "./MasonryGallery.css";
 const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }) => {
   const [images, setImages] = useState([]);
   const observer = useRef(null);
-  const masonryRef = useRef(null); // Ref for the Masonry container
+  const masonryRef = useRef(null); // Ref for the Masonry container //
   const navigate = useNavigate();
   const shuffledImagesRef = useRef(null); // To store shuffled images across renders
 
