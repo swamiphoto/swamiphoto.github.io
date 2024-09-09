@@ -96,6 +96,8 @@ const SingleGallery = () => {
       layout={layout} // Default to "masonry" if no layout is provided
       imagesFolderUrl={gallery.imagesFolderUrl}
       showCover={showCover} // Default to true if not provided
+      enableSlideshow={true}
+      slug={gallerySlug}
     />
   );
 };

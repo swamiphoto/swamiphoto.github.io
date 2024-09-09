@@ -1,33 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./HorizontalGallery.css";
 
-const HorizontalGallery = ({ name, images, description }) => {
+const HorizontalGallery = ({ name, images, description, showCover = true }) => {
   const [cursorType, setCursorType] = useState("default");
   const [isCoverScreen, setIsCoverScreen] = useState(true);
-  const observer = useRef(null);
-
-  useEffect(() => {
-    observer.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.src = entry.target.dataset.src;
-          entry.target.onload = () => entry.target.classList.add("loaded");
-          entry.target.onerror = () => entry.target.classList.add("hidden");
-          observer.current.unobserve(entry.target);
-        }
-      });
-    });
-
-    return () => observer.current.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const imgs = document.querySelectorAll("img.lazy-load");
-    imgs.forEach((img) => observer.current.observe(img));
-  }, [images]);
+  const horizontalScrollRef = useRef(null);
 
   const handleWheel = (event) => {
-    const container = document.querySelector(".horizontal-scroll");
+    const container = horizontalScrollRef.current;
     if (event.deltaY !== 0) {
       event.preventDefault();
       container.scrollLeft += event.deltaY;
@@ -41,7 +21,7 @@ const HorizontalGallery = ({ name, images, description }) => {
   };
 
   const handleStartClick = () => {
-    const container = document.querySelector(".horizontal-scroll");
+    const container = horizontalScrollRef.current;
     container.scrollTo({
       left: container.scrollLeft + window.innerWidth,
       behavior: "smooth",
@@ -65,7 +45,7 @@ const HorizontalGallery = ({ name, images, description }) => {
   };
 
   const handleClick = (event) => {
-    const container = document.querySelector(".horizontal-scroll");
+    const container = horizontalScrollRef.current;
     const containerWidth = container.clientWidth;
     const clickX = event.clientX;
 
@@ -97,18 +77,21 @@ const HorizontalGallery = ({ name, images, description }) => {
         cursor: isCoverScreen ? "default" : cursorType === "left" ? 'url("/left-arrow.svg") 24 24, auto' : cursorType === "right" ? 'url("/right-arrow.svg") 24 24, auto' : "default",
       }}>
       <div
+        ref={horizontalScrollRef}
         className="flex-grow flex items-center justify-start overflow-y-hidden horizontal-scroll"
         style={{
           scrollbarWidth: "thin" /* Firefox */,
           scrollbarColor: "#4b5563 #6b7280" /* Firefox */,
         }}>
-        <div className="relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
-          <h1 className="text-4xl font-bold mb-2">{name}</h1>
-          <p className="text-lg mb-6">{description}</p>
-          <button onClick={handleStartClick} className="text-gray-900 bg-white px-10 py-3 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
-            View Gallery
-          </button>
-        </div>
+        {showCover && isCoverScreen && (
+          <div className="relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
+            <h1 className="text-4xl font-bold mb-2">{name}</h1>
+            <p className="text-lg mb-6">{description}</p>
+            <button onClick={handleStartClick} className="text-gray-900 bg-white px-10 py-3 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
+              View Gallery
+            </button>
+          </div>
+        )}
         {images.map((image, index) => (
           <img key={index} data-src={image} className="max-h-[calc(100vh-40px)] object-cover mx-3 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
         ))}

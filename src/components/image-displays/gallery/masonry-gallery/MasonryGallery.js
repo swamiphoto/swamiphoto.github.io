@@ -1,33 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Masonry from "react-masonry-css";
 import { handleImageClick } from "../../../../common/images"; // Import the common functions
 import { useNavigate } from "react-router-dom";
 import "./MasonryGallery.css";
 
 const MasonryGallery = ({ name, images, description, showCover = true }) => {
-  const observer = useRef(null);
   const masonryRef = useRef(null); // Ref for the Masonry container
   const navigate = useNavigate();
-
-  useEffect(() => {
-    observer.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.src = entry.target.dataset.src;
-          entry.target.onload = () => entry.target.classList.add("loaded");
-          entry.target.onerror = () => entry.target.classList.add("hidden");
-          observer.current.unobserve(entry.target);
-        }
-      });
-    });
-
-    return () => observer.current.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const imgs = document.querySelectorAll("img.lazy-load");
-    imgs.forEach((img) => observer.current.observe(img));
-  }, [images]);
 
   const handleDownClick = () => {
     if (masonryRef.current) {
@@ -43,7 +22,7 @@ const MasonryGallery = ({ name, images, description, showCover = true }) => {
   return (
     <div className="masonry-gallery h-screen overflow-auto bg-gray-500">
       <div className="gallery-content flex-grow p-4 overflow-hidden">
-        {showCover && ( // Only show the cover if showCover is true
+        {showCover && (
           <div className="cover relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
             <h1 className="text-4xl font-bold mb-2">{name}</h1>
             <p className="text-lg mb-6">{description}</p>
