@@ -11,21 +11,13 @@ import Tennis from "./pages/tennis/Tennis";
 import Prints from "./pages/prints/Prints";
 import SingleGallery from "./pages/galleries/SingleGallery";
 import Lightbox from "./components/image-displays/lightbox/Lightbox";
-import Galleries, { galleryData } from "./pages/galleries/Galleries";
+// import Galleries, { galleryData } from "./pages/galleries/Galleries";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import "./App.css";
 
 // Define noHeaderPaths for galleries and other pages
 const otherNoHeaderPaths = ["/naga", "/nagabday", "/sunol", "/sunol2"];
-const noHeaderPaths = [
-  ...galleryData
-    .flatMap((gallery) => [
-      `/galleries/${gallery.slug}`, // Gallery view
-      gallery.enableSlideshow ? `/galleries/${gallery.slug}/slideshow` : null, // Slideshow view if enabled
-    ])
-    .filter(Boolean), // Filter out null values
-  ...otherNoHeaderPaths,
-];
+const noHeaderPaths = [];
 
 const MainContent = () => {
   const location = useLocation();
@@ -40,7 +32,7 @@ const MainContent = () => {
           <Route path="/portraits" element={<Portraits />} />
           <Route path="/bollywood" element={<Bollywood />} />
           <Route path="/tennis" element={<Tennis />} />
-          <Route path="/galleries" element={<Galleries />} />
+          {/* <Route path="/galleries" element={<Galleries />} /> */}
           <Route path="/headshots" element={<Headshots />} />
           <Route path="/galleries/:gallerySlug/:view?" element={<SingleGallery />} />
           <Route path="/about" element={<About />} />
