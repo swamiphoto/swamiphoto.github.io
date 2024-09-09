@@ -10,8 +10,8 @@ import Bollywood from "./pages/bollywood/Bollywood";
 import Tennis from "./pages/tennis/Tennis";
 import Prints from "./pages/prints/Prints";
 import SingleGallery from "./pages/galleries/SingleGallery";
-import Galleries, { galleryData } from "./pages/galleries/Galleries";
 import Lightbox from "./components/image-displays/lightbox/Lightbox";
+import Galleries, { galleryData } from "./pages/galleries/Galleries";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import "./App.css";
 
