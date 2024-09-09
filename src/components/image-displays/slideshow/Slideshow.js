@@ -17,7 +17,6 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
   const [aspectRatios, setAspectRatios] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [slideshowPlaying, setSlideshowPlaying] = useState(true); // Start the slideshow immediately
-  // const [showCover, setShowCover] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
@@ -54,6 +53,7 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
   useEffect(() => {
     if (imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
       startSlideshow();
+      handlePlayPauseAudio(); // Start playing audio when the slideshow starts
       return () => clearInterval(slideshowInterval.current);
     }
   }, [imagesLoaded, imageUrls, slideshowPlaying]);
@@ -91,16 +91,16 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
     }, duration - 2000);
   };
 
-  // const handlePlayPauseAudio = () => {
-  //   if (playerRef.current) {
-  //     if (audioPlaying) {
-  //       playerRef.current.pauseVideo();
-  //     } else {
-  //       playerRef.current.playVideo();
-  //     }
-  //     setAudioPlaying(!audioPlaying);
-  //   }
-  // };
+  const handlePlayPauseAudio = () => {
+    if (playerRef.current) {
+      if (audioPlaying) {
+        playerRef.current.pauseVideo();
+      } else {
+        playerRef.current.playVideo();
+      }
+      setAudioPlaying(!audioPlaying);
+    }
+  };
 
   const handlePlayPauseSlideshow = () => {
     if (slideshowPlaying) {
@@ -110,18 +110,10 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
       setAudioPlaying(false);
     } else {
       startSlideshow();
-      if (playerRef.current && !audioPlaying) {
-        playerRef.current.playVideo();
-        setAudioPlaying(true);
-      }
+      handlePlayPauseAudio(); // Ensure audio resumes when slideshow resumes
       setSlideshowPlaying(true);
     }
   };
-  // const handleStartClick = () => {
-  //   setShowCover(false);
-  //   handlePlayPauseAudio();
-  //   setSlideshowPlaying(true);
-  // };
 
   const handleToggleFullscreen = () => {
     if (!isFullscreen) {
@@ -183,24 +175,6 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Commented out the cover for now */}
-      {/* {showCover && (
-        <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
-          <>
-            <div className="absolute inset-0 w-full h-full bg-black z-10"></div>
-            <img src={imageUrls[isMobile ? mobileCoverImageIndex : coverImageIndex]} alt="" className="absolute inset-0 w-full h-full object-cover z-20 fade-in" />
-            <div className="overlay absolute inset-0 bg-black opacity-70 z-30"></div>
-            <div className="text-center text-gray-200 p-4 z-40 fade-in">
-              <h1 className="text-4xl font-bold mb-2">{title}</h1>
-              <p className="text-lg mb-6">{subtitle}</p>
-              <button onClick={handleStartClick} className="inline-block text-gray-900 bg-white px-10 py-3 mt-7 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
-                Start the Show
-              </button>
-            </div>
-          </>
-        </div>
-      )} */}
-
       <main className="flex-grow flex justify-center items-center relative">
         {renderPhotos()}
         {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
