@@ -3,6 +3,7 @@ import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-i
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 import useYouTubePlayer from "./useYouTubePlayer";
 import FilmStackSlideshowLayout from "./film-stack-slideshow-layout/FilmStackSlideshowLayout";
@@ -22,6 +23,7 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (imageUrls.length > 0) {
@@ -207,11 +209,31 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
       </main>
 
       {!showCover && !isMobile && (
-        <div className="fixed bottom-4 left-4 flex space-x-4 bg-white bg-opacity-90 p-3 shadow-lg rounded-lg z-50">
+        <div className="fixed top-4 left-4 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
+          {/* Back button */}
+          <HiOutlineArrowLeft
+            className="hover:text-red-500 cursor-pointer"
+            size={24}
+            onClick={() => navigate("/galleries")} // Go back to the previous page
+          />
+
           {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
+
           {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
-          <HiOutlineArrowLeft className={`hover:text-red-500 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
-          <HiOutlineArrowRight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} />
+
+          {/* <HiOutlineArrowLeft className={`hover:text-red-500 cursor-pointer ${currentImageIndex === 0 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handlePreviousPhoto} style={{ pointerEvents: currentImageIndex === 0 ? "none" : "auto" }} />
+
+          <HiOutlineArrowRight className={`hover:text-red-500 cursor-pointer ${currentImageIndex === imageUrls.length - 1 ? "opacity-30" : "opacity-100"}`} size={24} onClick={handleNextPhoto} style={{ pointerEvents: currentImageIndex === imageUrls.length - 1 ? "none" : "auto" }} /> */}
+
+          {/* "View Gallery" link */}
+          <button
+            className="hover:text-red-500 cursor-pointer tracking-wider text-sm"
+            onClick={() => {
+              const galleryPath = window.location.pathname.replace("/slideshow", ""); // Remove /slideshow from the path
+              window.location.href = galleryPath;
+            }}>
+            View Gallery
+          </button>
         </div>
       )}
 

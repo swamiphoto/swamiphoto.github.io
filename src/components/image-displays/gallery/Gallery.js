@@ -94,7 +94,7 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
       {layout === "masonry" ? <MasonryGallery name={name} images={images} description={description} showCover={showCover} /> : <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />}
 
       {/* Bottom-left bar with controls */}
-      <div className="fixed bottom-10 left-10 flex space-x-4 bg-white bg-opacity-90 p-3 shadow-lg rounded-lg z-50">
+      <div className="fixed bottom-10 left-10 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
         <HiOutlineArrowLeft
           className="hover:text-red-500 cursor-pointer"
           size={20}
@@ -103,7 +103,7 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
         {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
         {/* "View Slideshow" Link */}
         {enableSlideshow && (
-          <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer font-geist-mono tracking-wider text-sm uppercase">
+          <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
             View Slideshow
           </button>
         )}
