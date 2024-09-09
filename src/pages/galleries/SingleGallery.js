@@ -21,8 +21,8 @@ const SingleGallery = () => {
   const gallery = galleryData.find((g) => g.slug === gallerySlug);
 
   useEffect(() => {
-    // Only run fetchImages if the gallery exists
-    if (gallery) {
+    // Only fetch images if the view is "slideshow" and the gallery exists
+    if (gallery && view === "slideshow") {
       const fetchImages = async () => {
         const urls = await fetchImageUrls(gallery.imagesFolderUrl);
         setImageUrls(urls);
@@ -40,10 +40,10 @@ const SingleGallery = () => {
 
       fetchImages();
     }
-  }, [gallery]);
+  }, [gallery, view]);
 
-  // Handle loading state
-  if (!imagesLoaded && gallery) {
+  // Handle loading state only for slideshow view
+  if (view === "slideshow" && !imagesLoaded && gallery) {
     return <Loading />;
   }
 
