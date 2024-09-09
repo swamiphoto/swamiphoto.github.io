@@ -1,33 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
-import { fetchImageUrls, handleImageClick } from "../../../../common/images"; // Import the common functions
+import React, { useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
+import { handleImageClick } from "../../../../common/images"; // Import the common functions
 import { useNavigate } from "react-router-dom";
 import "./MasonryGallery.css";
 
-const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }) => {
-  const [images, setImages] = useState([]);
+const MasonryGallery = ({ name, images, description, showCover = true }) => {
   const observer = useRef(null);
-  const masonryRef = useRef(null); // Ref for the Masonry container // //
+  const masonryRef = useRef(null); // Ref for the Masonry container
   const navigate = useNavigate();
-  const shuffledImagesRef = useRef(null); // To store shuffled images across renders
-
-  // Function to shuffle the array of images
-  const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-  };
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      const urls = await fetchImageUrls(imagesFolderUrl);
-      if (!shuffledImagesRef.current) {
-        // Shuffle and store in ref only once on component mount
-        shuffledImagesRef.current = shuffleArray(urls);
-      }
-      setImages(shuffledImagesRef.current); // Use the shuffled images stored in ref
-    };
-
-    fetchImages();
-  }, [imagesFolderUrl]);
 
   useEffect(() => {
     observer.current = new IntersectionObserver((entries) => {
@@ -63,7 +43,7 @@ const MasonryGallery = ({ name, imagesFolderUrl, description, showCover = true }
   return (
     <div className="masonry-gallery h-screen overflow-auto bg-gray-500">
       <div className="gallery-content flex-grow p-4 overflow-hidden">
-        {showCover && (
+        {showCover && ( // Only show the cover if showCover is true
           <div className="cover relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
             <h1 className="text-4xl font-bold mb-2">{name}</h1>
             <p className="text-lg mb-6">{description}</p>

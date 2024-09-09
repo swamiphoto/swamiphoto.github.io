@@ -11,7 +11,7 @@ const galleryData = [
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
     layout: "masonry",
-    showCover: false,
+    showCover: true,
     enableSlideshow: true,
     slideshowSettings: {
       customDurations: { 24: 7000 },

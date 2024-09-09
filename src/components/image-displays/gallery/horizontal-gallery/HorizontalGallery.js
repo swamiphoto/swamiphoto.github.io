@@ -1,21 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { fetchImageUrls } from "../../../../common/images";
+import React, { useEffect, useRef, useState } from "react";
 import "./HorizontalGallery.css";
 
-const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
-  const [images, setImages] = useState([]);
+const HorizontalGallery = ({ name, images, description }) => {
   const [cursorType, setCursorType] = useState("default");
   const [isCoverScreen, setIsCoverScreen] = useState(true);
   const observer = useRef(null);
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      const urls = await fetchImageUrls(imagesFolderUrl);
-      setImages(urls);
-    };
-
-    fetchImages();
-  }, [imagesFolderUrl]);
 
   useEffect(() => {
     observer.current = new IntersectionObserver((entries) => {
@@ -46,7 +35,7 @@ const HorizontalGallery = ({ name, imagesFolderUrl, description }) => {
         setIsCoverScreen(false);
       } else {
         setIsCoverScreen(true);
-        setCursorType("default"); // Reset cursor to default when returning to cover screen
+        setCursorType("default");
       }
     }
   };
