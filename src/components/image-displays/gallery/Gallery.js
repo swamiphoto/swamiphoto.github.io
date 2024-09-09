@@ -6,6 +6,7 @@ import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2"; // Na
 import { AiOutlinePlayCircle } from "react-icons/ai"; // Play icon
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx"; // Fullscreen icons
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
 
 const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, slug, showCover = true, enableSlideshow = false }) => {
   const [images, setImages] = useState([]);
@@ -13,6 +14,7 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
   const observer = useRef(null);
   const shuffledImagesRef = useRef(null); // Store the shuffled images to maintain consistency across renders
   const navigate = useNavigate(); // Use navigate for programmatic navigation
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect if user is on mobile
 
   // Function to shuffle the array of images
   const shuffleArray = (array) => {
@@ -88,26 +90,47 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
       console.error("Gallery slug is undefined");
     }
   };
-  return (
-    <div className="gallery-container relative h-screen">
-      {/* Render gallery based on layout */}
-      {layout === "masonry" ? <MasonryGallery name={name} images={images} description={description} showCover={showCover} /> : <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />}
 
-      {/* Bottom-left bar with controls */}
-      <div className="fixed bottom-10 left-10 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
-        <HiOutlineArrowLeft
-          className="hover:text-red-500 cursor-pointer"
-          size={20}
-          onClick={() => navigate("/galleries")} // Navigate back to the galleries page
-        />
-        {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
-        {/* "View Slideshow" Link */}
-        {enableSlideshow && (
-          <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
-            View Slideshow
-          </button>
-        )}
-      </div>
+  return (
+    <div className={`gallery-container relative h-screen`}>
+      {/* Fixed header for mobile */}
+      {isMobile && (
+        <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-300 z-50">
+          <div className="flex items-center space-x-4">
+            <HiOutlineArrowLeft
+              className="hover:text-red-500 cursor-pointer"
+              size={20}
+              onClick={() => navigate("/galleries")} // Navigate back to the galleries page
+            />
+            {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
+          </div>
+          {enableSlideshow && (
+            <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
+              View Slideshow
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Render gallery based on layout */}
+      <div>{layout === "masonry" ? <MasonryGallery name={name} images={images} description={description} showCover={showCover} /> : <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />}</div>
+
+      {/* Bottom-left bar for desktop */}
+      {!isMobile && (
+        <div className="fixed bottom-10 left-10 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
+          <HiOutlineArrowLeft
+            className="hover:text-red-500 cursor-pointer"
+            size={20}
+            onClick={() => navigate("/galleries")} // Navigate back to the galleries page
+          />
+          {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
+          {enableSlideshow && (
+            <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
+              View Slideshow
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

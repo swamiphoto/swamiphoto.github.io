@@ -2,11 +2,13 @@ import React, { useRef } from "react";
 import Masonry from "react-masonry-css";
 import { handleImageClick } from "../../../../common/images"; // Import the common functions
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
 import "./MasonryGallery.css";
 
 const MasonryGallery = ({ name, images, description, showCover = true }) => {
   const masonryRef = useRef(null); // Ref for the Masonry container
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect mobile screen
 
   const handleDownClick = () => {
     if (masonryRef.current) {
@@ -31,7 +33,7 @@ const MasonryGallery = ({ name, images, description, showCover = true }) => {
             </button>
           </div>
         )}
-        <div ref={masonryRef}>
+        <div ref={masonryRef} className={isMobile ? "mt-16" : ""}>
           <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
             {images.map((image, index) => (
               <div key={index} className="mb-5">
