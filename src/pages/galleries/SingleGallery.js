@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive"; // Import for detecting mobile
 import Slideshow from "../../components/image-displays/slideshow/Slideshow";
 import Gallery from "../../components/image-displays/gallery/Gallery";
 import Loading from "../../components/image-displays/slideshow/Loading/Loading";
@@ -9,13 +10,15 @@ import { fetchImageUrls } from "../../common/images";
 const DEFAULT_LAYOUT = "masonry"; // Default layout for gallery
 const DEFAULT_SLIDESHOW_LAYOUT = "kenburns"; // Default layout for slideshow
 const DEFAULT_YOUTUBE_LINK = "https://www.youtube.com/watch?v=PYujyluMxMU";
-const DEFAULT_SHOW_COVER = false; // Default to show the cover
+const DEFAULT_SHOW_COVER = false; // Default to not show the cover
 const DEFAULT_ENABLE_SLIDESHOW = false; // Default slideshow is disabled
 
 const SingleGallery = () => {
   const { gallerySlug, view } = useParams(); // view can be 'slideshow' or undefined for gallery
   const [imageUrls, setImageUrls] = useState([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect if on mobile
 
   // Ensure the hook is always run and the gallery is selected
   const gallery = galleryData.find((g) => g.slug === gallerySlug);
@@ -69,6 +72,9 @@ const SingleGallery = () => {
     enableSlideshow = DEFAULT_ENABLE_SLIDESHOW, // Default to false
   } = gallery;
 
+  // Override layout to "masonry" if on mobile
+  const finalLayout = isMobile ? "masonry" : layout;
+
   // Render slideshow if 'view' is 'slideshow' and the slideshow is enabled
   if (view === "slideshow" && enableSlideshow) {
     const randomYouTubeLink = youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)];
@@ -94,7 +100,7 @@ const SingleGallery = () => {
     <Gallery
       name={gallery.name}
       description={gallery.description}
-      layout={layout} // Default to "masonry" if no layout is provided
+      layout={finalLayout} // Use "masonry" if on mobile, else use the provided layout
       imagesFolderUrl={gallery.imagesFolderUrl}
       showCover={showCover} // Default to true if not provided
       enableSlideshow={enableSlideshow}
