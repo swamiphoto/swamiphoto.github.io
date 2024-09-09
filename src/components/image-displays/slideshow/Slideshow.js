@@ -16,8 +16,8 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [slideshowPlaying, setSlideshowPlaying] = useState(false);
-  const [showCover, setShowCover] = useState(true);
+  const [slideshowPlaying, setSlideshowPlaying] = useState(true); // Start the slideshow immediately
+  // const [showCover, setShowCover] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
@@ -91,16 +91,16 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
     }, duration - 2000);
   };
 
-  const handlePlayPauseAudio = () => {
-    if (playerRef.current) {
-      if (audioPlaying) {
-        playerRef.current.pauseVideo();
-      } else {
-        playerRef.current.playVideo();
-      }
-      setAudioPlaying(!audioPlaying);
-    }
-  };
+  // const handlePlayPauseAudio = () => {
+  //   if (playerRef.current) {
+  //     if (audioPlaying) {
+  //       playerRef.current.pauseVideo();
+  //     } else {
+  //       playerRef.current.playVideo();
+  //     }
+  //     setAudioPlaying(!audioPlaying);
+  //   }
+  // };
 
   const handlePlayPauseSlideshow = () => {
     if (slideshowPlaying) {
@@ -117,12 +117,11 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
       setSlideshowPlaying(true);
     }
   };
-
-  const handleStartClick = () => {
-    setShowCover(false);
-    handlePlayPauseAudio();
-    setSlideshowPlaying(true);
-  };
+  // const handleStartClick = () => {
+  //   setShowCover(false);
+  //   handlePlayPauseAudio();
+  //   setSlideshowPlaying(true);
+  // };
 
   const handleToggleFullscreen = () => {
     if (!isFullscreen) {
@@ -184,7 +183,8 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {showCover && (
+      {/* Commented out the cover for now */}
+      {/* {showCover && (
         <div className="absolute inset-0 flex items-center justify-center bg-cover bg-center z-50 w-full h-full">
           <>
             <div className="absolute inset-0 w-full h-full bg-black z-10"></div>
@@ -199,14 +199,14 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
             </div>
           </>
         </div>
-      )}
+      )} */}
 
       <main className="flex-grow flex justify-center items-center relative">
         {renderPhotos()}
         {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
       </main>
 
-      {!showCover && !isMobile && (
+      {!isMobile && (
         <div className="fixed top-4 left-4 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
           <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => navigate("/galleries")} />
           {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
@@ -217,7 +217,7 @@ const Slideshow = ({ imageUrls, title = "Gallery Title", youtubeUrl, subtitle = 
         </div>
       )}
 
-      {!showCover && isMobile && (
+      {isMobile && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-300 z-50">
           <div className="flex items-center space-x-4">
             <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => navigate("/galleries")} />
