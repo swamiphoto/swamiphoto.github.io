@@ -233,7 +233,7 @@ const Slideshow = ({
           {enableClientView &&
             (clientView ? (
               <button className=" hover:text-red-500 text-sm" onClick={handleExitClientView}>
-                Exit Client Area
+                Sign Out
               </button>
             ) : (
               <button className="hover:text-red-500 text-sm" onClick={() => setIsModalOpen(true)}>

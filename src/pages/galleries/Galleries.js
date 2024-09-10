@@ -22,6 +22,11 @@ const galleryData = [
       mobileCoverImageIndex: 21,
       layout: "kenburns",
     },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "rattlesnake", // Encrypted password
+      clientMessage: "Hello Naga & Bharath, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls. Let me know your favorites!",
+    },
   },
   {
     name: "Sunflowers with Naga",
