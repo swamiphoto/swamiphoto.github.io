@@ -75,21 +75,25 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
           <div className="flex items-center space-x-4">
             <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => navigate("/galleries")} />
           </div>
-          {enableSlideshow && (
-            <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
-              View Slideshow
-            </button>
-          )}
-          {enableClientView &&
-            (clientView ? (
-              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
-                Exit Client View
+          <div className="ml-auto flex space-x-4">
+            {" "}
+            {/* Align to the right */}
+            {enableSlideshow && (
+              <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
+                View Slideshow
               </button>
-            ) : (
-              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
-                Client Login
-              </button>
-            ))}
+            )}
+            {enableClientView &&
+              (clientView ? (
+                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
+                  Exit Client View
+                </button>
+              ) : (
+                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+                  Client Login
+                </button>
+              ))}
+          </div>
         </div>
       )}
 

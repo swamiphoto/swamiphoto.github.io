@@ -199,20 +199,23 @@ const Slideshow = ({
             {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           </div>
 
-          {enableClientView &&
-            (clientView ? (
-              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
-                Exit Client View
-              </button>
-            ) : (
-              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
-                Client Login
-              </button>
-            ))}
-
-          <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
-            Exit Slideshow
-          </button>
+          <div className="ml-auto flex space-x-4">
+            {" "}
+            {/* Align to the right */}
+            {enableClientView &&
+              (clientView ? (
+                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
+                  Exit Client View
+                </button>
+              ) : (
+                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+                  Client Login
+                </button>
+              ))}
+            <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
+              Exit Slideshow
+            </button>
+          </div>
         </div>
       )}
 
