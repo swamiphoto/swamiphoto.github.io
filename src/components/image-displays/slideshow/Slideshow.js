@@ -36,7 +36,10 @@ const Slideshow = ({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Manage login modal state
   const [password, setPassword] = useState(""); // Track password input
-  const playerRef = useYouTubePlayer(youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0]);
+
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
+
+  const playerRef = useYouTubePlayer(youtubeUrl ? youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0] : "", setIsPlayerReady);
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const navigate = useNavigate();
@@ -68,12 +71,12 @@ const Slideshow = ({
   }, [imageUrls]);
 
   useEffect(() => {
-    if (imagesLoaded && imageUrls.length > 0 && slideshowPlaying) {
+    if (imagesLoaded && isPlayerReady && imageUrls.length > 0 && slideshowPlaying) {
       startSlideshow();
-      handlePlayPauseAudio(); // Start playing audio when the slideshow starts
+      handlePlayPauseAudio(); // Call this only when the player is ready
       return () => clearInterval(slideshowInterval.current);
     }
-  }, [imagesLoaded, imageUrls, slideshowPlaying]);
+  }, [imagesLoaded, isPlayerReady, imageUrls, slideshowPlaying]); // Add isPlayerReady to the dependency array
 
   useEffect(() => {
     if (slideshowPlaying) {
@@ -109,7 +112,8 @@ const Slideshow = ({
   };
 
   const handlePlayPauseAudio = () => {
-    if (playerRef.current) {
+    if (playerRef.current && isPlayerReady) {
+      // Check if the player is ready
       if (audioPlaying) {
         playerRef.current.pauseVideo();
       } else {
