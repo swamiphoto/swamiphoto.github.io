@@ -22,21 +22,18 @@ const Slideshow = ({
   mobileCoverImageIndex = 0,
   hideCaptionsOnMobile = true,
   slug,
-  enableClientView = false, // Add this to check if client view is enabled
-  clientSettings = {}, // Contains clientLogin and clientMessage
-  clientView = false, // To track whether the user is logged in
-  setClientView, // Function to toggle client view
+  enableClientView = false,
+  clientView = false,
+  setIsModalOpen,
+  handleExitClientView,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [slideshowPlaying, setSlideshowPlaying] = useState(true); // Start the slideshow immediately
+  const [slideshowPlaying, setSlideshowPlaying] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Manage login modal state
-  const [password, setPassword] = useState(""); // Track password input
-
   const [isPlayerReady, setIsPlayerReady] = useState(false);
 
   const playerRef = useYouTubePlayer(youtubeUrl ? youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0] : "", setIsPlayerReady);
@@ -73,7 +70,7 @@ const Slideshow = ({
   useEffect(() => {
     if (imagesLoaded && isPlayerReady && imageUrls.length > 0 && slideshowPlaying) {
       startSlideshow();
-      handlePlayPauseAudio(); // Call this only when the player is ready
+      handlePlayPauseAudio();
       return () => clearInterval(slideshowInterval.current);
     }
   }, [imagesLoaded, isPlayerReady, imageUrls, slideshowPlaying]);
@@ -113,7 +110,6 @@ const Slideshow = ({
 
   const handlePlayPauseAudio = () => {
     if (playerRef.current && isPlayerReady) {
-      // Check if the player is ready
       if (audioPlaying) {
         playerRef.current.pauseVideo();
       } else {
@@ -131,7 +127,7 @@ const Slideshow = ({
       setAudioPlaying(false);
     } else {
       startSlideshow();
-      handlePlayPauseAudio(); // Ensure audio resumes when slideshow resumes
+      handlePlayPauseAudio();
       setSlideshowPlaying(true);
     }
   };
@@ -194,65 +190,8 @@ const Slideshow = ({
     }
   };
 
-  // Client login logic
-  const handleClientLogin = () => {
-    const decryptedPassword = clientSettings.clientLogin; // Assume this is decrypted (currently plain for demo)
-    if (password === decryptedPassword) {
-      setClientView(true); // Grant access to protected images
-      setIsModalOpen(false); // Hide login modal
-    } else {
-      alert("Incorrect password. Please try again.");
-    }
-  };
-
-  const handleExitClientView = () => {
-    setClientView(false); // Exit protected view
-  };
-
   return (
     <div className="flex h-screen overflow-hidden">
-      <main className="flex-grow flex justify-center items-center relative">
-        {renderPhotos()}
-        {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
-      </main>
-
-      {!isMobile && (
-        <div className="fixed top-4 left-4 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
-          <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => navigate("/galleries")} />
-          {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
-          {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
-
-          {/* Client login and exit view logic */}
-          {enableClientView &&
-            (clientView ? (
-              <button className=" hover:text-red-500 text-sm" onClick={handleExitClientView}>
-                Exit Client View
-              </button>
-            ) : (
-              <button className="hover:text-red-500 text-sm" onClick={() => setIsModalOpen(true)}>
-                Client Login
-              </button>
-            ))}
-
-          {/* Exit Slideshow */}
-          <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
-            Exit Slideshow
-          </button>
-        </div>
-      )}
-
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg relative w-3/4 sm:w-1/2 lg:w-1/3">
-            <h2 className="text-center text-lg font-bold mb-4">Client Login</h2>
-            <input type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-gray-300 p-2 rounded mb-4" />
-            <button onClick={handleClientLogin} className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">
-              Submit
-            </button>
-          </div>
-        </div>
-      )}
-
       {isMobile && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-300 z-50">
           <div className="flex items-center space-x-4">
@@ -271,7 +210,34 @@ const Slideshow = ({
               </button>
             ))}
 
-          {/* Exit Slideshow */}
+          <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
+            Exit Slideshow
+          </button>
+        </div>
+      )}
+
+      <main className="flex-grow flex justify-center items-center relative">
+        {renderPhotos()}
+        {youtubeUrl && <div id="youtube-player" className="absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none"></div>}
+      </main>
+
+      {!isMobile && (
+        <div className="fixed top-4 left-4 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
+          <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => navigate("/galleries")} />
+          {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
+          {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
+
+          {enableClientView &&
+            (clientView ? (
+              <button className=" hover:text-red-500 text-sm" onClick={handleExitClientView}>
+                Exit Client View
+              </button>
+            ) : (
+              <button className="hover:text-red-500 text-sm" onClick={() => setIsModalOpen(true)}>
+                Client Login
+              </button>
+            ))}
+
           <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
             Exit Slideshow
           </button>
