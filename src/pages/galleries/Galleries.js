@@ -33,7 +33,7 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
-      layout: "film-stack",
+      layout: "kenburns",
     },
     enableClientView: true,
     clientSettings: {

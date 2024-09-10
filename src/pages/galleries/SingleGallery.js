@@ -92,7 +92,7 @@ const SingleGallery = () => {
 
           <p className="text-center mx-auto md:max-w-xl text-xl text-gray-800 mb-6">{clientSettings.clientMessage}</p>
           <button onClick={closeModal} className="w-full max-w-sm  bg-black text-white font-geist-mono p-5 text-xl inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
-            Proceed to Gallery
+            View Images
           </button>
         </>
       );
@@ -103,7 +103,7 @@ const SingleGallery = () => {
         <h1 className="text-center mx-auto md:max-w-xl text-2xl text-gray-800 font-bold mb-10">Client Login</h1>
         <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full max-w-sm border border-gray-300 p-2 mb-4 outline-none focus:outline-none" />
         <button onClick={handleClientLogin} className="w-full max-w-sm bg-black text-white font-geist-mono p-2 inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
-          Submit
+          Enter Client Area
         </button>
       </>
     );

@@ -111,7 +111,7 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
           {enableClientView &&
             (clientView ? (
               <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
-                Exit Client View
+                Exit Client Area
               </button>
             ) : (
               <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
