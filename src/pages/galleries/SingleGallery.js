@@ -71,7 +71,6 @@ const SingleGallery = () => {
     const decryptedPassword = clientSettings.clientLogin;
     if (password === decryptedPassword) {
       setClientView(true);
-      setIsModalOpen(false);
     } else {
       alert("Incorrect password. Please try again.");
     }
@@ -83,6 +82,31 @@ const SingleGallery = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const renderModalContent = () => {
+    if (clientView) {
+      return (
+        <>
+          <h1 className="text-center mx-auto md:max-w-xl text-4xl text-gray-800 font-bold tracking-tighter mb-2">Welcome to the client area</h1>
+
+          <p className="text-center mx-auto md:max-w-xl text-xl text-gray-800 mb-6">{clientSettings.clientMessage}</p>
+          <button onClick={closeModal} className="w-full max-w-sm  bg-black text-white font-geist-mono p-5 text-xl inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
+            Proceed to Gallery
+          </button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <h1 className="text-center mx-auto md:max-w-xl text-2xl text-gray-800 font-bold mb-10">Client Login</h1>
+        <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full max-w-sm border border-gray-300 p-2 mb-4 outline-none focus:outline-none" />
+        <button onClick={handleClientLogin} className="w-full max-w-sm bg-black text-white font-geist-mono p-2 inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
+          Submit
+        </button>
+      </>
+    );
   };
 
   return (
@@ -125,19 +149,12 @@ const SingleGallery = () => {
       )}
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-white bg-opacity-90 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-white bg-opacity-95 flex justify-center items-center z-50">
           <div className="w-full h-full p-8 relative">
             <button className="absolute top-4 right-4 text-3xl opacity-70 hover:opacity-100" onClick={closeModal}>
               <HiOutlineX />
             </button>
-            <div className="flex flex-col justify-center items-center h-full">
-              <h1 className="text-center mx-auto md:max-w-xl text-2xl  text-gray-800 font-bold mb-10">Client Login</h1>
-
-              <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full max-w-sm border border-gray-300 p-2 mb-4 outline-none focus:outline-none" />
-              <button onClick={handleClientLogin} className="w-full max-w-sm py-2 bg-black text-white font-geist-mono px-10 inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
-                Submit
-              </button>
-            </div>
+            <div className="flex flex-col justify-center items-center h-full">{renderModalContent()}</div>
           </div>
         </div>
       )}

@@ -35,6 +35,11 @@ const galleryData = [
       youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
       layout: "film-stack",
     },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "wisteria", // Encrypted password
+      clientMessage: "Hello Naga, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls. Let me know your favorites!",
+    },
   },
   {
     name: "California",
@@ -46,11 +51,6 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=1opgh7ky2nU", "https://www.youtube.com/watch?v=hes6FYmLXmQ"],
-    },
-    enableClientView: true,
-    clientSettings: {
-      clientLogin: "happy", // Encrypted password
-      clientMessage: "Welcome to the protected view for Naga and Bharath's hike.",
     },
   },
   {
