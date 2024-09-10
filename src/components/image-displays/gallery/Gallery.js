@@ -8,9 +8,23 @@ import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx"; // Fullscr
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
 
-const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, slug, showCover = false, enableSlideshow = false }) => {
+const Gallery = ({
+  layout = "horizontal",
+  name,
+  imagesFolderUrl,
+  description,
+  slug,
+  showCover = false,
+  enableSlideshow = false,
+  enableClientView = false, // Add this to check if client view is enabled
+  clientSettings = {}, // Contains clientLogin and clientMessage
+  clientView = false, // To track whether the user is logged in
+  setClientView, // Function to toggle client view
+}) => {
   const [images, setImages] = useState([]);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state for client login
+  const [password, setPassword] = useState(""); // Track password input
   const observer = useRef(null);
   const shuffledImagesRef = useRef(null); // Store the shuffled images to maintain consistency across renders
   const navigate = useNavigate(); // Use navigate for programmatic navigation
@@ -43,6 +57,7 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
     imgs.forEach((img) => observer.current.observe(img));
   }, [images]);
 
+  // Fetch images and filter out protected images if clientView is not active
   useEffect(() => {
     const fetchImages = async () => {
       const urls = await fetchImageUrls(imagesFolderUrl);
@@ -50,11 +65,12 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
       if (!shuffledImagesRef.current) {
         shuffledImagesRef.current = shuffleArray(urls);
       }
-      setImages(shuffledImagesRef.current); // Set the shuffled images
+      const filteredImages = clientView ? shuffledImagesRef.current : shuffledImagesRef.current.filter((url) => !url.includes("protected"));
+      setImages(filteredImages); // Set the shuffled (and possibly filtered) images
     };
 
     fetchImages();
-  }, [imagesFolderUrl]); // Fetch images when imagesFolderUrl changes
+  }, [imagesFolderUrl, clientView]); // Fetch images when imagesFolderUrl or clientView changes
 
   // Fullscreen toggle
   const handleToggleFullscreen = () => {
@@ -82,6 +98,17 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
     setIsFullscreen(!isFullscreen);
   };
 
+  // Handle client login submission
+  const handleClientLogin = () => {
+    const decryptedPassword = clientSettings.clientLogin; // Assume this is decrypted (currently plain for demo)
+    if (password === decryptedPassword) {
+      setClientView(true); // Grant access to protected images
+      setIsModalOpen(false); // Hide login modal
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  };
+
   // Navigate to the slideshow page dynamically based on slug
   const handleViewSlideshow = () => {
     if (slug) {
@@ -102,13 +129,22 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
               size={20}
               onClick={() => navigate("/galleries")} // Navigate back to the galleries page
             />
-            {/* Fullscreen icon is only visible on desktop */}
           </div>
           {enableSlideshow && (
             <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
               View Slideshow
             </button>
           )}
+          {enableClientView &&
+            (clientView ? (
+              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setClientView(false)}>
+                Exit Client View
+              </button>
+            ) : (
+              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+                Client Login
+              </button>
+            ))}
         </div>
       )}
 
@@ -129,6 +165,29 @@ const Gallery = ({ layout = "horizontal", name, imagesFolderUrl, description, sl
               View Slideshow
             </button>
           )}
+          {enableClientView &&
+            (clientView ? (
+              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setClientView(false)}>
+                Exit Client View
+              </button>
+            ) : (
+              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+                Client Login
+              </button>
+            ))}
+        </div>
+      )}
+
+      {/* Modal for client login */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg relative w-3/4 sm:w-1/2 lg:w-1/3">
+            <h2 className="text-center text-lg font-bold mb-4">Client Login</h2>
+            <input type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-gray-300 p-2 rounded mb-4" />
+            <button onClick={handleClientLogin} className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">
+              Submit
+            </button>
+          </div>
         </div>
       )}
     </div>

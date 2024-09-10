@@ -17,6 +17,7 @@ const SingleGallery = () => {
   const { gallerySlug, view } = useParams(); // view can be 'slideshow' or undefined for gallery
   const [imageUrls, setImageUrls] = useState([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [clientView, setClientView] = useState(false); // Manage client view state
 
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect if on mobile
 
@@ -24,11 +25,17 @@ const SingleGallery = () => {
   const gallery = galleryData.find((g) => g.slug === gallerySlug);
 
   useEffect(() => {
-    // Only fetch images if the view is "slideshow" and the gallery exists
     if (gallery && view === "slideshow") {
       const fetchImages = async () => {
-        const urls = await fetchImageUrls(gallery.imagesFolderUrl);
+        let urls = await fetchImageUrls(gallery.imagesFolderUrl);
+
+        // Filter out "protected" images if clientView is false
+        if (!clientView) {
+          urls = urls.filter((url) => !url.includes("protected"));
+        }
+
         setImageUrls(urls);
+
         const imageLoadPromises = urls.map((url) => {
           return new Promise((resolve) => {
             const img = new Image();
@@ -37,13 +44,14 @@ const SingleGallery = () => {
             img.src = url;
           });
         });
+
         await Promise.all(imageLoadPromises);
         setImagesLoaded(true);
       };
 
       fetchImages();
     }
-  }, [gallery, view]);
+  }, [gallery, view, clientView]);
 
   // Handle loading state only for slideshow view
   if (view === "slideshow" && !imagesLoaded && gallery) {
@@ -70,6 +78,8 @@ const SingleGallery = () => {
     layout = DEFAULT_LAYOUT, // Default to "masonry"
     showCover = DEFAULT_SHOW_COVER, // Default to false
     enableSlideshow = DEFAULT_ENABLE_SLIDESHOW, // Default to false
+    enableClientView = false, // Add this to check if client view is enabled
+    clientSettings = {}, // Contains clientLogin and clientMessage
   } = gallery;
 
   // Override layout to "masonry" if on mobile
@@ -91,6 +101,10 @@ const SingleGallery = () => {
         coverImageIndex={coverImageIndex}
         mobileCoverImageIndex={mobileCoverImageIndex}
         slug={gallerySlug}
+        enableClientView={enableClientView} // Pass client view logic
+        clientSettings={clientSettings} // Pass client settings for login
+        clientView={clientView} // Pass client view state to filter protected images
+        setClientView={setClientView} // Function to toggle client view
       />
     );
   }
@@ -105,6 +119,10 @@ const SingleGallery = () => {
       showCover={showCover} // Default to true if not provided
       enableSlideshow={enableSlideshow}
       slug={gallerySlug}
+      enableClientView={enableClientView} // Pass client view logic
+      clientSettings={clientSettings} // Pass client settings for login
+      clientView={clientView} // Pass client view state to filter protected images
+      setClientView={setClientView} // Function to toggle client view
     />
   );
 };

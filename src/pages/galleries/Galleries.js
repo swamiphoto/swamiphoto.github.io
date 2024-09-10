@@ -47,6 +47,11 @@ const galleryData = [
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=1opgh7ky2nU", "https://www.youtube.com/watch?v=hes6FYmLXmQ"],
     },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "happy", // Encrypted password
+      clientMessage: "Welcome to the protected view for Naga and Bharath's hike.",
+    },
   },
   {
     name: "Lavender Fields with Naga",
@@ -71,7 +76,7 @@ const Galleries = () => {
   return (
     <main className="max-w-7xl mx-auto p-4">
       <Hero title="Galleries" showSubNav={false}>
-        <p>A curated collection of galleries showcasing images from client sessions and personal shoots, inlcuding landscapes, portraits, travel, and more.</p>
+        <p>A curated collection of galleries showcasing images from client sessions and personal shoots, including landscapes, portraits, travel, and more.</p>
       </Hero>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
