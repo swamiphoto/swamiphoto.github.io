@@ -76,7 +76,7 @@ const Slideshow = ({
       handlePlayPauseAudio(); // Call this only when the player is ready
       return () => clearInterval(slideshowInterval.current);
     }
-  }, [imagesLoaded, isPlayerReady, imageUrls, slideshowPlaying]); // Add isPlayerReady to the dependency array
+  }, [imagesLoaded, isPlayerReady, imageUrls, slideshowPlaying]);
 
   useEffect(() => {
     if (slideshowPlaying) {

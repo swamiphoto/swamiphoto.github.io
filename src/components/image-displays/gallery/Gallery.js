@@ -20,20 +20,15 @@ const Gallery = ({
   clientSettings = {}, // Contains clientLogin and clientMessage
   clientView = false, // To track whether the user is logged in
   setClientView, // Function to toggle client view
+  imageUrls, // Pass image URLs from parent (SingleGallery)
 }) => {
   const [images, setImages] = useState([]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state for client login
   const [password, setPassword] = useState(""); // Track password input
   const observer = useRef(null);
-  const shuffledImagesRef = useRef(null); // Store the shuffled images to maintain consistency across renders
   const navigate = useNavigate(); // Use navigate for programmatic navigation
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect if user is on mobile
-
-  // Function to shuffle the array of images
-  const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-  };
 
   // Intersection observer to lazy-load images
   useEffect(() => {
@@ -57,20 +52,9 @@ const Gallery = ({
     imgs.forEach((img) => observer.current.observe(img));
   }, [images]);
 
-  // Fetch images and filter out protected images if clientView is not active
   useEffect(() => {
-    const fetchImages = async () => {
-      const urls = await fetchImageUrls(imagesFolderUrl);
-      // Shuffle the images only once and store them in a ref
-      if (!shuffledImagesRef.current) {
-        shuffledImagesRef.current = shuffleArray(urls);
-      }
-      const filteredImages = clientView ? shuffledImagesRef.current : shuffledImagesRef.current.filter((url) => !url.includes("protected"));
-      setImages(filteredImages); // Set the shuffled (and possibly filtered) images
-    };
-
-    fetchImages();
-  }, [imagesFolderUrl, clientView]); // Fetch images when imagesFolderUrl or clientView changes
+    setImages(imageUrls); // Use the image URLs passed from SingleGallery
+  }, [imageUrls]);
 
   // Fullscreen toggle
   const handleToggleFullscreen = () => {
