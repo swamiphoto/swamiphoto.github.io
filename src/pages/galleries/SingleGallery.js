@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { HiOutlineX } from "react-icons/hi"; // Close icon
 import Slideshow from "../../components/image-displays/slideshow/Slideshow";
 import Gallery from "../../components/image-displays/gallery/Gallery";
 import Loading from "../../components/image-displays/slideshow/Loading/Loading";
@@ -80,17 +81,19 @@ const SingleGallery = () => {
     setClientView(false);
   };
 
-  if (view === "slideshow" && enableSlideshow) {
-    const randomYouTubeLink = youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)];
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
-    return (
-      <>
+  return (
+    <>
+      {view === "slideshow" && enableSlideshow ? (
         <Slideshow
           imageUrls={imageUrls}
           layout={slideshowLayout}
           title={gallery.slideshowSettings?.title || gallery.name}
           subtitle={gallery.slideshowSettings?.subtitle || gallery.description}
-          youtubeUrl={randomYouTubeLink}
+          youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
           customDurations={customDurations}
           captions={captions}
           coverImageIndex={coverImageIndex}
@@ -103,46 +106,38 @@ const SingleGallery = () => {
           handleExitClientView={handleExitClientView}
           setIsModalOpen={setIsModalOpen}
         />
-        {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-8 rounded-lg shadow-lg relative w-3/4 sm:w-1/2 lg:w-1/3">
-              <h2 className="text-center text-lg font-bold mb-4">Client Login</h2>
-              <input type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-gray-300 p-2 rounded mb-4" />
-              <button onClick={handleClientLogin} className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">
+      ) : (
+        <Gallery
+          name={gallery.name}
+          description={gallery.description}
+          layout={finalLayout}
+          images={imageUrls}
+          showCover={showCover}
+          enableSlideshow={enableSlideshow}
+          slug={gallerySlug}
+          enableClientView={enableClientView}
+          clientSettings={clientSettings}
+          clientView={clientView}
+          handleClientLogin={handleClientLogin}
+          handleExitClientView={handleExitClientView}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-white bg-opacity-90 flex justify-center items-center z-50">
+          <div className="w-full h-full p-8 relative">
+            <button className="absolute top-4 right-4 text-3xl opacity-70 hover:opacity-100" onClick={closeModal}>
+              <HiOutlineX />
+            </button>
+            <div className="flex flex-col justify-center items-center h-full">
+              <h1 className="text-center mx-auto md:max-w-xl text-2xl  text-gray-800 font-bold mb-10">Client Login</h1>
+
+              <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full max-w-sm border border-gray-300 p-2 mb-4 outline-none focus:outline-none" />
+              <button onClick={handleClientLogin} className="w-full max-w-sm py-2 bg-black text-white font-geist-mono px-10 inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
                 Submit
               </button>
             </div>
-          </div>
-        )}
-      </>
-    );
-  }
-
-  return (
-    <>
-      <Gallery
-        name={gallery.name}
-        description={gallery.description}
-        layout={finalLayout}
-        images={imageUrls}
-        showCover={showCover}
-        enableSlideshow={enableSlideshow}
-        slug={gallerySlug}
-        enableClientView={enableClientView}
-        clientSettings={clientSettings}
-        clientView={clientView}
-        handleClientLogin={handleClientLogin}
-        handleExitClientView={handleExitClientView}
-        setIsModalOpen={setIsModalOpen}
-      />
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg relative w-3/4 sm:w-1/2 lg:w-1/3">
-            <h2 className="text-center text-lg font-bold mb-4">Client Login</h2>
-            <input type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-gray-300 p-2 rounded mb-4" />
-            <button onClick={handleClientLogin} className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">
-              Submit
-            </button>
           </div>
         </div>
       )}
