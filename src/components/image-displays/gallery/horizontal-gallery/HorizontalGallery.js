@@ -69,7 +69,7 @@ const HorizontalGallery = ({ name, images, description, showCover = true }) => {
 
   return (
     <div
-      className="horizontal-gallery h-screen flex overflow-hidden bg-gray-500"
+      className="horizontal-gallery h-screen flex overflow-hidden "
       onWheel={handleWheel}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
