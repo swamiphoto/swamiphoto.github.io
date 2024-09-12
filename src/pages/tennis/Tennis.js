@@ -5,7 +5,7 @@ import Hero from "../../components/hero/Hero";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Tennis = () => {
-  useDarkenOnScroll();
+  // useDarkenOnScroll();
 
   const allPhotos = [
     IMAGES.tennis.federer.fed1,

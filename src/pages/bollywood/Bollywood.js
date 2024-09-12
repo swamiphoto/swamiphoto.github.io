@@ -6,7 +6,7 @@ import Hero from "../../components/hero/Hero";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Bollywood = () => {
-  useDarkenOnScroll();
+  // useDarkenOnScroll();
 
   const allPhotos = [
     IMAGES.bollywood.katrina,

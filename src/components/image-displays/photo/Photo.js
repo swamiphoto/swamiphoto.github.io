@@ -61,9 +61,9 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
           />
         </div>
       </div>
-      <div className={`w-full xl:w-1/3 p-6 xl:pt-20 text-left font-medium font-geist-mono ${textColorClass}`}>
-        <p className={`text-2xl font-bold ${textColorClass}`}>{title}</p>
-        <p className={`text-lg mt-3 ${textColorClass}`}>{caption}</p>
+      <div className={`w-full xl:w-1/3 p-6 xl:pt-20 text-left`}>
+        <p className={`text-2xl font-bold`}>{title}</p>
+        <p className={`text-lg mt-3`}>{caption}</p>
       </div>
     </div>
   );

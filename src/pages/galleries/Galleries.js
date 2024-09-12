@@ -25,7 +25,7 @@ const galleryData = [
     enableClientView: true,
     clientSettings: {
       clientLogin: "rattlesnake", // Encrypted password
-      clientMessage: "Hello Naga & Bharath, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls. Let me know your favorites!",
+      clientMessage: "Hello Naga & Bharath, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
     },
   },
   {
@@ -43,7 +43,7 @@ const galleryData = [
     enableClientView: true,
     clientSettings: {
       clientLogin: "wisteria", // Encrypted password
-      clientMessage: "Hello Naga, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls. Let me know your favorites!",
+      clientMessage: "Hello Naga, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
     },
   },
   {
@@ -90,7 +90,7 @@ const Galleries = () => {
             <div className="relative overflow-hidden shadow-lg">
               <img src={gallery.thumbnailUrl} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
             </div>
-            <p className="text-center mt-2 text-md font-geist-mono tracking-tighter text-gray-600">{gallery.name}</p>
+            <p className="text-center mt-2 text-md tracking-tighter text-gray-600">{gallery.name}</p>
           </Link>
         ))}
       </div>

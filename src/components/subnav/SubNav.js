@@ -20,10 +20,10 @@ const SubNav = () => {
 
   return (
     <div>
-      <ul className="hidden md:flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-geist-mono">
+      <ul className="hidden md:flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-medium text-gray-500">
         {navLinks.map((link, index) => (
           <li key={index}>
-            <a className={`text-gray-800 transition hover:text-gray-900 font-medium ${location.pathname === link.path ? "text-red-500" : ""}`} href={link.path}>
+            <a className={`${location.pathname === link.path ? "text-gray-900 underline" : ""}`} href={link.path}>
               {link.name}
             </a>
           </li>

@@ -6,7 +6,7 @@ import Hero from "../../components/hero/Hero";
 import { useDarkenOnScroll } from "../../hooks/useDarkenOnScroll";
 
 const Prints = () => {
-  useDarkenOnScroll();
+  // useDarkenOnScroll();
 
   return (
     <main className="max-w-7xl mx-auto">

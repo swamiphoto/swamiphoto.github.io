@@ -58,7 +58,7 @@ function App() {
   return (
     <ScrollProvider>
       <Router>
-        <div className="App">
+        <div className="App text-center">
           <MainContent />
         </div>
       </Router>

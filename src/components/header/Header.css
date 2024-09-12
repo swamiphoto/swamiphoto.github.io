@@ -1,8 +1,3 @@
-.active-link {
-  color: #000;
-  font-weight: 500;
-}
-
 .header .menu-toggle {
   display: none;
   align-items: center;
@@ -25,20 +20,6 @@
 }
 
 .header .nav ul li a {
-  @apply text-2xl md:text-base;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1s ease-in;
 }
 
 /* Ensure visibility on mobile */

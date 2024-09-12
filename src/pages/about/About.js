@@ -5,7 +5,7 @@ import IMAGES from "../../common/images";
 const About = () => {
   return (
     <div className="underlined-links min-h-screen">
-      <div className="mx-auto max-w-2xl space-y-6 text-left text-lg">
+      <div className="mx-auto max-w-2xl space-y-6 text-left text-xl">
         <h2 className="text-2xl font-bold mt-20 mb-6">Hello friends.</h2>
 
         <p>
@@ -67,7 +67,7 @@ const About = () => {
         <p className="font-bold">
           Swami Venkataramani
           <br />
-          <a href="mailto:swami@swamiphoto.com" className="text-gray-500 font-normal">
+          <a href="mailto:swami@swamiphoto.com" className="font-normal">
             swami@swamiphoto.com
           </a>
         </p>

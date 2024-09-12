@@ -135,21 +135,12 @@
 
 body {
   margin: 0;
-  font-family: "Geist", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  @apply font-serif text-gray-900 antialiased text-base;
   scroll-behavior: smooth;
-  @apply bg-gray-200;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 a {
-  @apply text-gray-800 hover:underline;
+  @apply hover:underline;
 }
 
 .underlined-links a {

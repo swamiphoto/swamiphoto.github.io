@@ -71,7 +71,7 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
   return (
     <div className={`gallery-container relative h-screen`}>
       {isMobile && (
-        <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-300 z-50">
+        <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-100 z-50">
           <div className="flex items-center space-x-4">
             <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => navigate("/galleries")} />
           </div>
@@ -79,17 +79,17 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
             {" "}
             {/* Align to the right */}
             {enableSlideshow && (
-              <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
+              <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer text-base font-medium">
                 View Slideshow
               </button>
             )}
             {enableClientView &&
               (clientView ? (
-                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
+                <button className="hover:text-red-500 cursor-pointer text-base font-medium" onClick={handleExitClientView}>
                   Exit Client View
                 </button>
               ) : (
-                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+                <button className="hover:text-red-500 cursor-pointer text-base font-medium" onClick={() => setIsModalOpen(true)}>
                   Client Login
                 </button>
               ))}
@@ -100,21 +100,21 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
       <div>{layout === "masonry" ? <MasonryGallery name={name} images={images} description={description} showCover={showCover} /> : <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />}</div>
 
       {!isMobile && (
-        <div className="fixed bottom-10 left-10 flex space-x-4 bg-white bg-opacity-40 p-3 shadow-md rounded-lg z-50">
+        <div className="fixed bottom-10 left-10 flex space-x-4 bg-white bg-opacity-80 p-3 shadow-md rounded-lg z-50">
           <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => navigate("/galleries")} />
           {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
           {enableSlideshow && (
-            <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer tracking-wider text-sm">
+            <button onClick={handleViewSlideshow} className="hover:text-red-500 cursor-pointer text-base font-medium">
               View Slideshow
             </button>
           )}
           {enableClientView &&
             (clientView ? (
-              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
+              <button className="hover:text-red-500 cursor-pointer text-base font-medium" onClick={handleExitClientView}>
                 Sign Out
               </button>
             ) : (
-              <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+              <button className="hover:text-red-500 cursor-pointer text-base font-medium" onClick={() => setIsModalOpen(true)}>
                 Client Login
               </button>
             ))}

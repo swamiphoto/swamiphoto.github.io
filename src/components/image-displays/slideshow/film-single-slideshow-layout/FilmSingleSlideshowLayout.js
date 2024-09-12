@@ -58,7 +58,7 @@ const FilmSingleSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning
             {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
               <div className="absolute top-10 left-4 w-3/5 p-5">
                 <div
-                  className="text-left bg-yellow-200 font-geist-mono shadow-lg transform rotate-1"
+                  className="text-left bg-yellow-200 font-mono shadow-lg transform rotate-1"
                   style={{
                     backgroundImage: "url('images/paper2.jpg')",
                     backgroundSize: "cover",

@@ -17,7 +17,7 @@ const KenBurnsSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning, 
             {captions[index] && (
               <div className="absolute bottom-10 left-4 w-3/5 p-5">
                 <div
-                  className="text-left bg-yellow-200 font-geist-mono shadow-lg transform"
+                  className="text-left bg-yellow-200 font-mono shadow-lg transform"
                   style={{
                     backgroundImage: "url('images/paper2.jpg')",
                     backgroundSize: "cover",

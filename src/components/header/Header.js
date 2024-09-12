@@ -14,42 +14,42 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const linkStyle = (path) => (location.pathname === path ? "font-bold underline" : "text-gray-500");
+  const linkStyle = (path) => (location.pathname === path ? "text-gray-900 underline" : "");
 
   const { isScrolled } = useScrollContext();
 
   return (
     <header className="w-full header">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 w-full">
-        <a className="block text-teal-600" href="/">
-          <img src="logo.png" alt="Logo" className="h-4" />
+        <a className="block mt-10" href="/">
+          <img src="logo1.png" alt="Logo" className="h-16" />
         </a>
         <div className="flex items-center">
           <nav aria-label="Global" className={`${isMenuOpen ? "block" : "hidden"} nav fixed inset-0 bg-gray-100 z-30 md:relative md:block md:bg-transparent`}>
             <TfiClose onClick={toggleMenu} className={`h-5 w-5 absolute top-5 right-5 transition-opacity md:hidden ${isMenuOpen ? "opacity-100" : "opacity-0"}`} />
-            <ul className="flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto">
+            <ul className="flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-medium text-gray-500">
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/")}`} href="/">
+                <a className={`${linkStyle("/")}`} href="/">
                   Portfolio
                 </a>
               </li>
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/galleries")}`} href="/galleries">
+                <a className={`${linkStyle("/galleries")}`} href="/galleries">
                   Galleries
                 </a>
               </li>
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/wallprints")}`} href="/wallprints">
+                <a className={`${linkStyle("/wallprints")}`} href="/wallprints">
                   Wall Prints
                 </a>
               </li>
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/podcast")}`} href="https://swamiphoto.substack.com" target="_blank" rel="noreferrer">
+                <a className={`${linkStyle("/podcast")}`} href="https://swamiphoto.substack.com" target="_blank" rel="noreferrer">
                   Podcast
                 </a>
               </li>
               <li>
-                <a className={`transition hover:text-gray-900 font-medium ${linkStyle("/about")}`} href="/about">
+                <a className={`${linkStyle("/about")}`} href="/about">
                   About
                 </a>
               </li>

@@ -4,8 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Geist"', "ui-sans-serif", "system-ui"],
-        "geist-mono": ['"Geist Mono"', "monospace"], // Adding Geist Mono
+        sans: ["neue-haas-unica, sans-serif", "ui-sans-serif", "system-ui"],
+        mono: ["Geist Mono", "monospace"],
+        serif: ['"Cormorant Garamond", serif'],
       },
       fontWeight: {
         normal: 400,
@@ -17,6 +18,9 @@ module.exports = {
         // You can add extra weight if you have them for Geist Mono
         extrabold: 800, // Example, adjust according to your font files
         black: 900, // Example, adjust according to your font files
+      },
+      fontSize: {
+        base: "1.3em",
       },
       keyframes: {
         flip: {

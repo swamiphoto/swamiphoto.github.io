@@ -87,7 +87,7 @@ const HorizontalGallery = ({ name, images, description, showCover = true }) => {
           <div className="relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
             <h1 className="text-4xl font-bold mb-2">{name}</h1>
             <p className="text-lg mb-6">{description}</p>
-            <button onClick={handleStartClick} className="text-gray-900 bg-white px-10 py-3 hover:bg-gray-400 transition-colors duration-1000 uppercase font-geist-mono tracking-wider">
+            <button onClick={handleStartClick} className="text-gray-900 bg-white px-10 py-3 hover:bg-gray-400 transition-colors duration-1000 uppercase font-mono tracking-wider">
               View Gallery
             </button>
           </div>
