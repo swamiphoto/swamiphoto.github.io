@@ -199,20 +199,20 @@ const Slideshow = ({
             {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           </div>
 
-          <div className="ml-auto flex space-x-4">
+          <div className="ml-auto flex space-x-4 text-sm">
             {" "}
             {/* Align to the right */}
             {enableClientView &&
               (clientView ? (
-                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={handleExitClientView}>
+                <button className="hover:text-red-500 cursor-pointer" onClick={handleExitClientView}>
                   Exit Client View
                 </button>
               ) : (
-                <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => setIsModalOpen(true)}>
+                <button className="hover:text-red-500 cursor-pointer" onClick={() => setIsModalOpen(true)}>
                   Client Login
                 </button>
               ))}
-            <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
+            <button className="hover:text-red-500 cursor-pointer" onClick={() => navigate(`/galleries/${slug}`)}>
               Exit Slideshow
             </button>
           </div>
@@ -232,16 +232,16 @@ const Slideshow = ({
 
           {enableClientView &&
             (clientView ? (
-              <button className=" hover:text-red-500 text-sm" onClick={handleExitClientView}>
+              <button className=" hover:text-red-500" onClick={handleExitClientView}>
                 Sign Out
               </button>
             ) : (
-              <button className="hover:text-red-500 text-sm" onClick={() => setIsModalOpen(true)}>
+              <button className="hover:text-red-500" onClick={() => setIsModalOpen(true)}>
                 Client Login
               </button>
             ))}
 
-          <button className="hover:text-red-500 cursor-pointer tracking-wider text-sm" onClick={() => navigate(`/galleries/${slug}`)}>
+          <button className="hover:text-red-500 cursor-pointer" onClick={() => navigate(`/galleries/${slug}`)}>
             Exit Slideshow
           </button>
         </div>

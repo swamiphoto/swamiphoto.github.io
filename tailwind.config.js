@@ -20,7 +20,7 @@ module.exports = {
         black: 900, // Example, adjust according to your font files
       },
       fontSize: {
-        base: "1.3em",
+        base: "19.5px",
       },
       keyframes: {
         flip: {
