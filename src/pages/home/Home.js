@@ -1,63 +1,84 @@
-import React from "react";
-import Hero from "../../components/hero/Hero";
-import Photo from "../../components/image-displays/photo/Photo";
-import Photos from "../../components/image-displays/photos/Photos";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import IMAGES from "../../common/images";
 import "./Home.css";
 
 const Home = () => {
-  const allPhotos = [
-    IMAGES.landscapes.comet,
-    IMAGES.landscapes.astro,
-    IMAGES.landscapes.mac,
-    IMAGES.landscapes.fog,
-    IMAGES.landscapes.paris,
-    IMAGES.landscapes.hotcreek,
-    IMAGES.landscapes.falltrees,
-    IMAGES.landscapes.fuzzyfall,
-    IMAGES.landscapes.ghost,
-    IMAGES.landscapes.walton,
-    IMAGES.landscapes.kerala,
-    IMAGES.landscapes.pastel,
-    IMAGES.landscapes.alviso,
-    IMAGES.landscapes.alviso2,
-    IMAGES.landscapes.kerala2,
-  ];
+  const navigate = useNavigate();
+
+  const desktopImages = [IMAGES.landscapes.mac, IMAGES.landscapes.fog, IMAGES.landscapes.pastel];
+
+  const mobileImages = [IMAGES.landscapes.comet, IMAGES.landscapes.astro, IMAGES.landscapes.falltrees];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [images, setImages] = useState(window.innerWidth < 768 ? mobileImages : desktopImages);
+
+  useEffect(() => {
+    // Update images based on screen width
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setImages(mobileImages);
+      } else {
+        setImages(desktopImages);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [desktopImages, mobileImages]);
+
+  useEffect(() => {
+    // Change image every 10 seconds
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    }, 10000); // 10000ms = 10 seconds
+
+    return () => clearInterval(interval);
+  }, [images]);
+
+  const handleButtonClick = () => {
+    navigate("/landscapes");
+  };
 
   return (
-    <main className="max-w-7xl mx-auto">
-      <Hero title="Landscapes">
-        <p>
-          A collection of my best work, you could say. My heart has always been in <a href="/landscapes">landscapes</a> and nature, but I also enjoy shooting <a href="/portraits">portraits</a>.{" "}
-        </p>
-      </Hero>
-
-      <Photos layout="verticalPair">
-        <Photo src={IMAGES.landscapes.comet} alt="Photo 1" allPhotos={allPhotos} />
-        <Photo src={IMAGES.landscapes.astro} alt="Photo 2" allPhotos={allPhotos} />
-      </Photos>
-
-      <Photo src={IMAGES.landscapes.mac} alt="Mac" allPhotos={allPhotos} />
-      <Photo src={IMAGES.landscapes.fog} alt="Fog" allPhotos={allPhotos} />
-      <Photo src={IMAGES.landscapes.paris} alt="Paris" allPhotos={allPhotos} />
-
-      <Photos layout="verticalPair">
-        <Photo src={IMAGES.landscapes.hotcreek} alt="Hot Creek" allPhotos={allPhotos} />
-        <Photo src={IMAGES.landscapes.falltrees} alt="Fall Trees" allPhotos={allPhotos} />
-      </Photos>
-
-      <Photo src={IMAGES.landscapes.fuzzyfall} alt="Fuzzy Fall" allPhotos={allPhotos} />
-      <Photo src={IMAGES.landscapes.ghost} alt="Ghost" allPhotos={allPhotos} />
-
-      <Photos layout="verticalPair">
-        <Photo src={IMAGES.landscapes.walton} alt="Walton" allPhotos={allPhotos} />
-        <Photo src={IMAGES.landscapes.kerala} alt="Kerala" allPhotos={allPhotos} />
-      </Photos>
-
-      <Photo src={IMAGES.landscapes.pastel} alt="Pastel" allPhotos={allPhotos} />
-      <Photo src={IMAGES.landscapes.alviso} alt="Alviso" allPhotos={allPhotos} />
-      <Photo src={IMAGES.landscapes.alviso2} alt="Alviso 2" allPhotos={allPhotos} />
-      <Photo src={IMAGES.landscapes.kerala2} alt="Kerala 2" allPhotos={allPhotos} />
+    <main>
+      <div className="relative h-screen overflow-hidden">
+        {/* Apply the Ken Burns animation to this parent div */}
+        <div className="absolute top-0 left-0 w-full h-full kenburns-animation">
+          {images.map((image, index) => (
+            <div key={index} className={`absolute top-0 left-0 w-full h-full bg-cover bg-center transition-opacity duration-[5000ms] ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `url(${image})` }}></div>
+          ))}
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex flex-col justify-center items-center text-white px-5">
+          <div className="text-center pt-10 md:pt-20 mb-10 px-6">
+            <h1 className="mx-auto md:max-w-3xl text-4xl md:text-6xl font-bold mb-2">Swami Venkataramani</h1>
+            <div className="mx-auto max-w-2xl md:text-2xl mb-8 mt-5 tracking-tight">
+              <p>
+                I’m an{" "}
+                <a href="https://www.linkedin.com/in/swamiphoto/" target="_blank" rel="noopener noreferrer" className="underline">
+                  engineer
+                </a>
+                ,{" "}
+                <a href="https://dribbble.com/swamiphoto/" target="_blank" rel="noopener noreferrer" className="underline">
+                  designer
+                </a>
+                , and photographer. My heart has always been in{" "}
+                <button className="underline text-white focus:outline-none" onClick={handleButtonClick}>
+                  landscapes
+                </button>{" "}
+                and nature, but I also enjoy{" "}
+                <button className="underline text-white focus:outline-none" onClick={() => navigate("/portraits")}>
+                  portraits
+                </button>
+                .
+              </p>
+            </div>
+            <button onClick={handleButtonClick} className="px-8 py-4 bg-white text-black font-bold opacity-70 hover:opacity-95 uppercase tracking-wider cursor-pointer">
+              View My Work
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };
