@@ -26,17 +26,9 @@ const Home = () => {
 
   return (
     <main className="max-w-7xl mx-auto">
-      <Hero title="Hi, I'm Swami.">
+      <Hero title="Landscapes">
         <p>
-          I’m an{" "}
-          <a href="https://www.linkedin.com/in/swamiphoto/" target="_blank" rel="noopener noreferrer">
-            engineer
-          </a>
-          ,{" "}
-          <a href="https://dribbble.com/swamiphoto/" target="_blank" rel="noopener noreferrer">
-            designer
-          </a>
-          , and photographer. My heart has always been in <a href="/landscapes">landscapes</a> and nature, but I also enjoy <a href="/portraits">portraits</a>.{" "}
+          A collection of my best work, you could say. My heart has always been in <a href="/landscapes">landscapes</a> and nature, but I also enjoy shooting <a href="/portraits">portraits</a>.{" "}
         </p>
       </Hero>
 
