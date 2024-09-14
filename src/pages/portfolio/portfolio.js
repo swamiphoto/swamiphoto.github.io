@@ -94,8 +94,8 @@ const Portfolio = () => {
 
       <Text>
         <p>
-          A lot of photographers stick to one genre, but I’ve always struggled with that. My heart is in landscapes and nature—there’s something about capturing portraits I really love. There's a unique connection and story that comes with every person I photograph, and that’s something I don’t want
-          to give up. So my portfolio is a mixed bag of serene landscapes and beautiful people!
+          A lot of photographers stick to one genre, but I’ve always struggled with that. My heart is in landscapes and nature, but there’s something about capturing portraits I really love. It's the unique connection and story that comes with every person and family I photograph, and that’s
+          something I cannot give up. So my portfolio is a mix of landscapes, portraits, and other genres I’ve dabbled in over the years.
         </p>
       </Text>
 
