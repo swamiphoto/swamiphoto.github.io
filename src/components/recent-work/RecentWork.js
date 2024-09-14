@@ -8,17 +8,15 @@ const RecentWork = () => {
     <section className="py-12">
       <SectionHeader title="Recent Work" description="Here's some of my latest work" />
 
-      <Photo src={IMAGES.landscapes.mac} caption="My attempt at recreating the scene from one of the iconic Mac wallpapers" />
+      <Photo src="https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500885-Edit-Edit.jpg" caption="Sunflowers with Naga" />
 
-      <Photo src={IMAGES.landscapes.gateway} caption="Capturing the majestic Gateway Arch during sunset." />
+      <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/japan/DSC00179-Edit-4.jpg" caption="Bamboo Forest" />
 
-      <Photo src={IMAGES.portraits.amrita} caption="A serene portrait of Amrita in natural light." />
+      <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/japan/DSC00324-Enhanced-NR.jpg" caption="Fushimi Inari Taisha" />
 
-      <Photo src={IMAGES.landscapes.fog} caption="A foggy morning over the rolling hills, perfect for contemplation." />
+      <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg" caption="The most beautiful bridge covered in fog" />
 
-      <Photo src={IMAGES.portraits.naga} caption="Portrait of Naga under a golden hour light." />
-
-      <Photo src={IMAGES.bollywood.katrina} caption="Capturing Katrina's stunning performance at a concert." />
+      <Photo src="https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501496.jpg" caption="One of my favorite mother and son portraits" />
     </section>
   );
 };

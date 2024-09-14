@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Podcast from "../../components/podcast/Podcast";
 import RecentWork from "../../components/recent-work/RecentWork";
+import WiggleLine from "../../components/wiggle-line/WiggleLine";
 
 const Portfolio = () => {
   const baseSettings = {
@@ -25,10 +26,10 @@ const Portfolio = () => {
 
   const categories = [
     {
-      name: "Landscapes",
+      name: "Landscapes & Cities",
       description:
         "Landscapes have always been at the heart of my photography. There’s something deeply inspiring about capturing the vast beauty of nature—from towering mountains to serene valleys. Standing in front of grand landscapes is a humbling experience, and each scene I capture often reflects my mood in that moment.",
-      images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.gateway],
+      images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.bbridge],
       link: "/portfolio/landscapes",
       autoplaySpeed: 4000,
     },
@@ -42,7 +43,7 @@ const Portfolio = () => {
     {
       name: "Bollywood",
       description: "I was fortunate to shoot some talented Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it here. Hope you enjoy this collection.",
-      images: [IMAGES.bollywood.katrina, IMAGES.bollywood.glamour, IMAGES.bollywood.dance],
+      images: [IMAGES.bollywood.katrina, IMAGES.bollywood.katrina2, IMAGES.bollywood.nargis3],
       link: "/portfolio/bollywood",
       autoplaySpeed: 5000,
     },
@@ -95,7 +96,14 @@ const Portfolio = () => {
       <Testimonial {...testimonialsData[0]} />
 
       <Photo src={IMAGES.landscapes.fog} caption="National Geographic Editor's Favorite" captionDesign="design2" />
-      <Photo src={IMAGES.landscapes.gateway} caption="Official backdrop at the Social Media Week conference in Mumbai" captionDesign="design2" />
+      <Photo src={IMAGES.landscapes.gateway} caption="This image was chosen as the official backdrop for the Social Media Week conference in Mumbai." captionDesign="design2" />
+
+      <Photo
+        src="https://storage.googleapis.com/swamiphoto/photos/recent/aurora2.jpg"
+        layout="print"
+        title="Auoara Borealis in California"
+        caption="Who would’ve thought you could see the Aurora in California? As soon as I heard it was possible, I grabbed a few friends, and we dashed to Livermore to capture this rare, once-in-a-blue-moon shot. SFGATE featured this image in their publication the next morning."
+      />
 
       <Text>
         <p>
@@ -137,6 +145,7 @@ const Portfolio = () => {
 
       {/* <Podcast /> */}
       <RecentWork />
+      <WiggleLine />
     </main>
   );
 };
