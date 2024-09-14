@@ -14,7 +14,7 @@ import Lightbox from "./components/image-displays/lightbox/Lightbox";
 import Galleries, { galleryData } from "./pages/galleries/Galleries";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import "./App.css";
-import Landscapes from "./pages/landscapes/Landscapes";
+import Landscapes from "./pages/landscapes/landscapes";
 import Portfolio from "./pages/portfolio/Portfolio";
 
 // Define noHeaderPaths for galleries and other pages
