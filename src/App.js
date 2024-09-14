@@ -15,7 +15,7 @@ import Galleries, { galleryData } from "./pages/galleries/Galleries";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import "./App.css";
 import Landscapes from "./pages/landscapes/landscapes";
-import Portfolio from "./pages/portfolio/Portfolio";
+import Portfolio from "./pages/portfolio/portfolio";
 
 // Define noHeaderPaths for galleries and other pages
 const otherNoHeaderPaths = ["/"];
