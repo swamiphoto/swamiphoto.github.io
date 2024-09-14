@@ -40,7 +40,7 @@ const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false
   // Layout 2: Optional Image
   if (layout === "layout2") {
     return (
-      <section className="bg-white px-6 lg:px-8 sm:py-16 sm:pb-24">
+      <section className="bg-white px-6 lg:px-8 py-16 pb-24">
         <WiggleLine />
         <figure className="mx-auto max-w-2xl text-center">
           <blockquote className="mt-10 text-xl font-semibold leading-8 tracking-tight text-gray-900 sm:text-2xl sm:leading-9">

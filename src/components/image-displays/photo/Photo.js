@@ -39,9 +39,9 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
   // Function to render caption based on design
   const renderCaption = () => {
     if (captionDesign === "design1") {
-      return <p className={`my-4 font-medium text-xl italic`}>{caption}</p>;
+      return <p className={`my-4 font-medium text-sm md:text-xl italic max-w-3xl mx-auto`}>{caption}</p>;
     } else if (captionDesign === "design2") {
-      return <p className={`my-4 font-semibold text-lg tracking-widest uppercase text-red-700`}>{caption}</p>;
+      return <p className={`my-4 font-bold text-sm md:text-lg tracking-widest uppercase text-red-600 max-w-3xl mx-auto`}>{caption}</p>;
     }
     return null;
   };

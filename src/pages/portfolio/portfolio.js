@@ -7,6 +7,7 @@ import Photos from "../../components/image-displays/photos/Photos";
 import Hero from "../../components/hero/Hero";
 import Testimonial from "../../components/testimonial/Testimonial";
 import Text from "../../components/text/Text";
+import SectionHeader from "../../components/section-header/SectionHeader";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -82,12 +83,16 @@ const Portfolio = () => {
         </p>
       </Hero>
 
-      <Photo src={IMAGES.landscapes.mac} caption="A breathtaking view of the mountains during sunrise." />
-      <Photo src={IMAGES.landscapes.paris} caption="Capturing emotions through the lens." />
+      <Photo src={IMAGES.landscapes.mac} caption="My attempt at recreating the scene from one of the iconic Mac wallpapers" />
+      <Photo
+        src={IMAGES.landscapes.paris}
+        caption="Sometimes, the best shots are the ones you don’t plan for. I started at Trocadéro for a sunrise shot, but the clouds were too thick. On my way back, the clouds suddenly broke, and I noticed the sun streaks. I quickly grabbed my camera and took this handheld shot."
+      />
 
       <Testimonial {...testimonialsData[0]} />
 
       <Photo src={IMAGES.landscapes.fog} caption="National Geographic Editor's Favorite" captionDesign="design2" />
+      <Photo src={IMAGES.landscapes.gateway} caption="Official backdrop at the Social Media Week conference in Mumbai" captionDesign="design2" />
 
       <Text>
         <p>
@@ -99,7 +104,6 @@ const Portfolio = () => {
       <section className="pt-12">
         {categories.map((category, index) => (
           <div key={category.name} className={`flex flex-col md:flex-row ${index % 2 === 1 ? "md:flex-row-reverse" : ""} mb-12`}>
-            {/* Use overflow-hidden and bg-white for containers */}
             <div className="md:w-2/3 overflow-hidden bg-white">
               <Slider {...{ ...baseSettings, autoplaySpeed: category.autoplaySpeed }}>
                 {category.images.map((image, imgIndex) => (
