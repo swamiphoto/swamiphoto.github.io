@@ -130,26 +130,6 @@ const Portfolio = () => {
 
       <Testimonial {...testimonialsData[2]} />
 
-      <section className="py-12">
-        {categories.map((category, index) => (
-          <div key={category.name} className={`flex flex-col md:flex-row ${index % 2 === 1 ? "md:flex-row-reverse" : ""} mb-12`}>
-            <div className="md:w-2/3">
-              <Slider {...settings}>
-                {category.images.map((image, imgIndex) => (
-                  <img key={imgIndex} src={image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg" />
-                ))}
-              </Slider>
-            </div>
-            <div className="md:w-1/3 flex flex-col justify-center p-10 text-left">
-              <Link to={category.link} className="no-underline">
-                <h2 className="text-3xl md:text-5xl font-bold mb-4 hover:opacity-75 transition-opacity duration-300">{category.name}</h2>
-                <p className="text-xl hover:opacity-75 transition-opacity duration-300">{category.description}</p>
-              </Link>
-            </div>
-          </div>
-        ))}
-      </section>
-
       <Photo src={IMAGES.bollywood.atif} alt="Photo 1" />
     </main>
   );
