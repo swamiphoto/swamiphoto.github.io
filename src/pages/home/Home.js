@@ -37,7 +37,7 @@ const Home = () => {
   }, [images]);
 
   const handleButtonClick = () => {
-    navigate("/landscapes");
+    navigate("/portfolio");
   };
 
   return (

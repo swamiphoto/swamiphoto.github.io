@@ -1,33 +1,71 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
+import WiggleLine from "../wiggle-line/WiggleLine";
 
-const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false }) => {
+const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false, layout = "layout1" }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
     rootMargin: "-20px",
   });
 
-  const orderClasses = reverse ? "md:flex-row-reverse" : "md:flex-row";
-  const animationClass = inView ? (reverse ? "animate-rotateRight" : "animate-rotateLeft") : "";
+  // Layout 1: Image on the left with fixed spacing regardless of image height
+  if (layout === "layout1") {
+    const animationClass = inView ? "animate-fadeIn" : "";
 
-  return (
-    <div ref={ref} className={`${animationClass} bg-gray-100 flex flex-col md:flex-row w-full md:w-9/12 mx-auto items-center overflow-hidden p-4 md:p-6 mb-8 rounded-xl border border-gray-300 ${orderClasses}`}>
-      {/* Image container */}
-      <div className="flex-shrink-0 mx-10 mb-4 md:mb-0" style={{ width: "300px", height: "300px" }}>
-        {" "}
-        {/* Adjust the width and height to be equal */}
-        <img src={imageSrc} alt={altText} className="w-full h-full object-cover rounded-full" />
-      </div>
+    return (
+      <div ref={ref} className={`flex flex-col md:flex-row w-full md:w-9/12 mx-auto items-center overflow-hidden p-4 md:p-6 mb-8 rounded-xl ${animationClass}`}>
+        {/* Image on the Left with fixed spacing */}
+        <div className="flex-shrink-0 mr-[20px]">
+          <img
+            src={imageSrc}
+            alt={altText}
+            className="w-auto h-full object-cover rounded" // You can adjust the height here, and the gap will remain 20px
+          />
+        </div>
 
-      {/* Text content */}
-      <div className={`flex-grow font-serif text-center italic md:text-left ${reverse ? "md:pl-9" : "md:pr-9"}`}>
-        <p className="text-xl">{testimony}</p>
-        <p className="mt-4 font-semibold text-2xl">{name}</p>
-        <p className="text-gray-500 text-lg">{role}</p>
+        {/* Text content aligned center with the image */}
+        <div className="flex-grow text-left flex flex-col justify-center">
+          <p className="text-lg leading-7 tracking-tight text-gray-900 sm:text-xl sm:leading-8">{testimony}</p>
+          {/* Name and Role below */}
+          <div className="mt-4">
+            <p className="font-semibold text-lg text-gray-900">{name}</p>
+            <p className="text-gray-600 text-base">{role}</p>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  // Layout 2: Optional Image
+  if (layout === "layout2") {
+    return (
+      <section className="bg-white px-6 lg:px-8 sm:py-16">
+        <WiggleLine />
+        <figure className="mx-auto max-w-2xl text-center">
+          <blockquote className="mt-10 text-xl font-semibold leading-8 tracking-tight text-gray-900 sm:text-2xl sm:leading-9">
+            <p>{testimony}</p>
+          </blockquote>
+
+          <figcaption className="mt-10 flex items-center justify-center space-x-6">
+            {/* Image, if provided */}
+            {imageSrc && (
+              <div className="h-16 w-16 flex-shrink-0">
+                <img alt={altText} src={imageSrc} className="h-full w-full object-cover rounded-full" />
+              </div>
+            )}
+            {/* Name and Role - Always present */}
+            <div className="text-center">
+              <div className="font-semibold text-2xl text-gray-500">— {name}</div>
+              <div className="mt-0.5 text-gray-600">{role}</div>
+            </div>
+          </figcaption>
+        </figure>
+      </section>
+    );
+  }
+
+  return null; // Default if no layout is selected
 };
 
 export default Testimonial;

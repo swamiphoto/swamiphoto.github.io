@@ -8,10 +8,9 @@ const SubNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const navLinks = [
-    { name: "Landscapes", path: "/" },
-    { name: "Portraits", path: "/portraits" },
-    { name: "Bollywood", path: "/bollywood" },
-    { name: "Tennis", path: "/tennis" },
+    { name: "Landscapes", path: "/portfolio/landscapes" },
+    { name: "Portraits", path: "/portfolio/portraits" },
+    { name: "Bollywood", path: "/portfolio/bollywood" },
   ];
 
   const handleChange = (value) => {

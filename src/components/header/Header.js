@@ -29,7 +29,7 @@ const Header = () => {
             <TfiClose onClick={toggleMenu} className={`h-5 w-5 absolute top-5 right-5 transition-opacity md:hidden ${isMenuOpen ? "opacity-100" : "opacity-0"}`} />
             <ul className="flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-medium text-gray-500">
               <li>
-                <a className={`${linkStyle("/")}`} href="/">
+                <a className={`${linkStyle("/portfolio")}`} href="/portfolio">
                   Portfolio
                 </a>
               </li>

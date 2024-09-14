@@ -14,7 +14,8 @@ import Lightbox from "./components/image-displays/lightbox/Lightbox";
 import Galleries, { galleryData } from "./pages/galleries/Galleries";
 import { ScrollProvider } from "./hooks/ScrollContext";
 import "./App.css";
-import Landscapes from "./pages/landscapes/landscapes";
+import Landscapes from "./pages/landscapes/Landscapes";
+import Portfolio from "./pages/portfolio/Portfolio";
 
 // Define noHeaderPaths for galleries and other pages
 const otherNoHeaderPaths = ["/"];
@@ -38,10 +39,11 @@ const MainContent = () => {
       <div className={`${isNoHeaderPath ? "" : "px-4 md:px-0"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/landscapes" element={<Landscapes />} />
-          <Route path="/portraits" element={<Portraits />} />
-          <Route path="/bollywood" element={<Bollywood />} />
-          <Route path="/tennis" element={<Tennis />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/landscapes" element={<Landscapes />} />
+          <Route path="/portfolio/portraits" element={<Portraits />} />
+          <Route path="/portfolio/bollywood" element={<Bollywood />} />
+          <Route path="/portfolio/tennis" element={<Tennis />} />
           <Route path="/galleries" element={<Galleries />} />
           <Route path="/headshots" element={<Headshots />} />
           <Route path="/galleries/:gallerySlug/:view?" element={<SingleGallery />} />
