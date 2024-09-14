@@ -16,6 +16,13 @@
   padding-left: 2rem;
 }
 
+.no-underline {
+  &:hover {
+    text-decoration: none;
+    @apply hover:text-red-700;
+  }
+}
+
 @media (max-width: 768px) {
   .category-description {
     padding-left: 0;

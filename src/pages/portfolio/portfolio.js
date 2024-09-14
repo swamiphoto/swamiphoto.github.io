@@ -11,14 +11,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Portfolio = () => {
-  const settings = {
+  const baseSettings = {
     dots: false,
     infinite: true,
     speed: 700,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
   };
 
   const categories = [
@@ -28,25 +27,29 @@ const Portfolio = () => {
         "Landscapes have always been at the heart of my photography. There’s something deeply inspiring about capturing the vast beauty of nature—from towering mountains to serene valleys. Standing in front of grand landscapes is a humbling experience, and each scene I capture often reflects my mood in that moment.",
       images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.gateway],
       link: "/portfolio/landscapes",
+      autoplaySpeed: 4000,
     },
     {
       name: "Portraits",
       description: "Capturing a person's character, beauty, and grace in a single frame is incredibly fulfilling. Over the years, I've photographed some truly kind-hearted and beautiful individuals. Here are a few of my favorites.",
       images: [IMAGES.portraits.naga, IMAGES.portraits.mala],
       link: "/portfolio/portraits",
+      autoplaySpeed: 4500,
     },
     {
       name: "Bollywood",
       description: "I was fortunate to shoot some talented Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it here. Hope you enjoy this collection.",
-      images: [IMAGES.bollywood.katrina, IMAGES.bollywood.atif],
+      images: [IMAGES.bollywood.katrina, IMAGES.bollywood.glamour, IMAGES.bollywood.dance],
       link: "/portfolio/bollywood",
+      autoplaySpeed: 5000,
     },
-    {
-      name: "Tennis",
-      description: "As one of the official photographers for the BNP Paribas Open at Indian Wells in 2018, I enjoyed capturing some of the world's best tennis players in action. Here are some of my favorite shots.",
-      images: [IMAGES.tennis.federer.fed1, IMAGES.tennis.federer.fed2, IMAGES.tennis.novak],
-      link: "/portfolio/tennis",
-    },
+    // {
+    //   name: "Tennis",
+    //   description: "As one of the official photographers for the BNP Paribas Open at Indian Wells in 2018, I enjoyed capturing some of the world's best tennis players in action. Here are some of my favorite shots.",
+    //   images: [IMAGES.tennis.federer.fed1, IMAGES.tennis.federer.fed2, IMAGES.tennis.novak],
+    //   link: "/portfolio/tennis",
+    //   autoplaySpeed: 3500,
+    // },
   ];
 
   const testimonialsData = [
@@ -78,7 +81,15 @@ const Portfolio = () => {
     <main className="max-w-7xl mx-auto">
       <Hero title="Portfolio" showSubNav={true}>
         <p>
-          A collection of my best work, you could say. My heart has always been in <a href="/landscapes">landscapes</a> and nature, but I also enjoy shooting <a href="/portraits">portraits</a>.
+          A collection of my best work, you could say. My heart has always been in{" "}
+          <Link to="/landscapes" className="no-underline">
+            landscapes
+          </Link>{" "}
+          and nature, but I also enjoy shooting{" "}
+          <Link to="/portraits" className="no-underline">
+            portraits
+          </Link>
+          .
         </p>
       </Hero>
 
@@ -97,29 +108,30 @@ const Portfolio = () => {
         </p>
       </Text>
 
-      <section className="py-12">
+      <section className="pt-12">
         {categories.map((category, index) => (
           <div key={category.name} className={`flex flex-col md:flex-row ${index % 2 === 1 ? "md:flex-row-reverse" : ""} mb-12`}>
-            <div className="md:w-2/3">
-              <Slider {...settings}>
+            {/* Use overflow-hidden and bg-white for containers */}
+            <div className="md:w-2/3 overflow-hidden bg-white">
+              <Slider {...{ ...baseSettings, autoplaySpeed: category.autoplaySpeed }}>
                 {category.images.map((image, imgIndex) => (
-                  <img key={imgIndex} src={image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg" />
+                  <Link to={category.link} key={imgIndex} className="block">
+                    <img src={image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg hover:opacity-75 transition-opacity duration-300" />
+                  </Link>
                 ))}
               </Slider>
             </div>
             <div className="md:w-1/3 flex flex-col justify-center p-10 text-left">
-              <Link to={category.link} className="no-underline">
-                <h2 className="text-3xl md:text-5xl font-bold mb-4 hover:opacity-75 transition-opacity duration-300">{category.name}</h2>
-                <p className="text-xl hover:opacity-75 transition-opacity duration-300">{category.description}</p>
+              <Link to={category.link} className="no-underline hover:opacity-75 transition-opacity duration-300">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 no-underline">{category.name}</h2>
+                <p className="text-xl no-underline">{category.description}</p>
               </Link>
             </div>
           </div>
         ))}
       </section>
 
-      <section className="py-12">
-        <Testimonial {...testimonialsData[1]} />
-      </section>
+      <Testimonial {...testimonialsData[1]} />
 
       <Photos layout="verticalPair">
         <Photo src={IMAGES.portraits.amrita} alt="Photo 1" />
