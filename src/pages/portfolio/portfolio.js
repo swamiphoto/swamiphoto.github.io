@@ -1,38 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
 import IMAGES from "../../common/images";
 import Photo from "../../components/image-displays/photo/Photo";
 import Photos from "../../components/image-displays/photos/Photos";
 import Hero from "../../components/hero/Hero";
-import Testimonial from "../../components/testimonial/Testimonial"; // Import your Testimonial component
-import Testimonials from "../../components/testimonials/Testimonials";
+import Testimonial from "../../components/testimonial/Testimonial";
 import Text from "../../components/text/Text";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Portfolio = () => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 700,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
   const categories = [
     {
       name: "Landscapes",
       description:
         "Landscapes have always been at the heart of my photography. There’s something deeply inspiring about capturing the vast beauty of nature—from towering mountains to serene valleys. Standing in front of grand landscapes is a humbling experience, and each scene I capture often reflects my mood in that moment.",
-      image: IMAGES.landscapes.pastel,
+      images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.gateway],
       link: "/portfolio/landscapes",
     },
     {
       name: "Portraits",
       description: "Capturing a person's character, beauty, and grace in a single frame is incredibly fulfilling. Over the years, I've photographed some truly kind-hearted and beautiful individuals. Here are a few of my favorites.",
-      image: IMAGES.portraits.naga,
+      images: [IMAGES.portraits.naga, IMAGES.portraits.mala],
       link: "/portfolio/portraits",
     },
     {
       name: "Bollywood",
       description: "I was fortunate to shoot some talented Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it here. Hope you enjoy this collection.",
-      image: IMAGES.bollywood.katrina,
+      images: [IMAGES.bollywood.katrina, IMAGES.bollywood.atif],
       link: "/portfolio/bollywood",
     },
     {
       name: "Tennis",
       description: "As one of the official photographers for the BNP Paribas Open at Indian Wells in 2018, I enjoyed capturing some of the world's best tennis players in action. Here are some of my favorite shots.",
-      image: IMAGES.tennis.federer.fed1,
+      images: [IMAGES.tennis.federer.fed1, IMAGES.tennis.federer.fed2, IMAGES.tennis.novak],
       link: "/portfolio/tennis",
     },
   ];
@@ -78,7 +90,7 @@ const Portfolio = () => {
       </section>
 
       <Photo src={IMAGES.landscapes.fog} alt="Sample Portrait" title="Captivating Portrait" caption="Capturing emotions through the lens." />
-      <h3 className="mb-5 font-medium text-xl tracking-wide uppercase  text-red-700">National Geographic Editor's Favorite</h3>
+      <h3 className="mb-5 font-medium text-xl tracking-wide uppercase text-red-700">National Geographic Editor's Favorite</h3>
 
       <Text>
         <p>
@@ -90,9 +102,13 @@ const Portfolio = () => {
       <section className="py-12">
         {categories.map((category, index) => (
           <div key={category.name} className={`flex flex-col md:flex-row ${index % 2 === 1 ? "md:flex-row-reverse" : ""} mb-12`}>
-            <Link to={category.link} className="md:w-2/3">
-              <img src={category.image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg hover:opacity-75 transition-opacity duration-300" />
-            </Link>
+            <div className="md:w-2/3">
+              <Slider {...settings}>
+                {category.images.map((image, imgIndex) => (
+                  <img key={imgIndex} src={image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg" />
+                ))}
+              </Slider>
+            </div>
             <div className="md:w-1/3 flex flex-col justify-center p-10 text-left">
               <Link to={category.link} className="no-underline">
                 <h2 className="text-3xl md:text-5xl font-bold mb-4 hover:opacity-75 transition-opacity duration-300">{category.name}</h2>
@@ -117,9 +133,13 @@ const Portfolio = () => {
       <section className="py-12">
         {categories.map((category, index) => (
           <div key={category.name} className={`flex flex-col md:flex-row ${index % 2 === 1 ? "md:flex-row-reverse" : ""} mb-12`}>
-            <Link to={category.link} className="md:w-2/3">
-              <img src={category.image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg hover:opacity-75 transition-opacity duration-300" />
-            </Link>
+            <div className="md:w-2/3">
+              <Slider {...settings}>
+                {category.images.map((image, imgIndex) => (
+                  <img key={imgIndex} src={image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg" />
+                ))}
+              </Slider>
+            </div>
             <div className="md:w-1/3 flex flex-col justify-center p-10 text-left">
               <Link to={category.link} className="no-underline">
                 <h2 className="text-3xl md:text-5xl font-bold mb-4 hover:opacity-75 transition-opacity duration-300">{category.name}</h2>
