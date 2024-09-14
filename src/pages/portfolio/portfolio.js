@@ -43,13 +43,6 @@ const Portfolio = () => {
       link: "/portfolio/bollywood",
       autoplaySpeed: 5000,
     },
-    // {
-    //   name: "Tennis",
-    //   description: "As one of the official photographers for the BNP Paribas Open at Indian Wells in 2018, I enjoyed capturing some of the world's best tennis players in action. Here are some of my favorite shots.",
-    //   images: [IMAGES.tennis.federer.fed1, IMAGES.tennis.federer.fed2, IMAGES.tennis.novak],
-    //   link: "/portfolio/tennis",
-    //   autoplaySpeed: 3500,
-    // },
   ];
 
   const testimonialsData = [
@@ -61,18 +54,14 @@ const Portfolio = () => {
       layout: "layout2",
     },
     {
-      altText: "Vivek Gupta",
       testimony: "Your photos are amazing—super high quality, especially the ones of Katrina. Out of all the photos from the six tours, yours are the best. The quality of your work proves you're one of the top photographers in the world. Thanks for sharing these stunning images!",
       name: "Vivek Gupta",
-      role: "",
       layout: "layout2",
     },
     {
-      altText: "Sirish M",
       testimony:
         "Swami is far more than just another photographer—his work has a distinct element of magic. One of his photographs of the Golden Gate Bridge was even featured in the National Geographic a few years ago. I’ve personally seen his creativity shine at several concerts, where he consistently stood out among the other photographers. With the love, passion, and dedication he pours into his craft, Swami’s pictures truly speak louder than a thousand words.",
       name: "Sirish M",
-      role: "",
       layout: "layout2",
     },
   ];
@@ -93,13 +82,12 @@ const Portfolio = () => {
         </p>
       </Hero>
 
-      <Photo src={IMAGES.landscapes.mac} alt="Sample Landscape" title="Majestic Mountains" caption="A breathtaking view of the mountains during sunrise." />
-      <Photo src={IMAGES.landscapes.paris} alt="Sample Portrait" title="Captivating Portrait" caption="Capturing emotions through the lens." />
+      <Photo src={IMAGES.landscapes.mac} caption="A breathtaking view of the mountains during sunrise." />
+      <Photo src={IMAGES.landscapes.paris} caption="Capturing emotions through the lens." />
 
       <Testimonial {...testimonialsData[0]} />
 
-      <Photo src={IMAGES.landscapes.fog} alt="Sample Portrait" title="Captivating Portrait" caption="Capturing emotions through the lens." />
-      <h3 className="mb-5 font-medium text-xl tracking-wide uppercase text-red-700">National Geographic Editor's Favorite</h3>
+      <Photo src={IMAGES.landscapes.fog} caption="National Geographic Editor's Favorite" captionDesign="design2" />
 
       <Text>
         <p>
@@ -116,7 +104,7 @@ const Portfolio = () => {
               <Slider {...{ ...baseSettings, autoplaySpeed: category.autoplaySpeed }}>
                 {category.images.map((image, imgIndex) => (
                   <Link to={category.link} key={imgIndex} className="block">
-                    <img src={image} alt={category.name} className="w-full h-auto rounded-lg shadow-lg hover:opacity-75 transition-opacity duration-300" />
+                    <img src={image} className="w-full h-auto rounded-lg shadow-lg hover:opacity-75 transition-opacity duration-300" />
                   </Link>
                 ))}
               </Slider>
@@ -134,13 +122,11 @@ const Portfolio = () => {
       <Testimonial {...testimonialsData[1]} />
 
       <Photos layout="verticalPair">
-        <Photo src={IMAGES.portraits.amrita} alt="Photo 1" />
-        <Photo src={IMAGES.portraits.suma2} alt="Photo 2" />
+        <Photo src={IMAGES.portraits.amrita} />
+        <Photo src={IMAGES.portraits.suma2} />
       </Photos>
 
       <Testimonial {...testimonialsData[2]} />
-
-      <Photo src={IMAGES.bollywood.atif} alt="Photo 1" />
     </main>
   );
 };
