@@ -10,6 +10,8 @@ import Text from "../../components/text/Text";
 import SectionHeader from "../../components/section-header/SectionHeader";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Podcast from "../../components/podcast/Podcast";
+import RecentWork from "../../components/recent-work/RecentWork";
 
 const Portfolio = () => {
   const baseSettings = {
@@ -48,11 +50,12 @@ const Portfolio = () => {
 
   const testimonialsData = [
     {
+      imageSrc: IMAGES.headshots.naga,
       testimony:
         "Having worked with Swami for over 7 years now, I can't come up with all the superlatives to describe how great it is to work with him. Thank you for your patience and professionalism. You have driven out far and wide for us and put up with two kids under five multiple times. You make everyone feel comfortable and helped capture some very precious moments of life for us. We love having you as our photographer.",
       name: "Naga Madhavapeddi",
       reverse: false,
-      layout: "layout2",
+      layout: "layout3",
     },
     {
       testimony: "Your photos are amazing—super high quality, especially the ones of Katrina. Out of all the photos from the six tours, yours are the best. The quality of your work proves you're one of the top photographers in the world. Thanks for sharing these stunning images!",
@@ -131,6 +134,9 @@ const Portfolio = () => {
       </Photos>
 
       <Testimonial {...testimonialsData[2]} />
+
+      {/* <Podcast /> */}
+      <RecentWork />
     </main>
   );
 };

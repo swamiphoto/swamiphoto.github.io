@@ -37,7 +37,7 @@ const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false
     );
   }
 
-  // Layout 2: Optional Image
+  // Layout 2: Optional Image with name and role on the side
   if (layout === "layout2") {
     return (
       <section className="bg-white px-6 lg:px-8 py-16 pb-24">
@@ -59,6 +59,31 @@ const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false
             </div>
           </figcaption>
         </figure>
+      </section>
+    );
+  }
+
+  // Layout 3: Image and name/role above the text
+  if (layout === "layout3") {
+    return (
+      <section className="bg-white px-6 lg:px-8 py-16 pb-24">
+        <figure className="mx-auto max-w-2xl text-center">
+          <figcaption className="flex flex-col items-center justify-center">
+            {imageSrc && (
+              <div className="h-20 w-20 mb-4">
+                <img alt={altText} src={imageSrc} className="h-full w-full object-cover rounded-full" />
+              </div>
+            )}
+            <div className="text-center">
+              <div className="font-semibold text-2xl text-gray-500">{name}</div>
+              <div className="mt-0.5 text-gray-600">{role}</div>
+            </div>
+          </figcaption>
+          <blockquote className="mt-6 text-xl font-semibold leading-8 tracking-tight text-gray-900 sm:text-2xl sm:leading-9">
+            <p>{testimony}</p>
+          </blockquote>
+        </figure>
+        <WiggleLine />
       </section>
     );
   }

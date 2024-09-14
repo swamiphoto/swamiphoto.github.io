@@ -52,7 +52,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
         src={src + "?width=1300"}
         alt={imageAltText} // Use fallback for alt
         loading="lazy"
-        className={`transition-opacity duration-500 ease-in-out ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"}`}
+        className={`transition-opacity duration-500 ease-in-out ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"} shadow-lg`}
         onLoad={() => setIsLoaded(true)}
         onClick={defaultClickHandler} // Use default handler
         style={{ cursor: "pointer" }}
