@@ -40,7 +40,7 @@ const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false
   // Layout 2: Optional Image
   if (layout === "layout2") {
     return (
-      <section className="bg-white px-6 lg:px-8 sm:py-16">
+      <section className="bg-white px-6 lg:px-8 sm:py-16 sm:pb-24">
         <WiggleLine />
         <figure className="mx-auto max-w-2xl text-center">
           <blockquote className="mt-10 text-xl font-semibold leading-8 tracking-tight text-gray-900 sm:text-2xl sm:leading-9">
@@ -48,13 +48,11 @@ const Testimonial = ({ imageSrc, altText, testimony, name, role, reverse = false
           </blockquote>
 
           <figcaption className="mt-10 flex items-center justify-center space-x-6">
-            {/* Image, if provided */}
             {imageSrc && (
               <div className="h-16 w-16 flex-shrink-0">
                 <img alt={altText} src={imageSrc} className="h-full w-full object-cover rounded-full" />
               </div>
             )}
-            {/* Name and Role - Always present */}
             <div className="text-center">
               <div className="font-semibold text-2xl text-gray-500">— {name}</div>
               <div className="mt-0.5 text-gray-600">{role}</div>

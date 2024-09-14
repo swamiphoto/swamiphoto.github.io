@@ -85,9 +85,7 @@ const Portfolio = () => {
       <Photo src={IMAGES.landscapes.mac} alt="Sample Landscape" title="Majestic Mountains" caption="A breathtaking view of the mountains during sunrise." />
       <Photo src={IMAGES.landscapes.paris} alt="Sample Portrait" title="Captivating Portrait" caption="Capturing emotions through the lens." />
 
-      <section className="py-12">
-        <Testimonial {...testimonialsData[0]} />
-      </section>
+      <Testimonial {...testimonialsData[0]} />
 
       <Photo src={IMAGES.landscapes.fog} alt="Sample Portrait" title="Captivating Portrait" caption="Capturing emotions through the lens." />
       <h3 className="mb-5 font-medium text-xl tracking-wide uppercase text-red-700">National Geographic Editor's Favorite</h3>
