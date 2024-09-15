@@ -76,11 +76,11 @@ const Portfolio = () => {
       <Hero title="Portfolio" showSubNav={true}>
         <p>
           Here's a collection of my best work. My heart has always been in{" "}
-          <Link to="/landscapes" className="no-underline">
+          <Link to="/portfolio/landscapes" className="no-underline">
             landscapes
           </Link>{" "}
           and nature, but I also love taking pictures of{" "}
-          <Link to="/portraits" className="no-underline">
+          <Link to="/portfolio/portraits" className="no-underline">
             people
           </Link>
           .
