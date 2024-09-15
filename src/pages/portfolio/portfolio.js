@@ -27,22 +27,21 @@ const Portfolio = () => {
   const categories = [
     {
       name: "Landscapes & Cities",
-      description:
-        "Landscapes have always been at the heart of my photography. There’s something deeply inspiring about capturing the vast beauty of nature—from towering mountains to serene valleys. Standing in front of grand landscapes is a humbling experience, and each scene I capture often reflects my mood in that moment.",
+      description: "There's nothing quite like being in front of a grand landscape at sunrise when you have the whole place to yourself. It's one of those humbling, indescribable feelings. I hope these images invite you to wander and wonder and lose yourself in the beauty of the world around us.",
       images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.bbridge],
       link: "/portfolio/landscapes",
       autoplaySpeed: 4000,
     },
     {
       name: "Portraits",
-      description: "Capturing a person's character, beauty, and grace in a single frame is incredibly fulfilling. Over the years, I've photographed some truly kind-hearted and beautiful individuals. Here are a few of my favorites.",
+      description: "Capturing the beauty of people in photographs is something I truly cherish. It's been an privilege to work with so many wonderful individuals and create images that bring them joy.",
       images: [IMAGES.portraits.naga, IMAGES.portraits.mala],
       link: "/portfolio/portraits",
       autoplaySpeed: 4500,
     },
     {
       name: "Bollywood",
-      description: "I was fortunate to shoot some talented Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it here. Hope you enjoy this collection.",
+      description: "Capturing the cinematic magic of Bollywood — the glamour, the vibrant colors, the familiar faces we all know, the expressive emotions — has been nothing short of a surreal experience.",
       images: [IMAGES.bollywood.katrina, IMAGES.bollywood.katrina2, IMAGES.bollywood.nargis3],
       link: "/portfolio/bollywood",
       autoplaySpeed: 5000,
