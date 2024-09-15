@@ -27,21 +27,22 @@ const Portfolio = () => {
   const categories = [
     {
       name: "Landscapes & Cities",
-      description: "There's nothing quite like being in front of a grand landscape at sunrise when you have the whole place to yourself. It's one of those humbling, indescribable feelings. I hope these images invite you to wander and wonder and lose yourself in the beauty of the world around us.",
+      description:
+        "There's nothing quite like standing in front of a grand landscape at sunrise, with the whole place to yourself. Getting up early is tough, and sometimes it's cold, but the moment the first light touches the scene, you know it's all worth it. I hope these images inspire you to wander, explore, and lose yourself in the beauty of the world around us.",
       images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.bbridge],
       link: "/portfolio/landscapes",
       autoplaySpeed: 4000,
     },
     {
       name: "Portraits",
-      description: "Capturing the beauty of people in photographs is something I truly cherish. It's been an privilege to work with so many wonderful individuals and create images that bring them joy.",
+      description: "Capturing the beauty of a person, both inside and out, is a truly rewarding experience. I enjoy observing the dynamics and quirks of each family, becoming a part of their world for a day. It brings me joy to create images they'll treasure for years to come.",
       images: [IMAGES.portraits.naga, IMAGES.portraits.mala],
       link: "/portfolio/portraits",
       autoplaySpeed: 4500,
     },
     {
       name: "Bollywood",
-      description: "Capturing the cinematic magic of Bollywood — the glamour, the vibrant colors, the familiar faces we all know, the expressive emotions — has been nothing short of a surreal experience.",
+      description: "A piece of Bollywood's cinematic magic, captured through my lens, with all the glamour, the vibrant colors, the familiar faces, and the expressive emotions.",
       images: [IMAGES.bollywood.katrina, IMAGES.bollywood.katrina2, IMAGES.bollywood.nargis3],
       link: "/portfolio/bollywood",
       autoplaySpeed: 5000,

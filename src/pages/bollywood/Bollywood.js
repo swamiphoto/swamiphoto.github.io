@@ -25,13 +25,7 @@ const Bollywood = () => {
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Bollywood">
-        <p>
-          I was fortunate to shoot some talented Bollywood actors, directors, and musicians. If you'd like to know how I got this opportunity, I've written about it{" "}
-          <a href="https://swamiphoto.medium.com/the-power-of-writing-down-efefb72a1f3a" target="_blank" rel="noopener noreferrer">
-            here
-          </a>
-          . Hope you enjoy this collection.
-        </p>
+        <p>A piece of Bollywood's cinematic magic, captured through my lens, with all the glamour, the vibrant colors, and the familiar faces we all love.</p>
       </Hero>
 
       <Photo src={IMAGES.bollywood.katrina} alt="Katrina" allPhotos={allPhotos} />

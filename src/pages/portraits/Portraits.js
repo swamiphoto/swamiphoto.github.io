@@ -10,7 +10,7 @@ const Portraits = () => {
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Portraits">
-        <p>Capturing a person's character, beauty, and grace in a single frame is incredibly fulfilling. Over the years, I've photographed some truly kind-hearted and beautiful individuals. Here are a few of my favorites.</p>
+        <p>Capturing the beauty of a person, both inside and out, is a truly rewarding experience. Here are my favorite portraits.</p>
       </Hero>
 
       <Photo src={IMAGES.portraits.naga} alt="Naga" allPhotos={allPhotos} />
