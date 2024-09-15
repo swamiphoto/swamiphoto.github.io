@@ -7,7 +7,7 @@ const Lightbox = () => {
   const { imagePath } = useParams(); // Get the imagePath from the URL params
   const navigate = useNavigate();
   const location = useLocation();
-  const { previousImageUrls = [], nextImageUrls = [] } = location.state || {};
+  const { previousImageUrls = [], nextImageUrls = [], from } = location.state || {};
 
   const [currentImage, setCurrentImage] = useState(null);
   const [cursorType, setCursorType] = useState("default");
@@ -63,7 +63,7 @@ const Lightbox = () => {
       const encodedPreviousImage = base64Encode(previousImage); // Encode the previous image URL
 
       navigate(`/image/${encodedPreviousImage}`, {
-        state: { previousImageUrls: previousImageUrls.slice(0, -1), nextImageUrls: [currentImage, ...nextImageUrls] },
+        state: { previousImageUrls: previousImageUrls.slice(0, -1), nextImageUrls: [currentImage, ...nextImageUrls], from },
       });
     }
 
@@ -72,7 +72,7 @@ const Lightbox = () => {
       const encodedNextImage = base64Encode(nextImage); // Encode the next image URL
 
       navigate(`/image/${encodedNextImage}`, {
-        state: { previousImageUrls: [...previousImageUrls, currentImage], nextImageUrls: nextImageUrls.slice(1) },
+        state: { previousImageUrls: [...previousImageUrls, currentImage], nextImageUrls: nextImageUrls.slice(1), from },
       });
     }
   };
@@ -80,8 +80,8 @@ const Lightbox = () => {
   // Close the Lightbox and navigate to the previous page or default to "/"
   const handleClose = (e) => {
     e.stopPropagation(); // Prevent the click event from bubbling up to the parent container
-    if (location.state && location.state.from) {
-      navigate(location.state.from); // Go back to the referring page
+    if (from) {
+      navigate(from); // Go back to the referring page
     } else {
       navigate("/"); // Default to home if no referrer
     }

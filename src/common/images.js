@@ -110,7 +110,7 @@ export const base64Decode = (str) => {
 };
 
 // Common function to handle photo clicks and navigate to the lightbox
-export const handleImageClick = (imageUrl, allPhotos, navigate) => {
+export const handleImageClick = (imageUrl, allPhotos, navigate, location) => {
   const currentIndex = allPhotos.indexOf(imageUrl); // Find the index of the clicked photo
   const previousImageUrls = allPhotos.slice(0, currentIndex); // Get previous images
   const nextImageUrls = allPhotos.slice(currentIndex + 1); // Get next images
@@ -120,7 +120,7 @@ export const handleImageClick = (imageUrl, allPhotos, navigate) => {
   if (uniqueId) {
     // Navigate to the Lightbox with previous and next image URLs
     navigate(`/image/${uniqueId}`, {
-      state: { previousImageUrls, nextImageUrls },
+      state: { previousImageUrls, nextImageUrls, from: location.pathname },
     });
   }
 };

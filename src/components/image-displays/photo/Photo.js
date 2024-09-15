@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Photo.css";
 import { useScrollContext } from "../../../hooks/ScrollContext";
 import { generateUniqueId, imageMapping, base64Encode } from "../../../common/images"; // Ensure correct imports
@@ -8,6 +8,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
   const [isLoaded, setIsLoaded] = useState(false);
   const { isScrolled } = useScrollContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Determine alt text based on available title or caption if alt is not provided
   const imageAltText = alt || title || caption || "© 2024 Swami Venkataramani";
@@ -40,7 +41,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
       }
 
       // Use navigate with the encoded URL
-      navigate(`/image/${finalUrl}`, { state: { previousImageUrls, nextImageUrls } });
+      navigate(`/image/${finalUrl}`, { state: { previousImageUrls, nextImageUrls, from: location.pathname } });
     }
   };
 

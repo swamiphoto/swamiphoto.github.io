@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
 import Masonry from "react-masonry-css";
 import { handleImageClick } from "../../../../common/images"; // Import the common functions
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
 import "./MasonryGallery.css";
 
 const MasonryGallery = ({ name, images, description, showCover = true }) => {
   const masonryRef = useRef(null); // Ref for the Masonry container
   const navigate = useNavigate();
+  const location = useLocation();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect mobile screen
 
   const handleDownClick = () => {
@@ -41,7 +42,7 @@ const MasonryGallery = ({ name, images, description, showCover = true }) => {
                   data-src={image}
                   className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg"
                   onError={(e) => e.target.classList.add("hidden")}
-                  onClick={() => handleImageClick(image, images, navigate)} // Use the common function
+                  onClick={() => handleImageClick(image, images, navigate, location)} // Use the common function
                 />
               </div>
             ))}
