@@ -14,10 +14,21 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
 
   // Click handler for opening the image in Lightbox
   const defaultClickHandler = () => {
+    // Check if the src exists in the imageMapping
     const key = Object.keys(imageMapping).find((k) => imageMapping[k] === src);
-    const uniqueId = generateUniqueId(key);
+    const uniqueId = key ? generateUniqueId(key) : null;
+
+    let finalUrl = null;
 
     if (uniqueId) {
+      // Use the unique ID if we found it in the mapping
+      finalUrl = base64Encode(uniqueId);
+    } else {
+      // Fallback to using the raw URL if there's no uniqueId
+      finalUrl = base64Encode(src);
+    }
+
+    if (finalUrl) {
       let previousImageUrls = [];
       let nextImageUrls = [];
 
@@ -28,9 +39,8 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
         nextImageUrls = allPhotos.slice(currentIndex + 1); // Next images
       }
 
-      // Use navigate with properly encoded URL
-      const encodedUniqueId = base64Encode(uniqueId);
-      navigate(`/image/${encodedUniqueId}`, { state: { previousImageUrls, nextImageUrls } });
+      // Use navigate with the encoded URL
+      navigate(`/image/${finalUrl}`, { state: { previousImageUrls, nextImageUrls } });
     }
   };
 

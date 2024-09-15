@@ -22,7 +22,7 @@ const Header = () => {
     <header className="w-full header">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 w-full">
         <a className="block mt-10" href="/">
-          <img src="logo1.png" alt="Logo" className="h-16" />
+          <img src="/logo1.png" alt="Logo" className="h-16" />
         </a>
         <div className="flex items-center">
           <nav aria-label="Global" className={`${isMenuOpen ? "block" : "hidden"} nav fixed inset-0 bg-gray-100 z-30 md:relative md:block md:bg-transparent`}>
