@@ -59,13 +59,13 @@ const Portfolio = () => {
       layout: "layout3",
     },
     {
-      testimony: "Your photos are amazing—super high quality, especially the ones of Katrina. Out of all the photos from the six tours, yours are the best. The quality of your work proves you're one of the top photographers in the world. Thanks for sharing these stunning images!",
+      testimony: "Swami's photos are top notch, especially his shots of Katrina Kaif. Among all the photos from the six tours, his images of Katrina are the absolute best. The quality of his work is exceptional, making him easily one of the top photographers in the world.",
       name: "Vivek Gupta",
       layout: "layout2",
     },
     {
       testimony:
-        "Swami is far more than just another photographer—his work has a distinct element of magic. One of his photographs of the Golden Gate Bridge was even featured in the National Geographic a few years ago. I’ve personally seen his creativity shine at several concerts, where he consistently stood out among the other photographers. With the love, passion, and dedication he pours into his craft, Swami’s pictures truly speak louder than a thousand words.",
+        "Swami is much more than just a photographer—his work carries a touch of magic. As a concert organizer, I’ve witnessed his talent firsthand at numerous Bollywood events, where he consistently stood out among other photographers. With the love, passion, and dedication he brings to every shot, Swami’s images truly speak louder than words.",
       name: "Sirish M",
       layout: "layout2",
     },
@@ -75,13 +75,13 @@ const Portfolio = () => {
     <main className="max-w-7xl mx-auto">
       <Hero title="Portfolio" showSubNav={true}>
         <p>
-          A collection of my best work, you could say. My heart has always been in{" "}
+          Here's a collection of my best work. My heart has always been in{" "}
           <Link to="/landscapes" className="no-underline">
             landscapes
           </Link>{" "}
-          and nature, but I also enjoy shooting{" "}
+          and nature, but I also love taking pictures of{" "}
           <Link to="/portraits" className="no-underline">
-            portraits
+            people
           </Link>
           .
         </p>
@@ -95,8 +95,8 @@ const Portfolio = () => {
 
       <Testimonial {...testimonialsData[0]} />
 
-      <Photo src={IMAGES.landscapes.fog} caption="National Geographic Editor's Favorite" captionDesign="design2" />
-      <Photo src={IMAGES.landscapes.gateway} caption="This image was chosen as the official backdrop for the Social Media Week conference in Mumbai." captionDesign="design2" />
+      <Photo src={IMAGES.landscapes.fog} caption="Editor's Favorite, National Geographic" captionDesign="design2" />
+      <Photo src={IMAGES.landscapes.gateway} caption="Official conference backdrop, Social Media Week Mumbai." captionDesign="design2" />
 
       <Photo
         src="https://storage.googleapis.com/swamiphoto/photos/recent/aurora2.jpg"
@@ -107,8 +107,8 @@ const Portfolio = () => {
 
       <Text>
         <p>
-          A lot of photographers stick to one genre, but I’ve always struggled with that. My heart is in landscapes and nature, but there’s something about capturing portraits I really love. It's the unique connection and story that comes with every person and family I photograph, and that’s
-          something I cannot give up. So my portfolio is a mix of landscapes, portraits, and other genres I’ve dabbled in over the years.
+          Many photographers focus on one genre, but I’ve always struggled with that. Portraits and landscapes are two different beasts—one is heavy on studio lighting, the other on natural light—and specializing in both is a disadvantage to me. My heart has always been in landscapes and nature, but
+          the deep connection I feel when photographing people is something I can't ignore. So, you'll find my portfolio is a mixed bag of landscapes and people, reflecting both my passions.
         </p>
       </Text>
 
