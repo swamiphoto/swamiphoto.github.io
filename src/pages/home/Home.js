@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IMAGES from "../../common/images";
 import "./Home.css";
 
@@ -54,21 +54,25 @@ const Home = () => {
             <h1 className="mx-auto md:max-w-3xl text-4xl md:text-6xl font-bold mb-2">Swami Venkataramani</h1>
             <div className="mx-auto max-w-2xl md:text-2xl mb-8 mt-5 tracking-tight">
               <p>
-                I’m an{" "}
-                <a href="https://www.linkedin.com/in/swamiphoto/" target="_blank" rel="noopener noreferrer" className="underline">
-                  engineer
-                </a>
+                Published{" "}
+                <Link to="/portfolio" className="underline text-white focus:outline-none">
+                  photographer
+                </Link>
                 ,{" "}
-                <a href="https://dribbble.com/swamiphoto/" target="_blank" rel="noopener noreferrer" className="underline">
-                  designer
+                <a href="https://swamiphoto.substack.com/podcast" target="_blank" rel="noopener noreferrer" className="underline text-white focus:outline-none">
+                  podcaster
                 </a>
-                , and photographer. My heart has always been in{" "}
-                <button className="underline text-white focus:outline-none" onClick={handleButtonClick}>
+                , and photography coach based in Bay Area. Focusing on{" "}
+                <button className="underline text-white focus:outline-none" onClick={() => navigate("/portfolio/landscapes")}>
                   landscapes
-                </button>{" "}
-                and nature, but I also enjoy{" "}
-                <button className="underline text-white focus:outline-none" onClick={() => navigate("/portraits")}>
+                </button>
+                ,{" "}
+                <button className="underline text-white focus:outline-none" onClick={() => navigate("/portfolio/portraits")}>
                   portraits
+                </button>
+                , and{" "}
+                <button className="underline text-white focus:outline-none" onClick={() => navigate("/portfolio/bollywood")}>
+                  Bollywood
                 </button>
                 .
               </p>

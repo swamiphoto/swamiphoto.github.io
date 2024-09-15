@@ -87,7 +87,7 @@ const Portfolio = () => {
         </p>
       </Hero>
 
-      <Photo src={IMAGES.landscapes.mac} caption="My attempt at recreating the scene from one of the iconic Mac wallpapers" />
+      <Photo src={IMAGES.landscapes.mac} caption="An attempt at recreating the scene from one of the Mac wallpapers" />
       <Photo
         src={IMAGES.landscapes.paris}
         caption="Sometimes, the best shots are the ones you don’t plan for. I started at Trocadéro for a sunrise shot, but the clouds were too thick. On my way back, the clouds suddenly broke, and I noticed the sun streaks. I quickly grabbed my camera and took this handheld shot."
