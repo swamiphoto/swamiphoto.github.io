@@ -28,21 +28,22 @@ const Portfolio = () => {
     {
       name: "Landscapes & Cities",
       description:
-        "There's nothing quite like standing in front of a grand landscape at sunrise, with the whole place to yourself. Getting up early is tough, and sometimes it's cold, but the moment the first light touches the scene, you know it's all worth it. I hope these images inspire you to wander, explore, and lose yourself in the beauty of the world around us.",
+        "There's nothing quite like standing in front of a grand landscape at sunrise, with the whole place to yourself. Getting up early is tough, and sometimes it's cold, but the moment the first light touches the scene, you know it's all worth it. I hope these images inspire you to wander, explore, and lose yourself in the breathtaking beauty of the world around us.",
       images: [IMAGES.landscapes.pastel, IMAGES.landscapes.mac, IMAGES.landscapes.bbridge],
       link: "/portfolio/landscapes",
       autoplaySpeed: 4000,
     },
     {
       name: "Portraits",
-      description: "Capturing the beauty of a person, both inside and out, is a truly rewarding experience. I enjoy observing the dynamics and quirks of each family, becoming a part of their world for a day. It brings me joy to create images they'll treasure for years to come.",
+      description:
+        "Capturing a person's beauty, inside and out, and bringing out the spirit of their unique character is very rewarding.  I love observing the unique dynamics and quirks of each family, and becoming a part of their world for a day. It's a joy to create images they'll treasure for years to come.",
       images: [IMAGES.portraits.naga, IMAGES.portraits.mala],
       link: "/portfolio/portraits",
       autoplaySpeed: 4500,
     },
     {
       name: "Bollywood",
-      description: "A piece of Bollywood's cinematic magic, captured through my lens, with all the glamour, the vibrant colors, the familiar faces, and the expressive emotions.",
+      description: "A piece of Bollywood's cinematic magic, captured through my lens, with all the glamour, the vibrant colors, and the familiar faces we've all come to love.",
       images: [IMAGES.bollywood.katrina, IMAGES.bollywood.katrina2, IMAGES.bollywood.nargis3],
       link: "/portfolio/bollywood",
       autoplaySpeed: 5000,
@@ -75,11 +76,11 @@ const Portfolio = () => {
     <main className="max-w-7xl mx-auto">
       <Hero title="Portfolio" showSubNav={true}>
         <p>
-          Here's a collection of my best work. My heart has always been in{" "}
+          Welcome to my portfolio—my favorite shots. My heart has always been in{" "}
           <Link to="/portfolio/landscapes" className="no-underline">
             landscapes
           </Link>{" "}
-          and nature, but I also love taking pictures of{" "}
+          and nature, but I also enjoy shooting{" "}
           <Link to="/portfolio/portraits" className="no-underline">
             people
           </Link>

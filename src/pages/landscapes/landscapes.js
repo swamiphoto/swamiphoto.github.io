@@ -26,7 +26,7 @@ const Landscapes = () => {
   return (
     <main className="max-w-7xl mx-auto">
       <Hero title="Landscapes">
-        <p>My favorite landscape images. I hope these invite you to wander and wonder and lose yourself in the beauty of the world around us.</p>
+        <p>I hope these landscapes inspire you to wander and wonder and lose yourself in the breathtaking beauty of the world around us.</p>
       </Hero>
 
       <Photos layout="verticalPair">
