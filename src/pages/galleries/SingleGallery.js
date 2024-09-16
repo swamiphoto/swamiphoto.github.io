@@ -7,6 +7,7 @@ import Gallery from "../../components/image-displays/gallery/Gallery";
 import Loading from "../../components/image-displays/slideshow/Loading/Loading";
 import { galleryData } from "./Galleries";
 import { fetchImageUrls } from "../../common/images";
+import { Helmet } from "react-helmet-async";
 
 const DEFAULT_LAYOUT = "masonry";
 const DEFAULT_SLIDESHOW_LAYOUT = "kenburns";
@@ -113,6 +114,17 @@ const SingleGallery = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{gallery.name}</title>
+        <meta name="description" content={gallery.description} />
+        <meta property="og:title" content={gallery.name} />
+        <meta property="og:description" content={gallery.description} />
+        <meta property="og:image" content={gallery.thumbnailUrl || imageUrls[0]} />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:title" content={gallery.name} />
+        <meta name="twitter:description" content={gallery.description} />
+        <meta name="twitter:image" content={gallery.thumbnailUrl || imageUrls[0]} />
+      </Helmet>
       {view === "slideshow" && enableSlideshow ? (
         <Slideshow
           imageUrls={imageUrls}
