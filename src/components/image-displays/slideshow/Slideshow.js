@@ -113,6 +113,7 @@ const Slideshow = ({
       if (audioPlaying) {
         playerRef.current.pauseVideo();
       } else {
+        playerRef.current.unMute(); // Ensure video is unmuted after interaction
         playerRef.current.playVideo();
       }
       setAudioPlaying(!audioPlaying);
