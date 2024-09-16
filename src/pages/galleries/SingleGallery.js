@@ -89,7 +89,7 @@ const SingleGallery = () => {
     if (clientView) {
       return (
         <>
-          <h1 className="text-center mx-auto md:max-w-xl text-4xl text-gray-800 font-bold tracking-tighter mb-2">Welcome to the client area</h1>
+          <h1 className="text-center mx-auto md:max-w-xl text-4xl text-gray-800 font-bold tracking-tighter mb-2">Welcome to the Client Area</h1>
 
           <p className="text-center mx-auto md:max-w-xl text-xl text-gray-800 mb-6">{clientSettings.clientMessage}</p>
           <button onClick={closeModal} className="w-full max-w-sm  bg-black text-white p-5 text-xl font-medium inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
@@ -101,7 +101,8 @@ const SingleGallery = () => {
 
     return (
       <>
-        <h1 className="text-center mx-auto md:max-w-xl text-2xl text-gray-800 font-bold mb-10">Client Login</h1>
+        <h1 className="text-center mx-auto md:max-w-xl text-4xl text-gray-800 font-bold tracking-tighter mb-2">Client Login</h1>
+        <p className="text-center mx-auto md:max-w-xl text-xl text-gray-800 mb-6">If you're the client and need the password for this gallery, feel free to reach out. This will grant you access to all the images.</p>
         <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full max-w-sm border border-gray-300 p-2 mb-4 outline-none focus:outline-none" />
         <button onClick={handleClientLogin} className="w-full max-w-sm bg-black text-white p-2 font-medium inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
           Enter Client Area

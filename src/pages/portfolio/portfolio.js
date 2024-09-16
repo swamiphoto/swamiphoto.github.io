@@ -76,11 +76,11 @@ const Portfolio = () => {
     <main className="max-w-7xl mx-auto">
       <Hero title="Portfolio" showSubNav={true}>
         <p>
-          Welcome to my portfolio—my favorite shots. My heart has always been in{" "}
+          Welcome to my portfolio, a collection of my best work. My heart has always been in{" "}
           <Link to="/portfolio/landscapes" className="no-underline">
             landscapes
           </Link>{" "}
-          and nature, but I also enjoy shooting{" "}
+          and nature, but I also like shooting{" "}
           <Link to="/portfolio/portraits" className="no-underline">
             people
           </Link>
