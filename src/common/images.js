@@ -1,5 +1,6 @@
 export const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
 const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
+const cloudimageToken = "clsjpwsdca";
 
 const IMAGES = {
   landscapes: {
@@ -95,6 +96,14 @@ const IMAGES = {
   me: `${bucketUrl}/photos/me.jpeg`,
 };
 
+const getCloudimageUrl = (imageUrl, params = {}) => {
+  // Remove 'https://' or 'http://' from the imageUrl
+  const cleanUrl = imageUrl.replace(/^https?:\/\//, "");
+  const baseUrl = `https://${cloudimageToken}.cloudimg.io/${cleanUrl}`;
+  const queryParams = new URLSearchParams(params).toString();
+  return `${baseUrl}?${queryParams}`;
+};
+
 // Helper function to encode Base64 (URL-safe)
 export const base64Encode = (str) => {
   return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
@@ -169,4 +178,4 @@ const fetchImageUrls = async (folder) => {
 };
 
 export default IMAGES;
-export { imageMapping, fetchImageUrls, generateUniqueId };
+export { imageMapping, fetchImageUrls, generateUniqueId, getCloudimageUrl };

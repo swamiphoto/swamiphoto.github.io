@@ -3,6 +3,7 @@ import Masonry from "react-masonry-css";
 import { handleImageClick } from "../../../../common/images"; // Import the common functions
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
+import { getCloudimageUrl } from "../../../../common/images";
 import "./MasonryGallery.css";
 
 const MasonryGallery = ({ name, images, description, showCover = true }) => {
@@ -39,7 +40,7 @@ const MasonryGallery = ({ name, images, description, showCover = true }) => {
             {images.map((image, index) => (
               <div key={index} className="mb-5">
                 <img
-                  data-src={image}
+                  data-src={getCloudimageUrl(image, { width: 800, quality: 80 })}
                   className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg"
                   onError={(e) => e.target.classList.add("hidden")}
                   onClick={() => handleImageClick(image, images, navigate, location)} // Use the common function

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { HiOutlineX } from "react-icons/hi";
-import { imageMapping, base64Encode, base64Decode } from "../../../common/images"; // Import base64Encode and base64Decode
+import { imageMapping, base64Encode, base64Decode, getCloudimageUrl } from "../../../common/images"; // Import base64Encode and base64Decode
 
 const Lightbox = () => {
   const { imagePath } = useParams(); // Get the imagePath from the URL params
@@ -109,7 +109,7 @@ const Lightbox = () => {
         <HiOutlineX />
       </button>
       <div className="relative w-full h-full flex items-center justify-center p-5">
-        <img src={currentImage + "?width=1300"} alt="Current Image" className="max-h-full max-w-full object-contain" />
+        <img src={getCloudimageUrl(currentImage, { width: 1300, quality: 80 })} alt="Current Image" className="max-h-full max-w-full object-contain" />
       </div>
     </div>
   );

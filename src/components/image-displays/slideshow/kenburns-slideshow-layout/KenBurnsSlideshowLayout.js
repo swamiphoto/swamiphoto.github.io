@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./KenBurnsSlideshowLayout.css";
+import { getCloudimageUrl } from "../../../../common/images";
 
 const KenBurnsSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning, aspectRatios = [], captions, hideCaptionsOnMobile }) => {
   return (
@@ -13,7 +14,8 @@ const KenBurnsSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning, 
 
         return (
           <div key={index} className={`kenburns-image ${isVertical ? "vertical" : ""} ${isHorizontal ? "horizontal" : ""} ${index === currentImageIndex ? (transitioning ? `kenburns-slide-out` : "kenburns-visible") : "kenburns-hidden"}`}>
-            <img src={url} alt={`Image ${index + 1}`} />
+            <img src={getCloudimageUrl(url, { width: 1600, quality: 80 })} alt={`Image ${index + 1}`} />
+
             {captions[index] && (
               <div className="absolute bottom-10 left-4 w-3/5 p-5">
                 <div

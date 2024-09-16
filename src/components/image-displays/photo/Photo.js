@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Photo.css";
 import { useScrollContext } from "../../../hooks/ScrollContext";
-import { generateUniqueId, imageMapping, base64Encode } from "../../../common/images"; // Ensure correct imports
+import { generateUniqueId, imageMapping, base64Encode, getCloudimageUrl } from "../../../common/images";
 
 function Photo({ src, alt = "", layout = "default", caption = "", title = "", orientation = "horizontal", captionDesign = "design1", allPhotos = [] }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -60,7 +60,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
   const renderDefaultLayout = () => (
     <div className="text-center mb-4 md:mb-10">
       <img
-        src={src + "?width=1300"}
+        src={getCloudimageUrl(src, { width: 1600, quality: 80 })}
         alt={imageAltText} // Use fallback for alt
         loading="lazy"
         className={`transition-opacity duration-500 ease-in-out ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"} shadow-lg`}

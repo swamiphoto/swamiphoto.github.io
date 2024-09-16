@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
+import { getCloudimageUrl } from "../../../../common/images";
 import "./FilmStackSlideshowLayout.css";
 
 const FilmStackSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning, aspectRatios, captions, hideCaptionsOnMobile }) => {
@@ -45,7 +46,8 @@ const FilmStackSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning,
               "--duration": durations[index],
               zIndex: imageUrls.length - index,
             }}>
-            <img src={url} alt={`Image ${index + 1}`} />
+            <img src={getCloudimageUrl(url, { width: 1300, quality: 80 })} alt={`Image ${index + 1}`} />
+
             {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
               <div className="absolute top-10 left-4 w-3/5 p-5">
                 <div

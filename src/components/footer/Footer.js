@@ -14,7 +14,7 @@ const Footer = () => {
         .{" "}
         <span className="underlined-links">
           <a href="https://svenkastudio.com/#contact" target="_blank">
-            Want a portfolio site like this?
+            Want a site like this?
           </a>
         </span>
       </div>

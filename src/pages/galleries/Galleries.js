@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Hero from "../../components/hero/Hero";
-import { bucketUrl } from "../../common/images"; // Use your existing bucketUrl
+import { bucketUrl, getCloudimageUrl } from "../../common/images"; // Use your existing bucketUrl
 
 const galleryData = [
   {
     name: "Hike with Naga and Bharath",
     description: "An adventurous hike with Naga and Bharath.",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/sunol/AR501526.jpg?width=1300`,
+    thumbnailUrl: `${bucketUrl}/photos/portraits/sunol/AR501526.jpg`,
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
     layout: "masonry",
@@ -161,7 +161,7 @@ const Galleries = () => {
         {galleryData.map((gallery) => (
           <Link to={`/galleries/${gallery.slug}`} key={gallery.name} className="group">
             <div className="relative overflow-hidden shadow-lg">
-              <img src={gallery.thumbnailUrl} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+              <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 500, quality: 80 })} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
             </div>
             <p className="text-center mt-2 text-md tracking-tighter text-gray-600">{gallery.name}</p>
           </Link>
