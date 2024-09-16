@@ -102,7 +102,7 @@ const galleryData = [
     layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=BeUSuSXBqMQ"],
       layout: "film-single",
     },
     enableClientView: true,
@@ -120,7 +120,7 @@ const galleryData = [
     layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=JHkx2XOtlpU"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=JkfSV51U-64"],
       layout: "kenburns",
     },
     enableClientView: true,
