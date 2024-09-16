@@ -61,6 +61,18 @@
   }
 }
 
+/* Keyframes for sliding out to the right */
+@keyframes film-stack-slideOutRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--rotate)) rotateZ(var(--rotateZ));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + 100vw), -50%) rotate(calc(var(--rotate) + 20deg)) rotateZ(var(--rotateZ));
+    opacity: 0;
+  }
+}
+
 /* Keyframes for slight movement */
 @keyframes film-stack-slightMove {
   0% {
