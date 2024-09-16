@@ -136,7 +136,7 @@ const Slideshow = ({
       setAudioPlaying(false);
     } else {
       // On mobile, ensure the video is unmuted and play the audio when starting the slideshow
-      if (isMobile && playerRef.current) {
+      if (playerRef.current) {
         playerRef.current.unMute(); // Unmute the video
         playerRef.current.playVideo(); // Explicitly play the video on mobile interaction
       }
