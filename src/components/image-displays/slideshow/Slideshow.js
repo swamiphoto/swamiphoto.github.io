@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { HiOutlinePause, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
+import { HiOutlinePause, HiOutlinePlay, HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
@@ -210,13 +210,13 @@ const Slideshow = ({
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-300 z-50">
           <div className="flex items-center space-x-4">
             <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => navigate("/galleries")} />
-            {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
+            {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <HiOutlinePlay className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           </div>
 
           <div className="ml-auto flex space-x-4 text-sm">
             {" "}
             {/* Align to the right */}
-            {enableClientView &&
+            {/* {enableClientView &&
               (clientView ? (
                 <button className="hover:text-red-500 cursor-pointer" onClick={handleExitClientView}>
                   Exit Client View
@@ -225,9 +225,9 @@ const Slideshow = ({
                 <button className="hover:text-red-500 cursor-pointer" onClick={() => setIsModalOpen(true)}>
                   Client Login
                 </button>
-              ))}
+              ))} */}
             <button className="hover:text-red-500 cursor-pointer" onClick={() => navigate(`/galleries/${slug}`)}>
-              Exit Slideshow
+              View Gallery
             </button>
           </div>
         </div>
@@ -241,9 +241,9 @@ const Slideshow = ({
       {!isMobile && (
         <div className="fixed top-4 left-4 flex items-center space-x-4 bg-white bg-opacity-80 p-3 shadow-md rounded-lg z-50">
           <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => navigate("/galleries")} />
-          {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <AiOutlinePlayCircle className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
+          {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <HiOutlinePlay className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
-
+          {/* 
           {enableClientView &&
             (clientView ? (
               <button className=" hover:text-red-500" onClick={handleExitClientView}>
@@ -253,10 +253,10 @@ const Slideshow = ({
               <button className="hover:text-red-500" onClick={() => setIsModalOpen(true)}>
                 Client Login
               </button>
-            ))}
+            ))} */}
 
           <button className="hover:text-red-500 cursor-pointer" onClick={() => navigate(`/galleries/${slug}`)}>
-            Exit Slideshow
+            View Gallery
           </button>
         </div>
       )}
