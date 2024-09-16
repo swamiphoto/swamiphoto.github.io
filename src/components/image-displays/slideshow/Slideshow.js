@@ -108,6 +108,13 @@ const Slideshow = ({
     }, duration - 2000);
   };
 
+  useEffect(() => {
+    if (isMobile) {
+      // Start paused on mobile
+      setSlideshowPlaying(false);
+    }
+  }, [isMobile]);
+
   const handlePlayPauseAudio = () => {
     if (playerRef.current && isPlayerReady) {
       if (audioPlaying) {
@@ -127,6 +134,10 @@ const Slideshow = ({
       setSlideshowPlaying(false);
       setAudioPlaying(false);
     } else {
+      // On mobile, ensure the video is unmuted and play the audio when starting the slideshow
+      if (isMobile && playerRef.current) {
+        playerRef.current.unMute();
+      }
       startSlideshow();
       handlePlayPauseAudio();
       setSlideshowPlaying(true);
