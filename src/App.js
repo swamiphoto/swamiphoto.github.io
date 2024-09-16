@@ -1,4 +1,5 @@
 import React from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -60,13 +61,15 @@ const MainContent = () => {
 
 function App() {
   return (
-    <ScrollProvider>
-      <Router>
-        <div className="App text-center">
-          <MainContent />
-        </div>
-      </Router>
-    </ScrollProvider>
+    <HelmetProvider>
+      <ScrollProvider>
+        <Router>
+          <div className="App text-center">
+            <MainContent />
+          </div>
+        </Router>
+      </ScrollProvider>
+    </HelmetProvider>
   );
 }
 
