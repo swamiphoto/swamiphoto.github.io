@@ -17,6 +17,7 @@ const Slideshow = ({
   youtubeUrl,
   subtitle = "Subtitle",
   customDurations = {},
+  duration = 10000,
   captions = {},
   coverImageIndex = 0,
   mobileCoverImageIndex = 0,
@@ -99,13 +100,13 @@ const Slideshow = ({
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
-    const duration = customDurations[currentImageIndex] || 10000;
+    const slideDuration = customDurations[currentImageIndex] || duration;
     slideshowInterval.current = setTimeout(() => {
       setTransitioning(true);
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
       setTransitioning(false);
       if (slideshowPlaying) startSlideshow();
-    }, duration - 2000);
+    }, slideDuration - 2000);
   };
 
   useEffect(() => {

@@ -13,6 +13,7 @@ const DEFAULT_SLIDESHOW_LAYOUT = "kenburns";
 const DEFAULT_YOUTUBE_LINK = "https://www.youtube.com/watch?v=PYujyluMxMU";
 const DEFAULT_SHOW_COVER = false;
 const DEFAULT_ENABLE_SLIDESHOW = false;
+const DEFAULT_SLIDESHOW_DURATION = 10000;
 
 const SingleGallery = () => {
   const { gallerySlug, view } = useParams();
@@ -61,7 +62,7 @@ const SingleGallery = () => {
     return <div>Gallery not found</div>;
   }
 
-  const { layout: slideshowLayout = DEFAULT_SLIDESHOW_LAYOUT, youtubeLinks = [DEFAULT_YOUTUBE_LINK], customDurations = {}, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0 } = gallery.slideshowSettings || {};
+  const { layout: slideshowLayout = DEFAULT_SLIDESHOW_LAYOUT, youtubeLinks = [DEFAULT_YOUTUBE_LINK], customDurations = {}, duration = DEFAULT_SLIDESHOW_DURATION, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0 } = gallery.slideshowSettings || {};
 
   const { layout = DEFAULT_LAYOUT, showCover = DEFAULT_SHOW_COVER, enableSlideshow = DEFAULT_ENABLE_SLIDESHOW, enableClientView = false, clientSettings = {} } = gallery;
 
@@ -119,6 +120,7 @@ const SingleGallery = () => {
           subtitle={gallery.slideshowSettings?.subtitle || gallery.description}
           youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
           customDurations={customDurations}
+          duration={duration}
           captions={captions}
           coverImageIndex={coverImageIndex}
           mobileCoverImageIndex={mobileCoverImageIndex}

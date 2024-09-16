@@ -85,7 +85,8 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=_iktURk0X-A"],
-      layout: "kenburns",
+      layout: "film-stack",
+      duration: 5000,
     },
     enableClientView: true,
     clientSettings: {
@@ -103,7 +104,7 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=BeUSuSXBqMQ"],
-      layout: "film-stack",
+      layout: "film-single",
     },
     enableClientView: true,
     clientSettings: {
