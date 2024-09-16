@@ -120,13 +120,13 @@ const Slideshow = ({
       if (audioPlaying) {
         playerRef.current.pauseVideo();
       } else {
-        playerRef.current.unMute(); // Ensure video is unmuted after interaction
+        // Explicitly unmute and play video on user interaction (especially for mobile)
+        playerRef.current.unMute();
         playerRef.current.playVideo();
       }
       setAudioPlaying(!audioPlaying);
     }
   };
-
   const handlePlayPauseSlideshow = () => {
     if (slideshowPlaying) {
       clearInterval(slideshowInterval.current);
@@ -136,7 +136,8 @@ const Slideshow = ({
     } else {
       // On mobile, ensure the video is unmuted and play the audio when starting the slideshow
       if (isMobile && playerRef.current) {
-        playerRef.current.unMute();
+        playerRef.current.unMute(); // Unmute the video
+        playerRef.current.playVideo(); // Explicitly play the video on mobile interaction
       }
       startSlideshow();
       handlePlayPauseAudio();
