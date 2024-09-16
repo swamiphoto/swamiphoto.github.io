@@ -52,7 +52,7 @@ const galleryData = [
     thumbnailUrl: `${bucketUrl}/photos/landscapes/california/AR501858.jpg`,
     slug: "california",
     imagesFolderUrl: "landscapes/california",
-    layout: "horizontal",
+    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=1opgh7ky2nU", "https://www.youtube.com/watch?v=hes6FYmLXmQ"],
@@ -74,6 +74,78 @@ const galleryData = [
     description: "A collection of images from Japan.",
     imagesFolderUrl: "landscapes/japan",
     layout: "horizontal",
+  },
+  {
+    name: "Anagha",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/anagha/DSC_0068.jpg`,
+    slug: "anagha",
+    description: "Forgot how good a poser Anagha was as a kid!",
+    imagesFolderUrl: "portraits/anagha",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=_iktURk0X-A"],
+      layout: "kenburns",
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "harmonium",
+      clientMessage: "Hello Megha/Adithya, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
+    },
+  },
+  {
+    name: "Anagha at Adobe Lodge",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/anagha2/DSC_1309-Edit.jpg`,
+    slug: "anagha-family",
+    description: "My first shoot with Anagha. She was a natural!",
+    imagesFolderUrl: "portraits/anagha2",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
+      layout: "film-single",
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "harmonium",
+      clientMessage: "Hello Megha/Adithya, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
+    },
+  },
+  {
+    name: "Naga and Bharath (Maternity)",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg`,
+    slug: "naga-bharath",
+    description: "My first shoot with Naga and Bharath. Naga was pregnant with Sathya",
+    imagesFolderUrl: "portraits/naga-stanford",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=JHkx2XOtlpU"],
+      layout: "kenburns",
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "sathya",
+      clientMessage: "Hello Naga/Bharath...my first shoot with you...nostalgic! Here are the rest of the images only you can see.",
+    },
+  },
+  {
+    name: "Naga, Bharath, and Sathya",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-adobe/DSC_5614.jpg`,
+    slug: "naga-bharath-sathya",
+    description: "First shoot with Sathya.",
+    imagesFolderUrl: "portraits/naga-adobe",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=puOnVzlkrQM"],
+      layout: "kenburns",
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "sathya",
+      clientMessage: "Hello Naga/Bharath...these are the images form Adobe Lodge...our first shoot with Sathya! Here are the rest of the images only you can see.",
+    },
   },
 ];
 

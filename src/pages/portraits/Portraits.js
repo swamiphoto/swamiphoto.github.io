@@ -23,6 +23,7 @@ const Portraits = () => {
 
       <Photo src={IMAGES.portraits.suma} alt="Suma" allPhotos={allPhotos} />
       <Photo src={IMAGES.portraits.mala2} alt="Mala 2" allPhotos={allPhotos} />
+      <Photo src="https://storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg" alt="Anagha" allPhotos={allPhotos} />
       <Photo src={IMAGES.portraits.amrita2} alt="Amrita 2" allPhotos={allPhotos} />
       <Photo src={IMAGES.portraits.naga2} alt="Naga 2" allPhotos={allPhotos} />
     </main>

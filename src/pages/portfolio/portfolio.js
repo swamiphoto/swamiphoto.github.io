@@ -37,7 +37,7 @@ const Portfolio = () => {
       name: "Portraits",
       description:
         "Capturing a person's beauty, inside and out, and bringing out the spirit of their unique character is very rewarding.  I love observing the unique dynamics and quirks of each family, and becoming a part of their world for a day. It's a joy to create images they'll treasure for years to come.",
-      images: [IMAGES.portraits.naga, IMAGES.portraits.mala],
+      images: [IMAGES.portraits.naga, IMAGES.portraits.mala, "https://storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg"],
       link: "/portfolio/portraits",
       autoplaySpeed: 4500,
     },
@@ -100,7 +100,7 @@ const Portfolio = () => {
       <Photo src={IMAGES.landscapes.gateway} caption="Official conference backdrop, Social Media Week Mumbai." captionDesign="design2" />
 
       <Photo
-        src="https://storage.googleapis.com/swamiphoto/photos/recent/aurora2.jpg"
+        src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/aurora2.jpg"
         layout="print"
         title="Auoara Borealis in California"
         caption="Who would’ve thought you could see the Aurora in California? As soon as I heard it was possible, I grabbed a few friends, and we dashed to Livermore to capture this rare, once-in-a-blue-moon shot. SFGATE featured this image in their publication the next morning."
