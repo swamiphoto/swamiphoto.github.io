@@ -121,6 +121,7 @@ const SingleGallery = () => {
         <meta property="og:description" content={gallery.description} />
         <meta property="og:image" content={gallery.thumbnailUrl || imageUrls[0]} />
         <meta property="og:url" content={window.location.href} />
+        <meta property="og:type" content="website" />
         <meta name="twitter:title" content={gallery.name} />
         <meta name="twitter:description" content={gallery.description} />
         <meta name="twitter:image" content={gallery.thumbnailUrl || imageUrls[0]} />
