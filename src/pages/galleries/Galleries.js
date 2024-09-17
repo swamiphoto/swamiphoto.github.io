@@ -186,6 +186,25 @@ const galleryData = [
       clientMessage: "Hello Naga/Bharath...here are all the images from our first shoot with Sriman (Mt. Diablo)! Remember the fox?!",
     },
   },
+  {
+    name: "Traditional Sriman",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-home/DSC_4265-2.jpg`,
+    slug: "traditional-sriman",
+    description: "Sriman in traditional attire",
+    imagesFolderUrl: "portraits/naga-home",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=PYujyluMxMU"],
+      layout: "film-single",
+      duration: 7000,
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "nakedbaby",
+      clientMessage: "Hello Naga/Bharath...here are all the images from the shoot we did at your previous place. Naked baby shots.",
+    },
+  },
 ];
 
 const Galleries = () => {
