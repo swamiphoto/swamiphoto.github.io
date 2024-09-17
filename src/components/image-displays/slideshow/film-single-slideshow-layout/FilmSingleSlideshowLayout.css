@@ -30,10 +30,18 @@
 @media (max-width: 768px) {
   .film-single-image.horizontal {
     width: 100vw;
+
+    img {
+      width: 100vw;
+    }
   }
 
   .film-single-image.vertical {
     width: 350px;
+
+    img {
+      width: 350px;
+    }
   }
 }
 

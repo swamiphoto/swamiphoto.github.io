@@ -32,10 +32,18 @@
 @media (max-width: 768px) {
   .film-stack-image.horizontal {
     width: 100vw;
+
+    img {
+      width: 100vw;
+    }
   }
 
   .film-stack-image.vertical {
     width: 350px;
+
+    img {
+      width: 350px;
+    }
   }
 }
 
