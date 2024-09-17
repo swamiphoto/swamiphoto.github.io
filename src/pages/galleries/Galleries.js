@@ -113,7 +113,7 @@ const galleryData = [
     },
   },
   {
-    name: "Naga and Bharath (Maternity)",
+    name: "Naga and Bharath",
     thumbnailUrl: `${bucketUrl}/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg`,
     slug: "naga-bharath",
     description: "My first shoot with Naga and Bharath. Naga was pregnant with Sathya",
@@ -131,9 +131,9 @@ const galleryData = [
     },
   },
   {
-    name: "Naga, Bharath, and Sathya",
+    name: "Sathya",
     thumbnailUrl: `${bucketUrl}/photos/portraits/naga-adobe/DSC_5614.jpg`,
-    slug: "naga-bharath-sathya",
+    slug: "sathya",
     description: "First shoot with Sathya.",
     imagesFolderUrl: "portraits/naga-adobe",
     layout: "masonry",
@@ -146,7 +146,44 @@ const galleryData = [
     enableClientView: true,
     clientSettings: {
       clientLogin: "sathya",
-      clientMessage: "Hello Naga/Bharath...these are the images form Adobe Lodge...our first shoot with Sathya! Here are the rest of the images only you can see.",
+      clientMessage: "Hello Naga/Bharath...these are the images from Adobe Lodge...our first shoot with Sathya! Here are the rest of the images only you can see.",
+    },
+  },
+  {
+    name: "Young Boy Sathya",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sanjose/_DSC0510.jpg`,
+    slug: "young-boy-sathya",
+    description: "Second shoot with Sathya.",
+    imagesFolderUrl: "portraits/naga-sanjose",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=puOnVzlkrQM"],
+      layout: "kenburns",
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "sathya",
+      clientMessage: "Hello Naga/Bharath...here are all the images from our second shoot with Sathya!",
+    },
+  },
+  {
+    name: "Sathya and Sriman",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-diablo/DSC_4122.jpg`,
+    slug: "sathya-sriman",
+    description: "Sriman's first shoot",
+    imagesFolderUrl: "portraits/naga-diablo",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=hzGHrQBq_i4"],
+      layout: "kenburns",
+      duration: 9000,
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "sriman",
+      clientMessage: "Hello Naga/Bharath...here are all the images from our first shoot with Sriman (Mt. Diablo)! Remember the fox?!",
     },
   },
 ];
