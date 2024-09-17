@@ -12,10 +12,19 @@
 .film-single-image.horizontal {
   height: auto;
   width: 70vw;
+
+  img {
+    height: auto;
+    width: 70vw;
+  }
 }
 
 .film-single-image.vertical {
   width: 550px;
+
+  img {
+    width: 550px;
+  }
 }
 
 @media (max-width: 768px) {

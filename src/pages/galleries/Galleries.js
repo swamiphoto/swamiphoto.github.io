@@ -24,7 +24,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "rattlesnake", // Encrypted password
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga & Bharath, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
     },
   },
@@ -42,7 +42,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "wisteria", // Encrypted password
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
     },
   },
@@ -66,6 +66,11 @@ const galleryData = [
     imagesFolderUrl: "portraits/naga-lavendar",
     layout: "masonry",
     enableSlideshow: true,
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "wisteria",
+      clientMessage: "Hi Naga, here are all the Lavendar images — send me the URLs of the ones you like, I'll make them public.",
+    },
   },
   {
     name: "Japan",
@@ -126,7 +131,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "sathya",
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga/Bharath...my first shoot with you...nostalgic! Here are the rest of the images only you can see.",
     },
   },
@@ -145,7 +150,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "sathya",
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga/Bharath...these are the images from Adobe Lodge...our first shoot with Sathya! Here are the rest of the images only you can see.",
     },
   },
@@ -163,7 +168,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "sathya",
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga/Bharath...here are all the images from our second shoot with Sathya!",
     },
   },
@@ -182,7 +187,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "sriman",
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga/Bharath...here are all the images from our first shoot with Sriman (Mt. Diablo)! Remember the fox?!",
     },
   },
@@ -201,7 +206,7 @@ const galleryData = [
     },
     enableClientView: true,
     clientSettings: {
-      clientLogin: "nakedbaby",
+      clientLogin: "wisteria",
       clientMessage: "Hello Naga/Bharath...here are all the images from the shoot we did at your previous place. Naked baby shots.",
     },
   },
