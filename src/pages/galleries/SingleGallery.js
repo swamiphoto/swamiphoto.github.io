@@ -23,7 +23,6 @@ const SingleGallery = () => {
   const [clientView, setClientView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState("");
-  const [metaHtml, setMetaHtml] = useState("");
 
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const gallery = galleryData.find((g) => g.slug === gallerySlug);
@@ -55,18 +54,6 @@ const SingleGallery = () => {
       fetchImages();
     }
   }, [gallery, clientView]);
-
-  useEffect(() => {
-    const fetchMetaData = async () => {
-      const res = await fetch(`/api/meta-tags?slug=${gallerySlug}`); // Call your serverless function
-      const metaHtml = await res.text();
-      setMetaHtml(metaHtml); // Store the dynamic meta tags
-    };
-
-    if (gallerySlug) {
-      fetchMetaData();
-    }
-  }, [gallerySlug]);
 
   if (view === "slideshow" && !imagesLoaded && gallery) {
     return <Loading />;
@@ -130,11 +117,15 @@ const SingleGallery = () => {
       <Helmet>
         <title>{gallery.name}</title>
         <meta name="description" content={gallery.description} />
+        <meta property="og:title" content={gallery.name} />
+        <meta property="og:description" content={gallery.description} />
+        <meta property="og:image" content={gallery.thumbnailUrl || imageUrls[0]} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content={gallery.name} />
+        <meta name="twitter:description" content={gallery.description} />
+        <meta name="twitter:image" content={gallery.thumbnailUrl || imageUrls[0]} />
       </Helmet>
-
-      {/* Inject dynamic meta tags */}
-      <div dangerouslySetInnerHTML={{ __html: metaHtml }} />
-
       {view === "slideshow" && enableSlideshow ? (
         <Slideshow
           imageUrls={imageUrls}
