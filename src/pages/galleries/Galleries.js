@@ -205,6 +205,44 @@ const galleryData = [
       clientMessage: "Hello Naga/Bharath...here are all the images from the shoot we did at your previous place. Naked baby shots.",
     },
   },
+  {
+    name: "Sai Suma",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit.jpg`,
+    slug: "saisuma",
+    description: "Modeling for Chiffon and Spice",
+    imagesFolderUrl: "portraits/saisuma",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=PYujyluMxMU"],
+      layout: "film-single",
+      duration: 7000,
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "chiffon",
+      clientMessage: "Hi Suma...here are a few more images from the shoot that only you can see.",
+    },
+  },
+  {
+    name: "Sathya and Ishuwar",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/sathya-ishuwar/DSC_9082.jpg`,
+    slug: "sathyaishuwar",
+    description: "Pre-wedding shoot",
+    imagesFolderUrl: "portraits/sathya-ishuwar",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=6P5zx_rxlhI"],
+      layout: "film-stack",
+      duration: 7000,
+    },
+    enableClientView: true,
+    clientSettings: {
+      clientLogin: "stanford",
+      clientMessage: "Hi Sathya/Ishuwar...so long ago and yet feels like yesterday! Here are more images only you can see.",
+    },
+  },
 ];
 
 const Galleries = () => {
