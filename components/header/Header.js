@@ -13,6 +13,10 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   // Conditionally apply styles based on the current route
   const linkStyle = (path) => (router.pathname === path ? "text-gray-900 underline" : "");
 
@@ -27,27 +31,27 @@ const Header = () => {
             <TfiClose onClick={toggleMenu} className={`h-5 w-5 absolute top-5 right-5 transition-opacity md:hidden ${isMenuOpen ? "opacity-100" : "opacity-0"}`} />
             <ul className="flex flex-col items-center justify-center h-full space-y-4 md:flex-row md:space-y-0 md:space-x-6 md:h-auto font-medium text-gray-500">
               <li>
-                <Link href="/portfolio" className={linkStyle("/portfolio")}>
+                <Link href="/portfolio" className={linkStyle("/portfolio")} onClick={closeMenu}>
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/galleries" className={linkStyle("/galleries")}>
+                <Link href="/galleries" className={linkStyle("/galleries")} onClick={closeMenu}>
                   Galleries
                 </Link>
               </li>
               <li>
-                <Link href="/wallprints" className={linkStyle("/wallprints")}>
+                <Link href="/wallprints" className={linkStyle("/wallprints")} onClick={closeMenu}>
                   Wall Prints
                 </Link>
               </li>
               <li>
-                <a href="https://swamiphoto.substack.com" target="_blank" rel="noreferrer" className={linkStyle("/podcast")}>
+                <a href="https://swamiphoto.substack.com" target="_blank" rel="noreferrer" className={linkStyle("/podcast")} onClick={closeMenu}>
                   Podcast
                 </a>
               </li>
               <li>
-                <Link href="/about" className={linkStyle("/about")}>
+                <Link href="/about" className={linkStyle("/about")} onClick={closeMenu}>
                   About
                 </Link>
               </li>
