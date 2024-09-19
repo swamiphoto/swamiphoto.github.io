@@ -12,7 +12,13 @@ const Lightbox = () => {
   const [nextImageUrls, setNextImageUrls] = useState([]);
   const [cursorType, setCursorType] = useState("default");
 
-  // Fetch the navigation state from localStorage (or use query params)
+  // Preload image function
+  const preloadImage = (src) => {
+    const img = new Image();
+    img.src = src;
+  };
+
+  // Fetch the navigation state from localStorage
   useEffect(() => {
     const navigationData = localStorage.getItem("imageNavigation");
     if (navigationData) {
@@ -20,6 +26,14 @@ const Lightbox = () => {
       setPreviousImageUrls(previousImageUrls);
       setNextImageUrls(nextImageUrls);
       setCurrentImage(currentImage);
+
+      // Preload the next and previous images
+      if (nextImageUrls.length > 0) {
+        preloadImage(nextImageUrls[0]); // Preload the next image
+      }
+      if (previousImageUrls.length > 0) {
+        preloadImage(previousImageUrls[previousImageUrls.length - 1]); // Preload the previous image
+      }
     }
   }, [imageId]);
 
