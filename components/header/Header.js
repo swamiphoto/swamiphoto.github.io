@@ -40,11 +40,11 @@ const Header = () => {
                   Galleries
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/wallprints" className={linkStyle("/wallprints")} onClick={closeMenu}>
                   Wall Prints
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <a href="https://swamiphoto.substack.com" target="_blank" rel="noreferrer" className={linkStyle("/podcast")} onClick={closeMenu}>
                   Podcast
