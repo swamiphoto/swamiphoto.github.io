@@ -8,6 +8,7 @@ import useYouTubePlayer from "./useYouTubePlayer";
 import FilmStackSlideshowLayout from "./film-stack-slideshow-layout/FilmStackSlideshowLayout";
 import FilmSingleSlideshowLayout from "./film-single-slideshow-layout/FilmSingleSlideshowLayout";
 import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlideshowLayout";
+import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
 const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
@@ -94,11 +95,8 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
   };
 
   useEffect(() => {
-    if (isMobile) {
-      // Start paused on mobile
-      setSlideshowPlaying(false);
-    }
-  }, [isMobile]);
+    setSlideshowPlaying(false);
+  }, []);
 
   const handlePlayPauseAudio = () => {
     if (playerRef.current && isPlayerReady) {
@@ -196,6 +194,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
 
   return (
     <div className="flex h-screen overflow-hidden">
+      {/* For Mobile Version */}
       {isMobile && isModalOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center">
           {/* Translucent white background */}
@@ -216,13 +215,50 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
               {/* Styled button to start slideshow and dismiss modal */}
               <button
                 onClick={() => {
-                  handleStartSlideshow(); // Start slideshow
-                  setIsModalOpen(false); // Close the modal
+                  setIsModalOpen(false);
+                  handlePlayPauseSlideshow(); // Start slideshow
                 }}
                 className="px-8 py-4 bg-black text-white font-bold uppercase tracking-wider cursor-pointer">
                 Start Slideshow
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* For Non-Mobile (Desktop and Larger Screens) */}
+      {!isMobile && isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex justify-center items-center">
+          {/* Translucent white background */}
+          <div className="absolute inset-0 bg-gray-300 opacity-95"></div>
+
+          {/* Full height modal with margin and shadow */}
+          <div className="relative z-[100] bg-white  rounded-2xl shadow-xl w-full mx-auto flex" style={{ margin: "15px", height: "calc(100% - 30px)" }}>
+            {/* Left 2/3: Cover image with no padding */}
+            <div className="w-2/3 h-full">
+              <img src={thumbnailUrl} alt="Cover Image" className="w-full h-full object-cover rounded-l-lg" />
+            </div>
+
+            {/* Right 1/3: Text and button */}
+            <div className="w-1/3 h-full p-10 pr-16 flex flex-col justify-center items-start text-left">
+              <h2 className="text-5xl font-semibold mb-4">{title}</h2>
+              <p className="text-xl text-gray-600 mb-6">{subtitle}</p>
+
+              {/* Styled button to start slideshow and dismiss modal */}
+              <button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  handlePlayPauseSlideshow(); // Start slideshow
+                }}
+                className="px-8 py-4 bg-black hover:opacity-80 text-white font-bold uppercase tracking-wider cursor-pointer">
+                Start Slideshow
+              </button>
+            </div>
+
+            {/* Close button in top-right corner */}
+            <button onClick={() => router.push("/galleries")} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+              <TfiClose className={`h-5 w-5`} />
+            </button>
           </div>
         </div>
       )}
