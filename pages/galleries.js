@@ -213,7 +213,7 @@ const galleryData = [
   },
   {
     name: "Sai Suma",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit.jpg`,
+    thumbnailUrl: `${bucketUrl}/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit-Edit.jpg`,
     slug: "saisuma",
     description: "Modeling for Chiffon and Spice",
     imagesFolderUrl: "portraits/saisuma",

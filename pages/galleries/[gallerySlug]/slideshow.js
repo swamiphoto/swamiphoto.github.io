@@ -5,6 +5,7 @@ import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import Head from "next/head";
 import { fetchImageUrls } from "../../../common/images"; // Ensure fetchImageUrls is imported
 import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
+import { getCloudimageUrl } from "../../../common/images";
 
 const SlideshowPage = ({ gallerySlug, gallery }) => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         {/* Open Graph Meta Tags for Social Sharing */}
         <meta property="og:title" content={`${gallery.name} - Slideshow by Swami Venkataramani`} />
         <meta property="og:description" content={`${gallery.description} (Recommend viewing this on desktop in fullscreen mode)`} />
-        <meta property="og:image" content={gallery.thumbnailUrl} /> {/* Assuming thumbnail URL is available */}
+        <meta property="og:image" content={getCloudimageUrl(gallery.thumbnailUrl, { width: 1200, quality: 80 })} />
         <meta property="og:url" content={`https://swamiphoto.com/galleries/${gallerySlug}/slideshow`} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}

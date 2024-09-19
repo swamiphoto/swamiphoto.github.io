@@ -10,7 +10,7 @@ import FilmSingleSlideshowLayout from "./film-single-slideshow-layout/FilmSingle
 import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlideshowLayout";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, enableClientView = false, clientView = false, handleExitClientView }) => {
+const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
