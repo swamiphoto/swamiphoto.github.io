@@ -101,24 +101,16 @@ const Lightbox = () => {
   const handleClose = (e) => {
     e.stopPropagation();
 
-    // Function to navigate back to a non-image page
-    const navigateBackToNonImagePage = () => {
-      let historyDepth = -1;
+    // Retrieve the parent page from localStorage
+    const parentPage = localStorage.getItem("parentPage");
 
-      while (historyDepth >= -history.length) {
-        const previousUrl = document.referrer || window.history.state?.url || "";
-        if (!previousUrl.includes("/image/")) {
-          window.history.go(historyDepth); // Navigate back to this non-image URL
-          return;
-        }
-        historyDepth--;
-      }
-
-      // Fallback to homepage if no non-image URL found in history
+    if (parentPage) {
+      // Navigate back to the stored parent page
+      router.push(parentPage);
+    } else {
+      // Fallback to the home page if no parent page is found
       router.push("/");
-    };
-
-    navigateBackToNonImagePage();
+    }
   };
 
   if (!currentImage) {

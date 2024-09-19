@@ -118,13 +118,15 @@ export const base64Decode = (str) => {
 };
 
 // Common function to handle photo clicks and navigate to the lightbox
-export const handleImageClick = (imageUrl, allPhotos, router, from) => {
-  console.log("From Page:", from); // Debugging line
-  const currentIndex = allPhotos.indexOf(imageUrl);
-  const previousImageUrls = allPhotos.slice(0, currentIndex);
-  const nextImageUrls = allPhotos.slice(currentIndex + 1);
+export const handleImageClick = (imageUrl, allPhotos, router) => {
+  const currentIndex = allPhotos.indexOf(imageUrl); // Find the index of the clicked photo
+  const previousImageUrls = allPhotos.slice(0, currentIndex); // Get previous images
+  const nextImageUrls = allPhotos.slice(currentIndex + 1); // Get next images
 
-  const uniqueId = base64Encode(imageUrl);
+  const uniqueId = base64Encode(imageUrl); // Base64 encode the image URL
+
+  // Store the current page (parent page) in localStorage
+  localStorage.setItem("parentPage", router.asPath); // Store the current route as the parent page
 
   if (uniqueId) {
     localStorage.setItem(
@@ -133,7 +135,6 @@ export const handleImageClick = (imageUrl, allPhotos, router, from) => {
         previousImageUrls,
         nextImageUrls,
         currentImage: imageUrl,
-        from, // Save the originating page
       })
     );
 
