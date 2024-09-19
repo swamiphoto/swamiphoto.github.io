@@ -199,18 +199,18 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
       {isMobile && isModalOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center">
           {/* Translucent white background */}
-          <div className="absolute inset-0 bg-black opacity-80"></div>
+          <div className="absolute inset-0 bg-white opacity-95"></div>
 
           {/* Full height modal with margin, padding, and shadow */}
-          <div className="relative z-50 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
+          <div className="relative z-50 bg-white border border-gray-100 rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
             {/* Close button in top-right corner */}
             <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
               ✕
             </button>
 
             <div className="flex flex-col justify-center items-center h-full text-center">
-              <img src={thumbnailUrl} alt="Cover Image" className="mb-4 w-full h-auto rounded-lg" />
-              <h2 className="text-xl font-semibold mb-2">{title}</h2>
+              <img src={thumbnailUrl} alt="Cover Image" className="mb-4 w-full h-auto" />
+              <h2 className="text-2xl font-semibold mb-2">{title}</h2>
               <p className="text-gray-600 mb-4">{subtitle}</p>
 
               {/* Styled button to start slideshow and dismiss modal */}
