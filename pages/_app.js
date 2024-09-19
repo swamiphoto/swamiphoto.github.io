@@ -44,13 +44,11 @@ function MyApp({ Component, pageProps }) {
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
       <div className="App text-center">
-        {/* Conditionally render the Header */}
         {!isNoHeaderPath && <Header />}
         <div className={`${isNoHeaderPath ? "" : "px-4 md:px-0"}`}>
           {/* The page-specific component */}
           <Component {...pageProps} />
         </div>
-        {/* Conditionally render the Footer */}
         {!isNoHeaderPath && <Footer />}
       </div>
     </ScrollProvider>
