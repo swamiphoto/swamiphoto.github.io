@@ -212,18 +212,24 @@ const Slideshow = ({
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {isMobile && isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-white bg-opacity-95 flex justify-center items-center p-4 rounded-lg" style={{ margin: "15px", padding: "15px" }}>
-          <div className="text-center">
+      <div className="fixed inset-0 z-50 flex justify-center items-center">
+        {/* Translucent white background */}
+        <div className="absolute inset-0 bg-white opacity-80"></div>
+
+        {/* Full height modal with margin, padding, and shadow */}
+        <div className="relative z-50 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
+          <div className="flex flex-col justify-center items-center h-full text-center">
             <img src={imageUrls[coverImageIndex]} alt="Cover Image" className="mb-4 w-full h-auto rounded-lg" />
             <h2 className="text-xl font-semibold mb-2">{title}</h2>
             <p className="text-gray-600 mb-4">{subtitle}</p>
-            <button className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition" onClick={handleStartSlideshow}>
+
+            {/* Styled button */}
+            <button onClick={handleStartSlideshow} className="px-8 py-4 bg-black text-white font-bold opacity-90 hover:opacity-100 uppercase tracking-wider cursor-pointer">
               Start Slideshow
             </button>
           </div>
         </div>
-      )}
+      </div>
 
       {isMobile && !isModalOpen && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-100 z-50">
