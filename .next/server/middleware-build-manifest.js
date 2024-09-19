@@ -19,16 +19,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/galleries": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/galleries.js"
-    ],
-    "/galleries/[gallerySlug]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/galleries/[gallerySlug].js"
-    ],
     "/image/[imageId]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -38,11 +28,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/portfolio.js"
-    ],
-    "/portfolio/landscapes": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/portfolio/landscapes.js"
     ]
   },
   "ampFirstPages": []
