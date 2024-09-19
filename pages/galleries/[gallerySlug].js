@@ -19,14 +19,24 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
   useEffect(() => {
     if (gallery) {
       const fetchImages = async () => {
-        let urls = await fetchImageUrls(gallery.imagesFolderUrl);
+        let urls = [];
 
-        if (!clientView) {
-          urls = urls.filter((url) => !url.includes("protected"));
+        // Use provided imageUrls if specified
+        if (gallery.imageUrls && gallery.imageUrls.length > 0) {
+          urls = gallery.imageUrls;
+        } else if (gallery.imagesFolderUrl) {
+          // Otherwise fetch images from the folder URL
+          urls = await fetchImageUrls(gallery.imagesFolderUrl);
+
+          // Filter out protected images if not in client view
+          if (!clientView) {
+            urls = urls.filter((url) => !url.includes("protected"));
+          }
         }
 
         setImageUrls(urls);
 
+        // Preload the images
         const imageLoadPromises = urls.map((url) => {
           return new Promise((resolve) => {
             const img = new Image();
@@ -37,7 +47,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         });
 
         await Promise.all(imageLoadPromises);
-        setImagesLoaded(true);
+        setImagesLoaded(true); // Mark images as loaded
       };
 
       fetchImages();

@@ -15,8 +15,16 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   useEffect(() => {
     if (gallery) {
       const fetchImages = async () => {
-        let urls = await fetchImageUrls(gallery.imagesFolderUrl); // Fetch images from the folder URL
-        urls = urls.filter((url) => !url.includes("protected"));
+        let urls = [];
+
+        if (gallery.imageUrls && gallery.imageUrls.length > 0) {
+          // Use provided imageUrls if specified
+          urls = gallery.imageUrls;
+        } else if (gallery.imagesFolderUrl) {
+          // Otherwise fetch images from the folder URL
+          urls = await fetchImageUrls(gallery.imagesFolderUrl);
+          urls = urls.filter((url) => !url.includes("protected"));
+        }
 
         setImageUrls(urls);
 

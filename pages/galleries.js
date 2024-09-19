@@ -249,6 +249,25 @@ const galleryData = [
       clientMessage: "Hi Sathya/Ishuwar...so long ago and yet feels like yesterday! Here are more images only you can see.",
     },
   },
+  {
+    name: "The Journey",
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sanjose/_DSC0510.jpg`,
+    slug: "naga-journey",
+    description: "The journey with Naga's family",
+    imageUrls: [
+      "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9185-Edit.jpg",
+      "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9214-Edit.jpg",
+      "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9227-Edit.jpg",
+      "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9222-Edit.jpg",
+      "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5566-Edit.jpg",
+    ],
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=6P5zx_rxlhI"],
+    },
+    isHidden: true,
+  },
 ];
 
 const Galleries = () => {
@@ -263,16 +282,16 @@ const Galleries = () => {
         </Hero>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryData.map((gallery) => (
-            <Link href={`/galleries/${gallery.slug}`} key={gallery.name}>
-              {" "}
-              {/* Wrapping content in <a> for proper Next.js routing */}
-              <div className="relative overflow-hidden shadow-lg">
-                <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 500, quality: 80 })} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
-              </div>
-              <p className="text-center mt-2 text-md tracking-tighter text-gray-600">{gallery.name}</p>
-            </Link>
-          ))}
+          {galleryData
+            .filter((gallery) => !gallery.isHidden)
+            .map((gallery) => (
+              <Link href={`/galleries/${gallery.slug}`} key={gallery.name}>
+                <div className="relative overflow-hidden shadow-lg">
+                  <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 500, quality: 80 })} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                </div>
+                <p className="text-center mt-2 text-md tracking-tighter text-gray-600">{gallery.name}</p>
+              </Link>
+            ))}
         </div>
       </main>
     </>
