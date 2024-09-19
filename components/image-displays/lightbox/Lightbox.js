@@ -119,7 +119,7 @@ const Lightbox = () => {
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
-      onClick={handleClick} // Re-enabled handleClick for left and right navigation
+      onClick={handleClick}
       style={{
         cursor: cursorType === "left" ? 'url("/left-arrow.svg") 24 24, auto' : cursorType === "right" ? 'url("/right-arrow.svg") 24 24, auto' : "default",
       }}>
