@@ -199,7 +199,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
       {isMobile && isModalOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center">
           {/* Translucent white background */}
-          <div className="absolute inset-0 bg-white opacity-50"></div>
+          <div className="absolute inset-0 bg-black opacity-80"></div>
 
           {/* Full height modal with margin, padding, and shadow */}
           <div className="relative z-50 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
@@ -219,7 +219,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
                   handleStartSlideshow(); // Start slideshow
                   setIsModalOpen(false); // Close the modal
                 }}
-                className="px-8 py-4 bg-white text-black font-bold opacity-70 hover:opacity-95 uppercase tracking-wider cursor-pointer">
+                className="px-8 py-4 bg-black text-white font-bold uppercase tracking-wider cursor-pointer">
                 Start Slideshow
               </button>
             </div>
