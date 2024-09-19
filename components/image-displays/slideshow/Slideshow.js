@@ -25,7 +25,6 @@ const Slideshow = ({
   slug,
   enableClientView = false,
   clientView = false,
-  setIsModalOpen,
   handleExitClientView,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -36,6 +35,7 @@ const Slideshow = ({
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true); // Start with the modal open on mobile
 
   const playerRef = useYouTubePlayer(youtubeUrl ? youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0] : "", setIsPlayerReady);
   const slideshowInterval = useRef(null);
@@ -192,6 +192,11 @@ const Slideshow = ({
     }
   };
 
+  const handleStartSlideshow = () => {
+    setIsModalOpen(false); // Close the modal when the slideshow starts
+    handlePlayPauseSlideshow(); // Start the slideshow by toggling the play/pause state
+  };
+
   const renderPhotos = () => {
     switch (layout) {
       case "film-stack":
@@ -207,7 +212,20 @@ const Slideshow = ({
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {isMobile && (
+      {isMobile && isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-white bg-opacity-95 flex justify-center items-center p-4 rounded-lg" style={{ margin: "15px", padding: "15px" }}>
+          <div className="text-center">
+            <img src={imageUrls[coverImageIndex]} alt="Cover Image" className="mb-4 w-full h-auto rounded-lg" />
+            <h2 className="text-xl font-semibold mb-2">{title}</h2>
+            <p className="text-gray-600 mb-4">{subtitle}</p>
+            <button className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition" onClick={handleStartSlideshow}>
+              Start Slideshow
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isMobile && !isModalOpen && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-100 z-50">
           <div className="flex items-center space-x-4">
             <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => router.push("/galleries")} />
