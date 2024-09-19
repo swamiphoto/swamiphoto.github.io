@@ -1,6 +1,11 @@
-// tailwind.config.js
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./components/**/**/*.{js,ts,jsx,tsx}", // This ensures deeper folders inside components are included
+    "./layouts/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -15,9 +20,8 @@ module.exports = {
         bold: 700,
         light: 300,
         thin: 100,
-        // You can add extra weight if you have them for Geist Mono
-        extrabold: 800, // Example, adjust according to your font files
-        black: 900, // Example, adjust according to your font files
+        extrabold: 800,
+        black: 900,
       },
       fontSize: {
         base: "19.5px",

@@ -9,6 +9,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "pages/about", "pages/bollywood", "pages/galleries", "pages/headshots", "pages/home", "pages/landscapes", "pages/portfolio", "pages/portraits", "pages/prints", "pages/recent", "pages/tennis", "pages/home.js", "pages/galleries.js", "common", "components", "hooks"],
   "exclude": ["node_modules", "**/node_modules/*"]
 }

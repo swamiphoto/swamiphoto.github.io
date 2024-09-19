@@ -1,0 +1,10 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/image/[imageId]": "pages/image/[imageId].js",
+  "/galleries": "pages/galleries.js",
+  "/portfolio": "pages/portfolio.js",
+  "/galleries/[gallerySlug]": "pages/galleries/[gallerySlug].js",
+  "/portfolio/landscapes": "pages/portfolio/landscapes.js"
+}
