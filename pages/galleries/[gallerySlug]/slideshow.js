@@ -53,7 +53,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         {/* Open Graph Meta Tags for Social Sharing */}
         <meta property="og:title" content={`${gallery.name} - Slideshow by Swami Venkataramani`} />
         <meta property="og:description" content={`${gallery.description} (Recommend viewing this on desktop in fullscreen mode)`} />
-        <meta property="og:image" content={getCloudimageUrl(gallery.thumbnailUrl, { width: 1600, quality: 80 })} />
+        <meta property="og:image" content="/images/mac.png" />
         <meta property="og:url" content={`https://www.swamiphoto.com/galleries/${gallerySlug}/slideshow`} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}
