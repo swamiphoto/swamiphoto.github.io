@@ -287,7 +287,7 @@ const Galleries = () => {
             .map((gallery) => (
               <Link href={`/galleries/${gallery.slug}`} key={gallery.name}>
                 <div className="relative overflow-hidden shadow-lg">
-                  <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 500, quality: 80 })} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                  <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 500, quality: 80 })} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 hover:opacity-90" />
                 </div>
                 <p className="text-center mt-2 text-md tracking-tighter text-gray-600">{gallery.name}</p>
               </Link>
