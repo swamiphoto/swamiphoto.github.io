@@ -2,7 +2,6 @@
   "name": "swamiphoto",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@geist-ui/react": "^2.2.5",
     "@geist-ui/react-icons": "^1.0.1",
