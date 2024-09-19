@@ -15,6 +15,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
     if (gallery) {
       const fetchImages = async () => {
         let urls = await fetchImageUrls(gallery.imagesFolderUrl); // Fetch images from the folder URL
+        urls = urls.filter((url) => !url.includes("protected"));
 
         setImageUrls(urls);
 
