@@ -97,7 +97,6 @@ const Lightbox = () => {
     }
   };
 
-  // Handle lightbox close
   const handleClose = (e) => {
     e.stopPropagation();
 
