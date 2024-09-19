@@ -10,23 +10,7 @@ import FilmSingleSlideshowLayout from "./film-single-slideshow-layout/FilmSingle
 import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlideshowLayout";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({
-  imageUrls,
-  layout = "film-stack",
-  title = "Gallery Title",
-  youtubeUrl,
-  subtitle = "Subtitle",
-  customDurations = {},
-  duration = 10000,
-  captions = {},
-  coverImageIndex = 0,
-  mobileCoverImageIndex = 0,
-  hideCaptionsOnMobile = true,
-  slug,
-  enableClientView = false,
-  clientView = false,
-  handleExitClientView,
-}) => {
+const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, enableClientView = false, clientView = false, handleExitClientView }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -212,24 +196,36 @@ const Slideshow = ({
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="fixed inset-0 z-50 flex justify-center items-center">
-        {/* Translucent white background */}
-        <div className="absolute inset-0 bg-white opacity-80"></div>
+      {isMobile && isModalOpen && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center">
+          {/* Translucent white background */}
+          <div className="absolute inset-0 bg-white opacity-50"></div>
 
-        {/* Full height modal with margin, padding, and shadow */}
-        <div className="relative z-50 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
-          <div className="flex flex-col justify-center items-center h-full text-center">
-            <img src={imageUrls[coverImageIndex]} alt="Cover Image" className="mb-4 w-full h-auto rounded-lg" />
-            <h2 className="text-xl font-semibold mb-2">{title}</h2>
-            <p className="text-gray-600 mb-4">{subtitle}</p>
-
-            {/* Styled button */}
-            <button onClick={handleStartSlideshow} className="px-8 py-4 bg-black text-white font-bold opacity-90 hover:opacity-100 uppercase tracking-wider cursor-pointer">
-              Start Slideshow
+          {/* Full height modal with margin, padding, and shadow */}
+          <div className="relative z-50 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
+            {/* Close button in top-right corner */}
+            <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+              ✕
             </button>
+
+            <div className="flex flex-col justify-center items-center h-full text-center">
+              <img src={thumbnailUrl} alt="Cover Image" className="mb-4 w-full h-auto rounded-lg" />
+              <h2 className="text-xl font-semibold mb-2">{title}</h2>
+              <p className="text-gray-600 mb-4">{subtitle}</p>
+
+              {/* Styled button to start slideshow and dismiss modal */}
+              <button
+                onClick={() => {
+                  handleStartSlideshow(); // Start slideshow
+                  setIsModalOpen(false); // Close the modal
+                }}
+                className="px-8 py-4 bg-white text-black font-bold opacity-70 hover:opacity-95 uppercase tracking-wider cursor-pointer">
+                Start Slideshow
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {isMobile && !isModalOpen && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-100 z-50">

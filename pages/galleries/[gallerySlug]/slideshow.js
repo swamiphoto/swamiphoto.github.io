@@ -72,8 +72,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
           customDurations={customDurations}
           duration={duration}
           captions={captions}
-          coverImageIndex={coverImageIndex}
-          mobileCoverImageIndex={mobileCoverImageIndex}
+          thumbnailUrl={gallery.thumbnailUrl}
           slug={gallerySlug}
         />
       ) : (
