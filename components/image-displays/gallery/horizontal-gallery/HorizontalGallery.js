@@ -1,11 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { getCloudimageUrl } from "../../../../common/images";
 import "./HorizontalGallery.module.css";
+import { useRouter } from "next/router";
 
 const HorizontalGallery = ({ name, images, description, showCover = true }) => {
   const [cursorType, setCursorType] = useState("default");
   const [isCoverScreen, setIsCoverScreen] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const horizontalScrollRef = useRef(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.admin !== undefined) {
+      setIsAdmin(true);
+    }
+  }, [router.query]);
 
   const handleWheel = (event) => {
     const container = horizontalScrollRef.current;
@@ -70,7 +79,7 @@ const HorizontalGallery = ({ name, images, description, showCover = true }) => {
 
   return (
     <div
-      className="horizontal-gallery h-screen flex overflow-hidden "
+      className="horizontal-gallery h-screen flex overflow-hidden"
       onWheel={handleWheel}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
@@ -93,9 +102,17 @@ const HorizontalGallery = ({ name, images, description, showCover = true }) => {
             </button>
           </div>
         )}
-        {images.map((image, index) => (
-          <img key={index} data-src={getCloudimageUrl(image, { width: 1300, quality: 80 })} className="max-h-[calc(100vh-40px)] object-cover mx-3 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
-        ))}
+
+        {!isAdmin &&
+          images.map((image, index) => <img key={index} data-src={getCloudimageUrl(image, { width: 1300, quality: 80 })} className="max-h-[calc(100vh-40px)] object-cover mx-3 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />)}
+
+        {isAdmin &&
+          images.map((image, index) => (
+            <div key={index} className="mb-4">
+              <p className="text-black font-bold">{index + 1}</p>
+              <img src={getCloudimageUrl(image, { width: 1300, quality: 80 })} className="w-60" />
+            </div>
+          ))}
       </div>
     </div>
   );

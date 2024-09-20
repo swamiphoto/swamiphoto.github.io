@@ -4,35 +4,38 @@ import styles from "./KenBurnsSlideshowLayout.module.css";
 import Text from "../../../text/Text";
 
 const KenBurnsSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transitioning, aspectRatios = [], captions, hideCaptionsOnMobile }) => {
-  const totalSlides = imageUrls.length + Object.keys(texts).length; // Total number of slides, including text slides
+  // Combine image and text slides in a single array, ensuring the text slide comes after the image
+  const slides = [];
+  imageUrls.forEach((imageUrl, index) => {
+    slides.push({ type: "image", index });
+    if (texts.hasOwnProperty(index + 1)) {
+      slides.push({ type: "text", index: index + 1 });
+    }
+  });
 
   return (
     <div className={styles["kenburns-container"]}>
-      {/* Loop through both images and texts, combining their indices */}
-      {Array.from({ length: totalSlides }).map((_, index) => {
-        const isTextSlide = texts.hasOwnProperty(index); // Check if current index is a text slide
-
-        // If it's a text slide, render the text slide with the same transition and zoom effect
-        if (isTextSlide) {
+      {slides.map((slide, index) => {
+        if (slide.type === "text") {
           return (
-            <div key={index} className={`${styles["kenburns-text"]} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
+            <div key={`text-${slide.index}`} className={`${styles["kenburns-text"]} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
               <div className="flex justify-center items-center h-full bg-white">
                 <div className={`max-w-3xl px-4 ${styles["kenburns-zoom-text"]}`}>
-                  <Text layout="layout2">{texts[index]}</Text>
+                  <Text layout="layout2">{texts[slide.index]}</Text>
                 </div>
               </div>
             </div>
           );
         } else {
-          // Calculate the actual image index by skipping text slides
-          const actualImageIndex = index - Object.keys(texts).filter((i) => i < index).length;
+          const actualImageIndex = slide.index;
           const aspectRatio = aspectRatios[actualImageIndex];
-
           const isVertical = aspectRatio < 1;
           const isHorizontal = aspectRatio >= 1;
 
           return (
-            <div key={index} className={`${styles["kenburns-image"]} ${isVertical ? styles["vertical"] : ""} ${isHorizontal ? styles["horizontal"] : ""} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
+            <div
+              key={`image-${actualImageIndex}`}
+              className={`${styles["kenburns-image"]} ${isVertical ? styles["vertical"] : ""} ${isHorizontal ? styles["horizontal"] : ""} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
               <img src={imageUrls[actualImageIndex]} alt={`Image ${actualImageIndex + 1}`} />
               {captions[actualImageIndex] && (
                 <div className="absolute bottom-10 left-4 w-3/5 p-5">
