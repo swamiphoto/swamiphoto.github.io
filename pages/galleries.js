@@ -252,7 +252,7 @@ const galleryData = [
   },
   {
     name: "The Journey",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sanjose/_DSC0510.jpg`,
+    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sunflowers/AR500896.jpg`,
     slug: "naga-journey",
     description:
       "The first time I photographed Naga and Bharath, Naga was pregnant with Sathya. A couple of years later, I captured them again when Sathya was two. Then Sriman came along, and we added a few more memories to the collection. Now, Sathya is seven, and Sriman is four, and every time we meet, they are eager to play soccer with me. This is what I love about photography—I'm part of their journey!",
