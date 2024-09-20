@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./KenBurnsSlideshowLayout.module.css";
+import Text from "../../../text/Text";
 
 const KenBurnsSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transitioning, aspectRatios = [], captions, hideCaptionsOnMobile }) => {
   const totalSlides = imageUrls.length + Object.keys(texts).length; // Total number of slides, including text slides
@@ -16,7 +17,9 @@ const KenBurnsSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transiti
           return (
             <div key={index} className={`${styles["kenburns-text"]} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
               <div className="flex justify-center items-center h-full bg-white">
-                <div className={`text-2xl md:text-3xl max-w-3xl px-4 text-center ${styles["kenburns-zoom-text"]}`}>{texts[index]}</div>
+                <div className={`max-w-3xl px-4 ${styles["kenburns-zoom-text"]}`}>
+                  <Text layout="layout2">{texts[index]}</Text>
+                </div>
               </div>
             </div>
           );
