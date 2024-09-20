@@ -31,7 +31,7 @@ const galleryData = [
   },
   {
     name: "Sunflowers with Naga",
-    description: "A dreamy evening with the sunflowers in Woodland.",
+    description: "A dreamy evening with the sunflowers in Woodland. We were at the tailend of the sunflower season and took a chance to drive a couple hours to see them, but the light was perfect and the flowers were still in bloom.",
     thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sunflowers/AR500896.jpg`,
     slug: "naga-sunflowers",
     imagesFolderUrl: "portraits/naga-sunflowers",

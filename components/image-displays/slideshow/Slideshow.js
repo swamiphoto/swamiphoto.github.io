@@ -200,8 +200,8 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
           {/* Translucent white background */}
           <div className="absolute inset-0 bg-gray-300 opacity-95"></div>
 
-          {/* Modal with fixed margin and flex layout */}
-          <div className="relative z-50 bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto flex flex-col" style={{ margin: "15px", maxHeight: "calc(100% - 30px)" }}>
+          {/* Modal with fixed margin, min height, and flex layout */}
+          <div className="relative z-50 bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto flex flex-col" style={{ margin: "15px", minHeight: "calc(100% - 30px)" }}>
             {/* Close button positioned over the image in top-right corner */}
             <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-5 right-5 z-60 text-gray-500 hover:text-gray-800">
               <TfiClose className="h-5 w-5" />
@@ -219,7 +219,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
             </div>
 
             {/* Fixed button at the bottom */}
-            <div className="p-7 bg-white">
+            <div className="p-7 bg-white rounded-b-2xl">
               <button
                 onClick={() => {
                   setIsModalOpen(false);
@@ -255,6 +255,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
               <button
                 onClick={() => {
                   setIsModalOpen(false);
+                  handleToggleFullscreen();
                   handlePlayPauseSlideshow(); // Start slideshow
                 }}
                 className="px-8 py-4 bg-black hover:opacity-80 text-white font-bold uppercase tracking-wider cursor-pointer">
