@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./KenBurnsSlideshowLayout.module.css";
 import Text from "../../../text/Text";
 
-const KenBurnsSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transitioning, aspectRatios = [], captions, hideCaptionsOnMobile }) => {
-  // Combine image and text slides in a single array, ensuring the text slide comes after the image
+const KenBurnsSlideshowLayout = ({ imageUrls, texts, aspectRatios = [], captions, hideCaptionsOnMobile }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [transitioning, setTransitioning] = useState(false);
+
+  // Calculate total slides (images + text slides)
+  const totalSlides = imageUrls.length + Object.keys(texts).length;
+
+  // Combine image and text slides in a single array, making sure the text slide comes after the image
   const slides = [];
   imageUrls.forEach((imageUrl, index) => {
-    slides.push({ type: "image", index });
+    slides.push({ type: "image", index }); // Add the image slide
     if (texts.hasOwnProperty(index + 1)) {
+      // Adjust text placement to come AFTER the image at the corresponding index
       slides.push({ type: "text", index: index + 1 });
     }
   });
+
+  // Logic to cycle through slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % totalSlides); // Cycle through all slides
+        setTransitioning(false);
+      }, 1000); // Transition duration (1 second)
+    }, 5000); // Slide duration (5 seconds)
+    return () => clearInterval(interval); // Clean up interval on unmount
+  }, [totalSlides]);
 
   return (
     <div className={styles["kenburns-container"]}>
@@ -68,8 +87,6 @@ const KenBurnsSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transiti
 KenBurnsSlideshowLayout.propTypes = {
   imageUrls: PropTypes.array.isRequired,
   texts: PropTypes.object.isRequired, // Text slides
-  currentImageIndex: PropTypes.number.isRequired,
-  transitioning: PropTypes.bool.isRequired,
   aspectRatios: PropTypes.array.isRequired,
   captions: PropTypes.object.isRequired,
   hideCaptionsOnMobile: PropTypes.bool.isRequired,
