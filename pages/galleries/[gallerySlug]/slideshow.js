@@ -62,7 +62,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         <meta property="og:site_name" content="Swami Venkataramani — Photography Portfolio"></meta>
         <meta property="og:title" content={`${gallery.name} - Slideshow by Swami Venkataramani`} />
         <meta property="og:description" content={`${gallery.description} (Recommend viewing on desktop)`} />
-        <meta property="og:image:secure_url" itemProp="image" content={gallery.thumbnailUrl} />
+        <meta property="og:image:secure_url" itemProp="image" content={getCloudimageUrl(gallery.thumbnailUrl, { width: 1200, height: 630, quality: 80 })} />
         <meta property="og:url" content={`https://www.swamiphoto.com/galleries/${gallerySlug}/slideshow`} />
         <meta property="og:type" content="website" />
         <meta property="og:updated_time" content="1726816739" />
