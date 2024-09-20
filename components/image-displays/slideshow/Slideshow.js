@@ -198,10 +198,10 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
       {isMobile && isModalOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center">
           {/* Translucent white background */}
-          <div className="absolute inset-0 bg-white opacity-95"></div>
+          <div className="absolute inset-0 bg-gray-300 opacity-95"></div>
 
           {/* Full height modal with no padding and margin */}
-          <div className="relative z-50 bg-white rounded-lg shadow-xl w-full h-full mx-auto flex flex-col">
+          <div className="relative z-50 bg-white rounded-2xl shadow-xl w-full h-full mx-auto flex flex-col" style={{ margin: "15px", height: "calc(100% - 30px)" }}>
             {/* Close button positioned over the image in top-right corner */}
             <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-5 right-5 z-60 text-gray-500 hover:text-gray-800">
               <TfiClose className={`h-5 w-5`} />
@@ -209,7 +209,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
 
             {/* Image taking up full width and pushed to the top */}
             <div className="w-full">
-              <img src={thumbnailUrl} alt="Cover Image" className="w-full h-auto object-cover" />
+              <img src={thumbnailUrl} alt="Cover Image" className="w-full h-auto object-cover rounded-t-2xl " />
             </div>
 
             {/* Text aligned left with no top, left, or right padding */}
