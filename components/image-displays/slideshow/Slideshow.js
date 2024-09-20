@@ -200,20 +200,20 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
           {/* Translucent white background */}
           <div className="absolute inset-0 bg-gray-300 opacity-95"></div>
 
-          {/* Full height modal with no padding and margin */}
-          <div className="relative z-50 bg-white rounded-2xl shadow-xl w-full h-full mx-auto flex flex-col" style={{ margin: "15px", height: "calc(100% - 30px)" }}>
+          {/* Modal with fixed margin and scrollable content */}
+          <div className="relative z-50 bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto flex flex-col" style={{ margin: "15px", maxHeight: "calc(100% - 30px)" }}>
             {/* Close button positioned over the image in top-right corner */}
             <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-5 right-5 z-60 text-gray-500 hover:text-gray-800">
-              <TfiClose className={`h-5 w-5`} />
+              <TfiClose className="h-5 w-5" />
             </button>
 
-            {/* Image taking up full width and pushed to the top */}
+            {/* Image taking up full width */}
             <div className="w-full">
-              <img src={thumbnailUrl} alt="Cover Image" className="w-full h-auto object-cover rounded-t-2xl " />
+              <img src={thumbnailUrl} alt="Cover Image" className="w-full h-auto object-cover rounded-t-2xl" />
             </div>
 
-            {/* Text aligned left with no top, left, or right padding */}
-            <div className="w-full p-10 text-left">
+            {/* Scrollable text section with margins preserved */}
+            <div className="w-full p-10 text-left overflow-y-auto" style={{ maxHeight: "calc(100% - 200px)" }}>
               <h2 className="text-2xl font-semibold mb-2">{title}</h2>
               <p className="text-gray-600 mb-10">{subtitle}</p>
 
