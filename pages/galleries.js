@@ -263,6 +263,10 @@ const galleryData = [
       "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9222-Edit.jpg",
       "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5566-Edit.jpg",
     ],
+    texts: {
+      1: "The journey of a thousand miles begins with a single step.",
+      4: "I love being part of your journey!",
+    },
     layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {

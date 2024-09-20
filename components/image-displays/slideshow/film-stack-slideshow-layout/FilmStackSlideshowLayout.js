@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import { getCloudimageUrl } from "../../../../common/images";
 import styles from "./FilmStackSlideshowLayout.module.css";
 
-const FilmStackSlideshowLayout = ({ imageUrls, currentImageIndex, transitioning, aspectRatios, captions, hideCaptionsOnMobile }) => {
+const FilmStackSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transitioning, aspectRatios, captions, hideCaptionsOnMobile }) => {
   const [tilts, setTilts] = useState([]);
   const [zTilts, setZTilts] = useState([]);
   const [moveXs, setMoveXs] = useState([]);

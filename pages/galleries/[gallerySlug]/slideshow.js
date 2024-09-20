@@ -74,6 +74,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
       {imagesLoaded ? (
         <Slideshow
           imageUrls={imageUrls} // Pass the fetched image URLs to Slideshow
+          texts={gallery.texts}
           layout={layout}
           title={gallery.name}
           subtitle={gallery.description}
