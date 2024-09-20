@@ -184,7 +184,7 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
       case "film-stack":
         return <FilmStackSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "film-single":
-        return <FilmSingleSlideshowLayout imageUrls={imageUrls} texts={texts} ccurrentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmSingleSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "kenburns":
         return <KenBurnsSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       default:
