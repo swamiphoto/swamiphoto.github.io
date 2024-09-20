@@ -347,8 +347,8 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-journey/IMG_3274-2.jpg",
     ],
     texts: {
-      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I had never done one before. I said, "sure, let’s give it a shot."',
-      2: "We met at Stanford, and Naga was glowing. Bharath was visibly excited. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
+      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let’s give it a shot."',
+      3: "We met at Stanford, and Naga was glowing. Bharath was visibly excited. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
       6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn’t even seen the images yet but trusted me.',
       8: "Sathya was born. We did a shoot soon after at Adobe lodge. Sathya was a natural...he was so comfortable in front of the camera.",
       24: "Naga loves wisterias. We found a bunch and took a shot. Coz, why not.",
