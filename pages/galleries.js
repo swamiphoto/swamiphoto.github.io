@@ -8,7 +8,7 @@ const galleryData = [
   {
     name: "Hike with Naga and Bharath",
     description: "An adventurous hike with Naga and Bharath.",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/sunol/AR501526.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg?width=500&quality=80`,
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
     layout: "masonry",
@@ -32,7 +32,7 @@ const galleryData = [
   {
     name: "Sunflowers with Naga",
     description: "A dreamy evening with the sunflowers in Woodland. We were at the tailend of the sunflower season and took a chance to drive a couple hours to see them, but the light was perfect and the flowers were still in bloom.",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sunflowers/AR500896.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500896.jpg?width=500&quality=80`,
     slug: "naga-sunflowers",
     imagesFolderUrl: "portraits/naga-sunflowers",
     layout: "masonry",
@@ -51,7 +51,7 @@ const galleryData = [
     name: "California",
     description:
       "California is pure magic. Whether it's the dramatic coastline, the rolling golden hills, or the towering forests, every corner feels like a world of its own. This gallery is a celebration of the landscapes that never fail to leave me in awe—scenes that remind me just how special this place is.",
-    thumbnailUrl: `${bucketUrl}/photos/landscapes/california/AR501858.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
     slug: "california",
     imagesFolderUrl: "landscapes/california",
     layout: "masonry",
@@ -62,7 +62,7 @@ const galleryData = [
   },
   {
     name: "Lavender Fields with Naga",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg?width=500&quality=80`,
     slug: "naga-lavendar",
     description: "A purple evening with Naga's fmaily in the lavender fields.",
     imagesFolderUrl: "portraits/naga-lavendar",
@@ -76,7 +76,7 @@ const galleryData = [
   },
   {
     name: "Japan",
-    thumbnailUrl: `${bucketUrl}/photos/landscapes/japan/DSC00179-Edit-4.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/japan/DSC00179-Edit-4.jpg?width=500&quality=80`,
     slug: "japan",
     description: "A collection of images from Japan.",
     imagesFolderUrl: "landscapes/japan",
@@ -84,7 +84,7 @@ const galleryData = [
   },
   {
     name: "Anagha",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/anagha/DSC_0068.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha/DSC_0068.jpg?width=500&quality=80`,
     slug: "anagha",
     description: "Forgot how good a poser Anagha was as a kid!",
     imagesFolderUrl: "portraits/anagha",
@@ -103,7 +103,7 @@ const galleryData = [
   },
   {
     name: "Anagha at Adobe Lodge",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/anagha2/DSC_1309-Edit.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg?width=500&quality=80`,
     slug: "anagha-family",
     description: "My first shoot with Anagha. She was a natural!",
     imagesFolderUrl: "portraits/anagha2",
@@ -121,7 +121,7 @@ const galleryData = [
   },
   {
     name: "Naga and Bharath",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg?width=500&quality=80`,
     slug: "naga-bharath",
     description: "My first shoot with Naga and Bharath. Naga was pregnant with Sathya",
     imagesFolderUrl: "portraits/naga-stanford",
@@ -139,7 +139,7 @@ const galleryData = [
   },
   {
     name: "Sathya",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-adobe/DSC_5614.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5614.jpg?width=500&quality=80`,
     slug: "sathya",
     description: "First shoot with Sathya.",
     imagesFolderUrl: "portraits/naga-adobe",
@@ -158,7 +158,7 @@ const galleryData = [
   },
   {
     name: "Young Boy Sathya",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sanjose/_DSC0510.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg?width=500&quality=80`,
     slug: "young-boy-sathya",
     description: "Second shoot with Sathya.",
     imagesFolderUrl: "portraits/naga-sanjose",
@@ -176,7 +176,7 @@ const galleryData = [
   },
   {
     name: "Sathya and Sriman",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-diablo/DSC_4122.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-diablo/DSC_4122.jpg?width=500&quality=80`,
     slug: "sathya-sriman",
     description: "Sriman's first shoot",
     imagesFolderUrl: "portraits/naga-diablo",
@@ -195,7 +195,7 @@ const galleryData = [
   },
   {
     name: "Traditional Sriman",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-home/DSC_4265-2.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-home/DSC_4265-2.jpg?width=500&quality=80`,
     slug: "traditional-sriman",
     description: "Sriman in traditional attire",
     imagesFolderUrl: "portraits/naga-home",
@@ -214,7 +214,7 @@ const galleryData = [
   },
   {
     name: "Sai Suma",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit-Edit.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit-Edit.jpg?width=500&quality=80`,
     slug: "saisuma",
     description: "Modeling for Chiffon and Spice",
     imagesFolderUrl: "portraits/saisuma",
@@ -233,7 +233,7 @@ const galleryData = [
   },
   {
     name: "Sathya and Ishuwar",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/sathya-ishuwar/DSC_9082.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sathya-ishuwar/DSC_9082.jpg?width=500&quality=80`,
     slug: "sathyaishuwar",
     description: "Pre-wedding shoot",
     imagesFolderUrl: "portraits/sathya-ishuwar",
@@ -252,7 +252,7 @@ const galleryData = [
   },
   {
     name: "The Journey",
-    thumbnailUrl: `${bucketUrl}/photos/portraits/naga-sanjose/_DSC0510.jpg`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg?width=500&quality=80`,
     slug: "naga-journey",
     description:
       "The first time I photographed Naga and Bharath, Naga was pregnant with Sathya. A couple of years later, I captured them again when Sathya was two. Then Sriman came along, and we added a few more memories to the collection. Now, Sathya is seven, and Sriman is four, and every time we meet, they are eager to play soccer with me. This is what I love about photography—I'm part of their journey!",
