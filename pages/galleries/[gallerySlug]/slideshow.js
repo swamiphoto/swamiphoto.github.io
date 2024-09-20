@@ -59,11 +59,13 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         <title>{gallery.name} - Slideshow by Swami Venkataramani</title>
         <meta name="description" content={gallery.description} />
         {/* Open Graph Meta Tags for Social Sharing */}
+        <meta property="og:site_name" content="Swami Venkataramani — Photography Portfolio"></meta>
         <meta property="og:title" content={`${gallery.name} - Slideshow by Swami Venkataramani`} />
-        <meta property="og:description" content={`${gallery.description} (Recommend viewing this on desktop in fullscreen mode)`} />
+        <meta property="og:description" content={`${gallery.description} (Recommend viewing on desktop)`} />
         <meta property="og:image:secure_url" itemProp="image" content={getCloudimageUrl(gallery.thumbnailUrl, { width: 1600, quality: 80 })} />
         <meta property="og:url" content={`https://www.swamiphoto.com/galleries/${gallerySlug}/slideshow`} />
         <meta property="og:type" content="website" />
+        <meta property="og:updated_time" content="1726816739" />
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:title" content={`${gallery.name} - Slideshow by Swami Venkataramani`} />
         <meta name="twitter:description" content={gallery.description} />
