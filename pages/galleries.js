@@ -345,6 +345,12 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501135-Edit.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501260.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-journey/IMG_3274-2.jpg",
+
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSC_5374-Edit.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSC_5266-Edit.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSC_5024.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSC_5118-Edit.jpg",
     ],
     texts: {
       1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let’s give it a shot."',
@@ -360,6 +366,7 @@ const galleryData = [
       70: "There's always time for a few couple and solo shots!",
       75: "We’d talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
       82: "Hope you enjoyed the show. This is what photography is to me. It’s not the lighting, or the composition, or the gear. It’s the connection. It’s becoming a part of their journey.",
+      83: "Almost forgot...we did a lavender shoot too! It was the first time Mala and I took a trip after the lockdown.",
     },
 
     layout: "horizontal",
