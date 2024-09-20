@@ -13,6 +13,8 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
+    const isMobile = () => window.innerWidth <= 768;
+
     if (gallery) {
       const fetchImages = async () => {
         let urls = [];
@@ -24,6 +26,11 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
           // Otherwise fetch images from the folder URL
           urls = await fetchImageUrls(gallery.imagesFolderUrl);
           urls = urls.filter((url) => !url.includes("protected"));
+        }
+
+        // Apply the getCloudimageUrl transformation for mobile users
+        if (isMobile()) {
+          urls = urls.map((url) => getCloudimageUrl(url, { width: 800, quality: 50 }));
         }
 
         setImageUrls(urls);
