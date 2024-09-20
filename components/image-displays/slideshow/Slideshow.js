@@ -223,7 +223,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
               <button
                 onClick={() => {
                   setIsModalOpen(false);
-                  handlePlayPauseSlideshow(); // Start slideshow
+                  handlePlayPauseSlideshow();
                 }}
                 className="w-full px-8 py-4 bg-black text-white font-bold uppercase tracking-wider cursor-pointer">
                 Start Slideshow
