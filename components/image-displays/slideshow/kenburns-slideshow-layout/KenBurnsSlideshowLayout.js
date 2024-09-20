@@ -6,17 +6,17 @@ const KenBurnsSlideshowLayout = ({ imageUrls, texts, currentImageIndex, transiti
   const totalSlides = imageUrls.length + Object.keys(texts).length; // Total number of slides, including text slides
 
   return (
-    <div className="kenburns-container">
+    <div className={styles["kenburns-container"]}>
       {/* Loop through both images and texts, combining their indices */}
       {Array.from({ length: totalSlides }).map((_, index) => {
         const isTextSlide = texts.hasOwnProperty(index); // Check if current index is a text slide
 
-        // If it's a text slide, render the text slide with the same transition classes
+        // If it's a text slide, render the text slide with the same transition and zoom effect
         if (isTextSlide) {
           return (
-            <div key={index} className={`${styles["kenburns-image"]} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
+            <div key={index} className={`${styles["kenburns-text"]} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
               <div className="flex justify-center items-center h-full bg-white">
-                <div className="text-2xl md:text-3xl max-w-3xl px-4 text-center">{texts[index]}</div>
+                <div className={`text-2xl md:text-3xl max-w-3xl px-4 text-center ${styles["kenburns-zoom-text"]}`}>{texts[index]}</div>
               </div>
             </div>
           );
