@@ -49,14 +49,15 @@ const galleryData = [
   },
   {
     name: "California",
-    description: "Possibly the most beautiful place on earth.",
+    description:
+      "California is pure magic. Whether it's the dramatic coastline, the rolling golden hills, or the towering forests, every corner feels like a world of its own. This gallery is a celebration of the landscapes that never fail to leave me in awe—scenes that remind me just how special this place is.",
     thumbnailUrl: `${bucketUrl}/photos/landscapes/california/AR501858.jpg`,
     slug: "california",
     imagesFolderUrl: "landscapes/california",
     layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=1opgh7ky2nU", "https://www.youtube.com/watch?v=hes6FYmLXmQ"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=BciS5krYL80"],
     },
   },
   {

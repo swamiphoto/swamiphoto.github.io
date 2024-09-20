@@ -200,17 +200,22 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
           {/* Translucent white background */}
           <div className="absolute inset-0 bg-white opacity-95"></div>
 
-          {/* Full height modal with margin, padding, and shadow */}
-          <div className="relative z-50 bg-white border border-gray-100 rounded-lg shadow-xl w-full max-w-lg mx-auto" style={{ margin: "15px", padding: "15px", height: "calc(100% - 30px)" }}>
-            {/* Close button in top-right corner */}
-            <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
-              ✕
+          {/* Full height modal with no padding and margin */}
+          <div className="relative z-50 bg-white rounded-lg shadow-xl w-full h-full mx-auto flex flex-col">
+            {/* Close button positioned over the image in top-right corner */}
+            <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-5 right-5 z-60 text-gray-500 hover:text-gray-800">
+              <TfiClose className={`h-5 w-5`} />
             </button>
 
-            <div className="flex flex-col justify-center items-center h-full text-center">
-              <img src={thumbnailUrl} alt="Cover Image" className="mb-4 w-full h-auto" />
+            {/* Image taking up full width and pushed to the top */}
+            <div className="w-full">
+              <img src={thumbnailUrl} alt="Cover Image" className="w-full h-auto object-cover" />
+            </div>
+
+            {/* Text aligned left with no top, left, or right padding */}
+            <div className="w-full p-10 text-left">
               <h2 className="text-2xl font-semibold mb-2">{title}</h2>
-              <p className="text-gray-600 mb-4">{subtitle}</p>
+              <p className="text-gray-600 mb-10">{subtitle}</p>
 
               {/* Styled button to start slideshow and dismiss modal */}
               <button
