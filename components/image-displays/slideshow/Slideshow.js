@@ -200,7 +200,7 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
           {/* Translucent white background */}
           <div className="absolute inset-0 bg-gray-300 opacity-95"></div>
 
-          {/* Modal with fixed margin and scrollable content */}
+          {/* Modal with fixed margin and flex layout */}
           <div className="relative z-50 bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto flex flex-col" style={{ margin: "15px", maxHeight: "calc(100% - 30px)" }}>
             {/* Close button positioned over the image in top-right corner */}
             <button onClick={() => router.push(`/galleries/${slug}`)} className="absolute top-5 right-5 z-60 text-gray-500 hover:text-gray-800">
@@ -212,18 +212,20 @@ const Slideshow = ({ imageUrls, layout = "film-stack", title = "Gallery Title", 
               <img src={thumbnailUrl} alt="Cover Image" className="w-full h-auto object-cover rounded-t-2xl" />
             </div>
 
-            {/* Scrollable text section with margins preserved */}
-            <div className="w-full p-10 text-left overflow-y-auto" style={{ maxHeight: "calc(100% - 200px)" }}>
+            {/* Scrollable text section */}
+            <div className="flex-grow overflow-y-auto p-7 text-left">
               <h2 className="text-2xl font-semibold mb-2">{title}</h2>
-              <p className="text-gray-600 mb-10">{subtitle}</p>
+              <p className="text-gray-600 mb-4">{subtitle}</p>
+            </div>
 
-              {/* Styled button to start slideshow and dismiss modal */}
+            {/* Fixed button at the bottom */}
+            <div className="p-7 bg-white">
               <button
                 onClick={() => {
                   setIsModalOpen(false);
                   handlePlayPauseSlideshow(); // Start slideshow
                 }}
-                className="px-8 py-4 bg-black text-white font-bold uppercase tracking-wider cursor-pointer">
+                className="w-full px-8 py-4 bg-black text-white font-bold uppercase tracking-wider cursor-pointer">
                 Start Slideshow
               </button>
             </div>
