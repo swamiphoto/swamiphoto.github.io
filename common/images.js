@@ -184,5 +184,20 @@ const fetchImageUrls = async (folder) => {
   }
 };
 
+const getImageResolution = () => {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 768) {
+    // Mobile screens
+    return { width: screenWidth, quality: 50 }; // Use the actual screen width for mobile
+  } else if (screenWidth > 768 && screenWidth <= 1440) {
+    // Standard desktop screens
+    return { width: screenWidth, quality: 70 }; // Use the screen width for desktop
+  } else {
+    // Very large screens (4K, ultra-wide, etc.)
+    return { width: screenWidth, quality: 90 }; // Use the screen width for large screens
+  }
+};
+
 export default IMAGES;
-export { imageMapping, fetchImageUrls, generateUniqueId, getCloudimageUrl };
+export { imageMapping, fetchImageUrls, generateUniqueId, getCloudimageUrl, getImageResolution };

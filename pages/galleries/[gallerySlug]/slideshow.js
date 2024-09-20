@@ -5,7 +5,7 @@ import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import Head from "next/head";
 import { fetchImageUrls } from "../../../common/images"; // Ensure fetchImageUrls is imported
 import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
-import { getCloudimageUrl } from "../../../common/images";
+import { getCloudimageUrl, getImageResolution } from "../../../common/images";
 
 const SlideshowPage = ({ gallerySlug, gallery }) => {
   const router = useRouter();
@@ -13,8 +13,6 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
-    const isMobile = () => window.innerWidth <= 768;
-
     if (gallery) {
       const fetchImages = async () => {
         let urls = [];
@@ -28,10 +26,9 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
           urls = urls.filter((url) => !url.includes("protected"));
         }
 
-        // Apply the getCloudimageUrl transformation for mobile users
-        if (isMobile()) {
-          urls = urls.map((url) => getCloudimageUrl(url, { width: 800, quality: 50 }));
-        }
+        // Get the appropriate resolution based on screen size
+        const resolution = getImageResolution();
+        urls = urls.map((url) => getCloudimageUrl(url, { width: resolution.width, quality: resolution.quality }));
 
         setImageUrls(urls);
 
