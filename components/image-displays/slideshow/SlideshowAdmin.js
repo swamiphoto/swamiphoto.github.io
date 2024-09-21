@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import Text from "../../text/Text"; // Correct Text import
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const SlideshowAdmin = ({ gallery }) => {
   const [slides, setSlides] = useState([]);
   const [inputs, setInputs] = useState([]); // Stores both image URLs and text inputs in order
   const imageRefs = useRef([]); // Ref array for image elements
+  const [popup, setPopup] = useState({ open: false, index: null }); // Popup state for URL input
+  const [newUrl, setNewUrl] = useState(""); // Temporary URL state for adding new images
 
   useEffect(() => {
     if (gallery) {
@@ -40,51 +43,74 @@ const SlideshowAdmin = ({ gallery }) => {
     imageRefs.current = imageRefs.current.slice(0, slides.length); // Trim refs array to match slides length
   }, [slides]);
 
-  const handleInputChange = (e, index, type) => {
-    const value = e.target.value;
+  // Handle deleting an image by index
+  const handleDeleteImage = (sectionIndex, imageIndex) => {
+    const updatedInputs = [...inputs];
+    updatedInputs[sectionIndex].urls.splice(imageIndex, 1); // Remove the image URL
+    setInputs(updatedInputs);
 
-    if (type === "images") {
-      const newInputs = [...inputs];
-      const urls = value.split("\n").filter((url) => url.trim() !== ""); // Split by line break
-      newInputs[index].urls = urls; // Set this to the array of URLs
-      setInputs(newInputs);
+    // Update slides as well
+    const updatedSlides = [...slides];
+    updatedSlides[sectionIndex].urls.splice(imageIndex, 1);
+    setSlides(updatedSlides);
+  };
 
-      // Update slides
-      const newSlides = [...slides];
-      newSlides[index] = { type: "images", urls };
-      setSlides(newSlides);
-    } else if (type === "text") {
-      const newInputs = [...inputs];
-      newInputs[index].content = value;
-      setInputs(newInputs);
+  // Handle opening a popup for adding new images
+  const handleOpenPopup = (sectionIndex) => {
+    setPopup({ open: true, index: sectionIndex });
+    setNewUrl(""); // Reset new URL state
+  };
 
-      const newSlides = [...slides];
-      newSlides[index] = { type: "text", content: value };
-      setSlides(newSlides);
+  // Handle saving a new image URL
+  const handleSaveImage = () => {
+    if (newUrl.trim()) {
+      const updatedInputs = [...inputs];
+      updatedInputs[popup.index].urls.push(newUrl); // Add the new image URL
+      setInputs(updatedInputs);
+
+      // Update slides as well
+      const updatedSlides = [...slides];
+      updatedSlides[popup.index].urls.push(newUrl);
+      setSlides(updatedSlides);
+
+      setPopup({ open: false, index: null }); // Close popup
+      setNewUrl(""); // Clear URL input
     }
   };
 
-  const handleElementClick = (index, type, urlIndex) => {
-    const inputElem = type === "images" ? document.getElementById(`input-images-${index}`) : document.getElementById(`input-text-${index}`);
-    if (inputElem) {
-      inputElem.focus();
-      inputElem.scrollIntoView({ behavior: "smooth", block: "center" });
+  // Handle drag end
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
 
-      // Highlight individual URL if it's an image click
-      if (type === "images" && urlIndex !== undefined) {
-        const urls = inputElem.value.split("\n");
-        const urlStart = urls.slice(0, urlIndex).join("\n").length;
-        const urlEnd = urlStart + urls[urlIndex].length;
+    const { source, destination } = result;
 
-        inputElem.setSelectionRange(urlStart + 1, urlEnd + 1); // Highlight the URL
-      }
+    // Clone current inputs and slides
+    const updatedInputs = [...inputs];
+    const updatedSlides = [...slides];
+
+    // Moving within the same section
+    if (source.droppableId === destination.droppableId) {
+      const sectionIndex = parseInt(source.droppableId, 10);
+      const [movedImage] = updatedInputs[sectionIndex].urls.splice(source.index, 1);
+      updatedInputs[sectionIndex].urls.splice(destination.index, 0, movedImage);
+
+      // Update slides as well
+      updatedSlides[sectionIndex].urls = [...updatedInputs[sectionIndex].urls];
+    } else {
+      // Moving across sections
+      const sourceSectionIndex = parseInt(source.droppableId, 10);
+      const destinationSectionIndex = parseInt(destination.droppableId, 10);
+      const [movedImage] = updatedInputs[sourceSectionIndex].urls.splice(source.index, 1);
+      updatedInputs[destinationSectionIndex].urls.splice(destination.index, 0, movedImage);
+
+      // Update slides as well
+      updatedSlides[sourceSectionIndex].urls = [...updatedInputs[sourceSectionIndex].urls];
+      updatedSlides[destinationSectionIndex].urls = [...updatedInputs[destinationSectionIndex].urls];
     }
-  };
 
-  const handleScrollToLeftPane = (index, type) => {
-    if (imageRefs.current[index]) {
-      imageRefs.current[index].scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    // Update state
+    setInputs(updatedInputs);
+    setSlides(updatedSlides);
   };
 
   return (
@@ -92,7 +118,7 @@ const SlideshowAdmin = ({ gallery }) => {
       {/* Left Pane: Display Images and Texts */}
       <div className="w-3/4 p-4 overflow-auto border-r">
         {slides.map((slide, slideIndex) => (
-          <div key={slideIndex} className="mb-4" onClick={() => handleElementClick(slideIndex, slide.type)} ref={(el) => (imageRefs.current[slideIndex] = el)}>
+          <div key={slideIndex} className="mb-4" ref={(el) => (imageRefs.current[slideIndex] = el)}>
             {slide.type === "images" ? (
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-1">
                 {slide.urls.map((url, urlIndex) => (
@@ -101,7 +127,6 @@ const SlideshowAdmin = ({ gallery }) => {
                     src={url}
                     alt={`Slide ${slideIndex + 1}`}
                     className="h-36 w-auto object-contain mx-auto" // Consistent height, preserve aspect ratio
-                    onClick={() => handleElementClick(slideIndex, slide.type, urlIndex)}
                   />
                 ))}
               </div>
@@ -116,22 +141,54 @@ const SlideshowAdmin = ({ gallery }) => {
 
       {/* Right Pane: Editable Inputs */}
       <div className="w-1/4 p-4 overflow-auto">
-        {inputs.map((input, index) => (
-          <div key={`input-${index}`} className="mb-4">
-            {input.type === "images" ? (
-              <textarea
-                id={`input-images-${index}`}
-                value={input.urls.join("\n\n")} // Join URLs with extra line breaks
-                onChange={(e) => handleInputChange(e, index, "images")}
-                rows={4}
-                className="w-full p-2 border border-gray-300 rounded-lg"
-                onClick={() => handleScrollToLeftPane(index, "images")}
-              />
-            ) : (
-              <textarea id={`input-text-${index}`} value={input.content} onChange={(e) => handleInputChange(e, index, "text")} rows={2} className="w-full p-2 border border-gray-300 rounded-lg" onClick={() => handleScrollToLeftPane(index, "text")} />
-            )}
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          {inputs.map((input, index) => (
+            <div key={`input-${index}`} className="mb-4 p-3 bg-gray-100 shadow rounded-lg">
+              {input.type === "images" ? (
+                <Droppable droppableId={`${index}`} direction="horizontal">
+                  {(provided) => (
+                    <div className="flex flex-wrap gap-2" {...provided.droppableProps} ref={provided.innerRef}>
+                      {input.urls.map((url, urlIndex) => (
+                        <Draggable key={urlIndex} draggableId={`${index}-${urlIndex}`} index={urlIndex}>
+                          {(provided) => (
+                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="relative group">
+                              {/* Image Thumbnail */}
+                              <img src={url} alt="Thumbnail" className="h-20 w-auto object-cover" />
+                              {/* Delete Icon on Hover */}
+                              <button className="absolute top-0 right-0 bg-red-500 text-white p-1 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleDeleteImage(index, urlIndex)}>
+                                X
+                              </button>
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                      {/* Insert Placeholder Button */}
+                      <button className="flex items-center justify-center w-full h-10 bg-gray-200 text-gray-600 hover:bg-gray-300" onClick={() => handleOpenPopup(index)}>
+                        + Add Image
+                      </button>
+                    </div>
+                  )}
+                </Droppable>
+              ) : (
+                <textarea id={`input-text-${index}`} value={input.content} onChange={(e) => handleInputChange(e, index, "text")} rows={2} className="w-full p-2 border border-gray-300 rounded-lg" />
+              )}
+            </div>
+          ))}
+        </DragDropContext>
+
+        {/* Popup for Adding New Image */}
+        {popup.open && (
+          <div className="fixed inset-0 bg-gray-700 bg-opacity-75 flex justify-center items-center">
+            <div className="bg-white p-4 rounded-lg">
+              <input type="text" value={newUrl} onChange={(e) => setNewUrl(e.target.value)} placeholder="Enter image URL" className="w-full mb-4 p-2 border border-gray-300 rounded-lg" />
+              <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={handleSaveImage}>
+                Save
+              </button>
+            </div>
           </div>
-        ))}
+        )}
+
         <button
           className="mt-4 p-2 bg-blue-500 text-white rounded-lg"
           onClick={() =>
