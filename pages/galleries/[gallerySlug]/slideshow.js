@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { galleryData } from "../../galleries"; // Import gallery data
 import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
+import SlideshowAdmin from "../../../components/image-displays/slideshow/SlideshowAdmin"; // Import SlideshowAdmin component
 import Head from "next/head";
 import { fetchImageUrls } from "../../../common/images"; // Ensure fetchImageUrls is imported
 import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
@@ -11,6 +12,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   const router = useRouter();
   const [imageUrls, setImageUrls] = useState([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const isAdminView = router.query.admin !== undefined; // Detect if the admin query is present
 
   useEffect(() => {
     if (gallery) {
@@ -57,6 +59,12 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   const { slideshowSettings = {} } = gallery;
   const { layout = "kenburns", youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU"], customDurations = {}, duration = 10000, captions = {}, coverImageIndex = 0, mobileCoverImageIndex = 0 } = slideshowSettings;
 
+  // Render admin view if ?admin is present in the query string
+  if (isAdminView) {
+    return <SlideshowAdmin gallery={gallery} />;
+  }
+
+  // Regular slideshow rendering
   return (
     <>
       <Head>
@@ -73,7 +81,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:title" content={`${gallery.name} - Slideshow by Swami Venkataramani`} />
         <meta name="twitter:description" content={gallery.description} />
-        <meta name="twitter:image" content={gallery.thumbnailUrl} /> {/* Assuming thumbnail URL is available */}
+        <meta name="twitter:image" content={gallery.thumbnailUrl} />
         <meta name="twitter:card" content={gallery.thumbnailUrl} />
       </Head>
 
