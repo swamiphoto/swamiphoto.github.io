@@ -12,9 +12,10 @@ import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
 const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
+  const [slides, setSlides] = useState([]); // Combine both image and text slides
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [slideshowPlaying, setSlideshowPlaying] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -26,6 +27,23 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const router = useRouter(); // Using Next.js router
+
+  // Combine imageUrls and texts into slides
+  useEffect(() => {
+    // Combine imageUrls and texts into slides only if they change
+    const combinedSlides = [];
+    imageUrls.forEach((url, index) => {
+      combinedSlides.push({ type: "image", url }); // Add image slide
+      if (texts[index + 1]) {
+        combinedSlides.push({ type: "text", content: texts[index + 1] }); // Add corresponding text slide
+      }
+    });
+
+    // Avoid unnecessary state updates by checking if the slides have changed
+    if (JSON.stringify(combinedSlides) !== JSON.stringify(slides)) {
+      setSlides(combinedSlides); // Store combined slides
+    }
+  }, [imageUrls, texts]); // Only run when imageUrls or texts change
 
   useEffect(() => {
     if (imageUrls.length > 0) {
@@ -54,12 +72,12 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
   }, [imageUrls]);
 
   useEffect(() => {
-    if (imagesLoaded && isPlayerReady && imageUrls.length > 0 && slideshowPlaying) {
+    if (imagesLoaded && isPlayerReady && slides.length > 0 && slideshowPlaying) {
       startSlideshow();
       handlePlayPauseAudio();
       return () => clearInterval(slideshowInterval.current);
     }
-  }, [imagesLoaded, isPlayerReady, imageUrls, slideshowPlaying]);
+  }, [imagesLoaded, isPlayerReady, slides, slideshowPlaying]);
 
   useEffect(() => {
     if (slideshowPlaying) {
@@ -81,23 +99,28 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentImageIndex]);
+  }, [currentSlideIndex]);
 
   const startSlideshow = () => {
     clearInterval(slideshowInterval.current);
-    const slideDuration = customDurations[currentImageIndex] || duration;
+    const slideDuration = customDurations[currentSlideIndex] || duration;
+
     slideshowInterval.current = setTimeout(() => {
       setTransitioning(true);
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
+
+      setCurrentSlideIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % slides.length; // Loop through all slides
+        return nextIndex;
+      });
+
       setTransitioning(false);
+
       if (slideshowPlaying) startSlideshow();
     }, slideDuration - 2000);
   };
-
   useEffect(() => {
     setSlideshowPlaying(false);
   }, []);
-
   const handlePlayPauseAudio = () => {
     if (playerRef.current && isPlayerReady) {
       if (audioPlaying) {
@@ -155,20 +178,20 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
   };
 
   const handlePreviousPhoto = () => {
-    if (currentImageIndex > 0) {
+    if (currentSlideIndex > 0) {
       setTransitioning(true);
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => prevIndex - 1);
+        setCurrentSlideIndex((prevIndex) => prevIndex - 1);
         setTransitioning(false);
       }, 2000);
     }
   };
 
   const handleNextPhoto = () => {
-    if (currentImageIndex < imageUrls.length - 1) {
+    if (currentSlideIndex < slides.length - 1) {
       setTransitioning(true);
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => prevIndex + 1);
+        setCurrentSlideIndex((prevIndex) => prevIndex + 1);
         setTransitioning(false);
       }, 2000);
     }
@@ -182,11 +205,11 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
   const renderPhotos = () => {
     switch (layout) {
       case "film-stack":
-        return <FilmStackSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmStackSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "film-single":
-        return <FilmSingleSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmSingleSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "kenburns":
-        return <KenBurnsSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentImageIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <KenBurnsSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       default:
         return null;
     }
@@ -274,7 +297,7 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
       {isMobile && !isModalOpen && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-100 z-50">
           <div className="flex items-center space-x-4">
-            <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => router.push("/galleries")} />
+            <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => router.replace("/galleries")} />
             {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <HiOutlinePlay className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           </div>
 
@@ -293,7 +316,7 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
 
       {!isMobile && (
         <div className="fixed top-4 left-4 flex items-center space-x-4 bg-white bg-opacity-80 p-3 shadow-md rounded-lg z-50">
-          <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => router.push("/galleries")} />
+          <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={24} onClick={() => router.replace("/galleries")} />
           {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <HiOutlinePlay className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           {isFullscreen ? <RxExitFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} /> : <RxEnterFullScreen className="hover:text-red-500 cursor-pointer" size={20} onClick={handleToggleFullscreen} />}
 
