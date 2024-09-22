@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import Text from "../../text/Text"; // Correct Text import
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { getCloudimageUrl } from "../../../common/images"; // Importing getCloudimageUrl for scaling
 
 const SlideshowAdmin = ({ gallery }) => {
   const [slides, setSlides] = useState([]);
   const [inputs, setInputs] = useState([]); // Stores both image URLs and text inputs in order
-  const imageRefs = useRef([]); // Ref array for image elements
+  const imageRefs = useRef([]); // Ref array for image elements on the left
+  const inputRefs = useRef([]); // Ref array for inputs on the right
   const [popup, setPopup] = useState({ open: false, index: null }); // Popup state for URL input
   const [newUrl, setNewUrl] = useState(""); // Temporary URL state for adding new images
+  const [jsonModalOpen, setJsonModalOpen] = useState(false); // State for showing JSON modal
+  const [jsonContent, setJsonContent] = useState(""); // Holds the regenerated JSON content
 
   useEffect(() => {
     if (gallery) {
@@ -38,10 +42,11 @@ const SlideshowAdmin = ({ gallery }) => {
     }
   }, [gallery]);
 
-  // Sync refs with slides length
+  // Sync refs with slides and inputs length
   useEffect(() => {
     imageRefs.current = imageRefs.current.slice(0, slides.length); // Trim refs array to match slides length
-  }, [slides]);
+    inputRefs.current = inputRefs.current.slice(0, inputs.length); // Trim input refs array
+  }, [slides, inputs]);
 
   // Handle deleting an image by index
   const handleDeleteImage = (sectionIndex, imageIndex) => {
@@ -113,6 +118,52 @@ const SlideshowAdmin = ({ gallery }) => {
     setSlides(updatedSlides);
   };
 
+  // Scroll to the right pane when clicking an image/text on the left
+  const handleElementClick = (index, type, urlIndex) => {
+    const inputElem = inputRefs.current[index];
+    if (inputElem) {
+      inputElem.scrollIntoView({ behavior: "smooth", block: "center" });
+      inputElem.focus();
+
+      if (type === "images" && urlIndex !== undefined) {
+        const inputThumbnailElem = inputRefs.current[index].querySelector(`img[data-urlindex="${urlIndex}"]`);
+        if (inputThumbnailElem) {
+          inputThumbnailElem.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    }
+  };
+
+  // Scroll to the left pane when clicking an input on the right
+  const handleScrollToLeftPane = (index, type) => {
+    const leftElem = imageRefs.current[index];
+    if (leftElem) {
+      leftElem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  // Handle Regenerate JSON and display it in modal
+  const handleRegenerateJson = () => {
+    const fullJson = {
+      ...gallery, // Include other properties of the gallery
+      imageUrls: inputs.flatMap((input) => (input.type === "images" ? input.urls : [])),
+      texts: inputs
+        .filter((input) => input.type === "text")
+        .reduce((acc, input, i) => {
+          acc[i + 1] = input.content;
+          return acc;
+        }, {}),
+    };
+    setJsonContent(JSON.stringify(fullJson, null, 2)); // Format JSON nicely
+    setJsonModalOpen(true); // Show modal
+  };
+
+  // Copy JSON to clipboard
+  const handleCopyToClipboard = () => {
+    navigator.clipboard.writeText(jsonContent);
+    alert("JSON copied to clipboard!");
+  };
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Left Pane: Display Images and Texts */}
@@ -124,14 +175,15 @@ const SlideshowAdmin = ({ gallery }) => {
                 {slide.urls.map((url, urlIndex) => (
                   <img
                     key={urlIndex}
-                    src={url}
+                    src={getCloudimageUrl(url, { width: 400, quality: 30 })} // Scale down images for the left pane
                     alt={`Slide ${slideIndex + 1}`}
-                    className="h-36 w-auto object-contain mx-auto" // Consistent height, preserve aspect ratio
+                    className="h-36 w-auto object-contain mx-auto cursor-pointer" // Consistent height, preserve aspect ratio
+                    onClick={() => handleElementClick(slideIndex, slide.type, urlIndex)}
                   />
                 ))}
               </div>
             ) : (
-              <div className="max-w-3xl px-4">
+              <div className="max-w-3xl px-4 cursor-pointer" onClick={() => handleElementClick(slideIndex, slide.type)}>
                 <Text layout="layout2">{slide.content}</Text>
               </div>
             )}
@@ -143,7 +195,7 @@ const SlideshowAdmin = ({ gallery }) => {
       <div className="w-1/4 p-4 overflow-auto">
         <DragDropContext onDragEnd={handleOnDragEnd}>
           {inputs.map((input, index) => (
-            <div key={`input-${index}`} className="mb-4 p-3 bg-gray-100 shadow rounded-lg">
+            <div key={`input-${index}`} className="mb-4 p-3 bg-gray-100 shadow rounded-lg" ref={(el) => (inputRefs.current[index] = el)}>
               {input.type === "images" ? (
                 <Droppable droppableId={`${index}`} direction="horizontal">
                   {(provided) => (
@@ -151,11 +203,14 @@ const SlideshowAdmin = ({ gallery }) => {
                       {input.urls.map((url, urlIndex) => (
                         <Draggable key={urlIndex} draggableId={`${index}-${urlIndex}`} index={urlIndex}>
                           {(provided) => (
-                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="relative group">
-                              {/* Image Thumbnail */}
-                              <img src={url} alt="Thumbnail" className="h-20 w-auto object-cover" />
-                              {/* Delete Icon on Hover */}
-                              <button className="absolute top-0 right-0 bg-red-500 text-white p-1 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleDeleteImage(index, urlIndex)}>
+                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="relative">
+                              <img
+                                src={getCloudimageUrl(url, { width: 100, quality: 30 })} // Scale down images for thumbnails
+                                alt={`Thumbnail ${urlIndex}`}
+                                className="w-24 h-24 object-cover"
+                                data-urlindex={urlIndex}
+                              />
+                              <button className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs cursor-pointer" onClick={() => handleDeleteImage(index, urlIndex)}>
                                 X
                               </button>
                             </div>
@@ -163,45 +218,59 @@ const SlideshowAdmin = ({ gallery }) => {
                         </Draggable>
                       ))}
                       {provided.placeholder}
-                      {/* Insert Placeholder Button */}
-                      <button className="flex items-center justify-center w-full h-10 bg-gray-200 text-gray-600 hover:bg-gray-300" onClick={() => handleOpenPopup(index)}>
+                      <button className="w-24 h-24 bg-gray-300 flex items-center justify-center text-xl font-bold text-gray-600 cursor-pointer" onClick={() => handleOpenPopup(index)}>
                         + Add Image
                       </button>
                     </div>
                   )}
                 </Droppable>
               ) : (
-                <textarea id={`input-text-${index}`} value={input.content} onChange={(e) => handleInputChange(e, index, "text")} rows={2} className="w-full p-2 border border-gray-300 rounded-lg" />
+                <textarea ref={(el) => (inputRefs.current[index] = el)} value={input.content} onChange={(e) => handleInputChange(e, index, "text")} rows={2} className="w-full p-2 border border-gray-300 rounded-lg" onClick={() => handleScrollToLeftPane(index, "text")} />
               )}
             </div>
           ))}
         </DragDropContext>
 
-        {/* Popup for Adding New Image */}
+        <button className="mt-4 p-2 bg-blue-500 text-white rounded-lg" onClick={handleRegenerateJson}>
+          Regenerate JSON
+        </button>
+
+        {/* Popup for Adding New Images */}
         {popup.open && (
-          <div className="fixed inset-0 bg-gray-700 bg-opacity-75 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-lg">
-              <input type="text" value={newUrl} onChange={(e) => setNewUrl(e.target.value)} placeholder="Enter image URL" className="w-full mb-4 p-2 border border-gray-300 rounded-lg" />
-              <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={handleSaveImage}>
-                Save
-              </button>
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <h2 className="mb-2">Enter Image URL:</h2>
+              <input type="text" className="w-full p-2 border border-gray-300 rounded-lg mb-2" value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+              <div className="flex justify-end">
+                <button className="mr-2 p-2 bg-green-500 text-white rounded-lg" onClick={handleSaveImage}>
+                  Save
+                </button>
+                <button className="p-2 bg-red-500 text-white rounded-lg" onClick={() => setPopup({ open: false, index: null })}>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}
-
-        <button
-          className="mt-4 p-2 bg-blue-500 text-white rounded-lg"
-          onClick={() =>
-            alert(
-              JSON.stringify({
-                imageUrls: inputs.flatMap((input) => (input.type === "images" ? input.urls : [])),
-                texts: inputs.filter((input) => input.type === "text").map((input, i) => ({ [i + 1]: input.content })),
-              })
-            )
-          }>
-          Regenerate JSON
-        </button>
       </div>
+
+      {/* Modal for JSON display */}
+      {jsonModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg max-w-4xl w-full">
+            <h2 className="mb-4">Generated JSON:</h2>
+            <textarea value={jsonContent} readOnly className="w-full h-64 p-2 border border-gray-300 rounded-lg mb-4" />
+            <div className="flex justify-end">
+              <button className="mr-2 p-2 bg-green-500 text-white rounded-lg" onClick={handleCopyToClipboard}>
+                Copy JSON
+              </button>
+              <button className="p-2 bg-red-500 text-white rounded-lg" onClick={() => setJsonModalOpen(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
