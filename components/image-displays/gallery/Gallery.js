@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import MasonryGallery from "./masonry-gallery/MasonryGallery";
 import HorizontalGallery from "./horizontal-gallery/HorizontalGallery";
+import AdminGallery from "./admin-gallery/AdminGallery"; // Assuming you have the AdminGallery component
 import { HiOutlineArrowLeft } from "react-icons/hi2";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
@@ -12,6 +13,19 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
   const observer = useRef(null);
   const router = useRouter();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const [isAdmin, setIsAdmin] = useState(false); // State to detect if `admin` query exists
+
+  // Check for the presence of the `admin` query parameter
+  useEffect(() => {
+    if (router.isReady) {
+      const adminQueryParam = router.query.admin;
+      if (adminQueryParam !== undefined) {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    }
+  }, [router.isReady, router.query.admin]);
 
   // Intersection observer to lazy-load images
   useEffect(() => {
@@ -95,7 +109,15 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
         </div>
       )}
 
-      <div>{layout === "masonry" ? <MasonryGallery name={name} images={images} description={description} showCover={showCover} /> : <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />}</div>
+      <div>
+        {isAdmin ? (
+          <AdminGallery name={name} images={images} description={description} showCover={showCover} />
+        ) : layout === "masonry" ? (
+          <MasonryGallery name={name} images={images} description={description} showCover={showCover} />
+        ) : (
+          <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />
+        )}
+      </div>
 
       {!isMobile && (
         <div className="fixed bottom-10 left-10 flex items-center space-x-4 bg-white bg-opacity-80 p-3 shadow-md rounded-lg z-50">
