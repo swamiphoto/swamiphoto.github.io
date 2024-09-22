@@ -4,6 +4,7 @@ import { handleImageClick } from "../../../../common/images";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import { getCloudimageUrl } from "../../../../common/images";
+import { FiCopy } from "react-icons/fi"; // Icon for copy action
 import styles from "./AdminGallery.module.css"; // Use a separate CSS module for admin-specific styles
 
 const AdminGallery = ({ name, images, description, showCover = true }) => {
@@ -26,6 +27,23 @@ const AdminGallery = ({ name, images, description, showCover = true }) => {
     return imageUrl.split("/").pop();
   };
 
+  const getCleanImageUrl = (imageUrl) => {
+    // Remove the unwanted parts of the URL
+    return imageUrl.replace("clsjpwsdca.cloudimg.io/", "").split("?")[0];
+  };
+
+  const handleCopyToClipboard = (imageUrl) => {
+    const cleanUrl = getCleanImageUrl(imageUrl);
+    navigator.clipboard
+      .writeText(cleanUrl)
+      .then(() => {
+        //alert("Copied to clipboard: " + cleanUrl);
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
   return (
     <div className={`${styles.adminGallery} h-screen overflow-auto`}>
       <div className="gallery-content flex-grow p-4 overflow-hidden">
@@ -43,7 +61,10 @@ const AdminGallery = ({ name, images, description, showCover = true }) => {
             {images.map((image, index) => (
               <div key={index} className="relative mb-5">
                 <img src={getCloudimageUrl(image, { width: 800, quality: 80 })} className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} onClick={() => handleImageClick(image, images, router)} />
-                <div className="absolute top-2 right-2 bg-gray-800 text-white text-sm px-2 py-1 rounded font-sans">{getFilename(image)}</div>
+                <div className="absolute top-2 right-2 bg-gray-800 text-white text-sm px-2 py-1 rounded font-sans">
+                  {getFilename(image)}
+                  <FiCopy className="inline-block ml-2 cursor-pointer" onClick={() => handleCopyToClipboard(getCloudimageUrl(image, { width: 800, quality: 80 }))} />
+                </div>
               </div>
             ))}
           </Masonry>
