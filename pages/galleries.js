@@ -8,7 +8,7 @@ const galleryData = [
   {
     name: "Admin",
     slug: "admin",
-    imagesFolderUrl: "bollywood",
+    imagesFolderUrl: "portraits/sudha",
     isHidden: true,
   },
   {
@@ -543,7 +543,6 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=qmBW9-fUvag"],
-      layout: "film-single",
     },
   },
   {
@@ -595,6 +594,31 @@ const galleryData = [
       youtubeLinks: ["https://www.youtube.com/watch?v=ZTmF2v59CtI"],
       layout: "film-single",
       duration: 5000,
+    },
+  },
+  {
+    name: "Expressions ",
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0041.jpg`,
+    slug: "expressions",
+    description: "Sudha's fundraiser dance performance for Access Braille",
+    imageUrls: [
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0041.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0032.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0034.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0036.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0037.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0050.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0057.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0070.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0078.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0076.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0072.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0109.jpg",
+    ],
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=5JkPsWsq3E8"],
     },
   },
 ];

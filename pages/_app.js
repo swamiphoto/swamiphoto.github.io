@@ -10,7 +10,9 @@ import Head from "next/head";
 const otherNoHeaderPaths = ["/"];
 const galleryPaths = galleryData.map((gallery) => `/galleries/${gallery.slug}`);
 const slideshowPaths = galleryData.filter((gallery) => gallery.enableSlideshow).map((gallery) => `/galleries/${gallery.slug}/slideshow`);
-const noHeaderPaths = [...galleryPaths, ...slideshowPaths, ...otherNoHeaderPaths];
+const adminPaths = [...galleryPaths.map((path) => `${path}?admin`), ...slideshowPaths.map((path) => `${path}?admin`)];
+
+const noHeaderPaths = [...galleryPaths, ...slideshowPaths, ...otherNoHeaderPaths, ...adminPaths];
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
