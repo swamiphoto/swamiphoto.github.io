@@ -625,7 +625,7 @@ const galleryData = [
     name: "Pacific Coast Rocks ",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1412.jpg`,
     slug: "rocks",
-    description: "The pacific coast hidgway is one long stretch of beautiful surprises. I found these colorful rocks on a random beach along the coast.",
+    description: "The pacific coast highway is one long stretch of beautiful surprises. I found these colorful rocks on a random beach along the coast.",
     imageUrls: [
       "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1406.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1412.jpg",
