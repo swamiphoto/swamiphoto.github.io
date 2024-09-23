@@ -40,6 +40,8 @@ const Landscapes = () => {
         </Photos>
 
         <Photo src={IMAGES.landscapes.mac} alt="Mac" allPhotos={allPhotos} />
+        <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR502884-Enhanced-NR-2.jpg" caption="The spectacular city, possibly the world's most, sandwiched in fog" />
+
         <Photo src={IMAGES.landscapes.fog} alt="Fog" allPhotos={allPhotos} />
         <Photo src={IMAGES.landscapes.paris} alt="Paris" allPhotos={allPhotos} />
 

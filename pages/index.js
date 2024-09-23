@@ -7,7 +7,7 @@ import styles from "./index.module.css"; // Use module CSS instead
 const Home = () => {
   const router = useRouter();
 
-  const desktopImages = [IMAGES.landscapes.mac, IMAGES.landscapes.fog, IMAGES.landscapes.pastel];
+  const desktopImages = ["https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501956-Edit.jpg", IMAGES.landscapes.mac, IMAGES.landscapes.fog, IMAGES.landscapes.pastel];
   const mobileImages = [IMAGES.landscapes.comet, IMAGES.landscapes.astro, IMAGES.landscapes.falltrees];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

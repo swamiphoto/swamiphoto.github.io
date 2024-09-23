@@ -8,7 +8,7 @@ const galleryData = [
   {
     name: "Admin",
     slug: "admin",
-    imagesFolderUrl: "portraits/sudha",
+    imagesFolderUrl: "landscapes",
     isHidden: true,
   },
   {
@@ -618,7 +618,27 @@ const galleryData = [
     layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=5JkPsWsq3E8"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=LD5W8W7-0II"],
+    },
+  },
+  {
+    name: "Pacific Coast Rocks ",
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1412.jpg`,
+    slug: "rocks",
+    description: "The pacific coast hidgway is one long stretch of beautiful surprises. I found these colorful rocks on a random beach along the coast.",
+    imageUrls: [
+      "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1406.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1412.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1411.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1408.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1415.jpg",
+      "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1414.jpg",
+    ],
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=U1FZVpcKhGg"],
+      layout: "film-single",
     },
   },
 ];

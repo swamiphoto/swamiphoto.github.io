@@ -94,6 +94,7 @@ const Portfolio = () => {
           </p>
         </Hero>
 
+        <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR502884-Enhanced-NR-2.jpg" caption="The spectacular city, possibly the world's most, sandwiched in fog" />
         <Photo src={IMAGES.landscapes.mac} caption="An attempt at recreating the scene from one of the Mac wallpapers" />
         <Photo
           src={IMAGES.landscapes.paris}
