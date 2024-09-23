@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
-// import { Select } from "antd";
+import { Select } from "antd";
 
-// const { Option } = Select;
+const { Option } = Select;
 
 const SubNav = () => {
   const router = useRouter();
@@ -30,13 +30,13 @@ const SubNav = () => {
       </ul>
 
       {/* Mobile View */}
-      {/* <Select className="md:hidden w-3/5" defaultValue={router.pathname} onChange={handleChange} size="large">
+      <Select className="md:hidden w-3/5" defaultValue={router.pathname} onChange={handleChange} size="large">
         {navLinks.map((link, index) => (
           <Option key={index} value={link.path}>
             {link.name}
           </Option>
         ))}
-      </Select> */}
+      </Select>
     </div>
   );
 };
