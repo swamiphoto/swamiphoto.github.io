@@ -63,9 +63,9 @@ const TimeManagement = () => {
           <WiggleLine />
           <p className="mt-4">
             Most people spend 8 hours working but only get 3 hours of actual work done. Why not work only 3 hours and use the extra 5 hours for whatever else? And here’s another sobering fact—only 6% of people achieve meaningful goals each year. The rest of us are stuck in a cycle of busyness,
-            juggling tasks that don’t truly move the needle on what matters most.
+            juggling tasks that don’t move the needle.
           </p>
-          <p className="mt-4">It's time to break free from old patterns. I'll teach you how to manage your time, and accomplish in 13 weeks what others take a year to achieve.</p>
+          <p className="mt-4">Ready to break free from old patterns? I'll teach you how to manage your time, and accomplish in 13 weeks what others take a year to achieve.</p>
           <form ref={formRef} onSubmit={handleSignUp} className="space-y-4 mt-8">
             <div>
               <span className="text-2xl font-bold">Sign up now and save 75%!</span>
