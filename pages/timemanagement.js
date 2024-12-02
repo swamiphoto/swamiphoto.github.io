@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import IMAGES from "../common/images";
 import Head from "next/head";
 import WiggleLine from "../components/wiggle-line/WiggleLine";
 
@@ -44,36 +43,47 @@ const TimeManagement = () => {
       <Head>
         <title>Time Management Course</title>
       </Head>
-      <div className="underlined-links min-h-screen font-sans mb-20">
-        <div className="mx-auto max-w-2xl space-y-6 text-left text-xl">
-          <h1 className="text-5xl font-bold mt-20 mb-6">The Art of Time Management</h1>
-          <h2 className="text-2xl font-bold mt-20 mb-6">Achieve in 13 weeks what most people struggle to accomplish in a year.</h2>
-          <p>
+      <div className="min-h-screen font-sans flex flex-col lg:flex-row">
+        {/* Left Side (Video Section) */}
+        <div className="bg-gray-100 w-full lg:w-3/5 p-8 flex flex-col items-center justify-center">
+          <iframe src="https://www.youtube.com/embed/jZ0c7pvgOGA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full aspect-video max-w-lg lg:max-w-none"></iframe>
+          <p className="mt-4 text-center italic max-w-lg">
+            Learn time management from Swami Venkataramani, founder of{" "}
+            <a href="https://qtr.ai" target="_blank" rel="noopener noreferrer" className="text-blue-900 underline">
+              QTR
+            </a>
+            , the world's most advanced quarterly planner and goal achievement platform.
+          </p>
+        </div>
+
+        {/* Right Side (Text and Form Section) */}
+        <div className="w-full lg:w-2/5 p-6 lg:p-16 text-left shadow-xl border-l-gray-300 border-l">
+          <h1 className="text-4xl font-bold">The Art of Time Management</h1>
+          <h2 className="text-2xl font-medium text-gray-700 italic mt-4">Achieve in 13 weeks what most people struggle to accomplish in a year.</h2>
+          <WiggleLine />
+          <p className="mt-4">
             Most people spend 8 hours working but only get 3 hours of actual work done. Why not work only 3 hours and use the extra 5 hours for whatever else? And here’s another sobering fact—only 6% of people achieve meaningful goals each year. The rest of us are stuck in a cycle of busyness,
             juggling tasks that don’t truly move the needle on what matters most.
           </p>
-          <p>It's time to break free from old patterns. I'll teach you how to manage your time, and accomplish in 13 weeks what others take a year to achieve.</p>
-          <p>
-            <iframe src="https://www.youtube.com/embed/jZ0c7pvgOGA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full aspect-video"></iframe>
-          </p>
-          <form ref={formRef} onSubmit={handleSignUp} className="space-y-4 mt-10">
-            <div className="flex flex-col md:flex-row items-stretch md:space-x-4">
-              <div className="flex-grow">
-                <label htmlFor="email" className="sr-only">
-                  Email
-                </label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required className="w-full px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
-              </div>
-              <div>
-                <button type="submit" className="w-full md:w-auto px-6 py-3 bg-gray-800 text-white font-bold text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900">
-                  I'm Interested!
-                </button>
-              </div>
+          <p className="mt-4">It's time to break free from old patterns. I'll teach you how to manage your time, and accomplish in 13 weeks what others take a year to achieve.</p>
+          <form ref={formRef} onSubmit={handleSignUp} className="space-y-4 mt-8">
+            <div>
+              <span className="text-2xl font-bold">Sign up now and save 75%!</span>
+              <span className="ml-2 text-2xl line-through">$487</span>
+              <span className="ml-2 text-2xl font-bold">$47</span>
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email
+              </label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required className="w-full md:w-[400px] px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
+            </div>
+            <div>
+              <button type="submit" className="w-full md:w-[200px] px-6 py-3 bg-gray-800 text-white font-bold text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900">
+                I'm Interested!
+              </button>
             </div>
           </form>
-          <div className="mt-8">
-            <WiggleLine />
-          </div>
         </div>
       </div>
     </>
