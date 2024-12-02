@@ -133,6 +133,27 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "the_palomaitalic";
+  src: url("/src/assets/fonts/paloma/the_paloma_italic-webfont.woff2") format("woff2"), url("/src/assets/fonts/paloma/the_paloma_italic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "the_palomaregular";
+  src: url("/src/assets/fonts/paloma/the_paloma-webfont.woff2") format("woff2"), url("/src/assets/fonts/paloma/the_paloma-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "the_palomaregular";
+  src: url("/src/assets/fonts/paloma/the_paloma-webfont.woff2") format("woff2"), url("/src/assets/fonts/paloma/the_paloma-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   @apply font-serif text-gray-900 antialiased text-base;
