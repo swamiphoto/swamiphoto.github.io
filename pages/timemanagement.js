@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import IMAGES from "../common/images";
 import Head from "next/head";
-import CustomButton from "../components/custom-button/CustomButton";
+import WiggleLine from "../components/wiggle-line/WiggleLine";
 
 const TimeManagement = () => {
   const formRef = useRef(null);
@@ -44,7 +44,7 @@ const TimeManagement = () => {
       <Head>
         <title>Time Management Course</title>
       </Head>
-      <div className="underlined-links min-h-screen">
+      <div className="underlined-links min-h-screen font-sans mb-20">
         <div className="mx-auto max-w-2xl space-y-6 text-left text-xl">
           <h1 className="text-5xl font-bold mt-20 mb-6">The Art of Time Management</h1>
           <h2 className="text-2xl font-bold mt-20 mb-6">Achieve in 13 weeks what most people struggle to accomplish in a year.</h2>
@@ -62,15 +62,18 @@ const TimeManagement = () => {
                 <label htmlFor="email" className="sr-only">
                   Email
                 </label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="email" id="email" name="email" placeholder="Enter your email" required className="w-full px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
               </div>
               <div>
-                <button type="submit" className="w-full md:w-auto px-6 py-3 bg-gray-700 text-white font-medium text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                  I'm Interested
+                <button type="submit" className="w-full md:w-auto px-6 py-3 bg-gray-800 text-white font-bold text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900">
+                  I'm Interested!
                 </button>
               </div>
             </div>
           </form>
+          <div className="mt-8">
+            <WiggleLine />
+          </div>
         </div>
       </div>
     </>
