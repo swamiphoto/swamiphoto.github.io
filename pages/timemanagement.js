@@ -27,7 +27,7 @@ const TimeManagement = () => {
 
       if (response.ok) {
         console.log("Sign-up email sent successfully");
-        alert("Thank you for signing up! Check your inbox for more details.");
+        alert("Thank you for signing up! I'll let you know when the course is ready.");
       } else {
         console.error("Error sending sign-up email");
         alert("Something went wrong. Please try again later.");
