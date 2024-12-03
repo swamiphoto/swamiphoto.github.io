@@ -9,6 +9,8 @@ const TimeManagement = () => {
     event.preventDefault();
     const formData = {
       email: event.target.email.value,
+      name: event.target.name.value,
+      message: "New sign up for time management course",
     };
 
     try {
@@ -76,12 +78,19 @@ const TimeManagement = () => {
               </span>
               <span className="ml-2 text-2xl line-through">$299</span>
               <span className="ml-2 text-2xl font-bold">$47</span>
+              <div className="italic text-sm text-red-500 font-bold">Sign up today to lock in the discounted price—no payment needed now!</div>
+            </div>
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <input type="text" id="name" name="name" placeholder="Your name" required className="w-full md:w-[350px] px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
             </div>
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
               </label>
-              <input type="email" id="email" name="email" placeholder="Enter your email" required className="w-full md:w-[400px] px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
+              <input type="email" id="email" name="email" placeholder="Your email" required className="w-full md:w-[400px] px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
             </div>
             <div>
               <button type="submit" className="w-full md:w-[200px] px-6 py-3 bg-gray-800 text-white font-bold text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900">
