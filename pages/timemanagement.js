@@ -1,12 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Head from "next/head";
 import WiggleLine from "../components/wiggle-line/WiggleLine";
 
 const TimeManagement = () => {
   const formRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true); // Start spinner
     const formData = {
       email: event.target.email.value,
       name: event.target.name.value,
@@ -37,6 +39,7 @@ const TimeManagement = () => {
       alert("Something went wrong. Please try again later.");
     } finally {
       formRef.current.reset();
+      setIsSubmitting(false); // Stop spinner
     }
   };
 
@@ -78,7 +81,7 @@ const TimeManagement = () => {
               </span>
               <span className="ml-2 text-2xl line-through">$299</span>
               <span className="ml-2 text-2xl font-bold">$47</span>
-              <div className="italic text-sm text-red-500 font-bold">Sign up today to lock in the discounted price—no payment needed now!</div>
+              <div className="italic text-sm text-red-500 font-bold">No payment needed now, but sign up to lock in the early bird price!</div>
             </div>
             <div>
               <label htmlFor="name" className="sr-only">
@@ -93,8 +96,18 @@ const TimeManagement = () => {
               <input type="email" id="email" name="email" placeholder="Your email" required className="w-full md:w-[400px] px-4 py-3 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" />
             </div>
             <div>
-              <button type="submit" className="w-full md:w-[200px] px-6 py-3 bg-gray-800 text-white font-bold text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900">
-                I'm Interested!
+              <button type="submit" disabled={isSubmitting} className={`w-full md:w-[200px] px-6 py-3 bg-gray-800 text-white font-bold text-lg rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}>
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                    Submitting...
+                  </span>
+                ) : (
+                  "I'm Interested!"
+                )}
               </button>
             </div>
           </form>
