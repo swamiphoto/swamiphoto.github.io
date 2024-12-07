@@ -650,7 +650,7 @@ const galleryData = [
     layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=atVof3pjT-I"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=g4M0hH1R2eU"],
     },
   },
   {
