@@ -652,6 +652,7 @@ const galleryData = [
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=g4M0hH1R2eU"],
     },
+    isHidden: true,
   },
   {
     name: "Sarina",
