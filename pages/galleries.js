@@ -641,6 +641,31 @@ const galleryData = [
       layout: "film-single",
     },
   },
+  {
+    name: "Sarina's 1st Birthday",
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/sarina-first-bday/AR502170.jpg?width=800&quality=80`,
+    slug: "sarina-bday",
+    description: "Birthday party at Broom street Ganesha temple",
+    imagesFolderUrl: "events/sarina-first-bday",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=dx2ohacAshI"],
+    },
+  },
+  {
+    name: "Sarina",
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sarina/AR502585.jpg?width=800&quality=80`,
+    slug: "sarina",
+    description: "Portraits on Sarina's 1st birthday",
+    imagesFolderUrl: "portraits/sarina",
+    layout: "masonry",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=mVsmFCgxc1o"],
+      layout: "film-single",
+    },
+  },
 ];
 
 const Galleries = () => {
