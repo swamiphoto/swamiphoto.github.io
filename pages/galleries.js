@@ -667,6 +667,18 @@ const galleryData = [
       layout: "film-single",
     },
   },
+  {
+    name: "Sudha — Nava Rasa",
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503366-Edit-2-Edit.jpg`,
+    slug: "sudha-nava-rasa",
+    description: "Nava Rasa expressions by Sudha",
+    imagesFolderUrl: "portraits/sudha-navarasa",
+    layout: "horizontal",
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=OBUauvQLrQQ"],
+    },
+  },
 ];
 
 const Galleries = () => {
