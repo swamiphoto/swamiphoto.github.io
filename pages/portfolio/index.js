@@ -94,7 +94,7 @@ const Portfolio = () => {
           </p>
         </Hero>
 
-        <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR502878-Enhanced-NR-3-Edit-Edit.jpg" caption="One of the world's most spectacular cities sandwiched in fog" />
+        <Photo src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR502878-Enhanced-NR-3-Edit-Edit.jpg" caption="San Francisco — possibily one of the world's most spectacular cities — sandwiched in fog" />
         <Photo src={IMAGES.landscapes.mac} caption="An attempt at recreating the scene from one of the Mac wallpapers" />
         <Photo
           src={IMAGES.landscapes.paris}
@@ -104,7 +104,7 @@ const Portfolio = () => {
         <Testimonial {...testimonialsData[0]} />
 
         <Photo src={IMAGES.landscapes.fog} caption="Editor's Favorite, National Geographic" captionDesign="design2" />
-        <Photo src={IMAGES.landscapes.gateway} caption="Official conference backdrop, Social Media Week Mumbai." captionDesign="design2" />
+        <Photo src={IMAGES.landscapes.gateway} caption="Official conference backdrop, Social Media Week Mumbai" captionDesign="design2" />
 
         <Photo
           src="https://storage.googleapis.com/swamiphoto/photos/landscapes/california/aurora2.jpg"

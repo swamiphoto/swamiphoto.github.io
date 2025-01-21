@@ -154,6 +154,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Montage";
+  src: url("/src/assets/fonts/Montage/Montage-Serif-Font.woff2") format("woff2"), url("/src/assets/fonts/Montage/Montage-Serif-Font.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   @apply font-serif text-gray-900 antialiased text-base;

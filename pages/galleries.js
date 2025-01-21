@@ -12,8 +12,8 @@ const galleryData = [
     isHidden: true,
   },
   {
-    name: "Hike with Naga and Bharath",
-    description: "An adventurous hike with Naga and Bharath.",
+    name: "Sunol Ridge",
+    description: "I wanted to test my new Sigma 85mm portrait lens and asked Naga if she'd be my test model. We ended up hiking with her entire family and captured some shots after an hour-long hike up Sunol Ridge.",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg?width=500&quality=80`,
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
@@ -36,7 +36,7 @@ const galleryData = [
     },
   },
   {
-    name: "Sunflowers with Naga",
+    name: "Sunflower Portraits",
     description: "A dreamy evening with the sunflowers in Woodland. We were at the tailend of the sunflower season and took a chance to drive a couple hours to see them, but the light was perfect and the flowers were still in bloom.",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500896.jpg?width=500&quality=80`,
     slug: "naga-sunflowers",
@@ -54,7 +54,7 @@ const galleryData = [
     },
   },
   {
-    name: "California",
+    name: "Beautiful California",
     description:
       "California is pure magic. Whether it's the dramatic coastline, the rolling golden hills, or the towering forests, every corner feels like a world of its own. This gallery is a celebration of the landscapes that never fail to leave me in awe—scenes that remind me just how special this place is.",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
@@ -68,10 +68,10 @@ const galleryData = [
     },
   },
   {
-    name: "Lavender Fields with Naga",
+    name: "Lavender",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg?width=500&quality=80`,
     slug: "naga-lavendar",
-    description: "A purple evening with Naga's fmaily in the lavender fields.",
+    description: "We took a drive an hour and a half north to photograph Naga's family in the beautiful lavender fields. Mala joined me, and it was our first time going out after the lockdown, which made the evening feel extra special and refreshing.",
     imagesFolderUrl: "portraits/naga-lavendar",
     layout: "masonry",
     enableSlideshow: true,
@@ -85,7 +85,8 @@ const galleryData = [
     name: "Japan",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/japan/DSC00179-Edit-4.jpg?width=500&quality=80`,
     slug: "japan",
-    description: "A collection of images from Japan.",
+    description:
+      "I didn't take a whole lot of photos in Japan, as I was traveling with Mala. It was funny...I visited the temples and other sites twice: once early in the morning as a photographer avoiding crowds, and again later in the day with Mala for sightseeing. Two trips to each sight...and worth it!",
     imagesFolderUrl: "landscapes/japan",
     layout: "horizontal",
   },
@@ -360,19 +361,19 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSC_5118-Edit.jpg",
     ],
     texts: {
-      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let’s give it a shot."',
+      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let\'s give it a shot."',
       3: "We met at Stanford, and Naga was glowing. Bharath was visibly excited. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
-      6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn’t even seen the images yet but trusted me.',
+      6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn\'t even seen the images yet but trusted me.',
       8: "Sathya was born. We did a shoot soon after at Adobe lodge. Sathya was a natural...he was so comfortable in front of the camera.",
       24: "Naga loves wisterias. We found a bunch and took a shot. Coz, why not.",
       26: "Sathya turned two, and it was time for another shoot. This time, we chose a spot near the Japanese gardens in San Jose.",
       43: "Sriman was born. It was peak of Covid, but we decided on a shoot at Mt. Diablo.",
       50: "A few months later, we did another shoot, this time at their home. Sriman looked so adorable in traditional attire!",
-      63: "What’s a photoshoot without some naked baby shots?",
-      65: "Some of my favorite mother and son portraits. These aren’t technically perfect—even the lighting isn't great...but, there’s something about them I love. I think they remind me of me and my mom.",
+      63: "What's a photoshoot without some naked baby shots?",
+      65: "Some of my favorite mother and son portraits. These aren't technically perfect—even the lighting isn't great...but, there's something about them I love. I think they remind me of me and my mom.",
       70: "There's always time for a few couple and solo shots!",
-      75: "We’d talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
-      82: "Hope you enjoyed the show. This is what photography is to me. It’s not the lighting, or the composition, or the gear. It’s the connection. It’s becoming a part of their journey.",
+      75: "We'd talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
+      82: "Hope you enjoyed the show. This is what photography is to me. It's not the lighting, or the composition, or the gear. It's the connection. It's becoming a part of their journey.",
       83: "Almost forgot...we did a lavender shoot too! It was the first time Mala and I took a trip after the lockdown.",
     },
 
@@ -486,19 +487,19 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSC_5118-Edit.jpg",
     ],
     texts: {
-      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let’s give it a shot."',
+      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let\'s give it a shot."',
       3: "We met at Stanford, and Naga was glowing. Bharath was visibly excited. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
-      6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn’t even seen the images yet but trusted me.',
+      6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn\'t even seen the images yet but trusted me.',
       8: "Sathya was born. We did a shoot soon after at Adobe lodge. Sathya was a natural...he was so comfortable in front of the camera.",
       24: "Naga loves wisterias. We found a bunch and took a shot. Coz, why not.",
       26: "Sathya turned two, and it was time for another shoot. This time, we chose a spot near the Japanese gardens in San Jose.",
       43: "Sriman was born. It was peak of Covid, but we decided on a shoot at Mt. Diablo.",
       50: "A few months later, we did another shoot, this time at their home. Sriman looked so adorable in traditional attire!",
-      63: "What’s a photoshoot without some naked baby shots?",
-      65: "Some of my favorite mother and son portraits. These aren’t technically perfect—even the lighting isn't great...but, there’s something about them I love. I think they remind me of me and my mom.",
+      63: "What's a photoshoot without some naked baby shots?",
+      65: "Some of my favorite mother and son portraits. These aren't technically perfect—even the lighting isn't great...but, there's something about them I love. I think they remind me of me and my mom.",
       70: "There's always time for a few couple and solo shots!",
-      75: "We’d talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
-      82: "Hope you enjoyed the show. This is what photography is to me. It’s not the lighting, or the composition, or the gear. It’s the connection. It’s becoming a part of their journey.",
+      75: "We'd talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
+      82: "Hope you enjoyed the show. This is what photography is to me. It's not the lighting, or the composition, or the gear. It's the connection. It's becoming a part of their journey.",
       83: "Almost forgot...we did a lavender shoot too! It was the first time Mala and I took a trip after the lockdown.",
     },
 
@@ -597,9 +598,9 @@ const galleryData = [
     },
   },
   {
-    name: "Expressions ",
+    name: "Classical Dance",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0041.jpg`,
-    slug: "expressions",
+    slug: "classicaldance",
     description: "Sudha's fundraiser dance performance for Access Braille",
     imageUrls: [
       "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0041.jpg",
@@ -642,7 +643,7 @@ const galleryData = [
     },
   },
   {
-    name: "Sarina's 1st Birthday",
+    name: "Sarina",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/sarina-first-bday/AR502170.jpg?width=800&quality=80`,
     slug: "sarina-bday",
     description: "Birthday party at Broom street Ganesha temple",
@@ -668,7 +669,7 @@ const galleryData = [
     },
   },
   {
-    name: "Sudha — Nava Rasa",
+    name: "Nava Rasa",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503366-Edit-2-Edit.jpg`,
     slug: "sudha-nava-rasa",
     description: "Nava Rasa expressions by Sudha",
@@ -678,6 +679,29 @@ const galleryData = [
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=OBUauvQLrQQ"],
     },
+  },
+];
+
+const stackVariants = [
+  // Right bottom stack
+  {
+    first: "absolute -right-2 -bottom-2 w-full h-[400px] md:h-[500px] bg-gray-100 rotate-2 transition-transform duration-300 group-hover:translate-x-1 rounded-3xl",
+    second: "absolute -right-1 -bottom-1 w-full h-[400px] md:h-[500px] bg-gray-50 rotate-1 transition-transform duration-300 group-hover:translate-x-0.5 rounded-3xl",
+  },
+  // Left bottom stack
+  {
+    first: "absolute -left-2 -bottom-2 w-full h-[400px] md:h-[500px] bg-gray-100 -rotate-2 transition-transform duration-300 group-hover:-translate-x-1 rounded-3xl",
+    second: "absolute -left-1 -bottom-1 w-full h-[400px] md:h-[500px] bg-gray-50 -rotate-1 transition-transform duration-300 group-hover:-translate-x-0.5 rounded-3xl",
+  },
+  // Right top stack
+  {
+    first: "absolute -right-2 -top-2 w-full h-[400px] md:h-[500px] bg-gray-100 -rotate-2 transition-transform duration-300 group-hover:translate-x-1 rounded-3xl",
+    second: "absolute -right-1 -top-1 w-full h-[400px] md:h-[500px] bg-gray-50 -rotate-1 transition-transform duration-300 group-hover:translate-x-0.5 rounded-3xl",
+  },
+  // Left top stack
+  {
+    first: "absolute -left-2 -top-2 w-full h-[400px] md:h-[500px] bg-gray-100 rotate-2 transition-transform duration-300 group-hover:-translate-x-1 rounded-3xl",
+    second: "absolute -left-1 -top-1 w-full h-[400px] md:h-[500px] bg-gray-50 rotate-1 transition-transform duration-300 group-hover:-translate-x-0.5 rounded-3xl",
   },
 ];
 
@@ -692,17 +716,29 @@ const Galleries = () => {
           <p>A curated collection of galleries showcasing images from client sessions and personal shoots, including landscapes, portraits, travel, and more.</p>
         </Hero>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-8">
           {galleryData
             .filter((gallery) => !gallery.isHidden)
-            .map((gallery) => (
-              <Link href={`/galleries/${gallery.slug}`} key={gallery.name}>
-                <div className="relative overflow-hidden shadow-lg">
-                  <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 500, quality: 80 })} alt={gallery.name} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 hover:opacity-90" />
-                </div>
-                <p className="text-center mt-2 text-md tracking-tighter text-gray-600">{gallery.name}</p>
-              </Link>
-            ))}
+            .map((gallery) => {
+              const stackStyle = stackVariants[Math.floor(Math.random() * stackVariants.length)];
+              return (
+                <Link href={`/galleries/${gallery.slug}`} key={gallery.name} className="flex flex-col md:flex-row gap-6 group hover:opacity-95 transition-opacity hover:no-underline">
+                  <div className="relative md:w-7/12">
+                    <div className="relative">
+                      <div className={stackStyle.first}></div>
+                      <div className={stackStyle.second}></div>
+                      <div className="relative overflow-hidden shadow-lg rounded-3xl">
+                        <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 1200, quality: 80 })} alt={gallery.name} className="w-full h-[400px] md:h-[500px] object-cover relative z-10 rounded-3xl" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="md:w-5/12 space-y-3 py-2 flex flex-col justify-center text-left px-0 md:px-8">
+                    <h2 className="text-4xl font-medium tracking-tight text-gray-900">{gallery.name}</h2>
+                    {gallery.description && <p className="text-gray-600 text-xl">{gallery.description}</p>}
+                  </div>
+                </Link>
+              );
+            })}
         </div>
       </main>
     </>

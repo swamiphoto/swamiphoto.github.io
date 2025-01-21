@@ -13,6 +13,7 @@ module.exports = {
         mono: ["Geist Mono", "monospace"],
         serif: ['"Cormorant Garamond", serif'],
         serif2: ["the_palomaregular"],
+        serif3: ['"Montage", serif'],
       },
       fontWeight: {
         normal: 400,
@@ -83,6 +84,9 @@ module.exports = {
           800: "#63AB8C",
           900: "#448066",
         },
+      },
+      maxWidth: {
+        "8xl": "88rem",
       },
     },
   },

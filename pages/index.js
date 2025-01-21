@@ -7,7 +7,7 @@ import styles from "./index.module.css"; // Use module CSS instead
 const Home = () => {
   const router = useRouter();
 
-  const desktopImages = ["https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501956-Edit.jpg", IMAGES.landscapes.mac, IMAGES.landscapes.fog, IMAGES.landscapes.pastel];
+  const desktopImages = [IMAGES.landscapes.mac, IMAGES.landscapes.pastel];
   const mobileImages = [IMAGES.landscapes.comet, IMAGES.landscapes.astro, IMAGES.landscapes.falltrees];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -49,10 +49,10 @@ const Home = () => {
             <div key={index} className={`absolute top-0 left-0 w-full h-full bg-cover bg-center transition-opacity duration-[5000ms] ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `url(${image})` }}></div>
           ))}
         </div>
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex flex-col justify-center items-center text-white px-5">
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-center text-white px-5">
           <div className="text-center pt-10 md:pt-20 mb-10 px-6">
-            <h1 className="mx-auto md:max-w-3xl text-4xl md:text-6xl font-bold mb-2">Swami Venkataramani</h1>
-            <div className="mx-auto max-w-2xl md:text-2xl mb-8 mt-5 tracking-tight">
+            <img src="/logo1-white.png" alt="Swami Venkataramani" className="mx-auto h-16 md:h-24 mb-2" />
+            <div className="mx-auto max-w-2xl md:text-3xl mb-8 mt-5">
               <p>
                 Published{" "}
                 <Link href="/portfolio" className="underline text-white focus:outline-none">
@@ -77,7 +77,7 @@ const Home = () => {
                 .
               </p>
             </div>
-            <button onClick={handleButtonClick} className="px-8 py-4 bg-white text-black font-bold opacity-70 hover:opacity-95 uppercase tracking-wider cursor-pointer">
+            <button onClick={handleButtonClick} className="px-8 py-4 bg-white text-black opacity-75 hover:opacity-95 text-3xl tracking-wider cursor-pointer">
               View My Work
             </button>
           </div>
