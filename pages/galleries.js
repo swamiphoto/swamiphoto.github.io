@@ -23,11 +23,11 @@ const galleryData = [
       customDurations: { 24: 7000 },
       youtubeLinks: ["https://www.youtube.com/watch?v=PYujyluMxMU", "https://www.youtube.com/watch?v=qj4RiKoARPk"],
       captions: {
-        24: "Photographer's favorite. Possibly my all time favorite.",
+        // 24: "Photographer's favorite. Possibly my all time favorite.",
       },
       coverImageIndex: 24,
       mobileCoverImageIndex: 21,
-      layout: "kenburns",
+      layout: "film-single",
     },
     enableClientView: true,
     clientSettings: {
