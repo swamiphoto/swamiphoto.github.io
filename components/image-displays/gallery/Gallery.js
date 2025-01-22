@@ -7,8 +7,9 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
+import StackedGallery from "./stacked-gallery/StackedGallery";
 
-const Gallery = ({ layout = "horizontal", name, images, description, slug, showCover = false, enableSlideshow = false, enableClientView = false, clientView = false, setIsModalOpen, handleExitClientView }) => {
+const Gallery = ({ layout = "stacked", name, images, description, slug, showCover = true, enableSlideshow = false, enableClientView = false, clientView = false, setIsModalOpen, handleExitClientView }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const observer = useRef(null);
   const router = useRouter();
@@ -111,11 +112,13 @@ const Gallery = ({ layout = "horizontal", name, images, description, slug, showC
 
       <div>
         {isAdmin ? (
-          <AdminGallery name={name} images={images} description={description} showCover={showCover} />
+          <AdminGallery images={images} name={name} description={description} showCover={showCover} />
+        ) : layout === "stacked" ? (
+          <StackedGallery images={images} name={name} description={description} showCover={showCover} />
         ) : layout === "masonry" ? (
-          <MasonryGallery name={name} images={images} description={description} showCover={showCover} />
+          <MasonryGallery images={images} name={name} description={description} showCover={showCover} />
         ) : (
-          <HorizontalGallery name={name} images={images} description={description} showCover={showCover} />
+          <HorizontalGallery images={images} name={name} description={description} showCover={showCover} />
         )}
       </div>
 

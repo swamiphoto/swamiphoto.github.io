@@ -17,7 +17,8 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg?width=500&quality=80`,
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
-    layout: "masonry",
+    layout: "stacked",
+    showCover: true,
     enableSlideshow: true,
     slideshowSettings: {
       customDurations: { 24: 7000 },
@@ -41,8 +42,9 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500896.jpg?width=500&quality=80`,
     slug: "naga-sunflowers",
     imagesFolderUrl: "portraits/naga-sunflowers",
-    layout: "masonry",
+    layout: "stacked",
     enableSlideshow: true,
+    showCover: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
       layout: "kenburns",
@@ -60,8 +62,9 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
     slug: "california",
     imagesFolderUrl: "landscapes/california",
-    layout: "masonry",
     enableSlideshow: true,
+    layout: "stacked",
+    showCover: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=BciS5krYL80"],
       duration: 6000,
@@ -73,7 +76,6 @@ const galleryData = [
     slug: "naga-lavendar",
     description: "We took a drive an hour and a half north to photograph Naga's family in the beautiful lavender fields. Mala joined me, and it was our first time going out after the lockdown, which made the evening feel extra special and refreshing.",
     imagesFolderUrl: "portraits/naga-lavendar",
-    layout: "masonry",
     enableSlideshow: true,
     enableClientView: true,
     clientSettings: {
@@ -88,7 +90,6 @@ const galleryData = [
     description:
       "I didn't take a whole lot of photos in Japan, as I was traveling with Mala. It was funny...I visited the temples and other sites twice: once early in the morning as a photographer avoiding crowds, and again later in the day with Mala for sightseeing. Two trips to each sight...and worth it!",
     imagesFolderUrl: "landscapes/japan",
-    layout: "horizontal",
   },
   {
     name: "Anagha",
@@ -96,7 +97,6 @@ const galleryData = [
     slug: "anagha",
     description: "Forgot how good a poser Anagha was as a kid!",
     imagesFolderUrl: "portraits/anagha",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=_iktURk0X-A"],
@@ -115,7 +115,6 @@ const galleryData = [
     slug: "anagha-family",
     description: "My first shoot with Anagha. She was a natural!",
     imagesFolderUrl: "portraits/anagha2",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=BeUSuSXBqMQ"],
@@ -133,7 +132,6 @@ const galleryData = [
     slug: "naga-bharath",
     description: "My first shoot with Naga and Bharath. Naga was pregnant with Sathya",
     imagesFolderUrl: "portraits/naga-stanford",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=JkfSV51U-64"],
@@ -151,7 +149,6 @@ const galleryData = [
     slug: "sathya",
     description: "First shoot with Sathya.",
     imagesFolderUrl: "portraits/naga-adobe",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=puOnVzlkrQM"],
@@ -170,7 +167,6 @@ const galleryData = [
     slug: "young-boy-sathya",
     description: "Second shoot with Sathya.",
     imagesFolderUrl: "portraits/naga-sanjose",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=puOnVzlkrQM"],
@@ -188,7 +184,6 @@ const galleryData = [
     slug: "sathya-sriman",
     description: "Sriman's first shoot",
     imagesFolderUrl: "portraits/naga-diablo",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=hzGHrQBq_i4"],
@@ -207,7 +202,6 @@ const galleryData = [
     slug: "traditional-sriman",
     description: "Sriman in traditional attire",
     imagesFolderUrl: "portraits/naga-home",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=PYujyluMxMU"],
@@ -226,7 +220,6 @@ const galleryData = [
     slug: "saisuma",
     description: "Modeling for Chiffon and Spice",
     imagesFolderUrl: "portraits/saisuma",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=PYujyluMxMU"],
@@ -245,7 +238,6 @@ const galleryData = [
     slug: "sathyaishuwar",
     description: "Pre-wedding shoot",
     imagesFolderUrl: "portraits/sathya-ishuwar",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=6P5zx_rxlhI"],
@@ -376,8 +368,6 @@ const galleryData = [
       82: "Hope you enjoyed the show. This is what photography is to me. It's not the lighting, or the composition, or the gear. It's the connection. It's becoming a part of their journey.",
       83: "Almost forgot...we did a lavender shoot too! It was the first time Mala and I took a trip after the lockdown.",
     },
-
-    layout: "horizontal",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=hzGHrQBq_i4"],
@@ -540,7 +530,6 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/bollywood/sonu-atif/DSC_5151 2.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/bollywood/sonu-atif/DSC_5065 2.jpg",
     ],
-    layout: "horizontal",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=qmBW9-fUvag"],
@@ -561,7 +550,6 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/bollywood/dabaang/DSC_6845.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/bollywood/dabaang/DSC_6884.jpg",
     ],
-    layout: "horizontal",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=S61L1fpqFXE"],
@@ -589,7 +577,6 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/bollywood/dabaang/DSC_7450.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/bollywood/dabaang/DSC_7456.jpg",
     ],
-    layout: "horizontal",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=ZTmF2v59CtI"],
@@ -616,7 +603,6 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0072.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0109.jpg",
     ],
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=LD5W8W7-0II"],
@@ -635,7 +621,6 @@ const galleryData = [
       "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1415.jpg",
       "https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1414.jpg",
     ],
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=U1FZVpcKhGg"],
@@ -648,7 +633,6 @@ const galleryData = [
     slug: "sarina-bday",
     description: "Birthday party at Broom street Ganesha temple",
     imagesFolderUrl: "events/sarina-first-bday",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=g4M0hH1R2eU"],
@@ -661,7 +645,6 @@ const galleryData = [
     slug: "sarina",
     description: "Portraits on Sarina's 1st birthday",
     imagesFolderUrl: "portraits/sarina",
-    layout: "masonry",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=mVsmFCgxc1o"],
@@ -674,7 +657,6 @@ const galleryData = [
     slug: "sudha-nava-rasa",
     description: "Nava Rasa expressions by Sudha",
     imagesFolderUrl: "portraits/sudha-navarasa",
-    layout: "horizontal",
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=OBUauvQLrQQ"],

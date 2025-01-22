@@ -58,7 +58,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
     return <div>Gallery not found</div>;
   }
 
-  const { layout = "masonry", showCover = false, enableSlideshow = false, enableClientView = false, clientSettings = {} } = gallery;
+  const { layout = "stacked", showCover = true, enableSlideshow = false, enableClientView = false, clientSettings = {} } = gallery;
 
   const finalLayout = isMobile ? "masonry" : layout;
 

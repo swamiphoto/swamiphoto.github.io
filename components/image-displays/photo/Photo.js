@@ -30,7 +30,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
         src={getCloudimageUrl(src, { width: 1600, quality: 80 })}
         alt={imageAltText} // Use fallback for alt
         loading="lazy"
-        className={`transition-opacity duration-500 ease-in-out ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"} shadow-lg`}
+        className={`transition-opacity duration-500 ease-in-out rounded-3xl ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"} shadow-lg`}
         onLoad={() => setIsLoaded(true)}
         onClick={() => handleImageClick(src, allPhotos, router)} // Use the handleImageClick function
         style={{ cursor: "pointer" }}
@@ -47,7 +47,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
             src={src + "?width=1300"}
             alt={imageAltText} // Use fallback for alt
             loading="lazy"
-            className={`xl:max-h-screen shadow-lg transition-opacity duration-500 ease-in-out ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            className={`xl:max-h-screen shadow-lg transition-opacity duration-500 ease-in-out rounded-3xl ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"}`}
             onLoad={() => setIsLoaded(true)}
             onClick={() => handleImageClick(src, allPhotos, router)} // Use the handleImageClick function
             style={{ cursor: "pointer" }}
