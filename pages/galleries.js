@@ -17,11 +17,7 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg?width=500&quality=80`,
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
-    texts: {
-      1: "This is a sample text that will be displayed when the image with index 1 is shown.",
-      3: "We even saw a rattle snake while hiking",
-    },
-    layout: "masonry",
+    layout: "stacked",
     showCover: true,
     enableSlideshow: true,
     slideshowSettings: {
@@ -57,6 +53,20 @@ const galleryData = [
     clientSettings: {
       clientLogin: "wisteria",
       clientMessage: "Hello Naga, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
+    },
+  },
+  {
+    name: "Arizona",
+    description: "I took a trip to Arizona with my friends, and we visited Sedona, Grand Canyon, Antelope Canyon, and Horseshoe Bend. I can't believe I've never been to Page having been in AZ since 1998.",
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg?width=500&quality=80`,
+    slug: "arizona",
+    imagesFolderUrl: "landscapes/arizona",
+    layout: "stacked",
+    enableSlideshow: true,
+    showCover: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
+      layout: "film-single",
     },
   },
   {
