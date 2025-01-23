@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import StackedGallery from "./stacked-gallery/StackedGallery";
 
+//note: images is imageUrls (need to rename at some point)
 const Gallery = ({ layout = "stacked", name, images, description, slug, showCover = true, enableSlideshow = false, enableClientView = false, clientView = false, setIsModalOpen, handleExitClientView }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const observer = useRef(null);

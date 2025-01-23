@@ -9,24 +9,21 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
   const [imageLoadStates, setImageLoadStates] = useState({});
   const router = useRouter();
 
-  // Normalize images to ensure consistent format
-  const normalizedImages = images.map((image, index) => (typeof image === "string" ? { src: image, id: index } : { ...image, id: index }));
-
-  // Calculate aspect ratios for all images if missing
+  // Calculate aspect ratios for image URLs
   useEffect(() => {
     const calculateAspectRatios = async () => {
       const updatedImages = await Promise.all(
-        normalizedImages.map((image) => {
+        images.map((url) => {
           return new Promise((resolve) => {
             const img = new Image();
             img.onload = () => {
               const aspectRatio = img.width / img.height;
-              resolve({ ...image, aspectRatio });
+              resolve({ src: url, aspectRatio });
             };
             img.onerror = () => {
-              resolve({ ...image, aspectRatio: 1 }); // Default to 1 if there's an error
+              resolve({ src: url, aspectRatio: 1 }); // Default to 1 if there's an error
             };
-            img.src = image.src || ""; // Fallback to empty string
+            img.src = url;
           });
         })
       );
@@ -34,7 +31,7 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
     };
 
     calculateAspectRatios();
-  }, [normalizedImages]);
+  }, [images]);
 
   const handleImageLoad = (id) => {
     setImageLoadStates((prevStates) => ({
@@ -78,24 +75,25 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
                 className="flex flex-row items-center justify-center gap-4"
                 style={{ width: "75%", margin: "0 auto" }} // Center pairs
               >
-                {entry.map((image) =>
+                {entry.map((image, idx) =>
                   image ? (
                     <div
-                      key={`vertical-${image.id}`}
+                      key={`vertical-${index}-${idx}`}
                       className="flex justify-center relative"
                       style={{ width: "48%" }} // Ensure both images fit well
-                      onClick={() => handleImageClick(image, processedImages, router)}>
+                      onClick={() => handleImageClick(image.src, images, router)} // Pass image URL directly
+                    >
                       {/* Placeholder Div */}
-                      <div className={`absolute inset-0 bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[image.id] ? "opacity-0" : "opacity-100"}`}></div>
+                      <div className={`absolute inset-0 bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[`${index}-${idx}`] ? "opacity-0" : "opacity-100"}`}></div>
                       {/* Lazy-loaded Image */}
                       <img
                         src={getCloudimageUrl(image.src, {
                           width: 700, // Reduced image resolution
                           quality: 85,
                         })}
-                        className={`h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[image.id] ? "opacity-100" : "opacity-0"}`}
+                        className={`h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[`${index}-${idx}`] ? "opacity-100" : "opacity-0"}`}
                         alt=""
-                        onLoad={() => handleImageLoad(image.id)}
+                        onLoad={() => handleImageLoad(`${index}-${idx}`)}
                       />
                     </div>
                   ) : null
@@ -103,18 +101,21 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
               </div>
             ) : (
               // Horizontal image
-              <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry, processedImages, router)}>
+              <div
+                className="w-full flex justify-center relative"
+                onClick={() => handleImageClick(entry.src, images, router)} // Pass image URL directly
+              >
                 {/* Placeholder Div */}
-                <div className={`absolute w-[75%] max-h-[calc(100vw * 0.35)] bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[entry.id] ? "opacity-0" : "opacity-100"}`}></div>
+                <div className={`absolute w-[75%] max-h-[calc(100vw * 0.35)] bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-0" : "opacity-100"}`}></div>
                 {/* Lazy-loaded Image */}
                 <img
                   src={getCloudimageUrl(entry.src, {
                     width: 1100, // Reduced width for horizontal images
                     quality: 85,
                   })}
-                  className={`w-[75%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[entry.id] ? "opacity-100" : "opacity-0"}`}
+                  className={`w-[75%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-100" : "opacity-0"}`}
                   alt=""
-                  onLoad={() => handleImageLoad(entry.id)}
+                  onLoad={() => handleImageLoad(entry.src)}
                 />
               </div>
             )}
