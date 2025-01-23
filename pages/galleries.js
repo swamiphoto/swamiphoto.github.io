@@ -68,6 +68,7 @@ const galleryData = [
       youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
       layout: "film-single",
     },
+    isHidden: true,
   },
   {
     name: "Beautiful California",
@@ -77,7 +78,7 @@ const galleryData = [
     slug: "california",
     imagesFolderUrl: "landscapes/california",
     enableSlideshow: true,
-    layout: "stacked",
+    layout: "masonry",
     showCover: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=BciS5krYL80"],
