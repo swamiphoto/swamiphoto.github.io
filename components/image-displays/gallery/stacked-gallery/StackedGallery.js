@@ -64,31 +64,34 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
   }
 
   return (
-    <div className="pb-20">
+    <div className="pb-16">
       {showCover && <GalleryCover name={name} description={description} />}
       <div className={`${styles.stackedGallery}`}>
         {combinedRows.map((entry, index) => (
-          <div key={`row-${index}`} className="mb-8">
+          <div key={`row-${index}`} className="mb-6">
             {Array.isArray(entry) ? (
               // Vertical pairs
               <div
-                className="flex flex-row items-center justify-center gap-4"
-                style={{ width: "75%", margin: "0 auto" }} // Center pairs
-              >
+                className="flex flex-row items-center justify-center gap-3"
+                style={{
+                  width: "72%",
+                  margin: "0 auto", // Center vertical pairs
+                }}>
                 {entry.map((image, idx) =>
                   image ? (
                     <div
                       key={`vertical-${index}-${idx}`}
                       className="flex justify-center relative"
-                      style={{ width: "48%" }} // Ensure both images fit well
-                      onClick={() => handleImageClick(image.src, images, router)} // Pass image URL directly
-                    >
+                      style={{
+                        width: "47%", // Reduce width slightly for tighter spacing
+                      }}
+                      onClick={() => handleImageClick(image.src, images, router)}>
                       {/* Placeholder Div */}
                       <div className={`absolute inset-0 bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[`${index}-${idx}`] ? "opacity-0" : "opacity-100"}`}></div>
                       {/* Lazy-loaded Image */}
                       <img
                         src={getCloudimageUrl(image.src, {
-                          width: 700, // Reduced image resolution
+                          width: 600,
                           quality: 85,
                         })}
                         className={`h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[`${index}-${idx}`] ? "opacity-100" : "opacity-0"}`}
@@ -101,19 +104,16 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
               </div>
             ) : (
               // Horizontal image
-              <div
-                className="w-full flex justify-center relative"
-                onClick={() => handleImageClick(entry.src, images, router)} // Pass image URL directly
-              >
+              <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, images, router)}>
                 {/* Placeholder Div */}
-                <div className={`absolute w-[75%] max-h-[calc(100vw * 0.35)] bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-0" : "opacity-100"}`}></div>
+                <div className={`absolute w-[72%] max-h-[calc(100vw * 0.35)] bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-0" : "opacity-100"}`}></div>
                 {/* Lazy-loaded Image */}
                 <img
                   src={getCloudimageUrl(entry.src, {
-                    width: 1100, // Reduced width for horizontal images
+                    width: 1000,
                     quality: 85,
                   })}
-                  className={`w-[75%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-100" : "opacity-0"}`}
+                  className={`w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-100" : "opacity-0"}`}
                   alt=""
                   onLoad={() => handleImageLoad(entry.src)}
                 />
