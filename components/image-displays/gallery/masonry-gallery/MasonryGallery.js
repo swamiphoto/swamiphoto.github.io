@@ -35,7 +35,7 @@ const MasonryGallery = ({ name, images, description, showCover = true }) => {
                 <div key={index} className="mb-5">
                   <img
                     data-src={getCloudimageUrl(image, { width: 800, quality: 80 })}
-                    className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg"
+                    className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg rounded-3xl"
                     onError={(e) => e.target.classList.add("hidden")}
                     onClick={() => handleImageClick(image, images, router)} // Replaced navigate with Next.js router
                   />
