@@ -1,44 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { handleImageClick, getCloudimageUrl } from "../../../../common/images"; // Adjust import paths
 import { useRouter } from "next/router";
-import styles from "./StackedGallery.module.css"; // Assuming module-based CSS in Next.js
+import styles from "./StackedGallery.module.css";
 import GalleryCover from "../gallery-cover/GalleryCover";
 
 const StackedGallery = ({ name, images, description, showCover = true }) => {
   const [processedImages, setProcessedImages] = useState([]);
-  const [imageLoadStates, setImageLoadStates] = useState({});
   const router = useRouter();
 
-  // Calculate aspect ratios for image URLs
+  // Lazy load images and process aspect ratios
   useEffect(() => {
-    const calculateAspectRatios = async () => {
-      const updatedImages = await Promise.all(
-        images.map((url) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => {
-              const aspectRatio = img.width / img.height;
-              resolve({ src: url, aspectRatio });
-            };
-            img.onerror = () => {
-              resolve({ src: url, aspectRatio: 1 }); // Default to 1 if there's an error
-            };
-            img.src = url;
+    const processImages = () => {
+      images.forEach((url, index) => {
+        const img = new window.Image(); // Use browser's Image constructor
+        img.onload = () => {
+          const aspectRatio = img.width / img.height;
+
+          // Update state only if the image is not already processed
+          setProcessedImages((prev) => {
+            const alreadyExists = prev.some((image) => image.src === url);
+            if (alreadyExists) return prev;
+
+            return [...prev, { src: url, aspectRatio, id: index }];
           });
-        })
-      );
-      setProcessedImages(updatedImages);
+        };
+        img.onerror = () => {
+          setProcessedImages((prev) => {
+            const alreadyExists = prev.some((image) => image.src === url);
+            if (alreadyExists) return prev;
+
+            return [...prev, { src: url, aspectRatio: 1, id: index }]; // Default aspect ratio
+          });
+        };
+        img.src = url; // Trigger image loading
+      });
     };
 
-    calculateAspectRatios();
+    processImages();
   }, [images]);
-
-  const handleImageLoad = (id) => {
-    setImageLoadStates((prevStates) => ({
-      ...prevStates,
-      [id]: true, // Mark the specific image as loaded
-    }));
-  };
 
   // Separate vertical and horizontal images
   const verticalImages = processedImages.filter((image) => image.aspectRatio < 1);
@@ -64,39 +63,35 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
   }
 
   return (
-    <div className="pb-16">
+    <div className="pb-20">
       {showCover && <GalleryCover name={name} description={description} />}
       <div className={`${styles.stackedGallery}`}>
         {combinedRows.map((entry, index) => (
-          <div key={`row-${index}`} className="mb-6">
+          <div key={`row-${index}`} className="mb-8">
             {Array.isArray(entry) ? (
               // Vertical pairs
               <div
-                className="flex flex-row items-center justify-center gap-3"
+                className="flex flex-row items-center justify-center gap-4"
                 style={{
                   width: "72%",
-                  margin: "0 auto", // Center vertical pairs
+                  margin: "0 auto", // Center pairs
                 }}>
                 {entry.map((image, idx) =>
                   image ? (
                     <div
                       key={`vertical-${index}-${idx}`}
-                      className="flex justify-center relative"
+                      className="relative flex justify-center"
                       style={{
-                        width: "47%", // Reduce width slightly for tighter spacing
+                        width: "48%", // Adjusted for consistent spacing
                       }}
                       onClick={() => handleImageClick(image.src, images, router)}>
-                      {/* Placeholder Div */}
-                      <div className={`absolute inset-0 bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[`${index}-${idx}`] ? "opacity-0" : "opacity-100"}`}></div>
-                      {/* Lazy-loaded Image */}
                       <img
                         src={getCloudimageUrl(image.src, {
-                          width: 600,
+                          width: 600, // Lazy-load resolution
                           quality: 85,
                         })}
-                        className={`h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[`${index}-${idx}`] ? "opacity-100" : "opacity-0"}`}
                         alt=""
-                        onLoad={() => handleImageLoad(`${index}-${idx}`)}
+                        className="h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500"
                       />
                     </div>
                   ) : null
@@ -105,17 +100,13 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
             ) : (
               // Horizontal image
               <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, images, router)}>
-                {/* Placeholder Div */}
-                <div className={`absolute w-[72%] max-h-[calc(100vw * 0.35)] bg-gray-300 rounded-3xl shadow-lg transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-0" : "opacity-100"}`}></div>
-                {/* Lazy-loaded Image */}
                 <img
                   src={getCloudimageUrl(entry.src, {
-                    width: 1000,
+                    width: 1100, // Lazy-load resolution
                     quality: 85,
                   })}
-                  className={`w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 ${imageLoadStates[entry.src] ? "opacity-100" : "opacity-0"}`}
                   alt=""
-                  onLoad={() => handleImageLoad(entry.src)}
+                  className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500"
                 />
               </div>
             )}
