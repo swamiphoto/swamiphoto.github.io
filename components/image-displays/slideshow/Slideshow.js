@@ -249,7 +249,7 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
                   handlePlayPauseSlideshow(); // Start slideshow
                 }}
                 className="w-full px-8 py-4 bg-black text-white font-bold uppercase tracking-wider cursor-pointer">
-                Start Slideshow
+                Start Music Show
               </button>
             </div>
           </div>
@@ -282,7 +282,7 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
                   handlePlayPauseSlideshow(); // Start slideshow
                 }}
                 className="px-8 py-4 bg-black hover:opacity-80 text-white font-bold uppercase tracking-wider cursor-pointer">
-                Start Slideshow
+                Start Music Show
               </button>
             </div>
 

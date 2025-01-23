@@ -17,7 +17,11 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg?width=500&quality=80`,
     slug: "naga-sunol",
     imagesFolderUrl: "portraits/sunol",
-    layout: "stacked",
+    texts: {
+      1: "This is a sample text that will be displayed when the image with index 1 is shown.",
+      3: "We even saw a rattle snake while hiking",
+    },
+    layout: "masonry",
     showCover: true,
     enableSlideshow: true,
     slideshowSettings: {

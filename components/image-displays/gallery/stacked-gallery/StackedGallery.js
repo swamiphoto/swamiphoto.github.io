@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styles from "./StackedGallery.module.css";
 import GalleryCover from "../gallery-cover/GalleryCover";
 
-const StackedGallery = ({ name, images, description, showCover = true }) => {
+const StackedGallery = ({ name, images, texts, description }) => {
   const [processedImages, setProcessedImages] = useState([]);
   const router = useRouter();
 
@@ -64,7 +64,6 @@ const StackedGallery = ({ name, images, description, showCover = true }) => {
 
   return (
     <div className="pb-20">
-      {showCover && <GalleryCover name={name} description={description} />}
       <div className={`${styles.stackedGallery}`}>
         {combinedRows.map((entry, index) => (
           <div key={`row-${index}`} className="mb-8">

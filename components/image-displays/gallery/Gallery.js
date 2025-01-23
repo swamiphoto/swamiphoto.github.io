@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import StackedGallery from "./stacked-gallery/StackedGallery";
 import GalleryCover from "./gallery-cover/GalleryCover";
 
-const Gallery = ({ layout = "stacked", name, images, description, slug, showCover = true, enableSlideshow = false, enableClientView = false, clientView = false, setIsModalOpen, handleExitClientView }) => {
+const Gallery = ({ layout = "stacked", name, images, texts = {}, description, slug, showCover = true, enableSlideshow = false, enableClientView = false, clientView = false, setIsModalOpen, handleExitClientView }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
 
@@ -39,13 +39,13 @@ const Gallery = ({ layout = "stacked", name, images, description, slug, showCove
 
       <div>
         {isAdmin ? (
-          <AdminGallery images={images} name={name} description={description} showCover={showCover} />
+          <AdminGallery images={images} texts={texts} name={name} description={description} />
         ) : layout === "stacked" ? (
-          <StackedGallery images={images} name={name} description={description} showCover={false} />
+          <StackedGallery images={images} texts={texts} name={name} description={description} />
         ) : layout === "masonry" ? (
-          <MasonryGallery images={images} name={name} description={description} showCover={false} />
+          <MasonryGallery images={images} texts={texts} name={name} description={description} />
         ) : (
-          <HorizontalGallery images={images} name={name} description={description} showCover={false} />
+          <HorizontalGallery images={images} texts={texts} name={name} description={description} />
         )}
       </div>
     </div>

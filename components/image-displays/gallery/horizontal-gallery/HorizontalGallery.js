@@ -3,7 +3,7 @@ import { getCloudimageUrl } from "../../../../common/images";
 import "./HorizontalGallery.module.css";
 import { useRouter } from "next/router";
 
-const HorizontalGallery = ({ name, images, description, showCover = true }) => {
+const HorizontalGallery = ({ name, images, texts, description }) => {
   const [cursorType, setCursorType] = useState("default");
   const [isCoverScreen, setIsCoverScreen] = useState(true);
   const horizontalScrollRef = useRef(null);
@@ -86,7 +86,7 @@ const HorizontalGallery = ({ name, images, description, showCover = true }) => {
           scrollbarWidth: "thin" /* Firefox */,
           scrollbarColor: "#4b5563 #6b7280" /* Firefox */,
         }}>
-        {showCover && isCoverScreen && (
+        {isCoverScreen && (
           <div className="relative flex-shrink-0 w-screen h-screen flex flex-col items-center justify-center text-white bg-gray-500">
             <h1 className="text-4xl font-bold mb-2">{name}</h1>
             <p className="text-lg mb-6">{description}</p>

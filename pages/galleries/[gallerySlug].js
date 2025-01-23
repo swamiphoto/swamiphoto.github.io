@@ -129,6 +129,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         description={gallery.description}
         layout={finalLayout}
         images={imageUrls}
+        texts={gallery.texts}
         showCover={showCover}
         enableSlideshow={enableSlideshow}
         slug={gallerySlug}

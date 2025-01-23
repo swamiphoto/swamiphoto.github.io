@@ -1,16 +1,15 @@
 import React, { useRef } from "react";
 import Masonry from "react-masonry-css";
-import { handleImageClick } from "../../../../common/images"; // Adjust import paths for Next.js
+import { handleImageClick } from "../../../../common/images";
 import { useRouter } from "next/router";
-import { useMediaQuery } from "react-responsive"; // For detecting mobile devices
+import { useMediaQuery } from "react-responsive";
 import { getCloudimageUrl } from "../../../../common/images";
-import styles from "./MasonryGallery.module.css"; // Assuming module-based CSS in Next.js
-import GalleryCover from "../gallery-cover/GalleryCover";
+import styles from "./MasonryGallery.module.css";
 
-const MasonryGallery = ({ name, images, description, showCover = true }) => {
-  const masonryRef = useRef(null); // Ref for the Masonry container
+const MasonryGallery = ({ name, images, texts, description }) => {
+  const masonryRef = useRef(null);
   const router = useRouter();
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Detect mobile screen
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   const handleDownClick = () => {
     if (masonryRef.current) {
@@ -19,28 +18,28 @@ const MasonryGallery = ({ name, images, description, showCover = true }) => {
   };
 
   const breakpointColumnsObj = {
-    default: 3,
-    700: 1,
+    default: 2, // Use 2 columns for larger screens
+    700: 1, // Use 1 column for smaller screens (mobile)
   };
 
   return (
-    <div>
-      {showCover && <GalleryCover name={name} description={description} />}
-
-      <div className={`${styles.masonryGallery} h-screen`}>
+    <div className="flex flex-col items-center">
+      <div className={`${styles.masonryGallery} w-full max-w-6xl mx-auto h-screen`}>
         <div className="gallery-content flex-grow p-4 overflow-hidden">
           <div ref={masonryRef} className={isMobile ? "mt-16" : ""}>
             <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
-              {images.map((image, index) => (
-                <div key={index} className="mb-5">
-                  <img
-                    data-src={getCloudimageUrl(image, { width: 800, quality: 80 })}
-                    className="w-full h-auto lazy-load transition-opacity duration-500 ease-in shadow-lg rounded-3xl"
-                    onError={(e) => e.target.classList.add("hidden")}
-                    onClick={() => handleImageClick(image, images, router)} // Replaced navigate with Next.js router
-                  />
-                </div>
-              ))}
+              {images && images.length > 0 ? (
+                images.map((image, index) => {
+                  const imageUrl = getCloudimageUrl(image, { width: 800, quality: 80 });
+                  return (
+                    <div key={index} className="mb-5">
+                      <img src={imageUrl} className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg rounded-3xl" onError={(e) => console.error("Image failed to load:", imageUrl)} onClick={() => handleImageClick(image, images, router)} />
+                    </div>
+                  );
+                })
+              ) : (
+                <p className="text-center text-gray-500">No images available.</p>
+              )}
             </Masonry>
           </div>
         </div>
