@@ -64,6 +64,7 @@ const galleryData = [
       clientLogin: "wisteria",
       clientMessage: "Hello Naga, here are some additional images — only you can see them. If you'd like to print any of these, send me the image urls so I can fine-tune them a bit more. Let me know your favorites!",
     },
+    isHidden: true,
   },
   {
     name: "Arizona",
@@ -676,6 +677,7 @@ const galleryData = [
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=OBUauvQLrQQ"],
     },
+    isHiddem: true,
   },
 ];
 

@@ -1,67 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineX } from "react-icons/hi";
-import Gallery from "../../components/image-displays/gallery/Gallery"; // Replace with the new Story component path
-import Loading from "../../components/image-displays/slideshow/loading/Loading";
+import Gallery from "../../components/image-displays/gallery/Gallery";
 import { fetchImageUrls } from "../../common/images";
 import Head from "next/head";
-import { galleryData } from "../galleries"; // Ensure gallery data is imported correctly
+import { galleryData } from "../galleries";
 import router from "next/router";
 
 const SingleGallery = ({ gallerySlug, gallery }) => {
-  const [imageUrls, setImageUrls] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [filteredBlocks, setFilteredBlocks] = useState([]);
   const [clientView, setClientView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (gallery) {
-      const fetchImages = async () => {
-        let urls = [];
+    const processBlocks = async () => {
+      const processedBlocks = await Promise.all(
+        gallery.blocks.map(async (block) => {
+          if (block.type === "stacked" || block.type === "masonry") {
+            let imageUrls = block.imageUrls || [];
 
-        // Use provided imageUrls if specified
-        if (gallery.imageUrls && gallery.imageUrls.length > 0) {
-          urls = gallery.imageUrls;
-        } else if (gallery.imagesFolderUrl) {
-          // Otherwise fetch images from the folder URL
-          const fetchedUrls = await fetchImageUrls(gallery.imagesFolderUrl);
+            // Fetch image URLs if the folder URL is provided
+            if (block.imagesFolderUrl) {
+              const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
+              imageUrls = fetchedUrls;
+            }
 
-          // Filter out protected images if not in client view
-          if (!clientView) {
-            urls = fetchedUrls.filter((url) => !url.includes("protected"));
-          } else {
-            urls = fetchedUrls;
+            // Apply filtering for protected images
+            const filteredUrls = imageUrls.filter((url) => (clientView ? true : !url.includes("protected")));
+
+            return { ...block, imageUrls: filteredUrls };
           }
-        }
 
-        setImageUrls(urls);
+          // Return other block types (e.g., text) unmodified
+          return block;
+        })
+      );
 
-        // Preload the images
-        const imageLoadPromises = urls.map((url) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = resolve;
-            img.onerror = resolve;
-            img.src = url;
-          });
-        });
+      setFilteredBlocks(processedBlocks);
+    };
 
-        await Promise.all(imageLoadPromises);
-        setImagesLoaded(true); // Mark images as loaded
-      };
-
-      fetchImages(); // Invoke the async function
-    }
-  }, [gallery, clientView]);
-
-  if (!gallery) {
-    return <div>Gallery not found</div>;
-  }
+    processBlocks();
+  }, [gallery.blocks, clientView]);
 
   const handleClientLogin = () => {
     const decryptedPassword = gallery.clientSettings?.clientLogin || "";
     if (password === decryptedPassword) {
-      setClientView(true);
+      setClientView(true); // Enable client view
     } else {
       alert("Incorrect password. Please try again.");
     }
@@ -119,7 +103,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
       <Gallery
         name={gallery.name}
         description={gallery.description}
-        blocks={gallery.blocks || []}
+        blocks={filteredBlocks} // Pass filtered blocks to Gallery
         enableSlideshow={gallery.enableSlideshow}
         enableClientView={gallery.enableClientView}
         onBackClick={() => router.push("/galleries")}
