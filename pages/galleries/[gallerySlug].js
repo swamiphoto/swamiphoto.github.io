@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
 import { HiOutlineX } from "react-icons/hi";
-import Gallery from "../../components/image-displays/gallery/Gallery";
+import Story from "../../components/image-displays/story/Story"; // Replace with the new Story component path
 import Loading from "../../components/image-displays/slideshow/Loading/Loading";
 import { fetchImageUrls } from "../../common/images";
 import Head from "next/head";
 import { galleryData } from "../galleries"; // Ensure gallery data is imported correctly
+import router from "next/router";
 
 const SingleGallery = ({ gallerySlug, gallery }) => {
   const [imageUrls, setImageUrls] = useState([]);
@@ -13,8 +13,6 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
   const [clientView, setClientView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState("");
-
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   useEffect(() => {
     if (gallery) {
@@ -26,11 +24,13 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
           urls = gallery.imageUrls;
         } else if (gallery.imagesFolderUrl) {
           // Otherwise fetch images from the folder URL
-          urls = await fetchImageUrls(gallery.imagesFolderUrl);
+          const fetchedUrls = await fetchImageUrls(gallery.imagesFolderUrl);
 
           // Filter out protected images if not in client view
           if (!clientView) {
-            urls = urls.filter((url) => !url.includes("protected"));
+            urls = fetchedUrls.filter((url) => !url.includes("protected"));
+          } else {
+            urls = fetchedUrls;
           }
         }
 
@@ -50,7 +50,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         setImagesLoaded(true); // Mark images as loaded
       };
 
-      fetchImages();
+      fetchImages(); // Invoke the async function
     }
   }, [gallery, clientView]);
 
@@ -58,21 +58,13 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
     return <div>Gallery not found</div>;
   }
 
-  const { layout = "stacked", showCover = true, enableSlideshow = false, enableClientView = false, clientSettings = {} } = gallery;
-
-  const finalLayout = isMobile ? "masonry" : layout;
-
   const handleClientLogin = () => {
-    const decryptedPassword = clientSettings.clientLogin;
+    const decryptedPassword = gallery.clientSettings?.clientLogin || "";
     if (password === decryptedPassword) {
       setClientView(true);
     } else {
       alert("Incorrect password. Please try again.");
     }
-  };
-
-  const handleExitClientView = () => {
-    setClientView(false);
   };
 
   const closeModal = () => {
@@ -84,7 +76,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
       return (
         <>
           <h1 className="text-center mx-auto md:max-w-xl text-4xl text-gray-800 font-bold tracking-tighter mb-2">Welcome to the Client Area</h1>
-          <p className="text-center mx-auto md:max-w-xl text-xl text-gray-800 mb-6">{clientSettings.clientMessage}</p>
+          <p className="text-center mx-auto md:max-w-xl text-xl text-gray-800 mb-6">{gallery.clientSettings?.clientMessage}</p>
           <button onClick={closeModal} className="w-full max-w-sm bg-black text-white p-5 text-xl font-medium inline-flex items-center justify-center cursor-pointer outline-none focus:outline-none hover:opacity-80">
             View Images
           </button>
@@ -124,19 +116,21 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <Gallery
+      <Story
         name={gallery.name}
         description={gallery.description}
-        layout={finalLayout}
-        images={imageUrls}
-        texts={gallery.texts}
-        showCover={showCover}
-        enableSlideshow={enableSlideshow}
-        slug={gallerySlug}
-        enableClientView={enableClientView}
-        clientView={clientView}
-        handleExitClientView={handleExitClientView}
-        setIsModalOpen={setIsModalOpen}
+        blocks={gallery.blocks || []}
+        enableSlideshow={gallery.enableSlideshow}
+        enableClientView={gallery.enableClientView}
+        onBackClick={() => router.push("/galleries")}
+        onSlideshowClick={() => {
+          if (gallery.slug) {
+            router.push(`/galleries/${gallery.slug}/slideshow`);
+          } else {
+            console.error("Gallery slug is undefined");
+          }
+        }}
+        onClientLoginClick={() => setIsModalOpen(true)}
       />
 
       {isModalOpen && (

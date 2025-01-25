@@ -58,14 +58,26 @@ const galleryData = [
   {
     name: "Arizona",
     description: "I took a trip to Arizona with my friends, and we visited Sedona, Grand Canyon, Antelope Canyon, and Horseshoe Bend. I can't believe I've never been to Page having been in AZ since 1998.",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg?width=500&quality=80`,
+    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg?width=500&quality=80",
     slug: "arizona",
-    imagesFolderUrl: "landscapes/arizona",
-    layout: "stacked",
+    blocks: [
+      {
+        type: "stacked",
+        imageUrls: ["https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg", "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503809-Edit.jpg"],
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "landscapes/arizona",
+      },
+      {
+        type: "text",
+        content: "This is a text block that sits between galleries.",
+      },
+    ],
     enableSlideshow: true,
     showCover: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=qj4RiKoARPk"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=IvoAT-5HKwM"],
       layout: "film-single",
     },
     isHidden: true,
