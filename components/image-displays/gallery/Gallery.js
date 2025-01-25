@@ -1,11 +1,11 @@
 import React from "react";
-import GalleryCover from "../gallery/gallery-cover/GalleryCover";
-import MasonryGallery from "../gallery/masonry-gallery/MasonryGallery";
-import StackedGallery from "../gallery/stacked-gallery/StackedGallery";
+import GalleryCover from "./gallery-cover/GalleryCover";
+import MasonryGallery from "./masonry-gallery/MasonryGallery";
+import StackedGallery from "./stacked-gallery/StackedGallery";
 
-const Story = ({ name, description, blocks, enableSlideshow, enableClientView, onBackClick, onSlideshowClick, onClientLoginClick }) => {
+const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView, onBackClick, onSlideshowClick, onClientLoginClick }) => {
   return (
-    <div className="story-container">
+    <div className="gallery-container">
       {/* Render the GalleryCover */}
       <GalleryCover name={name} description={description} enableSlideshow={enableSlideshow} enableClientView={enableClientView} onBackClick={onBackClick} onSlideshowClick={onSlideshowClick} onClientLoginClick={onClientLoginClick} />
 
@@ -44,4 +44,4 @@ const Story = ({ name, description, blocks, enableSlideshow, enableClientView, o
   );
 };
 
-export default Story;
+export default Gallery;

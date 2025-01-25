@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineX } from "react-icons/hi";
-import Story from "../../components/image-displays/story/Story"; // Replace with the new Story component path
+import Gallery from "../../components/image-displays/gallery/Gallery"; // Replace with the new Story component path
 import Loading from "../../components/image-displays/slideshow/Loading/Loading";
 import { fetchImageUrls } from "../../common/images";
 import Head from "next/head";
@@ -116,7 +116,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <Story
+      <Gallery
         name={gallery.name}
         description={gallery.description}
         blocks={gallery.blocks || []}
