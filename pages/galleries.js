@@ -632,11 +632,10 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/sarina-first-bday/AR502170.jpg?width=800&quality=80`,
     slug: "sarina-bday",
     description: "Birthday party at Broom street Ganesha temple",
-    imagesFolderUrl: "events/sarina-first-bday",
     blocks: [
       {
         type: "stacked",
-        imagesFolderUrl: "landscapes/california",
+        imagesFolderUrl: "events/sarina-first-bday",
       },
     ],
     enableSlideshow: true,
@@ -650,11 +649,10 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sarina/AR502585.jpg?width=800&quality=80`,
     slug: "sarina",
     description: "Portraits on Sarina's 1st birthday",
-    imagesFolderUrl: "portraits/sarina",
     blocks: [
       {
         type: "stacked",
-        imagesFolderUrl: "landscapes/california",
+        imagesFolderUrl: "portraits/sarina",
       },
     ],
     enableSlideshow: true,
@@ -668,11 +666,10 @@ const galleryData = [
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503366-Edit-2-Edit.jpg`,
     slug: "sudha-nava-rasa",
     description: "Nava Rasa expressions by Sudha",
-    imagesFolderUrl: "portraits/sudha-navarasa",
     blocks: [
       {
         type: "stacked",
-        imagesFolderUrl: "landscapes/california",
+        imagesFolderUrl: "portraits/sudha-navarasa",
       },
     ],
     enableSlideshow: true,
