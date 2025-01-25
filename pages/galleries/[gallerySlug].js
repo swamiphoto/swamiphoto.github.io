@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineX } from "react-icons/hi";
 import Gallery from "../../components/image-displays/gallery/Gallery"; // Replace with the new Story component path
-import Loading from "../../components/image-displays/slideshow/Loading/Loading";
+import Loading from "../../components/image-displays/slideshow/loading/Loading";
 import { fetchImageUrls } from "../../common/images";
 import Head from "next/head";
 import { galleryData } from "../galleries"; // Ensure gallery data is imported correctly
