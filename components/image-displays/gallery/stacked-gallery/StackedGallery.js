@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { handleImageClick, getCloudimageUrl, fetchImageUrls } from "../../../../common/images";
+import { handleImageClick, getCloudimageUrl } from "../../../../common/images";
 import { useRouter } from "next/router";
 import styles from "./StackedGallery.module.css";
 
-const StackedGallery = ({ images = [], imagesFolderUrl = "" }) => {
+const StackedGallery = ({ images = [] }) => {
   const [processedImages, setProcessedImages] = useState([]);
   const router = useRouter();
 
-  // Load images either from a folder or directly from the `images` prop
+  // Process the provided images
   useEffect(() => {
-    const processImages = async () => {
-      const allImages = imagesFolderUrl
-        ? await fetchImageUrls(imagesFolderUrl) // Replace with your existing folder-fetching logic
-        : images;
-
-      allImages.forEach((url, index) => {
-        const img = new window.Image(); // Use the browser's Image constructor
+    const processImages = () => {
+      images.forEach((url, index) => {
+        const img = new window.Image();
         img.onload = () => {
           const aspectRatio = img.width / img.height;
 
-          // Add only unique images to the state
           setProcessedImages((prev) => {
             const alreadyExists = prev.some((image) => image.src === url);
             if (alreadyExists) return prev;
@@ -32,15 +27,15 @@ const StackedGallery = ({ images = [], imagesFolderUrl = "" }) => {
             const alreadyExists = prev.some((image) => image.src === url);
             if (alreadyExists) return prev;
 
-            return [...prev, { src: url, aspectRatio: 1, id: index }]; // Default to square aspect ratio
+            return [...prev, { src: url, aspectRatio: 1, id: index }];
           });
         };
-        img.src = url; // Trigger the image loading
+        img.src = url;
       });
     };
 
     processImages();
-  }, [images, imagesFolderUrl]);
+  }, [images]);
 
   // Separate vertical and horizontal images
   const verticalImages = processedImages.filter((image) => image.aspectRatio < 1);
@@ -70,7 +65,6 @@ const StackedGallery = ({ images = [], imagesFolderUrl = "" }) => {
         {combinedRows.map((entry, index) => (
           <div key={`row-${index}`} className="mb-8">
             {Array.isArray(entry) ? (
-              // Render vertical pairs
               <div
                 className="flex flex-row items-center justify-center gap-4"
                 style={{
@@ -92,7 +86,6 @@ const StackedGallery = ({ images = [], imagesFolderUrl = "" }) => {
                 )}
               </div>
             ) : (
-              // Render horizontal images
               <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, processedImages, router)}>
                 <img src={getCloudimageUrl(entry.src, { width: 1100, quality: 85 })} alt="" className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
               </div>

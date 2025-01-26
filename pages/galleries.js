@@ -22,7 +22,6 @@ const galleryData = [
         imagesFolderUrl: "portraits/sunol",
       },
     ],
-    layout: "stacked",
     showCover: true,
     enableSlideshow: true,
     slideshowSettings: {
@@ -52,7 +51,6 @@ const galleryData = [
         imagesFolderUrl: "portraits/naga-sunflowers",
       },
     ],
-    layout: "stacked",
     enableSlideshow: true,
     showCover: true,
     slideshowSettings: {
