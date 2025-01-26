@@ -16,14 +16,14 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
             case "stacked":
               return (
                 <div key={`block-${index}`} className="stacked-gallery-block">
-                  <StackedGallery images={block.imageUrls || []} />
+                  <StackedGallery imageUrls={block.imageUrls || []} />
                 </div>
               );
 
             case "masonry":
               return (
                 <div key={`block-${index}`} className="masonry-gallery-block">
-                  <MasonryGallery images={block.imageUrls || []} />
+                  <MasonryGallery imageUrls={block.imageUrls || []} />
                 </div>
               );
 

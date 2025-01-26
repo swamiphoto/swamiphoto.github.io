@@ -3,14 +3,14 @@ import { handleImageClick, getCloudimageUrl } from "../../../../common/images";
 import { useRouter } from "next/router";
 import styles from "./StackedGallery.module.css";
 
-const StackedGallery = ({ images = [] }) => {
+const StackedGallery = ({ imageUrls = [] }) => {
   const [processedImages, setProcessedImages] = useState([]);
   const router = useRouter();
 
   // Process the provided images
   useEffect(() => {
     const processImages = () => {
-      images.forEach((url, index) => {
+      imageUrls.forEach((url, index) => {
         const img = new window.Image();
         img.onload = () => {
           const aspectRatio = img.width / img.height;
@@ -35,7 +35,7 @@ const StackedGallery = ({ images = [] }) => {
     };
 
     processImages();
-  }, [images]);
+  }, [imageUrls]);
 
   // Separate vertical and horizontal images
   const verticalImages = processedImages.filter((image) => image.aspectRatio < 1);

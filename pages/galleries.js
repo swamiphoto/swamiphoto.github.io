@@ -108,7 +108,6 @@ const galleryData = [
       },
     ],
     enableSlideshow: true,
-    layout: "masonry",
     showCover: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=BciS5krYL80"],
@@ -679,6 +678,7 @@ const galleryData = [
   },
 ];
 
+//the gallery stack look
 const stackVariants = [
   // Right bottom stack
   {

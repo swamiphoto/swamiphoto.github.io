@@ -4,7 +4,7 @@ import { handleImageClick, getCloudimageUrl } from "../../../../common/images";
 import { useRouter } from "next/router";
 import styles from "./MasonryGallery.module.css";
 
-const MasonryGallery = ({ images = [] }) => {
+const MasonryGallery = ({ imageUrls = [] }) => {
   const router = useRouter();
 
   const breakpointColumnsObj = {
@@ -17,12 +17,12 @@ const MasonryGallery = ({ images = [] }) => {
       <div className={`${styles.masonryGallery} w-full max-w-6xl mx-auto`}>
         <div className="gallery-content flex-grow p-4 overflow-hidden">
           <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
-            {images.length > 0 ? (
-              images.map((image, index) => {
+            {imageUrls.length > 0 ? (
+              imageUrls.map((image, index) => {
                 const imageUrl = getCloudimageUrl(image, { width: 800, quality: 80 });
                 return (
                   <div key={index} className="mb-5">
-                    <img src={imageUrl} alt={`Image ${index + 1}`} className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg rounded-3xl" onError={() => console.error("Image failed to load:", imageUrl)} onClick={() => handleImageClick(image, images, router)} />
+                    <img src={imageUrl} alt={`Image ${index + 1}`} className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg rounded-3xl" onError={() => console.error("Image failed to load:", imageUrl)} onClick={() => handleImageClick(image, imageUrls, router)} />
                   </div>
                 );
               })
