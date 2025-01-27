@@ -65,29 +65,67 @@ const galleryData = [
   },
   {
     name: "Arizona",
-    description: "I took a trip to Arizona with my friends, and we visited Sedona, Grand Canyon, Antelope Canyon, and Horseshoe Bend. I can't believe I've never been to Page having been in AZ since 1998.",
+    description: "Over Christmas break, I went to Arizona and Utah with friends—Antelope Canyon, Grand Canyon, Monument Valley, and Sedona. It blows my mind that I lived in Arizona for 12 years and never visited Page. The landscapes were absolutely stunning.",
     thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg?width=500&quality=80",
     slug: "arizona",
     blocks: [
       {
-        type: "text",
-        content: "This is a text block that sits between galleries.",
+        type: "stacked",
+        imagesFolderUrl: "landscapes/arizona/antelepe-canyon",
       },
       {
         type: "text",
-        content: "This is another text block that sits between galleries.",
+        content:
+          "Since it was winter, we knew we wouldn’t see the famous light rays streaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow. Initially, we had booked an 8 a.m. tour, but we switched to the 10:30 slot—and I think we got lucky because the canyons were really vibrant.",
       },
       {
         type: "stacked",
-        imageUrls: ["https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg", "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503809-Edit.jpg"],
-      },
-      {
-        type: "masonry",
-        imagesFolderUrl: "landscapes/arizona",
+        imagesFolderUrl: "landscapes/arizona/antelope-canyon2",
       },
       {
         type: "text",
-        content: "This is a text block that sits between galleries.",
+        content: "I’m not used to being on the other side of the camera, but my friends insisted on taking my pictures—and I’m so glad they did. I love how these turned out! (Picture credit: Bharath)",
+      },
+      {
+        type: "stacked",
+        imageUrls: [
+          "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/b0e97b51-6e24-45e4-abab-3973eba8bdfd.jpg",
+          "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/d5432ee6-5172-421d-87be-2e89ee1b725e.jpg",
+          "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/PXL_20241222_183630103.MP~2.jpg",
+        ],
+      },
+
+      {
+        type: "text",
+        content: "Grand Canyon is a tough place to capture. The landscape is so grand and three dimensional, it’s difficult to convey the grandness through a 2D photo. I’ve been there several times and don’t really have a great photo still. I took portraits instead. ",
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "landscapes/arizona/grand-canyon",
+      },
+      {
+        type: "text",
+        content: "Sedona has this mystical, almost magical vibe to it. Red Rock Crossing is one of the most photographed spots in Arizona, but we were there a bit too early and the light was not favorable for landscapes. So I did more portraits.",
+      },
+      {
+        type: "stacked",
+        imagesFolderUrl: "landscapes/arizona/sedona",
+      },
+      {
+        type: "text",
+        content: "A few phone shots at Cathedral Rock.",
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "landscapes/arizona/sedona-phone-shots",
+      },
+      {
+        type: "text",
+        content: "My friends were headed back to the Bay Area. I asked my friend Suhrid to pick me up to go to Phoenix. Beautiful sunset that evening. Took a few shots of him and his mom. See how the rocks are glowing like gold.",
+      },
+      {
+        type: "stacked",
+        imagesFolderUrl: "landscapes/arizona/sedona2",
       },
     ],
     enableSlideshow: true,
@@ -96,7 +134,6 @@ const galleryData = [
       youtubeLinks: ["https://www.youtube.com/watch?v=IvoAT-5HKwM"],
       layout: "kenburns",
     },
-    isHidden: true,
   },
   {
     name: "Beautiful California",

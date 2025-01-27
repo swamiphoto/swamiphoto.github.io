@@ -3,6 +3,7 @@ import GalleryCover from "./gallery-cover/GalleryCover";
 import MasonryGallery from "./masonry-gallery/MasonryGallery";
 import StackedGallery from "./stacked-gallery/StackedGallery";
 import { useMediaQuery } from "react-responsive";
+import WiggleLine from "components/wiggle-line/WiggleLine";
 
 const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView, onBackClick, onSlideshowClick, onClientLoginClick }) => {
   // Check if the screen size is small
@@ -21,6 +22,7 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
               return (
                 <div key={`block-${index}`} className="stacked-gallery-block">
                   {isSmallScreen ? <MasonryGallery imageUrls={block.imageUrls || []} /> : <StackedGallery imageUrls={block.imageUrls || []} />}
+                  <WiggleLine />
                 </div>
               );
 
@@ -28,6 +30,7 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
               return (
                 <div key={`block-${index}`} className="masonry-gallery-block">
                   <MasonryGallery imageUrls={block.imageUrls || []} />
+                  <WiggleLine />
                 </div>
               );
 

@@ -60,7 +60,7 @@ const StackedGallery = ({ imageUrls = [] }) => {
   }
 
   return (
-    <div className="pb-20">
+    <div className="pb-2">
       <div className={`${styles.stackedGallery}`}>
         {combinedRows.map((entry, index) => (
           <div key={`row-${index}`} className="mb-8">
