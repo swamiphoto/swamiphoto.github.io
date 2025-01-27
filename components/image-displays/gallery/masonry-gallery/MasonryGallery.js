@@ -15,7 +15,7 @@ const MasonryGallery = ({ imageUrls = [] }) => {
   return (
     <div className="flex flex-col items-center">
       <div className={`${styles.masonryGallery} w-full max-w-6xl mx-auto`}>
-        <div className="gallery-content flex-grow p-4 overflow-hidden">
+        <div className="gallery-content flex-grow md:p-4 overflow-hidden">
           <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
             {imageUrls.length > 0 ? (
               imageUrls.map((image, index) => {

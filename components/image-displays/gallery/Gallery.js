@@ -2,21 +2,25 @@ import React from "react";
 import GalleryCover from "./gallery-cover/GalleryCover";
 import MasonryGallery from "./masonry-gallery/MasonryGallery";
 import StackedGallery from "./stacked-gallery/StackedGallery";
+import { useMediaQuery } from "react-responsive";
 
 const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView, onBackClick, onSlideshowClick, onClientLoginClick }) => {
+  // Check if the screen size is small
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
+
   return (
     <div className="gallery-container">
       {/* Render the GalleryCover */}
       <GalleryCover name={name} description={description} enableSlideshow={enableSlideshow} enableClientView={enableClientView} onBackClick={onBackClick} onSlideshowClick={onSlideshowClick} onClientLoginClick={onClientLoginClick} />
 
       {/* Render the blocks */}
-      <div className="space-y-10 px-4 md:px-8">
+      <div className="space-y-10 md:px-8">
         {blocks.map((block, index) => {
           switch (block.type) {
             case "stacked":
               return (
                 <div key={`block-${index}`} className="stacked-gallery-block">
-                  <StackedGallery imageUrls={block.imageUrls || []} />
+                  {isSmallScreen ? <MasonryGallery imageUrls={block.imageUrls || []} /> : <StackedGallery imageUrls={block.imageUrls || []} />}
                 </div>
               );
 

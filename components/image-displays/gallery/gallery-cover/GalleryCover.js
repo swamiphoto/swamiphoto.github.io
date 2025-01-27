@@ -3,7 +3,7 @@ import { HiOutlineArrowLeft } from "react-icons/hi2";
 
 const GalleryCover = ({ name, description, enableSlideshow = false, enableClientView = false, onBackClick, onSlideshowClick, onClientLoginClick }) => {
   return (
-    <div className="relative flex flex-col items-center justify-center text-gray-900 pt-20 md:p-20">
+    <div className="relative flex flex-col items-center justify-center text-gray-900 p-10 md:p-20">
       <div className="text-center px-6">
         {name && <h1 className="text-4xl md:text-6xl font-bold mb-4">{name}</h1>}
         {description && <p className="text-lg md:text-xl max-w-xl mx-auto mb-6">{description}</p>}

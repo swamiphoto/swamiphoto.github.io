@@ -30,20 +30,21 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
 
   // Combine imageUrls and texts into slides
   useEffect(() => {
-    // Combine imageUrls and texts into slides only if they change
     const combinedSlides = [];
+
     imageUrls.forEach((url, index) => {
       combinedSlides.push({ type: "image", url }); // Add image slide
-      if (texts[index + 1]) {
-        combinedSlides.push({ type: "text", content: texts[index + 1] }); // Add corresponding text slide
+
+      // Match text with the exact image index
+      if (texts[index]) {
+        combinedSlides.push({ type: "text", content: texts[index] }); // Add text slide
       }
     });
 
-    // Avoid unnecessary state updates by checking if the slides have changed
     if (JSON.stringify(combinedSlides) !== JSON.stringify(slides)) {
-      setSlides(combinedSlides); // Store combined slides
+      setSlides(combinedSlides);
     }
-  }, [imageUrls, texts]); // Only run when imageUrls or texts change
+  }, [imageUrls, texts]);
 
   useEffect(() => {
     if (imageUrls.length > 0) {

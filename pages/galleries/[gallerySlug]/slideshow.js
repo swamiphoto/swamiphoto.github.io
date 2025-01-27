@@ -34,8 +34,9 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
               imageCount += filteredUrls.length;
             }
           } else if (block.type === "text" && block.content) {
-            // Map text to the current position in the image order
+            // Ensure we append text blocks rather than overwrite
             extractedTexts[imageCount] = block.content;
+            imageCount += 1; // Increment imageCount to reserve a slot for the text block
           }
         }
 
