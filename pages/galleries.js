@@ -79,6 +79,13 @@ const galleryData = [
           "Since it was winter, we knew we wouldn’t see the famous light rays streaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow. Initially, we had booked an 8 a.m. tour, but we switched to the 10:30 slot—and I think we got lucky because the canyons were really vibrant.",
       },
       {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503763-Enhanced-NR.jpg",
+        caption: "Looks like a colorful iceberg insn't it?",
+        variant: 1,
+      },
+
+      {
         type: "stacked",
         imagesFolderUrl: "landscapes/arizona/antelope-canyon2",
       },
@@ -94,7 +101,12 @@ const galleryData = [
           "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/PXL_20241222_183630103.MP~2.jpg",
         ],
       },
-
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/SwJ0ug0PH3Y",
+        caption: "Monument Valley seen from the visitor center",
+        variant: 2,
+      },
       {
         type: "text",
         content: "Grand Canyon is a tough place to capture. The landscape is so grand and three dimensional, it’s difficult to convey the grandness through a 2D photo. I’ve been there several times and don’t really have a great photo still. I took portraits instead. ",
@@ -102,6 +114,13 @@ const galleryData = [
       {
         type: "masonry",
         imagesFolderUrl: "landscapes/arizona/grand-canyon",
+      },
+
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/osefSbIEE1g",
+        caption: "While driving at night from Monument Valley to Page, I had to swerve suddenly, which woke everyone up in the car. The kids, however, found it hilarious and started calling it the Swami Mama Turn. Ever since, they’ve been asking their dad to pull off the Swami Mama Turn!",
+        variant: 3,
       },
       {
         type: "text",
@@ -118,6 +137,12 @@ const galleryData = [
       {
         type: "masonry",
         imagesFolderUrl: "landscapes/arizona/sedona-phone-shots",
+      },
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/JkSdcyOA25o",
+        caption: "Sedona",
+        variant: 1,
       },
       {
         type: "text",
