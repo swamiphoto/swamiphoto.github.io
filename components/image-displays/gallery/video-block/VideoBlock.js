@@ -3,19 +3,17 @@ import ReactPlayer from "react-player";
 
 const VideoBlock = ({ url, caption, variant = 1 }) => {
   const videoContainerStyle = (() => {
-    if (variant === 1) return "w-full"; // Full-width for variant 1
-    if (variant === 2) return "w-[80%] mx-auto"; // Slightly wider and centered for variant 2
-    if (variant === 3) return "w-[90%] max-w-5xl mx-auto flex flex-col md:flex-row gap-6"; // Padded and centered for variant 3
+    if (variant === 1) return "fixed left-0 w-screen overflow-hidden"; // Full-width, edge-to-edge for variant 1
+    if (variant === 2) return "w-[85%] mx-auto"; // Centered for variant 2
+    if (variant === 3) return "w-[90%] max-w-5xl mx-auto flex flex-col md:flex-row gap-6"; // Left video, right caption
     return "w-full"; // Default fallback
   })();
 
-  const videoStyle = (() => {
-    if (variant === 3) return "relative pb-[56.25%] overflow-hidden rounded-3xl shadow-lg md:pb-[42%]"; // Adjusted aspect ratio for variant 3
-    return "relative pb-[56.25%] overflow-hidden rounded-3xl shadow-lg"; // Default aspect ratio for other variants
-  })();
+  const videoStyle = "relative pb-[56.25%] overflow-hidden shadow-lg"; // Shared video styles
+  const videoWrapperStyle = variant === 1 ? "rounded-none shadow-none" : "rounded-3xl shadow-lg";
 
   return (
-    <div className={videoContainerStyle}>
+    <div className={`${videoContainerStyle} ${variant === 1 ? "ml-0" : ""}`}>
       {variant === 3 ? (
         // Variant 3: Video on the left, caption on the right
         <>
@@ -45,7 +43,7 @@ const VideoBlock = ({ url, caption, variant = 1 }) => {
       ) : (
         // Variant 1 and 2: Common layout
         <>
-          <div className={videoStyle}>
+          <div className={`${videoStyle} ${videoWrapperStyle}`}>
             <ReactPlayer
               url={url}
               className="absolute top-0 left-0 w-full h-full"
@@ -55,12 +53,12 @@ const VideoBlock = ({ url, caption, variant = 1 }) => {
               config={{
                 youtube: {
                   playerVars: {
-                    modestbranding: 1, // Removes YouTube logo in the control bar
-                    rel: 0, // Prevents showing related videos at the end
-                    showinfo: 0, // Hides video title and uploader info
-                    fs: 1, // Allows fullscreen
-                    iv_load_policy: 3, // Hides annotations
-                    disablekb: 1, // Disables the keyboard controls
+                    modestbranding: 1,
+                    rel: 0,
+                    showinfo: 0,
+                    fs: 1,
+                    iv_load_policy: 3,
+                    disablekb: 1,
                   },
                 },
               }}

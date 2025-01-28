@@ -66,18 +66,29 @@ const galleryData = [
   {
     name: "Arizona",
     description: "Over Christmas break, I went to Arizona and Utah with friends—Antelope Canyon, Grand Canyon, Monument Valley, and Sedona. It blows my mind that I lived in Arizona for 12 years and never visited Page. The landscapes were absolutely stunning.",
-    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/AR503763-Enhanced-NR.jpg?width=500&quality=80",
+    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503758.jpg",
     slug: "arizona",
     blocks: [
+      {
+        type: "photo",
+        imageUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503758.jpg?width=1100&quality=85",
+        variant: 2,
+      },
+      {
+        type: "text",
+        content: "It was winter...we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow — our tour was at 10:30 am — but we were lucky because the canyons were really vibrant.",
+      },
+      {
+        type: "photo",
+        imageUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503751.jpg?width=1100&quality=85",
+        variant: 1,
+      },
+
       {
         type: "stacked",
         imagesFolderUrl: "landscapes/arizona/antelepe-canyon",
       },
-      {
-        type: "text",
-        content:
-          "Since it was winter, we knew we wouldn’t see the famous light rays streaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow. Initially, we had booked an 8 a.m. tour, but we switched to the 10:30 slot—and I think we got lucky because the canyons were really vibrant.",
-      },
+
       {
         type: "photo",
         imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503763-Enhanced-NR.jpg",
@@ -91,7 +102,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "I’m not used to being on the other side of the camera, but my friends insisted on taking my pictures—and I’m so glad they did. I love how these turned out! (Picture credit: Bharath)",
+        content: "I’m hardly on the other side of the camera, but Naga and Bharath insisted on taking my pictures—and I’m so glad they did. I love how these turned out!",
       },
       {
         type: "stacked",
@@ -101,6 +112,15 @@ const galleryData = [
           "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/PXL_20241222_183630103.MP~2.jpg",
         ],
       },
+
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503820-Edit-2.jpg",
+        caption:
+          "Horseshoe Bend was just 15 minutes from our Airbnb, but we left a bit late after spending the afternoon chatting. Naga and Bharath dropped me off at the parking lot, and I took off running—with my camera backpack and tripod (not something I’d recommend)—to the viewpoint, making it just in time to catch the last bit of light.",
+        variant: 1,
+      },
+
       {
         type: "video",
         url: "https://www.youtube.com/embed/SwJ0ug0PH3Y",
@@ -115,16 +135,15 @@ const galleryData = [
         type: "masonry",
         imagesFolderUrl: "landscapes/arizona/grand-canyon",
       },
-
       {
         type: "video",
-        url: "https://www.youtube.com/embed/osefSbIEE1g",
-        caption: "While driving at night from Monument Valley to Page, I had to swerve suddenly, which woke everyone up in the car. The kids, however, found it hilarious and started calling it the Swami Mama Turn. Ever since, they’ve been asking their dad to pull off the Swami Mama Turn!",
-        variant: 3,
+        url: "https://www.youtube.com/embed/kId9npazvq0",
+        caption: "12 hours of non-stop entertainment in the car (not that we had much of a choice)!",
+        variant: 2,
       },
       {
         type: "text",
-        content: "Sedona has this mystical, almost magical vibe to it. Red Rock Crossing is one of the most photographed spots in Arizona, but we were there a bit too early and the light was not favorable for landscapes. So I did more portraits.",
+        content: "Sedona has this mystical, almost magical vibe to it. Red Rock Crossing is one of the most photographed spots in Arizona, but we were there a bit too early and the light was not favorable for landscapes. That means more portraits...",
       },
       {
         type: "stacked",
@@ -132,7 +151,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "A few phone shots at Cathedral Rock.",
+        content: "Some phone shots of Naga at Cathedral Rock.",
       },
       {
         type: "masonry",
@@ -142,11 +161,11 @@ const galleryData = [
         type: "video",
         url: "https://www.youtube.com/embed/JkSdcyOA25o",
         caption: "Sedona",
-        variant: 1,
+        variant: 2,
       },
       {
         type: "text",
-        content: "My friends were headed back to the Bay Area. I asked my friend Suhrid to pick me up to go to Phoenix. Beautiful sunset that evening. Took a few shots of him and his mom. See how the rocks are glowing like gold.",
+        content: "My friends were headed back home. I need to go to Phoenix to spend time with family. I asked my friend Suhrid to pick me up. It was a beautiful evening so we took a few shots of him and his mom. See how the rocks are glowing like gold.",
       },
       {
         type: "stacked",

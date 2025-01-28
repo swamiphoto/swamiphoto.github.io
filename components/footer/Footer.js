@@ -3,20 +3,15 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="mx-auto p-8 md:p-24 pt-0 mt-10 text-gray-700">
-      <div>All images copyright © 2024 Swami Venkataramani</div>
+      <div>All images copyright © 2025 Swami Venkataramani</div>
       <div className="text-sm mt-1 ">
-        Designed by{" "}
+        Website is{" "}
         <b>
           <a href="https://svenkastudio.com" target="_blank">
-            Svenka Studio
+            custom-designed
           </a>
-        </b>
-        .{" "}
-        <span className="underlined-links">
-          <a href="https://svenkastudio.com/#contact" target="_blank">
-            Want a site like this?
-          </a>
-        </span>
+        </b>{" "}
+        by me.
       </div>
     </footer>
   );

@@ -13,7 +13,6 @@ const slideshowPaths = galleryData.filter((gallery) => gallery.enableSlideshow).
 const adminPaths = [...galleryPaths.map((path) => `${path}?admin`), ...slideshowPaths.map((path) => `${path}?admin`)];
 
 const noHeaderPaths = [...slideshowPaths, ...otherNoHeaderPaths, ...adminPaths, "/timemanagement"];
-const noFooterPaths = [...galleryPaths, ...slideshowPaths, ...otherNoHeaderPaths, ...adminPaths, "/timemanagement"];
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -54,7 +53,7 @@ function MyApp({ Component, pageProps }) {
           {/* The page-specific component */}
           <Component {...pageProps} />
         </div>
-        {!noFooterPaths && <Footer />}
+        {!isNoHeaderPath && <Footer />}
       </div>
     </ScrollProvider>
   );
