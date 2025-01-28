@@ -191,7 +191,7 @@ const galleryData = [
       },
       {
         type: "photo",
-        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR504400-Edit.jpg",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/naga.jpg",
         variant: 1,
       },
       {
@@ -212,7 +212,6 @@ const galleryData = [
       {
         type: "photo",
         imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR504282-Edit.jpg",
-        caption: "Little Sriman",
         variant: 2,
       },
       {

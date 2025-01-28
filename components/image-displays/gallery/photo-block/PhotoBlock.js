@@ -4,6 +4,11 @@ import { getCloudimageUrl, handleImageClick } from "../../../../common/images";
 
 const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => {
   const router = useRouter();
+  const [isVertical, setIsVertical] = React.useState(false);
+
+  const handleImageLoad = (e) => {
+    setIsVertical(e.target.naturalHeight > e.target.naturalWidth);
+  };
 
   const renderCaption = () => {
     return <p className="my-10 mb-40 font-medium text-sm md:text-xl italic text-center max-w-3xl mx-auto">{caption}</p>;
@@ -26,9 +31,10 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
           <img
             src={getCloudimageUrl(imageUrl, { width: 1100, quality: 85 })}
             alt={caption || "Photo"}
-            className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 cursor-pointer"
+            className={`w-full md:w-[72%] ${isVertical ? "md:w-[45%]" : ""} max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 cursor-pointer`}
             loading="lazy"
             onClick={() => handleImageClick(imageUrl, allPhotos, router)}
+            onLoad={handleImageLoad}
           />
         </div>
       );
