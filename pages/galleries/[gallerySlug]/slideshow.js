@@ -5,7 +5,7 @@ import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import SlideshowAdmin from "../../../components/image-displays/slideshow/SlideshowAdmin"; // Import SlideshowAdmin component
 import Head from "next/head";
 import { fetchImageUrls } from "../../../common/images"; // Ensure fetchImageUrls is imported
-import Loading from "../../../components/image-displays/slideshow/loading/Loading";
+import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
 import { getCloudimageUrl, getImageResolution } from "../../../common/images";
 
 const SlideshowPage = ({ gallerySlug, gallery }) => {
