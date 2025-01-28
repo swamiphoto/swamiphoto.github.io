@@ -14,6 +14,7 @@ module.exports = {
         serif: ['"Cormorant Garamond", serif'],
         serif2: ["the_palomaregular"],
         serif3: ['"Montage", serif'],
+        serif4: ['"Noto Serif JP", serif'],
       },
       fontWeight: {
         normal: 400,

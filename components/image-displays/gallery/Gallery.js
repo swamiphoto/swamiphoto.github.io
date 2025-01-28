@@ -17,7 +17,7 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
       <GalleryCover name={name} description={description} enableSlideshow={enableSlideshow} enableClientView={enableClientView} onBackClick={onBackClick} onSlideshowClick={onSlideshowClick} onClientLoginClick={onClientLoginClick} />
 
       {/* Render the blocks */}
-      <div className="space-y-10 md:px-8">
+      <div className="space-y-10">
         {blocks.map((block, index) => {
           switch (block.type) {
             case "stacked":
@@ -38,7 +38,7 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
 
             case "text":
               return (
-                <div key={`block-${index}`} className="text-block text-center text-2xl md:text-4xl text-gray-800 max-w-3xl mx-auto py-10">
+                <div key={`block-${index}`} className={`text-block text-center text-2xl md:text-4xl text-gray-800 max-w-3xl mx-auto py-10 ${block.variant === 2 ? "font-serif4" : ""}`}>
                   {block.content}
                 </div>
               );
@@ -47,6 +47,7 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
               return (
                 <div key={`block-${index}`} className="photo-block">
                   <PhotoBlock imageUrl={block.imageUrl} caption={block.caption} variant={block.variant || 1} />
+                  <WiggleLine />
                 </div>
               );
 

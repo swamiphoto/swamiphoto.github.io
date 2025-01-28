@@ -77,6 +77,7 @@ const galleryData = [
       {
         type: "text",
         content: "It was winter...we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow — our tour was at 10:30 am — but we were lucky because the canyons were really vibrant.",
+        variant: 1,
       },
       {
         type: "photo",
@@ -119,6 +120,28 @@ const galleryData = [
         caption:
           "Horseshoe Bend was just 15 minutes from our Airbnb, but we left a bit late after spending the afternoon chatting. Naga and Bharath dropped me off at the parking lot, and I took off running—with my camera backpack and tripod (not something I’d recommend)—to the viewpoint, making it just in time to catch the last bit of light.",
         variant: 1,
+      },
+      {
+        type: "text",
+        content: "Monument Valley feels like a different planet. The landscape is so vast. Wild west movies were filmed here, and it’s easy to see why. The View Hotel has amazing views of the valley, and we were wishing that we could have stayed there.",
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503840-Edit.jpg",
+        variant: 1,
+      },
+
+      {
+        type: "masonry",
+        imagesFolderUrl: "landscapes/arizona/monument-valley",
+      },
+
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503948-Edit-Edit.jpg",
+        variant: 2,
+        caption:
+          "We visited the spot where Forrest Gump runs in the movie, but I messed up—the sun was on the wrong side, and the rocks are silhoutted in the afternoon. I told my friends we should head back to catch the rocks glowing from the other side, but we got there after sunset and missed seeing the glowing rocks from the other side too. Oh well...always a reason to go back!",
       },
 
       {

@@ -7,9 +7,9 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1 }) => {
 
   const renderImage = () => {
     if (variant === 1) {
-      // Edge-to-edge layout
+      // Edge-to-edge layout without horizontal scroll
       return (
-        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
+        <div className="relative -mx-[calc((100vw-100%)/2)] w-screen max-w-[100vw]">
           <img src={imageUrl} alt={caption || "Photo"} className="w-full h-auto object-cover" loading="lazy" />
         </div>
       );
@@ -33,7 +33,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1 }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-hidden">
       {/* Render Image Based on Variant */}
       {renderImage()}
       {/* Caption */}
