@@ -5,7 +5,7 @@ import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import SlideshowAdmin from "../../../components/image-displays/slideshow/SlideshowAdmin"; // Import SlideshowAdmin component
 import Head from "next/head";
 import { fetchImageUrls } from "../../../common/images"; // Ensure fetchImageUrls is imported
-import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
+import Loading from "../../../components/image-displays/slideshow/loading/Loading";
 import { getCloudimageUrl, getImageResolution } from "../../../common/images";
 
 const SlideshowPage = ({ gallerySlug, gallery }) => {
@@ -13,55 +13,38 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   const [imageUrls, setImageUrls] = useState([]);
   const [texts, setTexts] = useState({});
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [slides, setSlides] = useState([]);
   const isAdminView = router.query.admin !== undefined; // Detect if the admin query is present
 
   useEffect(() => {
     if (gallery) {
-      const fetchImagesAndTexts = async () => {
-        let urls = [];
-        let extractedTexts = {};
-        let imageCount = 0; // Tracks the index of images for mapping text blocks
+      const fetchAndProcessSlides = async () => {
+        const combinedSlides = [];
 
         for (const block of gallery.blocks) {
-          if (block.type === "stacked" || block.type === "masonry") {
+          if (block.type === "photo" && block.imageUrl) {
+            combinedSlides.push({ type: "image", url: block.imageUrl, caption: block.caption || null });
+          } else if (block.type === "text" && block.content) {
+            combinedSlides.push({ type: "text", content: block.content });
+          } else if (block.type === "stacked" || block.type === "masonry") {
+            let urls = [];
             if (block.imageUrls) {
-              urls = urls.concat(block.imageUrls);
-              imageCount += block.imageUrls.length;
+              urls = block.imageUrls;
             } else if (block.imagesFolderUrl) {
               const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
-              const filteredUrls = fetchedUrls.filter((url) => !url.includes("protected"));
-              urls = urls.concat(filteredUrls);
-              imageCount += filteredUrls.length;
+              urls = fetchedUrls.filter((url) => !url.includes("protected"));
             }
-          } else if (block.type === "text" && block.content) {
-            // Ensure we append text blocks rather than overwrite
-            extractedTexts[imageCount] = block.content;
-            imageCount += 1; // Increment imageCount to reserve a slot for the text block
+            combinedSlides.push(...urls.map((url) => ({ type: "image", url })));
+          } else if (block.type === "video" && block.url) {
+            combinedSlides.push({ type: "video", url: block.url, caption: block.caption || null });
           }
         }
 
-        // Get the appropriate resolution based on screen size
-        const resolution = getImageResolution();
-        urls = urls.map((url) => getCloudimageUrl(url, { width: resolution.width, quality: resolution.quality }));
-
-        setImageUrls(urls);
-        setTexts(extractedTexts);
-
-        // Wait for all images to load
-        const imageLoadPromises = urls.map((url) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = resolve;
-            img.onerror = resolve;
-            img.src = url;
-          });
-        });
-
-        await Promise.all(imageLoadPromises);
-        setImagesLoaded(true); // Set flag when all images are loaded
+        setSlides(combinedSlides);
+        setImagesLoaded(true);
       };
 
-      fetchImagesAndTexts();
+      fetchAndProcessSlides();
     }
   }, [gallery]);
 
@@ -93,8 +76,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
 
       {imagesLoaded ? (
         <Slideshow
-          imageUrls={imageUrls}
-          texts={texts}
+          slides={slides}
           layout={layout}
           title={gallery.name}
           subtitle={gallery.description}

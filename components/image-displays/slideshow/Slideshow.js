@@ -3,7 +3,7 @@ import { HiOutlinePause, HiOutlinePlay, HiOutlineArrowLeft, HiOutlineArrowRight 
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
-import { useRouter } from "next/router"; // Next.js routing
+import { useRouter } from "next/router";
 import useYouTubePlayer from "./useYouTubePlayer";
 import FilmStackSlideshowLayout from "./film-stack-slideshow-layout/FilmStackSlideshowLayout";
 import FilmSingleSlideshowLayout from "./film-single-slideshow-layout/FilmSingleSlideshowLayout";
@@ -11,66 +11,45 @@ import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlidesh
 import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
+const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
-  const [slides, setSlides] = useState([]); // Combine both image and text slides
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [slideshowPlaying, setSlideshowPlaying] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true); // Start with the modal open on mobile
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const playerRef = useYouTubePlayer(youtubeUrl ? youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0] : "", setIsPlayerReady);
   const slideshowInterval = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-  const router = useRouter(); // Using Next.js router
+  const router = useRouter();
 
-  // Combine imageUrls and texts into slides
+  // Calculate aspect ratios for image slides
   useEffect(() => {
-    const combinedSlides = [];
+    const calculateAspectRatios = async () => {
+      const imageSlides = slides.filter((slide) => slide.type === "image");
+      const ratios = await Promise.all(
+        imageSlides.map((slide) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+              const aspectRatio = img.width / img.height;
+              resolve(aspectRatio);
+            };
+            img.onerror = () => resolve(1); // default to 1 if there's an error
+            img.src = slide.url;
+          });
+        })
+      );
+      setAspectRatios(ratios);
+      setImagesLoaded(true);
+    };
 
-    imageUrls.forEach((url, index) => {
-      combinedSlides.push({ type: "image", url }); // Add image slide
-
-      // Match text with the exact image index
-      if (texts[index]) {
-        combinedSlides.push({ type: "text", content: texts[index] }); // Add text slide
-      }
-    });
-
-    if (JSON.stringify(combinedSlides) !== JSON.stringify(slides)) {
-      setSlides(combinedSlides);
-    }
-  }, [imageUrls, texts]);
-
-  useEffect(() => {
-    if (imageUrls.length > 0) {
-      const calculateAspectRatios = async () => {
-        const ratios = await Promise.all(
-          imageUrls.map((url) => {
-            return new Promise((resolve) => {
-              const img = new Image();
-              img.onload = () => {
-                const aspectRatio = img.width / img.height;
-                resolve(aspectRatio);
-              };
-              img.onerror = () => {
-                resolve(1); // default to 1 if there's an error
-              };
-              img.src = url;
-            });
-          })
-        );
-        setAspectRatios(ratios);
-        setImagesLoaded(true);
-      };
-
-      calculateAspectRatios();
-    }
-  }, [imageUrls]);
+    if (slides.length > 0) calculateAspectRatios();
+  }, [slides]);
 
   useEffect(() => {
     if (imagesLoaded && isPlayerReady && slides.length > 0 && slideshowPlaying) {
@@ -108,12 +87,7 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
 
     slideshowInterval.current = setTimeout(() => {
       setTransitioning(true);
-
-      setCurrentSlideIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % slides.length; // Loop through all slides
-        return nextIndex;
-      });
-
+      setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % slides.length); // Loop through all slides
       setTransitioning(false);
 
       if (slideshowPlaying) startSlideshow();
@@ -127,7 +101,6 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
       if (audioPlaying) {
         playerRef.current.pauseVideo();
       } else {
-        // Explicitly unmute and play video on user interaction (especially for mobile)
         playerRef.current.unMute();
         playerRef.current.playVideo();
       }
@@ -142,10 +115,9 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
       setSlideshowPlaying(false);
       setAudioPlaying(false);
     } else {
-      // On mobile, ensure the video is unmuted and play the audio when starting the slideshow
       if (playerRef.current) {
-        playerRef.current.unMute(); // Unmute the video
-        playerRef.current.playVideo(); // Explicitly play the video on mobile interaction
+        playerRef.current.unMute();
+        playerRef.current.playVideo();
       }
       startSlideshow();
       handlePlayPauseAudio();
@@ -206,9 +178,9 @@ const Slideshow = ({ imageUrls, texts = {}, layout = "film-stack", title = "Gall
   const renderPhotos = () => {
     switch (layout) {
       case "film-stack":
-        return <FilmStackSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmStackSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "film-single":
-        return <FilmSingleSlideshowLayout imageUrls={imageUrls} texts={texts} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmSingleSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "kenburns":
         return <KenBurnsSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       default:
