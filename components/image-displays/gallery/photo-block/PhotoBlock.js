@@ -31,7 +31,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
           <img
             src={getCloudimageUrl(imageUrl, { width: 1100, quality: 85 })}
             alt={caption || "Photo"}
-            className={`w-full md:w-[72%] ${isVertical ? "md:w-[45%]" : ""} max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 cursor-pointer`}
+            className={`w-full md:w-[72%] ${isVertical ? "md:w-[40%]" : ""} max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 cursor-pointer`}
             loading="lazy"
             onClick={() => handleImageClick(imageUrl, allPhotos, router)}
             onLoad={handleImageLoad}
@@ -49,7 +49,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
   };
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative overflow-x-hidden">
       {/* Render Image Based on Variant */}
       {renderImage()}
       {/* Caption */}
