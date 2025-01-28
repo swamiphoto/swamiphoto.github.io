@@ -11,7 +11,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
   };
 
   const renderCaption = () => {
-    return <p className="my-10 mb-40 font-medium text-sm md:text-xl italic text-center max-w-3xl mx-auto">{caption}</p>;
+    return <p className="my-10 md:mb-20 font-medium text-sm md:text-xl italic text-center max-w-3xl mx-auto">{caption}</p>;
   };
 
   const renderImage = () => {

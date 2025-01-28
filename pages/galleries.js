@@ -202,7 +202,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "Some phone shots of Naga at Cathedral Rock.",
+        content: "Some phone shots at Cathedral Rock. Can you feel the serenity of this place? Sitting near Oak Creek and listening to the gentle flow of water, it feels like time somehow slows down here.",
       },
 
       {
