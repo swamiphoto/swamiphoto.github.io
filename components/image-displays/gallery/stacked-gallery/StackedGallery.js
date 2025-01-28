@@ -86,7 +86,7 @@ const StackedGallery = ({ imageUrls = [] }) => {
                 )}
               </div>
             ) : (
-              <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, processedImages, router)}>
+              <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, imageUrls, router)}>
                 <img src={getCloudimageUrl(entry.src, { width: 1100, quality: 85 })} alt="" className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
               </div>
             )}
