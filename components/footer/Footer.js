@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="text-sm mt-1 ">
         Website is{" "}
         <b>
-          <a href="https://svenkastudio.com" target="_blank">
+          <a href="https://svenkastudio.com" target="_blank" className="underline hover:text-red-500">
             custom-designed
           </a>
         </b>{" "}
-        by me.
+        by me.{" "}
       </div>
     </footer>
   );
