@@ -11,7 +11,7 @@ import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlidesh
 import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, captions = {}, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
+const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -178,11 +178,11 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
   const renderPhotos = () => {
     switch (layout) {
       case "film-stack":
-        return <FilmStackSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmStackSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "film-single":
-        return <FilmSingleSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <FilmSingleSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "kenburns":
-        return <KenBurnsSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} captions={captions} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <KenBurnsSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       default:
         return null;
     }

@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:card" content="/images/mac.png" />
 
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
       </Head>
       <div className="App text-center">
         {/* Render header conditionally */}

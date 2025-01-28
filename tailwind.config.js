@@ -12,9 +12,7 @@ module.exports = {
         sans: ["neue-haas-unica, sans-serif", "ui-sans-serif", "system-ui"],
         mono: ["Geist Mono", "monospace"],
         serif: ['"Cormorant Garamond", serif'],
-        serif2: ["the_palomaregular"],
-        serif3: ['"Montage", serif'],
-        serif4: ['"Noto Serif JP", serif'],
+        serif2: ['"DM Serif Display", serif'],
       },
       fontWeight: {
         normal: 400,

@@ -76,7 +76,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "It was winter...we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow — our tour was at 10:30 am — but we were lucky because the canyons were really vibrant.",
+        content: "It was winter, so we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow during our 10:30 a.m. tour. But we got lucky—the canyons were incredibly vibrant!",
         variant: 1,
       },
       {
@@ -93,7 +93,7 @@ const galleryData = [
       {
         type: "photo",
         imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503763-Enhanced-NR.jpg",
-        caption: "The slot canyons were formed over millions of years as flash floods carved deep, narrow paths through the sandstone. Over time, wind and water erosion shaped the walls into these incredible textures and patterns. Looks like a colorful iceberg, isn't it?",
+        caption: "These slot canyons were formed over millions of years as flash floods carved deep, narrow paths through the sandstone. Over time, wind and water erosion shaped the walls into these incredible textures and patterns. Looks like a colorful iceberg, isn't it?",
         variant: 1,
       },
 
@@ -158,7 +158,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "Grand Canyon is a tough place to capture. The landscape is so grand and three dimensional, it’s difficult to convey the grandness through a 2D photo. I’ve been there several times and don’t really have a great photo still. I took portraits instead. ",
+        content: "The Grand Canyon is not easy to capture. The landscape is so grand and three dimensional, it’s difficult to convey the grandness through a photo. I’ve been there several times and don’t really have a great photo still. I took portraits instead. ",
       },
       {
         type: "photo",
@@ -190,12 +190,30 @@ const galleryData = [
         imagesFolderUrl: "landscapes/arizona/sedona",
       },
       {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR504400-Edit.jpg",
+        variant: 1,
+      },
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/wDkitsE1J4E",
+        caption: "What are the chances? Bharath ran into his close friend from college in Sedona, of all places. A random spot, a random time… ",
+        variant: 2,
+      },
+      {
         type: "text",
         content: "Some phone shots of Naga at Cathedral Rock.",
       },
+
       {
         type: "masonry",
         imagesFolderUrl: "landscapes/arizona/sedona-phone-shots",
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR504282-Edit.jpg",
+        caption: "Little Sriman",
+        variant: 2,
       },
       {
         type: "video",
@@ -205,7 +223,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "My friends were headed back home. I need to go to Phoenix to spend time with family. I asked my friend Suhrid to pick me up. It was a beautiful evening so we took a few shots of him and his mom. See how the rocks are glowing like gold.",
+        content: "Naga/Bharath were heading back home, and I needed to get to Phoenix. My friend Suhrid was kind enough to drive two hours to pick me up. The evening was gorgeous, so we took a few shots of him and his mom. See how the rocks glow like gold!",
       },
       {
         type: "stacked",
@@ -222,7 +240,7 @@ const galleryData = [
   {
     name: "Beautiful California",
     description:
-      "California is pure magic. Whether it's the dramatic coastline, the rolling golden hills, or the towering forests, every corner feels like a world of its own. This gallery is a celebration of the landscapes that never fail to leave me in awe—scenes that remind me just how special this place is.",
+      "California has everything. Whether it's the dramatic coastline, the rolling golden hills, or the towering forests, every corner feels like a world of its own. This gallery is a celebration of the landscapes that never fail to leave me in awe—scenes that remind me just how special this place is.",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
     slug: "california",
     blocks: [
@@ -273,7 +291,7 @@ const galleryData = [
     name: "Anagha",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha/DSC_0068.jpg?width=500&quality=80`,
     slug: "anagha",
-    description: "Forgot how good a poser Anagha was as a kid!",
+    description: "As another photographer friend put it, this is truly magical. Anagha looked absolutely adorable in her traditional attire and was such a joy to work with. She was a natural.",
     blocks: [
       {
         type: "stacked",
@@ -296,7 +314,7 @@ const galleryData = [
     name: "Anagha at Adobe Lodge",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg?width=500&quality=80`,
     slug: "anagha-family",
-    description: "My first shoot with Anagha. She was a natural!",
+    description: "This was my first shoot with Anagha. She was barely one, but she already had a million-dollar smile. Now, she’s ten and still has that same smile, and I love showing her these photos. This is why I love portrait photography.",
     blocks: [
       {
         type: "stacked",
@@ -318,7 +336,7 @@ const galleryData = [
     name: "Naga and Bharath",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg?width=500&quality=80`,
     slug: "naga-bharath",
-    description: "My first shoot with Naga and Bharath. Naga was pregnant with Sathya",
+    description: "Naga was pregnant with Sathya, and this was their maternity shoot. They were so natural together, and their chemistry was incredible to capture. These shots remain some of my all-time favorites.",
     blocks: [
       {
         type: "stacked",
@@ -340,7 +358,7 @@ const galleryData = [
     name: "Sathya",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5614.jpg?width=500&quality=80`,
     slug: "sathya",
-    description: "First shoot with Sathya.",
+    description: "This was my first shoot with Sathya, who was just one at the time—chubby, cute, and full of the most adorable expressions. Now he’s seven, a handsome young boy, and we hang out playing cards and soccer together. It’s amazing to see how much he’s grown!",
     blocks: [
       {
         type: "stacked",
@@ -360,10 +378,10 @@ const galleryData = [
     },
   },
   {
-    name: "Young Boy Sathya",
+    name: "Sathya at Two",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg?width=500&quality=80`,
     slug: "young-boy-sathya",
-    description: "Second shoot with Sathya.",
+    description: "This was Sathya’s second shoot, at two years old. He was so full of energy, running around non-stop, and this gallery captures some adorable mother-and-child moments. Sathya’s uncle and aunt also joined in, making it a fun family outing.",
     blocks: [
       {
         type: "stacked",
@@ -671,7 +689,7 @@ const galleryData = [
     name: "Katrina Kaif",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/bollywood/katrina.jpeg`,
     slug: "katrinakaif",
-    description: "Katrina Kaif is a Bollywood actress, possibly the most famous. Her stunning looks, graceful presence, and playful energy were a treat to the lens.",
+    description: "Katrina Kaif is a Bollywood actress, rather famous. Her looks, graceful presence, and playful energy were a treat to the lens.",
     blocks: [
       {
         type: "stacked",
@@ -792,7 +810,7 @@ const galleryData = [
     name: "Nava Rasa",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503366-Edit-2-Edit.jpg`,
     slug: "sudha-nava-rasa",
-    description: "Nava Rasa expressions by Sudha",
+    description: "Nava Rasa refers to the nine emotions in Indian classical dance. Sudha was modeling for a sari designer, showcasing nine different saris, each representing a unique emotion. This is the first one.",
     blocks: [
       {
         type: "stacked",

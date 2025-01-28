@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
 import styles from "./FilmSingleSlideshowLayout.module.css"; // Import styles correctly
 
-const FilmSingleSlideshowLayout = ({ slides, currentImageIndex, transitioning, aspectRatios, captions, hideCaptionsOnMobile }) => {
+const FilmSingleSlideshowLayout = ({ slides, currentImageIndex, transitioning, aspectRatios, hideCaptionsOnMobile }) => {
   const [tilts, setTilts] = useState([]);
   const [zTilts, setZTilts] = useState([]);
   const [moveXs, setMoveXs] = useState([]);
@@ -59,45 +59,11 @@ const FilmSingleSlideshowLayout = ({ slides, currentImageIndex, transitioning, a
                 zIndex: slides.length - index,
               }}>
               <img src={slide.url} alt={`Slide ${index + 1}`} />
-              {(!isMobile || !hideCaptionsOnMobile) && captions[index] && (
-                <div className="absolute top-10 left-4 w-3/5 p-5">
-                  <div
-                    className="text-left bg-yellow-200 font-mono shadow-lg transform rotate-1"
-                    style={{
-                      backgroundImage: "url('images/paper2.jpg')",
-                      backgroundSize: "cover",
-                      boxShadow: "2px 2px 8px rgba(0,0,0,0.2)",
-                      clipPath: "url(#torn-edge-clip)",
-                      padding: "20px",
-                    }}>
-                    {captions[index]}
-                  </div>
-                  <svg width="0" height="0">
-                    <clipPath id="torn-edge-clip" clipPathUnits="objectBoundingBox">
-                      <path d="M0,0 h1 v0.7 l-0.1,0.05 l0.05,0.05 l-0.05,0.05 l0.1,0.05 v0.7 h-1 z" />
-                    </clipPath>
-                  </svg>
+              {slide.caption && (
+                <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+                  <div className="text-center text-gray-200 p-4 text-2xl max-w-3xl mx-4 leading-tight">{slide.caption}</div>
                 </div>
               )}
-            </div>
-          );
-        }
-
-        if (slide.type === "text") {
-          return (
-            <div key={index} className={`${styles["film-single-text"]} ${isCurrentSlide ? styles["visible"] : styles["hidden"]}`}>
-              <div className="text-center px-8">
-                <p>{slide.content}</p>
-              </div>
-            </div>
-          );
-        }
-
-        if (slide.type === "video") {
-          return (
-            <div key={index} className={`${styles["film-single-video"]} ${isCurrentSlide ? styles["visible"] : styles["hidden"]}`}>
-              <iframe src={slide.url} title={`Video ${index + 1}`} frameBorder="0" allow="autoplay; fullscreen" className="w-full h-full" />
-              {(!isMobile || !hideCaptionsOnMobile) && slide.caption && <div className="absolute bottom-10 left-4 w-3/5 p-5 bg-white shadow-lg">{slide.caption}</div>}
             </div>
           );
         }

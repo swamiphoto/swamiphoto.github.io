@@ -74,7 +74,7 @@ const VideoBlock = ({ url, caption, variant = 1 }) => {
           <div ref={videoRef} className={`${videoStyle} ${videoWrapperStyle}`}>
             <ReactPlayer {...playerProps} />
           </div>
-          {caption && <p className="my-4 font-medium text-sm md:text-xl italic text-center max-w-6xl mx-auto">{caption}</p>}
+          {caption && <p className="my-4 font-medium text-sm md:text-xl italic text-center max-w-3xl mx-auto">{caption}</p>}
         </>
       )}
     </div>

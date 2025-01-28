@@ -75,18 +75,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
       </Head>
 
       {imagesLoaded ? (
-        <Slideshow
-          slides={slides}
-          layout={layout}
-          title={gallery.name}
-          subtitle={gallery.description}
-          youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
-          customDurations={customDurations}
-          duration={duration}
-          captions={captions}
-          thumbnailUrl={gallery.thumbnailUrl}
-          slug={gallerySlug}
-        />
+        <Slideshow slides={slides} layout={layout} title={gallery.name} subtitle={gallery.description} youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]} customDurations={customDurations} duration={duration} thumbnailUrl={gallery.thumbnailUrl} slug={gallerySlug} />
       ) : (
         <Loading />
       )}
