@@ -11,14 +11,14 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
   };
 
   const renderCaption = () => {
-    return <p className="my-10 md:mb-20 font-medium text-sm md:text-xl italic text-center max-w-3xl mx-auto">{caption}</p>;
+    return <p className="my-4 md:mb-20 font-medium text-sm md:text-xl italic text-center max-w-3xl mx-auto">{caption}</p>;
   };
 
   const renderImage = () => {
     if (variant === 1) {
       // Edge-to-edge layout without horizontal scroll
       return (
-        <div className="relative -mx-[calc((100vw-100%)/2)] w-screen max-w-[100vw]">
+        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
           <img src={getCloudimageUrl(imageUrl, { width: 1920, quality: 85 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
         </div>
       );
@@ -49,7 +49,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
   };
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full relative">
       {/* Render Image Based on Variant */}
       {renderImage()}
       {/* Caption */}
