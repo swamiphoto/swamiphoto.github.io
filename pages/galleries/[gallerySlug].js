@@ -89,7 +89,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         {/* Open Graph Meta Tags for Social Sharing */}
         <meta property="og:title" content={`${gallery.name} - Gallery by Swami Venkataramani`} key="og:title" />
         <meta property="og:description" content={gallery.description} key="og:description" />
-        <meta property="og:image" content={gallery.thumbnailUrl.startsWith("http") ? gallery.thumbnailUrl : `https://swamiphoto.com${gallery.thumbnailUrl}`} key="og:image" />
+        <meta property="og:image" content={gallery.thumbnailUrl ? (gallery.thumbnailUrl.startsWith("http") ? gallery.thumbnailUrl : `https://swamiphoto.com${gallery.thumbnailUrl}`) : "https://swamiphoto.com/images/mac.png"} key="og:image" />
         <meta property="og:url" content={`https://swamiphoto.com/galleries/${gallerySlug}`} key="og:url" />
         <meta property="og:type" content="website" key="og:type" />
         <meta property="og:image:width" content="1200" />
@@ -99,7 +99,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:title" content={`${gallery.name} - Gallery by Swami Venkataramani`} key="twitter:title" />
         <meta name="twitter:description" content={gallery.description} key="twitter:description" />
-        <meta name="twitter:image" content={gallery.thumbnailUrl.startsWith("http") ? gallery.thumbnailUrl : `https://swamiphoto.com${gallery.thumbnailUrl}`} key="twitter:image" />
+        <meta name="twitter:image" content={gallery.thumbnailUrl ? (gallery.thumbnailUrl.startsWith("http") ? gallery.thumbnailUrl : `https://swamiphoto.com${gallery.thumbnailUrl}`) : "https://swamiphoto.com/images/mac.png"} key="twitter:image" />
         <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
       </Head>
 
