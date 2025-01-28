@@ -31,22 +31,11 @@ function MyApp({ Component, pageProps }) {
         <title>Swami Venkataramani — Photography Portfolio</title>
         <meta name="description" content={description} />
 
-        {/* Open Graph Meta Tags for Social Sharing */}
-        <meta property="og:title" content="Swami Venkataramani" />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content="/images/mac.png" />
-        <meta property="og:url" content="https://swamiphoto.com" />
         <meta property="og:type" content="website" />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:title" content="Swami Venkataramani" />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content="/images/mac.png" />
-        <meta name="twitter:card" content="/images/mac.png" />
-
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
       </Head>
+
       <div className="App text-center">
         {/* Render header conditionally */}
         {!isNoHeaderPath && <Header />}
