@@ -93,7 +93,7 @@ const galleryData = [
       {
         type: "photo",
         imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503763-Enhanced-NR.jpg",
-        caption: "Looks like a colorful iceberg insn't it?",
+        caption: "The slot canyons were formed over millions of years as flash floods carved deep, narrow paths through the sandstone. Over time, wind and water erosion shaped the walls into these incredible textures and patterns. Looks like a colorful iceberg, isn't it?",
         variant: 1,
       },
 
@@ -151,12 +151,28 @@ const galleryData = [
         variant: 2,
       },
       {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503959-Edit-2.jpg",
+        variant: 2,
+      },
+      {
         type: "text",
         content: "Grand Canyon is a tough place to capture. The landscape is so grand and three dimensional, it’s difficult to convey the grandness through a 2D photo. I’ve been there several times and don’t really have a great photo still. I took portraits instead. ",
       },
       {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR504066-Edit.jpg",
+        variant: 2,
+      },
+      {
         type: "masonry",
         imagesFolderUrl: "landscapes/arizona/grand-canyon",
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR504121-Enhanced-NR.jpg",
+        caption: "Nothing quite as satisfying as an Arizona sunset.",
+        variant: 2,
       },
       {
         type: "video",

@@ -1,4 +1,5 @@
 import React from "react";
+import { getCloudimageUrl } from "../../../../common/images";
 
 const PhotoBlock = ({ imageUrl, caption = "", variant = 1 }) => {
   const renderCaption = () => {
@@ -10,7 +11,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1 }) => {
       // Edge-to-edge layout without horizontal scroll
       return (
         <div className="relative -mx-[calc((100vw-100%)/2)] w-screen max-w-[100vw]">
-          <img src={imageUrl} alt={caption || "Photo"} className="w-full h-auto object-cover" loading="lazy" />
+          <img src={getCloudimageUrl(imageUrl, { width: 1920, quality: 85 })} alt={caption || "Photo"} className="w-full h-auto object-cover" loading="lazy" />
         </div>
       );
     }
@@ -19,7 +20,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1 }) => {
       // Normal-width layout
       return (
         <div className="w-full flex justify-center">
-          <img src={imageUrl} alt={caption || "Photo"} className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" loading="lazy" />
+          <img src={getCloudimageUrl(imageUrl, { width: 1100, quality: 85 })} alt={caption || "Photo"} className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" loading="lazy" />
         </div>
       );
     }
@@ -27,7 +28,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1 }) => {
     // Default fallback (variant 1)
     return (
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
-        <img src={imageUrl} alt={caption || "Photo"} className="w-full h-auto object-cover" loading="lazy" />
+        <img src={getCloudimageUrl(imageUrl, { width: 1920, quality: 85 })} alt={caption || "Photo"} className="w-full h-auto object-cover" loading="lazy" />
       </div>
     );
   };
