@@ -25,8 +25,12 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
               imageUrls = fetchedUrls;
             }
 
-            // Apply filtering for protected images
-            const filteredUrls = imageUrls.filter((url) => (clientView ? true : !url.includes("protected")));
+            // Apply filtering for protected images and excluded images
+            const filteredUrls = imageUrls.filter((url) => {
+              const isProtected = clientView ? true : !url.includes("protected");
+              const isExcluded = block.excludeImageUrls?.includes(url);
+              return isProtected && !isExcluded;
+            });
 
             return { ...block, imageUrls: filteredUrls };
           }

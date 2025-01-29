@@ -47,8 +47,19 @@ const galleryData = [
     slug: "naga-sunflowers",
     blocks: [
       {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500795-Edit-Edit.jpg",
+        variant: 2,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500885-Edit-Edit.jpg",
+        variant: 1,
+      },
+      {
         type: "stacked",
         imagesFolderUrl: "portraits/naga-sunflowers",
+        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500795-Edit-Edit.jpg", "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500885-Edit-Edit.jpg"],
       },
     ],
     enableSlideshow: true,
