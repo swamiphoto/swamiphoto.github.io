@@ -239,7 +239,7 @@ const galleryData = [
   {
     name: "Beautiful California",
     description:
-      "California has everything. Whether it's the dramatic coastline, the rolling golden hills, or the towering forests, every corner feels like a world of its own. This gallery is a celebration of the landscapes that never fail to leave me in awe—scenes that remind me just how special this place is.",
+      "I don’t think there’s anywhere quite like California. We have just about every landscape you can imagine—from jaw-dropping coastlines and rolling golden hills to vineyards, deserts, redwoods, and not to forget, Karl the Fog. This gallery is a collection of the landscapes that make me appreciate just how special this place is.",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
     slug: "california",
     blocks: [
@@ -399,10 +399,11 @@ const galleryData = [
     },
   },
   {
-    name: "Sathya and Sriman",
+    name: "Mt. Diablo",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-diablo/DSC_4122.jpg?width=500&quality=80`,
-    slug: "sathya-sriman",
-    description: "Sriman's first shoot",
+    slug: "mtdiablo",
+    description:
+      "This was my first shoot with Sriman, just a few months old, and my first time capturing the brothers together. We chose countryside outfits for the kids, which matched well with the rolling hills. Despite the wind constantly knocking over my light stands (and Naga and Bharath graciously helping to hold them), it was all worth it!",
     blocks: [
       {
         type: "stacked",
@@ -422,10 +423,11 @@ const galleryData = [
     },
   },
   {
-    name: "Traditional Sriman",
+    name: "Traditional Baby",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-home/DSC_4265-2.jpg?width=500&quality=80`,
-    slug: "traditional-sriman",
-    description: "Sriman in traditional attire",
+    slug: "traditional-baby",
+    description:
+      "We started this shoot outdoors, but it was cold for the baby. So we went home and did the rest of the shoot indoors. Sriman was so adorable in his traditional attire! Now he's four, and he still has the same adorable smile. Plenty of naked baby shots were taken, but of course Sriman wouldn't want them out here!",
     blocks: [
       {
         type: "stacked",
@@ -448,7 +450,7 @@ const galleryData = [
     name: "Sai Suma",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit-Edit.jpg?width=500&quality=80`,
     slug: "saisuma",
-    description: "Modeling for Chiffon and Spice",
+    description: "Sai is a photographer herself, but this time she was on the other side of the camera, pregnant with her first child, modeling for Chiffon and Spice. What started as a maternity shoot naturally turned into a mix of fashion and portrait shots.",
     blocks: [
       {
         type: "stacked",
@@ -471,7 +473,7 @@ const galleryData = [
     name: "Sathya and Ishuwar",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sathya-ishuwar/DSC_9082.jpg?width=500&quality=80`,
     slug: "sathyaishuwar",
-    description: "Pre-wedding shoot",
+    description: "Ishuwar called me asking if I'd do a pre-wedding shoot for them. I said sure, and we met at Stanford, where Ishuwar was studying. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
     blocks: [
       {
         type: "stacked",
@@ -623,7 +625,7 @@ const galleryData = [
     name: "Atif Aslam",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/bollywood/sonu-atif/DSC_4986 2.jpg`,
     slug: "atifaslam",
-    description: "I loved shooting Atif. He is a blend of charm, style, class, and pure talent.",
+    description: "Atif is a heartthrob from Pakistan. The guy is just rediculously handome. He is a blend of charm, style, class, and talent, and I have to say my camera and lens really loved him!",
     blocks: [
       {
         type: "stacked",
@@ -663,7 +665,7 @@ const galleryData = [
     name: "Prabhu Deva",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/bollywood/dabaang/DSC_6844.jpg`,
     slug: "prabhudeva",
-    description: "I grew up watching Prabhhu Deva, who's known as the Michael Jackson of India. It was surreal to see him dance in person.",
+    description: 'I grew up watching Prabhu Deva, the Michael Jackson of India. Especially the song "Chikku Bukku Raile". They used to call him "rubber" for his insane flexibility, and seeing him dance in person was surreal. Even at this age, he was moving effortlessly just like in the movies.',
     blocks: [
       {
         type: "stacked",
@@ -688,7 +690,7 @@ const galleryData = [
     name: "Katrina Kaif",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/bollywood/katrina.jpeg`,
     slug: "katrinakaif",
-    description: "Katrina Kaif is a Bollywood actress, rather famous. Her looks, graceful presence, and playful energy were a treat to the lens.",
+    description: "Katrina Kaif is one of Bollywood’s biggest stars, and it's easy to see why. She’s got the looks, the grace, and this playful energy that makes her a natural in front of the camera. She knows how to own the moment.",
     blocks: [
       {
         type: "stacked",
@@ -719,13 +721,14 @@ const galleryData = [
     },
   },
   {
-    name: "Classical Dance",
+    name: "Access Braille",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0041.jpg`,
-    slug: "classicaldance",
-    description: "Sudha's fundraiser dance performance for Access Braille",
+    slug: "accessbraille",
+    description: "Sudha is a Bharatanatyam dancer and teacher, and she moves with so much grace. She was performing for Access Braille, a non-profit that supports the visually impaired, and you can see in every photo how expressive she is, with every movement filled with emotion.",
     blocks: [
       {
-        blocks: [
+        type: "stacked",
+        imageUrls: [
           "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0034.jpg",
           "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0036.jpg",
           "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0037.jpg",
@@ -748,7 +751,7 @@ const galleryData = [
     name: "Pacific Coast Rocks ",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/landscapes/colorful-rocks/DSCF1412.jpg`,
     slug: "rocks",
-    description: "The pacific coast highway is one long stretch of beautiful surprises. I found these colorful rocks on a random beach along the coast.",
+    description: "The Pacific Coast Highway (Highway 1) is easily one of the most beautiful roads in the world, with unexpected surprises. I stumbled upon these colorful rocks on a random beach along the coast. Have you ever seen rocks having so much color?",
     blocks: [
       {
         type: "stacked",
@@ -801,6 +804,7 @@ const galleryData = [
       youtubeLinks: ["https://www.youtube.com/watch?v=mVsmFCgxc1o"],
       layout: "film-single",
     },
+    isHidden: true,
   },
   {
     name: "Nava Rasa",
