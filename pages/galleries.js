@@ -66,7 +66,7 @@ const galleryData = [
   {
     name: "Arizona",
     description: "Over Christmas break, I went to Arizona and Utah with friends—Antelope Canyon, Grand Canyon, Monument Valley, and Sedona. It blows my mind that I lived in Arizona for 12 years and never visited Page. The landscapes were absolutely stunning.",
-    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503758.jpg",
+    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503758.jpg?width=1100&quality=85",
     slug: "arizona",
     blocks: [
       {
@@ -725,10 +725,7 @@ const galleryData = [
     description: "Sudha's fundraiser dance performance for Access Braille",
     blocks: [
       {
-        type: "stacked",
-        imageUrls: [
-          "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0041.jpg",
-          "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0032.jpg",
+        blocks: [
           "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0034.jpg",
           "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0036.jpg",
           "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha/DSC_0037.jpg",
