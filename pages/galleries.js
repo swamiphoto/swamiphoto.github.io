@@ -367,7 +367,7 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=puOnVzlkrQM"],
-      layout: "film-stack",
+      layout: "kenburns",
       duration: 5000,
     },
     enableClientView: true,
