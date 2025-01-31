@@ -47,9 +47,21 @@ const galleryData = [
     slug: "naga-sunflowers",
     blocks: [
       {
+        type: "stacked",
+        imagesFolderUrl: "portraits/naga-sunflowers",
+        start: 0,
+        count: 2,
+      },
+      {
         type: "photo",
         imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500795-Edit-Edit.jpg",
-        variant: 2,
+        variant: 1,
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "portraits/naga-sunflowers",
+        start: 3,
+        count: 2,
       },
       {
         type: "photo",
@@ -59,7 +71,35 @@ const galleryData = [
       {
         type: "stacked",
         imagesFolderUrl: "portraits/naga-sunflowers",
-        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500795-Edit-Edit.jpg", "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500885-Edit-Edit.jpg"],
+        start: 6,
+        count: 4,
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "portraits/naga-sunflowers",
+        start: 10,
+        count: 12,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501135-Edit-Edit.jpg",
+        variant: 2,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501124-Edit.jpg",
+        variant: 2,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501135-Edit.jpg",
+        variant: 1,
+      },
+      {
+        type: "stacked",
+        imagesFolderUrl: "portraits/naga-sunflowers",
+        start: 25,
+        count: -1,
       },
     ],
     enableSlideshow: true,

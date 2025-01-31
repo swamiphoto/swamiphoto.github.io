@@ -4,28 +4,61 @@ import Gallery from "../../components/image-displays/gallery/Gallery";
 import { fetchImageUrls } from "../../common/images";
 import Head from "next/head";
 import { galleryData } from "../galleries";
-import router from "next/router";
+import { useRouter } from "next/router";
+import AdminGallery from "../../components/image-displays/gallery/admin-gallery/AdminGallery";
 
 const SingleGallery = ({ gallerySlug, gallery }) => {
   const [filteredBlocks, setFilteredBlocks] = useState([]);
   const [clientView, setClientView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [fetchedUrlsCache, setFetchedUrlsCache] = useState({});
+  const router = useRouter();
+  const isAdmin = router.query.admin !== undefined;
+
+  // Add console log to debug
+  console.log("Admin view:", isAdmin);
+  console.log("Gallery data:", gallery);
 
   useEffect(() => {
     const processBlocks = async () => {
       const processedBlocks = await Promise.all(
         gallery.blocks.map(async (block) => {
           if (block.type === "stacked" || block.type === "masonry") {
-            let imageUrls = block.imageUrls || [];
+            let imageUrls = [...(block.imageUrls || [])]; // Create a new array to avoid mutations
 
             // Fetch image URLs if the folder URL is provided
             if (block.imagesFolderUrl) {
-              const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
-              imageUrls = fetchedUrls;
+              // Check cache first
+              if (!fetchedUrlsCache[block.imagesFolderUrl]) {
+                const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
+                // Sort URLs alphabetically and ensure we create a new array
+                const sortedUrls = Array.from(fetchedUrls).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+                // Update cache
+                setFetchedUrlsCache((prev) => ({
+                  ...prev,
+                  [block.imagesFolderUrl]: sortedUrls,
+                }));
+                imageUrls = sortedUrls;
+              } else {
+                // Use cached URLs and ensure we sort them again
+                imageUrls = [...fetchedUrlsCache[block.imagesFolderUrl]].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+              }
+            } else {
+              // If we have direct imageUrls, sort them too for consistency
+              imageUrls = imageUrls.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
             }
 
-            // Apply filtering for protected images and excluded images
+            // First apply start and count filtering
+            if (typeof block.start === "number") {
+              if (block.count === -1) {
+                imageUrls = imageUrls.slice(block.start);
+              } else if (typeof block.count === "number") {
+                imageUrls = imageUrls.slice(block.start, block.start + block.count);
+              }
+            }
+
+            // Then apply protected and excluded filtering
             const filteredUrls = imageUrls.filter((url) => {
               const isProtected = clientView ? true : !url.includes("protected");
               const isExcluded = block.excludeImageUrls?.includes(url);
@@ -35,7 +68,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
             return { ...block, imageUrls: filteredUrls };
           }
 
-          // Return other block types (e.g., text) unmodified
+          // Return other block types unmodified
           return block;
         })
       );
@@ -44,7 +77,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
     };
 
     processBlocks();
-  }, [gallery.blocks, clientView]);
+  }, [gallery.blocks, clientView, fetchedUrlsCache]);
 
   const handleClientLogin = () => {
     const decryptedPassword = gallery.clientSettings?.clientLogin || "";
@@ -84,6 +117,16 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
     );
   };
 
+  if (isAdmin) {
+    // Add error boundary
+    try {
+      return <AdminGallery gallery={gallery} />;
+    } catch (error) {
+      console.error("Error in AdminGallery:", error);
+      return <div>Error loading admin view</div>;
+    }
+  }
+
   return (
     <>
       <Head>
@@ -111,7 +154,7 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
       <Gallery
         name={gallery.name}
         description={gallery.description}
-        blocks={filteredBlocks} // Pass filtered blocks to Gallery
+        blocks={filteredBlocks}
         enableSlideshow={gallery.enableSlideshow}
         enableClientView={gallery.enableClientView}
         onBackClick={() => router.push("/galleries")}
