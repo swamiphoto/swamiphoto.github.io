@@ -273,11 +273,19 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "Naga/Bharath were heading back home, and I needed to get to Phoenix. My friend Suhrid was kind enough to drive two hours to pick me up. The evening was gorgeous, so we took a few shots of him and his mom. See how the rocks glow like gold!",
+        content:
+          "Naga and Bharath were headed back home, and I needed to get to Phoenix. I called Suhrid to pick me—only an old friend would be foolish enough to drive two hours to get me. The evening was absolutely gorgeous, so we took a few shots of him and his mom. Just look at how the rocks glow like gold!",
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/sedona2/AR504508-Edit.jpg",
+        variant: 2,
+        caption: "Suhrid and I go way back—we went to the same high school in Malawi, were neighbors there, and later became roommates in college at ASU.",
       },
       {
         type: "stacked",
         imagesFolderUrl: "landscapes/arizona/sedona2",
+        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/sedona2/AR504508-Edit.jpg"],
       },
     ],
     enableSlideshow: true,
