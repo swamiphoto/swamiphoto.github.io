@@ -291,14 +291,14 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
       )}
 
       {isMobile && !isModalOpen && (
-        <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white bg-opacity-90 border-b border-gray-100 z-50">
+        <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-black bg-opacity-90 border-b border-gray-800 z-50">
           <div className="flex items-center space-x-4">
-            <HiOutlineArrowLeft className="hover:text-red-500 cursor-pointer" size={20} onClick={() => router.replace("/galleries")} />
-            {slideshowPlaying ? <HiOutlinePause className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <HiOutlinePlay className="hover:text-red-500 cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
+            <HiOutlineArrowLeft className="text-gray-500 hover:text-white cursor-pointer" size={20} onClick={() => router.replace("/galleries")} />
+            {slideshowPlaying ? <HiOutlinePause className="text-gray-500 hover:text-white cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} /> : <HiOutlinePlay className="text-gray-500 hover:text-white cursor-pointer" size={24} onClick={handlePlayPauseSlideshow} />}
           </div>
 
-          <div className="ml-auto flex space-x-4 text-sm">
-            <button className="hover:text-red-500 cursor-pointer" onClick={() => router.push(`/galleries/${slug}`)}>
+          <div className="ml-auto flex space-x-4 text-sm text-gray-400">
+            <button className="hover:text-white cursor-pointer" onClick={() => router.push(`/galleries/${slug}`)}>
               View Gallery
             </button>
           </div>
