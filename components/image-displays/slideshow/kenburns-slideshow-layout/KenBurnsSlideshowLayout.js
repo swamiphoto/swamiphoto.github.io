@@ -8,15 +8,17 @@ const KenBurnsSlideshowLayout = ({ slides, currentImageIndex, transitioning, asp
   const imageSlides = slides.filter((slide) => slide.type === "image");
 
   return (
-    <div className={styles["kenburns-container"]}>
+    <div className={`${styles["kenburns-container"]} bg-black`}>
       {slides.map((slide, index) => {
         if (slide.type === "text") {
           // Render text slide
           return (
-            <div key={index} className={`${styles["kenburns-text"]} ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
-              <div className="flex justify-center items-center h-full bg-white">
+            <div key={index} className={`${styles["kenburns-text"]} bg-black text-white ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
+              <div className="flex justify-center items-center h-full">
                 <div className={`max-w-3xl px-4 ${styles["kenburns-zoom-text"]}`}>
-                  <Text layout="layout2">{slide.content}</Text>
+                  <Text layout="layout2" color="white">
+                    {slide.content}
+                  </Text>
                 </div>
               </div>
             </div>
