@@ -127,7 +127,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "It was winter, so we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow during our 10:30 a.m. tour. But we got lucky—the canyons were incredibly vibrant!",
+        content: "It was winter, so we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow during our 10:30 a.m. tour. But we got lucky—the canyons were so vibrant!",
         variant: 1,
       },
       {
