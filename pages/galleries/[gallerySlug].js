@@ -25,50 +25,48 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
       const processedBlocks = await Promise.all(
         gallery.blocks.map(async (block) => {
           if (block.type === "stacked" || block.type === "masonry") {
-            let imageUrls = [...(block.imageUrls || [])]; // Create a new array to avoid mutations
+            // Create a stable reference for imageUrls
+            const baseImageUrls = block.imageUrls || [];
+            let imageUrls;
 
             // Fetch image URLs if the folder URL is provided
             if (block.imagesFolderUrl) {
               // Check cache first
-              if (!fetchedUrlsCache[block.imagesFolderUrl]) {
+              const cachedUrls = fetchedUrlsCache[block.imagesFolderUrl];
+              if (!cachedUrls) {
                 const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
-                // Sort URLs alphabetically and ensure we create a new array
-                const sortedUrls = Array.from(fetchedUrls).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-                // Update cache
+                // Create a stable sorted array
+                const sortedUrls = [...fetchedUrls].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+                // Update cache with the sorted array
                 setFetchedUrlsCache((prev) => ({
                   ...prev,
                   [block.imagesFolderUrl]: sortedUrls,
                 }));
                 imageUrls = sortedUrls;
               } else {
-                // Use cached URLs and ensure we sort them again
-                imageUrls = [...fetchedUrlsCache[block.imagesFolderUrl]].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+                // Use cached URLs directly (they're already sorted)
+                imageUrls = cachedUrls;
               }
             } else {
-              // If we have direct imageUrls, sort them too for consistency
-              imageUrls = imageUrls.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+              // Sort direct imageUrls
+              imageUrls = [...baseImageUrls].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
             }
 
-            // First apply start and count filtering
+            // Apply pagination if needed
             if (typeof block.start === "number") {
-              if (block.count === -1) {
-                imageUrls = imageUrls.slice(block.start);
-              } else if (typeof block.count === "number") {
-                imageUrls = imageUrls.slice(block.start, block.start + block.count);
-              }
+              imageUrls = block.count === -1 ? imageUrls.slice(block.start) : imageUrls.slice(block.start, block.start + block.count);
             }
 
-            // Then apply protected and excluded filtering
-            const filteredUrls = imageUrls.filter((url) => {
-              const isProtected = clientView ? true : !url.includes("protected");
-              const isExcluded = block.excludeImageUrls?.includes(url);
-              return isProtected && !isExcluded;
-            });
-
-            return { ...block, imageUrls: filteredUrls };
+            // Apply protection and exclusion filters
+            return {
+              ...block,
+              imageUrls: imageUrls.filter((url) => {
+                const isProtected = clientView ? true : !url.includes("protected");
+                const isExcluded = block.excludeImageUrls?.includes(url);
+                return isProtected && !isExcluded;
+              }),
+            };
           }
-
-          // Return other block types unmodified
           return block;
         })
       );
