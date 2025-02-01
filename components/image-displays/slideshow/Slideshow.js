@@ -21,6 +21,8 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [showControls, setShowControls] = useState(true);
+  const hideControlsTimeout = useRef(null);
 
   const playerRef = useYouTubePlayer(youtubeUrl ? youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0] : "", setIsPlayerReady);
   const slideshowInterval = useRef(null);
@@ -188,6 +190,27 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
     }
   };
 
+  // Function to show controls and reset hide timeout
+  const handleMouseMovement = () => {
+    setShowControls(true);
+    if (hideControlsTimeout.current) {
+      clearTimeout(hideControlsTimeout.current);
+    }
+    hideControlsTimeout.current = setTimeout(() => {
+      setShowControls(false);
+    }, 5000); // Hide controls after 5 seconds of inactivity
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMovement);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMovement);
+      if (hideControlsTimeout.current) {
+        clearTimeout(hideControlsTimeout.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* For Mobile Version */}
@@ -288,7 +311,7 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
       </main>
 
       {!isMobile && (
-        <div className="fixed top-4 left-4 flex items-center space-x-4 bg-white bg-opacity-80 p-3 shadow-md rounded-lg z-50">
+        <div className={`fixed top-4 left-4 flex items-center space-x-4 bg-white bg-opacity-80 p-3 shadow-md rounded-lg z-50 transition-opacity duration-1000 ${showControls ? "opacity-100" : "opacity-0"}`}>
           <HiOutlineArrowLeft
             className="hover:text-red-500 cursor-pointer"
             size={24}
