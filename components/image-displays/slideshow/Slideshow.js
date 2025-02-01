@@ -267,7 +267,7 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
 
             {/* Right 1/3: Text and button */}
             <div className="w-1/3 h-full p-10 pr-16 flex flex-col justify-center items-start text-left">
-              <h2 className="text-5xl font-semibold mb-4">{title}</h2>
+              <h2 className="text-5xl font-serif2 mb-4">{title}</h2>
               <p className="text-xl text-gray-600 mb-6">{subtitle}</p>
 
               {/* Styled button to start slideshow and dismiss modal */}

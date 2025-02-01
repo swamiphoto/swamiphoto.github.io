@@ -5,7 +5,7 @@ const GalleryCover = ({ name, description, enableSlideshow = false, enableClient
   return (
     <div className="relative flex flex-col items-center justify-center text-gray-900 p-4 pb-10 md:p-20">
       <div className="text-center px-6">
-        {name && <h1 className="text-4xl md:text-6xl font-bold mb-4">{name}</h1>}
+        {name && <h1 className="text-4xl md:text-6xl font-serif2 mb-4">{name}</h1>}
         {description && <p className="text-lg md:text-xl max-w-xl mx-auto mb-6">{description}</p>}
 
         <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-4 space-y-4 sm:space-y-0 mt-6 w-full sm:w-auto">

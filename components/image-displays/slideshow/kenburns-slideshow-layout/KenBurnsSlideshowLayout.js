@@ -15,9 +15,9 @@ const KenBurnsSlideshowLayout = ({ slides, currentImageIndex, transitioning, asp
           return (
             <div key={index} className={`${styles["kenburns-text"]} bg-black text-white ${index === currentImageIndex ? (transitioning ? styles["kenburns-slide-out"] : styles["kenburns-visible"]) : styles["kenburns-hidden"]}`}>
               <div className="flex justify-center items-center h-full">
-                <div className={`max-w-3xl px-4 ${styles["kenburns-zoom-text"]}`}>
+                <div className={`max-w-3xl px-4 ${styles["kenburns-zoom-text"]} font-serif2`}>
                   <Text layout="layout2" color="white">
-                    {slide.content}
+                    <span className="drop-cap">{slide.content}</span>
                   </Text>
                 </div>
               </div>

@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
 
         <meta property="og:type" content="website" />
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.typekit.net/kbh3pjg.css"></link>
       </Head>
 
       <div className="App text-center">

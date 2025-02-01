@@ -93,7 +93,7 @@ const Home = () => {
                   .
                 </p>
               </div>
-              <button onClick={handleButtonClick} className="px-8 py-4 bg-white text-black opacity-75 hover:opacity-95 text-3xl tracking-wider cursor-pointer">
+              <button onClick={handleButtonClick} className="px-8 py-4 bg-white text-black opacity-75 hover:opacity-95 text-3xl tracking-wider cursor-pointer font-serif2">
                 View My Work
               </button>
             </div>

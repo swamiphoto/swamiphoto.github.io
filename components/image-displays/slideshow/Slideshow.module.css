@@ -46,3 +46,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.drop-cap::first-letter {
+  font-size: 3em;
+  font-weight: bold;
+  float: left;
+  margin-right: 0.1em;
+  line-height: 1;
+}

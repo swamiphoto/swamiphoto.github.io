@@ -16,7 +16,7 @@ const TextLayout1 = ({ children, color }) => (
 const TextLayout2 = ({ children, color }) => (
   <div className="flex justify-center items-center h-auto py-16">
     <div className="text-2xl md:text-4xl max-w-3xl px-4">
-      <blockquote className="my-10 leading-8 tracking-tight sm:leading-10">{children}</blockquote>
+      <blockquote className="my-10 leading-10 tracking-tight sm:leading-10">{children}</blockquote>
       <WiggleLine color={color} />
     </div>
   </div>
