@@ -284,6 +284,7 @@ const galleryData = [
     showCover: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=IvoAT-5HKwM"],
+      musicCredits: ["Music: Eléana by Richard Clayderman"],
       layout: "kenburns",
     },
   },

@@ -11,7 +11,7 @@ import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlidesh
 import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug }) => {
+const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, musicCredits = [] }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -23,6 +23,7 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [showControls, setShowControls] = useState(true);
   const hideControlsTimeout = useRef(null);
+  const [currentMusicCredit, setCurrentMusicCredit] = useState("");
 
   const playerRef = useYouTubePlayer(youtubeUrl ? youtubeUrl.split("v=")[1] || youtubeUrl.split("/").pop().split("?")[0] : "", setIsPlayerReady);
   const slideshowInterval = useRef(null);
@@ -184,7 +185,7 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
       case "film-single":
         return <FilmSingleSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
       case "kenburns":
-        return <KenBurnsSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} hideCaptionsOnMobile={hideCaptionsOnMobile} />;
+        return <KenBurnsSlideshowLayout slides={slides} currentImageIndex={currentSlideIndex} transitioning={transitioning} aspectRatios={aspectRatios} hideCaptionsOnMobile={hideCaptionsOnMobile} currentMusicCredit={currentMusicCredit} />;
       default:
         return null;
     }
@@ -210,6 +211,12 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (musicCredits.length > 0) {
+      setCurrentMusicCredit(musicCredits[0]);
+    }
+  }, [musicCredits]);
 
   return (
     <div className="flex h-screen overflow-hidden">

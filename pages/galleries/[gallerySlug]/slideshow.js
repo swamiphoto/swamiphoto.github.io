@@ -53,7 +53,7 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   }
 
   const { slideshowSettings = {} } = gallery;
-  const { layout = "kenburns", youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU"], customDurations = {}, duration = 10000, captions = {}, coverImageIndex = 0 } = slideshowSettings;
+  const { layout = "kenburns", youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU"], customDurations = {}, duration = 10000, captions = {}, coverImageIndex = 0, musicCredits = [] } = slideshowSettings;
 
   // Render admin view if ?admin is present in the query string
   if (isAdminView) {
@@ -75,7 +75,18 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
       </Head>
 
       {imagesLoaded ? (
-        <Slideshow slides={slides} layout={layout} title={gallery.name} subtitle={gallery.description} youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]} customDurations={customDurations} duration={duration} thumbnailUrl={gallery.thumbnailUrl} slug={gallerySlug} />
+        <Slideshow
+          slides={slides}
+          layout={layout}
+          title={gallery.name}
+          subtitle={gallery.description}
+          youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
+          customDurations={customDurations}
+          duration={duration}
+          thumbnailUrl={gallery.thumbnailUrl}
+          slug={gallerySlug}
+          musicCredits={musicCredits}
+        />
       ) : (
         <Loading />
       )}
