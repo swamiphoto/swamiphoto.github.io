@@ -175,7 +175,7 @@ const galleryData = [
       {
         type: "text",
         content:
-          "Monument Valley feels like a different planet. The landscape is so vast. Wild west movies were filmed here, and it’s easy to see why. The View Hotel has amazing views of the valley, and we were wishing that we could have stayed there to see the buttes and mesas glowing in the morning light.",
+          "Monument Valley feels like a different planet. The landscape is so vast. Wild west movies were filmed here, and it’s easy to see why. The View Hotel has amazing views of the valley, and we were wishing we could have stayed there to see the buttes and mesas glowing in the morning light.",
       },
       {
         type: "photo",
@@ -875,13 +875,32 @@ const galleryData = [
       {
         type: "stacked",
         imagesFolderUrl: "portraits/sudha-navarasa",
+        start: 0,
+        count: 4,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503441-Edit-2-2.jpg",
+        variant: 1,
+      },
+      {
+        type: "stacked",
+        imagesFolderUrl: "portraits/sudha-navarasa",
+        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503551-Edit-Edit.jpg", "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503441-Edit-2-2.jpg"],
+        start: 4,
+        count: -1,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503551-Edit-Edit.jpg",
+        variant: 1,
       },
     ],
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=OBUauvQLrQQ"],
     },
-    isHiddem: true,
+    //isHidden: true,
   },
 ];
 
