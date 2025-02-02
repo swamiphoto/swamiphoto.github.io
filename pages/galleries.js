@@ -3,6 +3,7 @@ import Link from "next/link"; // Next.js client-side routing
 import Hero from "../components/hero/Hero";
 import { bucketUrl, getCloudimageUrl } from "../common/images";
 import Head from "next/head";
+import { type } from "@testing-library/user-event/dist/type";
 
 const galleryData = [
   {
@@ -20,6 +21,51 @@ const galleryData = [
       {
         type: "masonry",
         imagesFolderUrl: "portraits/sunol",
+        start: 0,
+        count: 11,
+        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501496.jpg"],
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501496.jpg",
+      },
+      {
+        type: "stacked",
+        imagesFolderUrl: "portraits/sunol",
+        start: 11,
+        count: 10,
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "portraits/sunol",
+        start: 21,
+        count: 9,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501702.jpg",
+        variant: 2,
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501814.jpg",
+        variant: 1,
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "portraits/sunol",
+        start: 30,
+        count: -1,
+        excludeImageUrls: [
+          "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501702.jpg",
+          "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501814.jpg",
+          "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501721.jpg",
+          "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501832.jpg",
+        ],
+      },
+      {
+        type: "stacked",
+        imageUrls: ["https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501721.jpg", "https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501832.jpg"],
       },
     ],
     showCover: true,
