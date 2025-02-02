@@ -79,7 +79,7 @@ const About = () => {
           </p>
 
           <p>
-            Being a full-time engineer with side hustles and multiple hobbies, I’ve had to learn the hard way how to manage my time effectively. I share these lessons on my{" "}
+            Being a full-time engineer with side hustles and multiple hobbies, I’ve had to learn the hard way how to manage my time effectively. I share these lessons in my{" "}
             <a href="https://swamiphoto.substack.com/s/productivity" target="_blank" rel="noopener noreferrer">
               newsletter
             </a>
