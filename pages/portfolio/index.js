@@ -134,7 +134,7 @@ const Portfolio = () => {
               </div>
               <div className="md:w-1/3 flex flex-col justify-center p-10 text-left">
                 <Link href={category.link} className="no-underline hover:opacity-75 transition-opacity duration-300">
-                  <h2 className="text-3xl md:text-5xl font-bold mb-4 no-underline">{category.name}</h2>
+                  <h2 className="text-3xl md:text-5xl font-serif2 mb-4 no-underline">{category.name}</h2>
                   <p className="text-xl no-underline">{category.description}</p>
                 </Link>
               </div>

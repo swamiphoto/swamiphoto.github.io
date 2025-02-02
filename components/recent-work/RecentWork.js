@@ -6,7 +6,7 @@ import SectionHeader from "../section-header/SectionHeader";
 const RecentWork = () => {
   return (
     <section className="py-12">
-      <SectionHeader title="Recent Work" description="Here's some of my latest work" />
+      <SectionHeader title="Recent Work" description="Here are some pictures I took in the last year" />
 
       <Photo src="https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500885-Edit-Edit.jpg" caption="Sunflowers with Naga" />
 
