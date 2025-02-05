@@ -950,7 +950,7 @@ const galleryData = [
   },
   {
     name: "Nanna",
-    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/DSC_2663-Enhanced-NR.jpg`,
+    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/DSC_2663-Enhanced-NR.jpg?width=1100&quality=85",
     slug: "nanna75",
     description: "Here’s a cherished collection of black-and-white photographs we gathered for Nanna’s 75th birthday video.",
     blocks: [
