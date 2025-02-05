@@ -948,6 +948,44 @@ const galleryData = [
     },
     //isHidden: true,
   },
+  {
+    name: "Nanna",
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/DSC_2663-Enhanced-NR.jpg`,
+    slug: "nanna75",
+    description: "Here’s a cherished collection of black-and-white photographs we gathered for Nanna’s 75th birthday video.",
+    blocks: [
+      {
+        type: "stacked",
+        imagesFolderUrl: "events/naga-dad-75th-bday",
+        start: 0,
+        count: 5,
+        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/DSC_2655-Enhanced-NR.jpg"],
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/DSC_2655-Enhanced-NR.jpg",
+        variant: 1,
+      },
+      {
+        type: "masonry",
+        imagesFolderUrl: "events/naga-dad-75th-bday",
+        start: 5,
+        count: 4,
+      },
+      {
+        type: "stacked",
+        imagesFolderUrl: "events/naga-dad-75th-bday",
+        start: 9,
+        count: -1,
+      },
+    ],
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=JlgkMXex2DI"],
+      layout: "kenburns",
+    },
+    isHidden: true,
+  },
 ];
 
 //the gallery stack look
