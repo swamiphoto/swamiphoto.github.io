@@ -981,7 +981,7 @@ const galleryData = [
     ],
     enableSlideshow: true,
     slideshowSettings: {
-      youtubeLinks: ["https://www.youtube.com/watch?v=JlgkMXex2DI"],
+      youtubeLinks: ["https://www.youtube.com/watch?v=5bnUXHKB-CY"],
       layout: "kenburns",
     },
     isHidden: true,
