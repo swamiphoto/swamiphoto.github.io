@@ -87,7 +87,7 @@ const About = () => {
             <a href="https://qtr.ai" target="_blank" rel="noopener noreferrer">
               QTR
             </a>
-            . It's a time management app that helps you achieve in 13 weeks what most people can't in a year.
+            . It's a time management app that helps you achieve in 13 weeks what most people struggle to achieve in a year.
           </p>
 
           <p>Thanks for stopping by. Hope you find something here that inspires you!</p>
