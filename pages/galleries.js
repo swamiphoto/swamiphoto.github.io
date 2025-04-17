@@ -303,6 +303,16 @@ const galleryData = [
         count: 4,
       },
       {
+        type: "text",
+        content: "A mini film stitched together from random phone clips. I think the kids will enjoy looking back on this when they're older. Wish I had something like this with my mom.",
+      },
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/wRWx1mJap14",
+        caption: "A Mother's Love",
+        variant: 2,
+      },
+      {
         type: "masonry",
         imagesFolderUrl: "portraits/naga-sunflowers",
         start: 10,
@@ -326,8 +336,18 @@ const galleryData = [
       {
         type: "stacked",
         imagesFolderUrl: "portraits/naga-sunflowers",
+        excludeImageUrls: ["https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501150.jpg"],
         start: 25,
         count: -1,
+      },
+      {
+        type: "text",
+        content: "With the last bit of light remaining, Naga put her photography skills to the test.",
+      },
+      {
+        type: "photo",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR501150.jpg",
+        variant: 2,
       },
     ],
     enableSlideshow: true,
