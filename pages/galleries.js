@@ -1035,9 +1035,9 @@ const galleryData = [
   },
   {
     name: "Bharath's Family",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/bharath-family/AR505965.jpg?width=1100&quality=85`,
     slug: "bharath-family",
-    description: "Portraits of Bharath's family, his brother's family, and his mom.",
+    description: "A fun, slightly chaotic evening shoot outside Naga and Bharath’s place—with his mom and brother’s family. Cranky kids, jet-lagged, dodging passing cars while we squeezed every last drop of light. Worth every bit of the madness—for family!",
     blocks: [
       {
         type: "stacked",
