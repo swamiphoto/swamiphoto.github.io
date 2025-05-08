@@ -3,7 +3,6 @@ import Link from "next/link"; // Next.js client-side routing
 import Hero from "../components/hero/Hero";
 import { bucketUrl, getCloudimageUrl } from "../common/images";
 import Head from "next/head";
-import { type } from "@testing-library/user-event/dist/type";
 
 const galleryData = [
   {
@@ -25,7 +24,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "It was winter, so we knew we wouldn’t see the famous light rays beaming into the canyons. We also weren’t sure if it would be bright enough for the canyons to glow during our 10:30 a.m. tour. But we got lucky—the canyons were so vibrant!",
+        content: "It was winter, so we knew we wouldn't see the famous light rays beaming into the canyons. We also weren't sure if it would be bright enough for the canyons to glow during our 10:30 a.m. tour. But we got lucky—the canyons were so vibrant!",
         variant: 1,
       },
       {
@@ -52,7 +51,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "I’m hardly on the other side of the camera, but Naga and Bharath insisted on taking my pictures—and I’m so glad they did. I love how these turned out!",
+        content: "I'm hardly on the other side of the camera, but Naga and Bharath insisted on taking my pictures—and I'm so glad they did. I love how these turned out!",
       },
       {
         type: "stacked",
@@ -67,13 +66,13 @@ const galleryData = [
         type: "photo",
         imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503820-Edit-2.jpg",
         caption:
-          "Horseshoe Bend was just 15 minutes from our Airbnb, but we left a bit late after spending the afternoon chatting. Naga and Bharath dropped me off at the parking lot, and I took off running—with my camera backpack and tripod (not something I’d recommend)—to the viewpoint, making it just in time to catch the last bit of light.",
+          "Horseshoe Bend was just 15 minutes from our Airbnb, but we left a bit late after spending the afternoon chatting. Naga and Bharath dropped me off at the parking lot, and I took off running—with my camera backpack and tripod (not something I'd recommend)—to the viewpoint, making it just in time to catch the last bit of light.",
         variant: 1,
       },
       {
         type: "text",
         content:
-          "Monument Valley feels like a different planet. The landscape is so vast. Wild west movies were filmed here, and it’s easy to see why. The View Hotel has amazing views of the valley, and we were wishing we could have stayed there to see the buttes and mesas glowing in the morning light.",
+          "Monument Valley feels like a different planet. The landscape is so vast. Wild west movies were filmed here, and it's easy to see why. The View Hotel has amazing views of the valley, and we were wishing we could have stayed there to see the buttes and mesas glowing in the morning light.",
       },
       {
         type: "photo",
@@ -107,7 +106,7 @@ const galleryData = [
       },
       {
         type: "text",
-        content: "The Grand Canyon is not easy to capture. The landscape is so grand and three dimensional, it’s difficult to convey the grandness through a photo. I’ve been there several times and don’t really have a great photo still. I took portraits instead. ",
+        content: "The Grand Canyon is not easy to capture. The landscape is so grand and three dimensional, it's difficult to convey the grandness through a photo. I've been there several times and don't really have a great photo still. I took portraits instead. ",
       },
       {
         type: "photo",
@@ -365,7 +364,7 @@ const galleryData = [
   {
     name: "Beautiful California",
     description:
-      "I don’t think there’s anywhere quite like California. We have just about every landscape you can imagine—from jaw-dropping coastlines and rolling golden hills to vineyards, deserts, redwoods, and not to forget, Karl the Fog. This gallery is a collection of the landscapes that make me appreciate just how special this place is.",
+      "I don't think there's anywhere quite like California. We have just about every landscape you can imagine—from jaw-dropping coastlines and rolling golden hills to vineyards, deserts, redwoods, and not to forget, Karl the Fog. This gallery is a collection of the landscapes that make me appreciate just how special this place is.",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
     slug: "california",
     blocks: [
@@ -439,7 +438,7 @@ const galleryData = [
     name: "Anagha at Adobe Lodge",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg?width=500&quality=80`,
     slug: "anagha-family",
-    description: "This was my first shoot with Anagha. She was barely one, but she already had a million-dollar smile. Now, she’s ten and still has that same smile, and I love showing her these photos. This is why I love portrait photography.",
+    description: "This was my first shoot with Anagha. She was barely one, but she already had a million-dollar smile. Now, she's ten and still has that same smile, and I love showing her these photos. This is why I love portrait photography.",
     blocks: [
       {
         type: "stacked",
@@ -483,7 +482,7 @@ const galleryData = [
     name: "Sathya",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5614.jpg?width=500&quality=80`,
     slug: "sathya",
-    description: "This was my first shoot with Sathya, who was just one at the time—chubby, cute, and full of the most adorable expressions. Now he’s seven, a handsome young boy, and we hang out playing cards and soccer together. It’s amazing to see how much he’s grown!",
+    description: "This was my first shoot with Sathya, who was just one at the time—chubby, cute, and full of the most adorable expressions. Now he's seven, a handsome young boy, and we hang out playing cards and soccer together. It's amazing to see how much he's grown!",
     blocks: [
       {
         type: "stacked",
@@ -506,7 +505,7 @@ const galleryData = [
     name: "Sathya at Two",
     thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg?width=500&quality=80`,
     slug: "young-boy-sathya",
-    description: "This was Sathya’s second shoot, at two years old. He was so full of energy, running around non-stop, and this gallery captures some adorable mother-and-child moments. Sathya’s uncle and aunt also joined in, making it a fun family outing.",
+    description: "This was Sathya's second shoot, at two years old. He was so full of energy, running around non-stop, and this gallery captures some adorable mother-and-child moments. Sathya's uncle and aunt also joined in, making it a fun family outing.",
     blocks: [
       {
         type: "stacked",
@@ -726,20 +725,13 @@ const galleryData = [
       },
     ],
     texts: {
-      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let\'s give it a shot."',
+      1: "It was 2017. I got a call from Naga. She said, 'I love your photos! Can we do a maternity shoot?' I'd never done one before. I said, 'sure, let's give it a shot.'",
       3: "We met at Stanford, and Naga was glowing. Bharath was visibly excited. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
-      6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn\'t even seen the images yet but trusted me.',
+      6: "After the shoot, Naga asked me, 'Can we book you for 3, 6, and 9-month shoots?' She hadn't even seen the images yet but trusted me.",
       8: "Sathya was born. We did a shoot soon after at Adobe lodge. Sathya was a natural...he was so comfortable in front of the camera.",
       24: "Naga loves wisterias. We found a bunch and took a shot. Coz, why not.",
       26: "Sathya turned two, and it was time for another shoot. This time, we chose a spot near the Japanese gardens in San Jose.",
       43: "Sriman was born. It was peak of Covid, but we decided on a shoot at Mt. Diablo.",
-      50: "A few months later, we did another shoot, this time at their home. Sriman looked so adorable in traditional attire!",
-      63: "What's a photoshoot without some naked baby shots?",
-      65: "Some of my favorite mother and son portraits. These aren't technically perfect—even the lighting isn't great...but, there's something about them I love. I think they remind me of me and my mom.",
-      70: "There's always time for a few couple and solo shots!",
-      75: "We'd talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
-      82: "Hope you enjoyed the show. This is what photography is to me. It's not the lighting, or the composition, or the gear. It's the connection. It's becoming a part of their journey.",
-      83: "Almost forgot...we did a lavender shoot too! It was the first time Mala and I took a trip after the lockdown.",
     },
     enableSlideshow: true,
     slideshowSettings: {
@@ -816,7 +808,7 @@ const galleryData = [
     name: "Katrina Kaif",
     thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/bollywood/katrina.jpeg`,
     slug: "katrinakaif",
-    description: "Katrina Kaif is one of Bollywood’s biggest stars, and it's easy to see why. She’s got the looks, the grace, and this playful energy that makes her a natural in front of the camera. She knows how to own the moment.",
+    description: "Katrina Kaif is one of Bollywood's biggest stars, and it's easy to see why. She's got the looks, the grace, and this playful energy that makes her a natural in front of the camera. She knows how to own the moment.",
     blocks: [
       {
         type: "stacked",
@@ -972,7 +964,7 @@ const galleryData = [
     name: "Nanna",
     thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/bw/DSC_2663-Enhanced-NR.jpg?width=1100&quality=85",
     slug: "nanna75",
-    description: "Here’s a cherished collection of black-and-white photographs we gathered for Nanna’s 75th birthday video.",
+    description: "Here's a cherished collection of black-and-white photographs we gathered for Nanna's 75th birthday video.",
     blocks: [
       {
         type: "masonry",
@@ -1037,6 +1029,24 @@ const galleryData = [
     enableSlideshow: true,
     slideshowSettings: {
       youtubeLinks: ["https://www.youtube.com/watch?v=Kpjo3Cxc_90"],
+      layout: "kenburns",
+    },
+    isHidden: true,
+  },
+  {
+    name: "Bharath's Family",
+    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg?width=500&quality=80`,
+    slug: "bharath-family",
+    description: "Portraits of Bharath's family, his brother's family, and his mom.",
+    blocks: [
+      {
+        type: "stacked",
+        imagesFolderUrl: "portraits/bharath-family",
+      },
+    ],
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=OhswLOVzXNc"],
       layout: "kenburns",
     },
     isHidden: true,
