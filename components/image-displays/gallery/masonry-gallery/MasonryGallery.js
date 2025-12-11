@@ -19,7 +19,7 @@ const MasonryGallery = ({ imageUrls = [] }) => {
           <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
             {imageUrls.length > 0 ? (
               imageUrls.map((image, index) => {
-                const imageUrl = getCloudimageUrl(image, { width: 800, quality: 80 });
+                const imageUrl = getCloudimageUrl(image, { width: 600, quality: 75 });
                 return (
                   <div key={index} className="mb-5">
                     <img src={imageUrl} alt={`Image ${index + 1}`} className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg rounded-3xl" onError={() => console.error("Image failed to load:", imageUrl)} onClick={() => handleImageClick(image, imageUrls, router)} />

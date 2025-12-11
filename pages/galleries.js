@@ -14,12 +14,12 @@ const galleryData = [
   {
     name: "Arizona",
     description: "Over Christmas break, I went to Arizona and Utah with friends—Antelope Canyon, Grand Canyon, Monument Valley, and Sedona. It blows my mind that I lived in Arizona for 12 years and never visited Page. The landscapes were absolutely stunning.",
-    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503758.jpg?width=1100&quality=85",
+    thumbnailUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/misc/AR503758.jpg",
     slug: "arizona",
     blocks: [
       {
         type: "photo",
-        imageUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503758.jpg?width=1100&quality=85",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503758.jpg",
         variant: 2,
       },
       {
@@ -29,7 +29,7 @@ const galleryData = [
       },
       {
         type: "photo",
-        imageUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503751.jpg?width=1100&quality=85",
+        imageUrl: "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/antelepe-canyon/AR503751.jpg",
         variant: 1,
       },
 
@@ -196,7 +196,7 @@ const galleryData = [
   {
     name: "Sunol Ridge",
     description: "I wanted to test my new Sigma 85mm portrait lens and asked Naga if she'd be my test model. We ended up hiking with her entire family and captured some shots after an hour-long hike up Sunol Ridge.",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sunol/AR501526.jpg`,
     slug: "naga-sunol",
     blocks: [
       {
@@ -270,7 +270,7 @@ const galleryData = [
   {
     name: "Sunflower Portraits",
     description: "A dreamy evening with the sunflowers in Woodland. We were at the tailend of the sunflower season and took a chance to drive a couple hours to see them, but the light was perfect and the flowers were still in bloom.",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500896.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sunflowers/AR500896.jpg`,
     slug: "naga-sunflowers",
     blocks: [
       {
@@ -365,7 +365,7 @@ const galleryData = [
     name: "Beautiful California",
     description:
       "I don't think there's anywhere quite like California. We have just about every landscape you can imagine—from jaw-dropping coastlines and rolling golden hills to vineyards, deserts, redwoods, and not to forget, Karl the Fog. This gallery is a collection of the landscapes that make me appreciate just how special this place is.",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/landscapes/california/AR501858.jpg`,
     slug: "california",
     blocks: [
       {
@@ -382,7 +382,7 @@ const galleryData = [
   },
   {
     name: "Lavender",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg`,
     slug: "naga-lavendar",
     description: "We took a drive an hour and a half north to photograph Naga's family in the beautiful lavender fields. Mala joined me, and it was our first time going out after the lockdown, which made the evening feel extra special and refreshing.",
     blocks: [
@@ -400,7 +400,7 @@ const galleryData = [
   },
   {
     name: "Japan",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/landscapes/japan/DSC00179-Edit-4.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/landscapes/japan/DSC00179-Edit-4.jpg`,
     slug: "japan",
     description:
       "I didn't take a whole lot of photos in Japan, as I was traveling with Mala. It was funny...I visited the temples and other sites twice: once early in the morning as a photographer avoiding crowds, and again later in the day with Mala for sightseeing. Two trips to each sight...and worth it!",
@@ -413,7 +413,7 @@ const galleryData = [
   },
   {
     name: "Anagha",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha/DSC_0068.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/anagha/DSC_0068.jpg`,
     slug: "anagha",
     description: "As another photographer friend put it, this is truly magical. Anagha looked absolutely adorable in her traditional attire and was such a joy to work with. She was a natural.",
     blocks: [
@@ -436,7 +436,7 @@ const galleryData = [
   },
   {
     name: "Anagha at Adobe Lodge",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/anagha2/DSC_1309-Edit.jpg`,
     slug: "anagha-family",
     description: "This was my first shoot with Anagha. She was barely one, but she already had a million-dollar smile. Now, she's ten and still has that same smile, and I love showing her these photos. This is why I love portrait photography.",
     blocks: [
@@ -458,7 +458,7 @@ const galleryData = [
   },
   {
     name: "Naga and Bharath",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-stanford/DSC_9221-Edit-Edit.jpg`,
     slug: "naga-bharath",
     description: "Naga was pregnant with Sathya, and this was their maternity shoot. They were so natural together, and their chemistry was incredible to capture. These shots remain some of my all-time favorites.",
     blocks: [
@@ -480,7 +480,7 @@ const galleryData = [
   },
   {
     name: "Sathya",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5614.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-adobe/DSC_5614.jpg`,
     slug: "sathya",
     description: "This was my first shoot with Sathya, who was just one at the time—chubby, cute, and full of the most adorable expressions. Now he's seven, a handsome young boy, and we hang out playing cards and soccer together. It's amazing to see how much he's grown!",
     blocks: [
@@ -503,7 +503,7 @@ const galleryData = [
   },
   {
     name: "Sathya at Two",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg`,
     slug: "young-boy-sathya",
     description: "This was Sathya's second shoot, at two years old. He was so full of energy, running around non-stop, and this gallery captures some adorable mother-and-child moments. Sathya's uncle and aunt also joined in, making it a fun family outing.",
     blocks: [
@@ -525,7 +525,7 @@ const galleryData = [
   },
   {
     name: "Mt. Diablo",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-diablo/DSC_4122.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-diablo/DSC_4122.jpg`,
     slug: "mtdiablo",
     description:
       "This was my first shoot with Sriman, just a few months old, and my first time capturing the brothers together. We chose countryside outfits for the kids, which matched well with the rolling hills. Despite the wind constantly knocking over my light stands (and Naga and Bharath graciously helping to hold them), it was all worth it!",
@@ -549,7 +549,7 @@ const galleryData = [
   },
   {
     name: "Traditional Baby",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-home/DSC_4265-2.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-home/DSC_4265-2.jpg`,
     slug: "traditional-baby",
     description:
       "We started this shoot outdoors, but it was cold for the baby. So we went home and did the rest of the shoot indoors. Sriman was so adorable in his traditional attire! Now he's four, and he still has the same adorable smile. Plenty of naked baby shots were taken, but of course Sriman wouldn't want them out here!",
@@ -573,7 +573,7 @@ const galleryData = [
   },
   {
     name: "Sai Suma",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit-Edit.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/saisuma/DSC_2769-Edit-Edit-2-Edit-Edit-Edit.jpg`,
     slug: "saisuma",
     description: "Sai is a photographer herself, but this time she was on the other side of the camera, pregnant with her first child, modeling for Chiffon and Spice. What started as a maternity shoot naturally turned into a mix of fashion and portrait shots.",
     blocks: [
@@ -596,7 +596,7 @@ const galleryData = [
   },
   {
     name: "Sathya and Ishuwar",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sathya-ishuwar/DSC_9082.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sathya-ishuwar/DSC_9082.jpg`,
     slug: "sathyaishuwar",
     description: "Ishuwar called me asking if I'd do a pre-wedding shoot for them. I said sure, and we met at Stanford, where Ishuwar was studying. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
     blocks: [
@@ -619,7 +619,7 @@ const galleryData = [
   },
   {
     name: "The Journey",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg?width=500&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-sanjose/_DSC0510.jpg`,
     slug: "naga-journey",
     description:
       "The first time I photographed Naga and Bharath, Naga was pregnant with Sathya. A couple of years later, I captured them again when Sathya was two. Then Sriman came along, and we added a few more memories to the collection. Now, Sathya is seven, and Sriman is four, and every time we meet, they are eager to play soccer with me. This is what I love about photography—I'm part of their journey!",
@@ -725,13 +725,20 @@ const galleryData = [
       },
     ],
     texts: {
-      1: "It was 2017. I got a call from Naga. She said, 'I love your photos! Can we do a maternity shoot?' I'd never done one before. I said, 'sure, let's give it a shot.'",
+      1: 'It was 2017. I got a call from Naga. She said, "I love your photos! Can we do a maternity shoot?" I\'d never done one before. I said, "sure, let\'s give it a shot."',
       3: "We met at Stanford, and Naga was glowing. Bharath was visibly excited. They were so natural together, and their chemistry was amazing to capture. These are still some of my favorite images.",
-      6: "After the shoot, Naga asked me, 'Can we book you for 3, 6, and 9-month shoots?' She hadn't even seen the images yet but trusted me.",
+      6: 'After the shoot, Naga asked me, "Can we book you for 3, 6, and 9-month shoots?" She hadn\'t even seen the images yet but trusted me.',
       8: "Sathya was born. We did a shoot soon after at Adobe lodge. Sathya was a natural...he was so comfortable in front of the camera.",
       24: "Naga loves wisterias. We found a bunch and took a shot. Coz, why not.",
       26: "Sathya turned two, and it was time for another shoot. This time, we chose a spot near the Japanese gardens in San Jose.",
       43: "Sriman was born. It was peak of Covid, but we decided on a shoot at Mt. Diablo.",
+      50: "A few months later, we did another shoot, this time at their home. Sriman looked so adorable in traditional attire!",
+      63: "What's a photoshoot without some naked baby shots?",
+      65: "Some of my favorite mother and son portraits. These aren't technically perfect—even the lighting isn't great...but, there's something about them I love. I think they remind me of me and my mom.",
+      70: "There's always time for a few couple and solo shots!",
+      75: "We'd talked about doing a sunflower shoot for years, and we finally made it happen. It was the tail end of the season, and we took a chance with a two-hour drive. But the light was perfect, and the flowers were still in bloom.",
+      82: "Hope you enjoyed the show. This is what photography is to me. It's not the lighting, or the composition, or the gear. It's the connection. It's becoming a part of their journey.",
+      83: "Almost forgot...we did a lavender shoot too! It was the first time Mala and I took a trip after the lockdown.",
     },
     enableSlideshow: true,
     slideshowSettings: {
@@ -891,7 +898,7 @@ const galleryData = [
   },
   {
     name: "Sarina",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/sarina-first-bday/AR502170.jpg?width=800&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/events/sarina-first-bday/AR502170.jpg`,
     slug: "sarina-bday",
     description: "Birthday party at Broom street Ganesha temple",
     blocks: [
@@ -908,7 +915,7 @@ const galleryData = [
   },
   {
     name: "Sarina",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sarina/AR502585.jpg?width=800&quality=80`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sarina/AR502585.jpg`,
     slug: "sarina",
     description: "Portraits on Sarina's 1st birthday",
     blocks: [
@@ -926,7 +933,7 @@ const galleryData = [
   },
   {
     name: "Nava Rasa",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503366-Edit-2-Edit.jpg`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/sudha-navarasa/AR503366-Edit-2-Edit.jpg`,
     slug: "sudha-nava-rasa",
     description: "Nava Rasa refers to the nine emotions in Indian classical dance. Sudha was modeling for a sari designer, showcasing nine different saris, each representing a unique emotion. This is the first one.",
     blocks: [
@@ -962,7 +969,7 @@ const galleryData = [
   },
   {
     name: "Nanna",
-    thumbnailUrl: "https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/bw/DSC_2663-Enhanced-NR.jpg?width=1100&quality=85",
+    thumbnailUrl: "https://storage.googleapis.com/swamiphoto/photos/events/naga-dad-75th-bday/bw/DSC_2663-Enhanced-NR.jpg",
     slug: "nanna75",
     description: "Here's a cherished collection of black-and-white photographs we gathered for Nanna's 75th birthday video.",
     blocks: [
@@ -1035,13 +1042,37 @@ const galleryData = [
   },
   {
     name: "Bharath's Family",
-    thumbnailUrl: `https://clsjpwsdca.cloudimg.io/storage.googleapis.com/swamiphoto/photos/portraits/bharath-family/AR505965.jpg?width=1100&quality=85`,
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg`,
     slug: "bharath-family",
-    description: "A fun, slightly chaotic evening shoot outside Naga and Bharath’s place—with his mom and brother’s family. Cranky kids, jet-lagged, dodging passing cars while we squeezed every last drop of light. Worth every bit of the madness—for family!",
+    description: "Portraits of Bharath's family, his brother's family, and his mom.",
     blocks: [
       {
         type: "stacked",
         imagesFolderUrl: "portraits/bharath-family",
+      },
+    ],
+    enableSlideshow: true,
+    slideshowSettings: {
+      youtubeLinks: ["https://www.youtube.com/watch?v=OhswLOVzXNc"],
+      layout: "kenburns",
+    },
+    isHidden: true,
+  },
+  {
+    name: "Rajee/Pradeep Puja",
+    thumbnailUrl: `https://storage.googleapis.com/swamiphoto/photos/portraits/naga-lavendar/DSCF6486-Edit.jpg`,
+    slug: "rajee-pradeep-puja",
+    description: "Sathya Narayana Puja at Rajee and Pradeep's home. Backyard portraits of families and couples after the puja.",
+    blocks: [
+      {
+        type: "stacked",
+        imagesFolderUrl: "events/rajee-pradeep-puja",
+        excludeImageUrls: [
+          "https://storage.googleapis.com/swamiphoto/photos/events/rajee-pradeep-puja/IMG_0312.jpeg",
+          "https://storage.googleapis.com/swamiphoto/photos/events/rajee-pradeep-puja/IMG_0304.jpeg",
+          "https://storage.googleapis.com/swamiphoto/photos/events/rajee-pradeep-puja/IMG_0338.jpeg",
+          "https://storage.googleapis.com/swamiphoto/photos/events/rajee-pradeep-puja/IMG_0311.jpeg",
+        ],
       },
     ],
     enableSlideshow: true,
@@ -1100,7 +1131,7 @@ const Galleries = () => {
                       <div className={stackStyle.first}></div>
                       <div className={stackStyle.second}></div>
                       <div className="relative overflow-hidden shadow-lg rounded-3xl">
-                        <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 1200, quality: 80 })} alt={gallery.name} className="w-full h-[400px] md:h-[500px] object-cover relative z-10 rounded-3xl" />
+                        <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 900, quality: 75 })} alt={gallery.name} className="w-full h-[400px] md:h-[500px] object-cover relative z-10 rounded-3xl" />
                       </div>
                     </div>
                   </div>

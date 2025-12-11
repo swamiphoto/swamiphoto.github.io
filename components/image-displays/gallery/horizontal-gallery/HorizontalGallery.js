@@ -97,7 +97,7 @@ const HorizontalGallery = ({ name, images, texts, description }) => {
         )}
 
         {images.map((image, index) => (
-          <img key={index} data-src={getCloudimageUrl(image, { width: 1300, quality: 80 })} className="max-h-[calc(100vh-40px)] object-cover mx-3 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
+          <img key={index} data-src={getCloudimageUrl(image, { width: 1000, quality: 75 })} className="max-h-[calc(100vh-40px)] object-cover mx-3 lazy-load transition-opacity duration-500 ease-in shadow-lg" onError={(e) => e.target.classList.add("hidden")} />
         ))}
       </div>
     </div>

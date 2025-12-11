@@ -27,7 +27,7 @@ function Photo({ src, alt = "", layout = "default", caption = "", title = "", or
   const renderDefaultLayout = () => (
     <div className="text-center mb-4 md:mb-10">
       <img
-        src={getCloudimageUrl(src, { width: 1600, quality: 80 })}
+        src={getCloudimageUrl(src, { width: 1200, quality: 75 })}
         alt={imageAltText} // Use fallback for alt
         loading="lazy"
         className={`transition-opacity duration-500 ease-in-out rounded-3xl ${imageClass} ${isLoaded ? "opacity-100" : "opacity-0"} shadow-lg`}

@@ -80,14 +80,14 @@ const StackedGallery = ({ imageUrls = [] }) => {
                         width: "48%",
                       }}
                       onClick={() => handleImageClick(image.src, processedImages, router)}>
-                      <img src={getCloudimageUrl(image.src, { width: 600, quality: 85 })} alt="" className="h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
+                      <img src={getCloudimageUrl(image.src, { width: 500, quality: 75 })} alt="" className="h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
                     </div>
                   ) : null
                 )}
               </div>
             ) : (
               <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, imageUrls, router)}>
-                <img src={getCloudimageUrl(entry.src, { width: 1100, quality: 85 })} alt="" className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
+                <img src={getCloudimageUrl(entry.src, { width: 900, quality: 75 })} alt="" className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
               </div>
             )}
           </div>

@@ -35,7 +35,32 @@ const AdminGallery = ({ name, images, texts, description }) => {
   };
 
   const getCleanImageUrl = (imageUrl) => {
-    return imageUrl.replace("clsjpwsdca.cloudimg.io/", "").split("?")[0];
+    // Extract the original image URL from either cloudimg.io format (for migration) or our new API format
+    let cleanUrl = imageUrl;
+    
+    // Remove cloudimg.io prefix if present (for backward compatibility during migration)
+    cleanUrl = cleanUrl.replace(/^https?:\/\/[^\/]+\.cloudimg\.io\//, "");
+    
+    // Remove our API endpoint prefix if present
+    cleanUrl = cleanUrl.replace(/^\/?api\/resize-image\?url=/, "");
+    
+    // Extract URL from query parameters if it's an API URL
+    if (cleanUrl.includes("url=")) {
+      const urlMatch = cleanUrl.match(/url=([^&]+)/);
+      if (urlMatch) {
+        cleanUrl = decodeURIComponent(urlMatch[1]);
+      }
+    }
+    
+    // Remove query parameters
+    cleanUrl = cleanUrl.split("?")[0];
+    
+    // If it doesn't start with http, ensure it's a full URL
+    if (!cleanUrl.startsWith("http")) {
+      cleanUrl = `https://${cleanUrl}`;
+    }
+    
+    return cleanUrl;
   };
 
   const handleCopyToClipboard = (imageUrl) => {

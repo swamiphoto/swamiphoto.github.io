@@ -1,9 +1,9 @@
-// next.config.js
-const withTM = require("next-transpile-modules")(["rc-util"]); // Add more if needed
-
-module.exports = withTM({
-  reactStrictMode: true, // Enable React strict mode if you want
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
   images: {
-    domains: ["storage.googleapis.com", "clsjpwsdca.cloudimg.io"], // Add your Google Cloud and Cloudimage domains
+    domains: ["storage.googleapis.com"],
   },
-});
+};
+
+module.exports = nextConfig;

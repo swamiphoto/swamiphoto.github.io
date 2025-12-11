@@ -1,6 +1,14 @@
 export const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
 const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
-const cloudimageToken = "clsjpwsdca";
+// Get the base URL for API routes (works in both client and server)
+const getApiBaseUrl = () => {
+  if (typeof window !== "undefined") {
+    // Client-side: use relative URL
+    return "";
+  }
+  // Server-side: use environment variable or default
+  return process.env.NEXT_PUBLIC_BASE_URL || "";
+};
 
 const IMAGES = {
   landscapes: {
@@ -97,10 +105,24 @@ const IMAGES = {
 };
 
 const getCloudimageUrl = (imageUrl, params = {}) => {
-  const cleanUrl = imageUrl.replace(/^https?:\/\//, "");
-  const baseUrl = `https://${cloudimageToken}.cloudimg.io/${cleanUrl}`;
-  const queryParams = new URLSearchParams(params).toString();
-  return `${baseUrl}?${queryParams}`;
+  // Clean up imageUrl - remove cloudimg.io prefix if present (for migration)
+  let cleanImageUrl = imageUrl.replace(/^https?:\/\/[^\/]+\.cloudimg\.io\//, "");
+
+  // If it doesn't start with http, ensure it's a full URL
+  if (!cleanImageUrl.startsWith("http")) {
+    cleanImageUrl = cleanImageUrl.startsWith("/") ? cleanImageUrl : `https://${cleanImageUrl}`;
+  }
+
+  // Build query parameters for the resize API
+  const queryParams = new URLSearchParams({
+    url: cleanImageUrl,
+    ...(params.width && { width: params.width.toString() }),
+    ...(params.quality && { quality: params.quality.toString() }),
+  });
+
+  // Use the new resize-image API endpoint
+  const apiBaseUrl = getApiBaseUrl();
+  return `${apiBaseUrl}/api/resize-image?${queryParams.toString()}`;
 };
 
 // Helper function to encode Base64 (URL-safe)

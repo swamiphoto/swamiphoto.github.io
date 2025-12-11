@@ -19,7 +19,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
       // Edge-to-edge layout without horizontal scroll
       return (
         <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-          <img src={getCloudimageUrl(imageUrl, { width: 1920, quality: 85 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
+          <img src={getCloudimageUrl(imageUrl, { width: 1400, quality: 75 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
         </div>
       );
     }
@@ -29,7 +29,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
       return (
         <div className="w-full flex justify-center">
           <img
-            src={getCloudimageUrl(imageUrl, { width: 1100, quality: 85 })}
+            src={getCloudimageUrl(imageUrl, { width: 900, quality: 75 })}
             alt={caption || "Photo"}
             className={`w-full md:w-[72%] ${isVertical ? "md:w-[40%]" : ""} max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500 cursor-pointer`}
             loading="lazy"
@@ -43,7 +43,7 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
     // Default fallback (variant 1)
     return (
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
-        <img src={getCloudimageUrl(imageUrl, { width: 1920, quality: 85 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
+        <img src={getCloudimageUrl(imageUrl, { width: 1400, quality: 75 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
       </div>
     );
   };
