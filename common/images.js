@@ -105,6 +105,7 @@ const IMAGES = {
 };
 
 const getCloudimageUrl = (imageUrl, params = {}) => {
+  // TEMPORARILY DISABLED: Return original URL without resizing to test if resizing is causing issues
   // Clean up imageUrl - remove cloudimg.io prefix if present (for migration)
   let cleanImageUrl = imageUrl.replace(/^https?:\/\/[^\/]+\.cloudimg\.io\//, "");
 
@@ -113,16 +114,20 @@ const getCloudimageUrl = (imageUrl, params = {}) => {
     cleanImageUrl = cleanImageUrl.startsWith("/") ? cleanImageUrl : `https://${cleanImageUrl}`;
   }
 
-  // Build query parameters for the resize API
-  const queryParams = new URLSearchParams({
-    url: cleanImageUrl,
-    ...(params.width && { width: params.width.toString() }),
-    ...(params.quality && { quality: params.quality.toString() }),
-  });
+  // TEMPORARY: Return original URL directly
+  return cleanImageUrl;
 
-  // Use the new resize-image API endpoint
-  const apiBaseUrl = getApiBaseUrl();
-  return `${apiBaseUrl}/api/resize-image?${queryParams.toString()}`;
+  // ORIGINAL CODE (commented out for testing):
+  // // Build query parameters for the resize API
+  // const queryParams = new URLSearchParams({
+  //   url: cleanImageUrl,
+  //   ...(params.width && { width: params.width.toString() }),
+  //   ...(params.quality && { quality: params.quality.toString() }),
+  // });
+
+  // // Use the new resize-image API endpoint
+  // const apiBaseUrl = getApiBaseUrl();
+  // return `${apiBaseUrl}/api/resize-image?${queryParams.toString()}`;
 };
 
 // Helper function to encode Base64 (URL-safe)
@@ -192,18 +197,90 @@ const generateImageMapping = (images) => {
 };
 const imageMapping = generateImageMapping(IMAGES);
 
-const fetchImageUrls = async (folder) => {
-  try {
-    const response = await fetch(`https://storage.googleapis.com/storage/v1/b/swamiphoto/o?prefix=photos/${folder}/&key=${apiKey}`);
-    const data = await response.json();
-    const urls = data.items
-      .filter((item) => item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
-      .map((item) => `${bucketUrl}/${item.name}`);
-    return urls;
-  } catch (error) {
-    console.error("Error fetching image URLs:", error);
-    return [];
+const fetchImageUrls = async (folder, retries = 2, abortSignal = null) => {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    // Check if aborted before starting
+    if (abortSignal && abortSignal.aborted) {
+      throw new Error("Request aborted");
+    }
+
+    try {
+      // Create abort controller for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+      // Combine abort signals if provided
+      let signal = controller.signal;
+      if (abortSignal) {
+        // If external abort signal triggers, abort our controller too
+        abortSignal.addEventListener("abort", () => controller.abort());
+        signal = controller.signal;
+      }
+
+      const response = await fetch(`https://storage.googleapis.com/storage/v1/b/swamiphoto/o?prefix=photos/${folder}/&key=${apiKey}`, {
+        signal: signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      // Check if aborted after fetch
+      if (abortSignal && abortSignal.aborted) {
+        throw new Error("Request aborted");
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Check if aborted after parsing
+      if (abortSignal && abortSignal.aborted) {
+        throw new Error("Request aborted");
+      }
+
+      // Validate response structure
+      if (!data || !Array.isArray(data.items)) {
+        throw new Error("Invalid response structure");
+      }
+
+      const urls = data.items
+        .filter((item) => item && item.name && item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
+        .map((item) => `${bucketUrl}/${item.name}`);
+
+      if (urls.length === 0 && attempt < retries) {
+        // If no URLs found and we have retries left, try again
+        continue;
+      }
+
+      return urls;
+    } catch (error) {
+      // Don't retry if aborted
+      if (error.name === "AbortError" || error.message.includes("aborted")) {
+        throw error;
+      }
+
+      if (error.name === "AbortError") {
+        console.error(`Timeout fetching image URLs for ${folder} (attempt ${attempt + 1}/${retries + 1})`);
+      } else {
+        console.error(`Error fetching image URLs for ${folder} (attempt ${attempt + 1}/${retries + 1}):`, error);
+      }
+
+      // If this was the last attempt, return empty array
+      if (attempt === retries) {
+        return [];
+      }
+
+      // Wait before retrying (exponential backoff), but check for abort during wait
+      for (let i = 0; i < 1000 * (attempt + 1); i += 100) {
+        if (abortSignal && abortSignal.aborted) {
+          throw new Error("Request aborted");
+        }
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+    }
   }
+  return [];
 };
 
 const getImageResolution = () => {

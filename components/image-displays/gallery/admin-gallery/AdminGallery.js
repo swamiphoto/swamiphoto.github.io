@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
-import { handleImageClick } from "../../../../common/images";
+import { handleImageClick, fetchImageUrls } from "../../../../common/images";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import { getCloudimageUrl } from "../../../../common/images";
 import { FiCopy } from "react-icons/fi"; // Icon for copy action
 import styles from "./AdminGallery.module.css"; // Use a separate CSS module for admin-specific styles
 
-const AdminGallery = ({ name, images, texts, description }) => {
+const AdminGallery = ({ name, images, texts, description, gallery } = {}) => {
   const [selectedImages, setSelectedImages] = useState([]); // State for storing selected images
   const [hasMounted, setHasMounted] = useState(false); // Ensure rendering only after component mounts on the client
+  const [allImages, setAllImages] = useState(images || []);
   const masonryRef = useRef(null);
   const router = useRouter();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -18,6 +19,31 @@ const AdminGallery = ({ name, images, texts, description }) => {
     // Set hasMounted to true only after client-side rendering starts
     setHasMounted(true);
   }, []);
+
+  // Extract images from gallery if gallery prop is provided
+  useEffect(() => {
+    if (gallery && gallery.blocks) {
+      const extractImages = async () => {
+        const imageList = [];
+        for (const block of gallery.blocks) {
+          if (block.type === "photo" && block.imageUrl) {
+            imageList.push(block.imageUrl);
+          } else if (block.type === "stacked" || block.type === "masonry") {
+            if (block.imageUrls) {
+              imageList.push(...block.imageUrls);
+            } else if (block.imagesFolderUrl) {
+              const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
+              imageList.push(...fetchedUrls);
+            }
+          }
+        }
+        setAllImages(imageList);
+      };
+      extractImages();
+    } else if (images) {
+      setAllImages(images);
+    }
+  }, [gallery, images]);
 
   const handleDownClick = () => {
     if (masonryRef.current) {
@@ -115,7 +141,7 @@ const AdminGallery = ({ name, images, texts, description }) => {
 
         <div ref={masonryRef} className={isMobile ? "mt-16" : ""}>
           <Masonry breakpointCols={breakpointColumnsObj} className="flex w-auto -ml-5" columnClassName="pl-5">
-            {images.map((image, index) => (
+            {allImages.map((image, index) => (
               <div key={index} className="relative mb-5">
                 {/* Checkbox for selecting images */}
                 <input
@@ -129,7 +155,7 @@ const AdminGallery = ({ name, images, texts, description }) => {
                   src={getCloudimageUrl(image, { width: 800, quality: 80 })}
                   className="w-full h-auto shadow-lg" // Removed opacity transition
                   onError={(e) => e.target.classList.add("hidden")}
-                  onClick={selectedImages.length === 0 ? () => handleImageClick(image, images, router) : null} // Disable click if at least one image is selected
+                  onClick={selectedImages.length === 0 ? () => handleImageClick(image, allImages, router) : null} // Disable click if at least one image is selected
                 />
                 <div className="absolute top-2 right-2 bg-gray-800 text-white text-sm px-2 py-1 rounded font-sans">
                   {getFilename(image)}

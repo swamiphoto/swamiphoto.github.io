@@ -9,6 +9,13 @@ const StackedGallery = ({ imageUrls = [] }) => {
 
   // Process the provided images
   useEffect(() => {
+    // Reset processed images when imageUrls change
+    setProcessedImages([]);
+    
+    if (imageUrls.length === 0) {
+      return;
+    }
+
     const processImages = () => {
       imageUrls.forEach((url, index) => {
         const img = new window.Image();
