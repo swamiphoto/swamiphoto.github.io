@@ -18,6 +18,8 @@ const StackedGallery = ({ imageUrls = [] }) => {
 
     const processImages = () => {
       imageUrls.forEach((url, index) => {
+        // Use the processed URL for preloading to match what will be rendered
+        const processedUrl = getCloudimageUrl(url, { width: 900, quality: 75 });
         const img = new window.Image();
         img.onload = () => {
           const aspectRatio = img.width / img.height;
@@ -29,7 +31,9 @@ const StackedGallery = ({ imageUrls = [] }) => {
             return [...prev, { src: url, aspectRatio, id: index }];
           });
         };
-        img.onerror = () => {
+        img.onerror = (error) => {
+          console.error(`Failed to preload image ${index + 1} (${url}):`, error);
+          // Still add the image to the list so it can be rendered (might work in browser even if preload fails)
           setProcessedImages((prev) => {
             const alreadyExists = prev.some((image) => image.src === url);
             if (alreadyExists) return prev;
@@ -37,7 +41,7 @@ const StackedGallery = ({ imageUrls = [] }) => {
             return [...prev, { src: url, aspectRatio: 1, id: index }];
           });
         };
-        img.src = url;
+        img.src = processedUrl;
       });
     };
 
@@ -87,14 +91,30 @@ const StackedGallery = ({ imageUrls = [] }) => {
                         width: "48%",
                       }}
                       onClick={() => handleImageClick(image.src, processedImages, router)}>
-                      <img src={getCloudimageUrl(image.src, { width: 500, quality: 75 })} alt="" className="h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
+                      <img 
+                        src={getCloudimageUrl(image.src, { width: 500, quality: 75 })} 
+                        alt="" 
+                        className="h-auto w-full object-cover shadow-lg rounded-3xl transition-opacity duration-500" 
+                        onError={(e) => {
+                          console.error("Failed to load image in StackedGallery:", image.src);
+                          e.target.style.display = 'none';
+                        }}
+                      />
                     </div>
                   ) : null
                 )}
               </div>
             ) : (
               <div className="w-full flex justify-center relative" onClick={() => handleImageClick(entry.src, imageUrls, router)}>
-                <img src={getCloudimageUrl(entry.src, { width: 900, quality: 75 })} alt="" className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" />
+                <img 
+                  src={getCloudimageUrl(entry.src, { width: 900, quality: 75 })} 
+                  alt="" 
+                  className="w-[72%] max-h-[calc(100vw * 0.35)] object-cover shadow-lg rounded-3xl transition-opacity duration-500" 
+                  onError={(e) => {
+                    console.error("Failed to load image in StackedGallery:", entry.src);
+                    e.target.style.display = 'none';
+                  }}
+                />
               </div>
             )}
           </div>

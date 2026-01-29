@@ -22,7 +22,16 @@ const MasonryGallery = ({ imageUrls = [] }) => {
                 const imageUrl = getCloudimageUrl(image, { width: 600, quality: 75 });
                 return (
                   <div key={index} className="mb-5">
-                    <img src={imageUrl} alt={`Image ${index + 1}`} className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg rounded-3xl" onError={() => console.error("Image failed to load:", imageUrl)} onClick={() => handleImageClick(image, imageUrls, router)} />
+                    <img 
+                      src={imageUrl} 
+                      alt={`Image ${index + 1}`} 
+                      className="w-full h-auto transition-opacity duration-500 ease-in shadow-lg rounded-3xl" 
+                      onError={(e) => {
+                        console.error("Image failed to load:", imageUrl, "Original URL:", image);
+                        e.target.style.display = 'none';
+                      }} 
+                      onClick={() => handleImageClick(image, imageUrls, router)} 
+                    />
                   </div>
                 );
               })

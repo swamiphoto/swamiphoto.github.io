@@ -1,52 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import { galleryData } from "../../galleries"; // Import gallery data
 import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import SlideshowAdmin from "../../../components/image-displays/slideshow/SlideshowAdmin"; // Import SlideshowAdmin component
 import Head from "next/head";
-import { fetchImageUrls } from "../../../common/images"; // Ensure fetchImageUrls is imported
-import Loading from "../../../components/image-displays/slideshow/Loading/Loading";
-import { getCloudimageUrl, getImageResolution } from "../../../common/images";
+import { getCloudimageUrl, getImageResolution, fetchImageUrls } from "../../../common/images";
 
 const SlideshowPage = ({ gallerySlug, gallery }) => {
   const router = useRouter();
-  const [imageUrls, setImageUrls] = useState([]);
-  const [texts, setTexts] = useState({});
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [slides, setSlides] = useState([]);
   const isAdminView = router.query.admin !== undefined; // Detect if the admin query is present
 
-  useEffect(() => {
-    if (gallery) {
-      const fetchAndProcessSlides = async () => {
-        const combinedSlides = [];
+  // Process slides from pre-fetched gallery blocks (images already fetched server-side)
+  const slides = useMemo(() => {
+    const combinedSlides = [];
 
-        for (const block of gallery.blocks) {
-          if (block.type === "photo" && block.imageUrl) {
-            combinedSlides.push({ type: "image", url: block.imageUrl, caption: block.caption || null });
-          } else if (block.type === "text" && block.content) {
-            combinedSlides.push({ type: "text", content: block.content });
-          } else if (block.type === "stacked" || block.type === "masonry") {
-            let urls = [];
-            if (block.imageUrls) {
-              urls = block.imageUrls;
-            } else if (block.imagesFolderUrl) {
-              const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
-              urls = fetchedUrls.filter((url) => !url.includes("protected"));
-            }
-            combinedSlides.push(...urls.map((url) => ({ type: "image", url })));
-          } else if (block.type === "video" && block.url) {
-            combinedSlides.push({ type: "video", url: block.url, caption: block.caption || null });
-          }
-        }
-
-        setSlides(combinedSlides);
-        setImagesLoaded(true);
-      };
-
-      fetchAndProcessSlides();
+    for (const block of gallery.blocks) {
+      if (block.type === "photo" && block.imageUrl) {
+        combinedSlides.push({ type: "image", url: block.imageUrl, caption: block.caption || null });
+      } else if (block.type === "text" && block.content) {
+        combinedSlides.push({ type: "text", content: block.content });
+      } else if (block.type === "stacked" || block.type === "masonry") {
+        // Images are already fetched server-side in getStaticProps
+        const urls = (block.imageUrls || []).filter((url) => !url.includes("protected"));
+        combinedSlides.push(...urls.map((url) => ({ type: "image", url })));
+      } else if (block.type === "video" && block.url) {
+        combinedSlides.push({ type: "video", url: block.url, caption: block.caption || null });
+      }
     }
-  }, [gallery]);
+
+    return combinedSlides;
+  }, [gallery.blocks]);
 
   if (!gallery) {
     return <div>Gallery not found</div>;
@@ -74,22 +57,18 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         <meta property="og:type" content="website" />
       </Head>
 
-      {imagesLoaded ? (
-        <Slideshow
-          slides={slides}
-          layout={layout}
-          title={gallery.name}
-          subtitle={gallery.description}
-          youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
-          customDurations={customDurations}
-          duration={duration}
-          thumbnailUrl={gallery.thumbnailUrl}
-          slug={gallerySlug}
-          musicCredits={musicCredits}
-        />
-      ) : (
-        <Loading />
-      )}
+      <Slideshow
+        slides={slides}
+        layout={layout}
+        title={gallery.name}
+        subtitle={gallery.description}
+        youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
+        customDurations={customDurations}
+        duration={duration}
+        thumbnailUrl={gallery.thumbnailUrl}
+        slug={gallerySlug}
+        musicCredits={musicCredits}
+      />
     </>
   );
 };
@@ -105,10 +84,66 @@ export async function getStaticProps({ params }) {
   const gallerySlug = params.gallerySlug;
   const gallery = galleryData.find((g) => g.slug === gallerySlug);
 
+  if (!gallery) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // Pre-fetch all image URLs server-side at build time
+  // Handle galleries without blocks array (e.g., admin gallery)
+  if (!gallery.blocks || !Array.isArray(gallery.blocks)) {
+    return {
+      props: {
+        gallerySlug,
+        gallery: {
+          ...gallery,
+          blocks: [],
+        },
+      },
+    };
+  }
+
+  const processedBlocks = await Promise.all(
+    gallery.blocks.map(async (block) => {
+      if ((block.type === "stacked" || block.type === "masonry") && block.imagesFolderUrl) {
+        try {
+          console.log(`[slideshow getStaticProps] Fetching images for folder: ${block.imagesFolderUrl}`);
+          const imageUrls = await fetchImageUrls(block.imagesFolderUrl);
+          // Sort URLs for consistency
+          const sortedUrls = imageUrls.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+          
+          if (sortedUrls.length === 0) {
+            console.warn(`[slideshow getStaticProps] WARNING: No images found for folder ${block.imagesFolderUrl} in gallery ${gallerySlug}.`);
+          } else {
+            console.log(`[slideshow getStaticProps] Successfully fetched ${sortedUrls.length} images for folder ${block.imagesFolderUrl}`);
+          }
+          
+          return {
+            ...block,
+            imageUrls: sortedUrls,
+          };
+        } catch (error) {
+          console.error(`[slideshow getStaticProps] ERROR fetching images for ${block.imagesFolderUrl} in gallery ${gallerySlug}:`, error.message || error);
+          console.error(`[slideshow getStaticProps] Full error:`, error);
+          // Return block with empty imageUrls array if fetch fails
+          return {
+            ...block,
+            imageUrls: block.imageUrls || [],
+          };
+        }
+      }
+      return block;
+    })
+  );
+
   return {
     props: {
       gallerySlug,
-      gallery,
+      gallery: {
+        ...gallery,
+        blocks: processedBlocks,
+      },
     },
   };
 }

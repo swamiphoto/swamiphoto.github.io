@@ -1,5 +1,10 @@
 export const bucketUrl = "https://storage.googleapis.com/swamiphoto"; // Base URL for your bucket
-const apiKey = "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
+// Use environment variable if available, otherwise fall back to hardcoded key
+const apiKey = process.env.GOOGLE_CLOUD_STORAGE_API_KEY || process.env.NEXT_PUBLIC_GOOGLE_CLOUD_STORAGE_API_KEY || "AIzaSyB0Avp_4ydF9e0NFwE3qg8lbX2H0tQhCvs"; // Your Google Cloud API key
+
+if (!apiKey) {
+  console.error("WARNING: Google Cloud Storage API key is not configured. Image fetching may fail.");
+}
 // Get the base URL for API routes (works in both client and server)
 const getApiBaseUrl = () => {
   if (typeof window !== "undefined") {
@@ -114,6 +119,20 @@ const getCloudimageUrl = (imageUrl, params = {}) => {
     cleanImageUrl = cleanImageUrl.startsWith("/") ? cleanImageUrl : `https://${cleanImageUrl}`;
   }
 
+  // Validate the URL is properly formatted
+  if (!cleanImageUrl || cleanImageUrl.trim() === "") {
+    console.error("getCloudimageUrl: Empty or invalid imageUrl provided:", imageUrl);
+    return imageUrl; // Return original as fallback
+  }
+
+  // Log in development to help debug
+  if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+    // Only log occasionally to avoid spam
+    if (Math.random() < 0.01) {
+      console.log("getCloudimageUrl processed:", { original: imageUrl, processed: cleanImageUrl, params });
+    }
+  }
+
   // TEMPORARY: Return original URL directly
   return cleanImageUrl;
 
@@ -197,9 +216,11 @@ const generateImageMapping = (images) => {
 };
 const imageMapping = generateImageMapping(IMAGES);
 
+// Server-side compatible image URL fetcher
+// Works in both Node.js (build time) and browser (client-side)
 const fetchImageUrls = async (folder, retries = 2, abortSignal = null) => {
   for (let attempt = 0; attempt <= retries; attempt++) {
-    // Check if aborted before starting
+    // Check if aborted before starting (only relevant for client-side)
     if (abortSignal && abortSignal.aborted) {
       throw new Error("Request aborted");
     }
@@ -209,9 +230,9 @@ const fetchImageUrls = async (folder, retries = 2, abortSignal = null) => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-      // Combine abort signals if provided
+      // Combine abort signals if provided (client-side only)
       let signal = controller.signal;
-      if (abortSignal) {
+      if (abortSignal && typeof abortSignal.addEventListener === "function") {
         // If external abort signal triggers, abort our controller too
         abortSignal.addEventListener("abort", () => controller.abort());
         signal = controller.signal;
@@ -223,34 +244,53 @@ const fetchImageUrls = async (folder, retries = 2, abortSignal = null) => {
 
       clearTimeout(timeoutId);
 
-      // Check if aborted after fetch
+      // Check if aborted after fetch (client-side only)
       if (abortSignal && abortSignal.aborted) {
         throw new Error("Request aborted");
       }
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text().catch(() => 'Unable to read error response');
+        console.error(`HTTP error for folder ${folder}: status ${response.status}, body: ${errorText.substring(0, 500)}`);
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText.substring(0, 200)}`);
       }
 
       const data = await response.json();
 
-      // Check if aborted after parsing
+      // Check if aborted after parsing (client-side only)
       if (abortSignal && abortSignal.aborted) {
         throw new Error("Request aborted");
       }
 
       // Validate response structure
-      if (!data || !Array.isArray(data.items)) {
-        throw new Error("Invalid response structure");
+      if (!data) {
+        console.error(`Invalid response for folder ${folder}:`, data);
+        throw new Error("Invalid response: no data");
+      }
+
+      // Check for API errors in response
+      if (data.error) {
+        console.error(`Google Cloud Storage API error for folder ${folder}:`, data.error);
+        throw new Error(`API error: ${data.error.message || JSON.stringify(data.error)}`);
+      }
+
+      if (!Array.isArray(data.items)) {
+        console.error(`Invalid response structure for folder ${folder}. Expected items array, got:`, typeof data.items, data);
+        throw new Error(`Invalid response structure: items is not an array. Response: ${JSON.stringify(data).substring(0, 200)}`);
       }
 
       const urls = data.items
         .filter((item) => item && item.name && item.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Filter out non-image URLs
         .map((item) => `${bucketUrl}/${item.name}`);
 
-      if (urls.length === 0 && attempt < retries) {
-        // If no URLs found and we have retries left, try again
-        continue;
+      if (urls.length === 0) {
+        console.warn(`No images found in folder ${folder} (found ${data.items.length} items total)`);
+        if (attempt < retries) {
+          // If no URLs found and we have retries left, try again
+          continue;
+        }
+      } else {
+        console.log(`Successfully fetched ${urls.length} images from folder ${folder}`);
       }
 
       return urls;
@@ -263,15 +303,20 @@ const fetchImageUrls = async (folder, retries = 2, abortSignal = null) => {
       if (error.name === "AbortError") {
         console.error(`Timeout fetching image URLs for ${folder} (attempt ${attempt + 1}/${retries + 1})`);
       } else {
-        console.error(`Error fetching image URLs for ${folder} (attempt ${attempt + 1}/${retries + 1}):`, error);
+        console.error(`Error fetching image URLs for ${folder} (attempt ${attempt + 1}/${retries + 1}):`, error.message || error);
+        // Log full error in development
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Full error:', error);
+        }
       }
 
-      // If this was the last attempt, return empty array
+      // If this was the last attempt, log final failure and return empty array
       if (attempt === retries) {
+        console.error(`Failed to fetch images for folder ${folder} after ${retries + 1} attempts. Returning empty array.`);
         return [];
       }
 
-      // Wait before retrying (exponential backoff), but check for abort during wait
+      // Wait before retrying (exponential backoff), but check for abort during wait (client-side only)
       for (let i = 0; i < 1000 * (attempt + 1); i += 100) {
         if (abortSignal && abortSignal.aborted) {
           throw new Error("Request aborted");

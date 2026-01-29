@@ -19,7 +19,17 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
       // Edge-to-edge layout without horizontal scroll
       return (
         <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-          <img src={getCloudimageUrl(imageUrl, { width: 1400, quality: 75 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
+          <img 
+            src={getCloudimageUrl(imageUrl, { width: 1400, quality: 75 })} 
+            alt={caption || "Photo"} 
+            className="w-full h-auto object-cover cursor-pointer" 
+            loading="lazy" 
+            onClick={() => handleImageClick(imageUrl, allPhotos, router)}
+            onError={(e) => {
+              console.error("Failed to load image in PhotoBlock:", imageUrl);
+              e.target.style.display = 'none';
+            }}
+          />
         </div>
       );
     }
@@ -35,6 +45,10 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
             loading="lazy"
             onClick={() => handleImageClick(imageUrl, allPhotos, router)}
             onLoad={handleImageLoad}
+            onError={(e) => {
+              console.error("Failed to load image in PhotoBlock:", imageUrl);
+              e.target.style.display = 'none';
+            }}
           />
         </div>
       );
@@ -43,7 +57,17 @@ const PhotoBlock = ({ imageUrl, caption = "", variant = 1, allPhotos = [] }) => 
     // Default fallback (variant 1)
     return (
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
-        <img src={getCloudimageUrl(imageUrl, { width: 1400, quality: 75 })} alt={caption || "Photo"} className="w-full h-auto object-cover cursor-pointer" loading="lazy" onClick={() => handleImageClick(imageUrl, allPhotos, router)} />
+        <img 
+          src={getCloudimageUrl(imageUrl, { width: 1400, quality: 75 })} 
+          alt={caption || "Photo"} 
+          className="w-full h-auto object-cover cursor-pointer" 
+          loading="lazy" 
+          onClick={() => handleImageClick(imageUrl, allPhotos, router)}
+          onError={(e) => {
+            console.error("Failed to load image in PhotoBlock:", imageUrl);
+            e.target.style.display = 'none';
+          }}
+        />
       </div>
     );
   };

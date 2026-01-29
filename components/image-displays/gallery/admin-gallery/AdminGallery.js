@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import Masonry from "react-masonry-css";
-import { handleImageClick, fetchImageUrls } from "../../../../common/images";
+import { handleImageClick } from "../../../../common/images";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import { getCloudimageUrl } from "../../../../common/images";
@@ -10,7 +10,6 @@ import styles from "./AdminGallery.module.css"; // Use a separate CSS module for
 const AdminGallery = ({ name, images, texts, description, gallery } = {}) => {
   const [selectedImages, setSelectedImages] = useState([]); // State for storing selected images
   const [hasMounted, setHasMounted] = useState(false); // Ensure rendering only after component mounts on the client
-  const [allImages, setAllImages] = useState(images || []);
   const masonryRef = useRef(null);
   const router = useRouter();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -20,29 +19,25 @@ const AdminGallery = ({ name, images, texts, description, gallery } = {}) => {
     setHasMounted(true);
   }, []);
 
-  // Extract images from gallery if gallery prop is provided
-  useEffect(() => {
+  // Extract images from gallery blocks (images are already fetched server-side)
+  const allImages = useMemo(() => {
     if (gallery && gallery.blocks) {
-      const extractImages = async () => {
-        const imageList = [];
-        for (const block of gallery.blocks) {
-          if (block.type === "photo" && block.imageUrl) {
-            imageList.push(block.imageUrl);
-          } else if (block.type === "stacked" || block.type === "masonry") {
-            if (block.imageUrls) {
-              imageList.push(...block.imageUrls);
-            } else if (block.imagesFolderUrl) {
-              const fetchedUrls = await fetchImageUrls(block.imagesFolderUrl);
-              imageList.push(...fetchedUrls);
-            }
+      const imageList = [];
+      for (const block of gallery.blocks) {
+        if (block.type === "photo" && block.imageUrl) {
+          imageList.push(block.imageUrl);
+        } else if (block.type === "stacked" || block.type === "masonry") {
+          // Images are already fetched server-side, so imageUrls should be populated
+          if (block.imageUrls && block.imageUrls.length > 0) {
+            imageList.push(...block.imageUrls);
           }
         }
-        setAllImages(imageList);
-      };
-      extractImages();
+      }
+      return imageList;
     } else if (images) {
-      setAllImages(images);
+      return images;
     }
+    return [];
   }, [gallery, images]);
 
   const handleDownClick = () => {

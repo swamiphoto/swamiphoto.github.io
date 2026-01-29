@@ -1131,7 +1131,17 @@ const Galleries = () => {
                       <div className={stackStyle.first}></div>
                       <div className={stackStyle.second}></div>
                       <div className="relative overflow-hidden shadow-lg rounded-3xl">
-                        <img src={getCloudimageUrl(gallery.thumbnailUrl, { width: 900, quality: 75 })} alt={gallery.name} className="w-full h-[400px] md:h-[500px] object-cover relative z-10 rounded-3xl" />
+                        <img 
+                          src={getCloudimageUrl(gallery.thumbnailUrl, { width: 900, quality: 75 })} 
+                          alt={gallery.name} 
+                          className="w-full h-[400px] md:h-[500px] object-cover relative z-10 rounded-3xl" 
+                          onError={(e) => {
+                            console.error("Failed to load gallery thumbnail:", gallery.thumbnailUrl, "Gallery:", gallery.name);
+                            if (e.target instanceof HTMLImageElement) {
+                              e.target.style.display = 'none';
+                            }
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
