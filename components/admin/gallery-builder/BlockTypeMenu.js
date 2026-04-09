@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const BLOCK_TYPES = [
   { type: "photo", label: "Photo", desc: "Single photo with optional caption" },
@@ -27,6 +27,7 @@ export function defaultBlock(type) {
 
 export default function BlockTypeMenu({ onAdd, onClose }) {
   const ref = useRef(null);
+  const [openUpward, setOpenUpward] = useState(false);
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -36,10 +37,22 @@ export default function BlockTypeMenu({ onAdd, onClose }) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [onClose]);
 
+  useEffect(() => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - rect.bottom;
+    // Menu height approx: 5 items × 52px each + 8px padding = ~268px
+    if (spaceBelow < 280) {
+      setOpenUpward(true);
+    }
+  }, []);
+
   return (
     <div
       ref={ref}
-      className="absolute left-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-30 w-64 py-1"
+      className={`absolute left-0 bg-white border border-gray-200 rounded-xl shadow-lg z-30 w-64 py-1 ${
+        openUpward ? "bottom-full mb-1" : "top-full mt-1"
+      }`}
     >
       {BLOCK_TYPES.map(({ type, label, desc }) => (
         <button
