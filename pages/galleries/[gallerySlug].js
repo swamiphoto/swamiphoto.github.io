@@ -6,6 +6,7 @@ import { galleryData } from "../galleries";
 import { useRouter } from "next/router";
 import AdminGallery from "../../components/image-displays/gallery/admin-gallery/AdminGallery";
 import { fetchImageUrls } from "../../common/images";
+import { readGalleriesConfig } from "../../common/galleriesConfig";
 
 const SingleGallery = ({ gallerySlug, gallery }) => {
   const [filteredBlocks, setFilteredBlocks] = useState([]);
@@ -151,33 +152,47 @@ const SingleGallery = ({ gallerySlug, gallery }) => {
 
 // Dynamic routing for Next.js
 export async function getStaticPaths() {
-  const paths = galleryData.map((gallery) => ({
-    params: { gallerySlug: gallery.slug },
-  }));
-  return { paths, fallback: false };
+  // Pre-generate known paths from hardcoded data at build time.
+  // fallback: 'blocking' allows new galleries created via the builder to work.
+  const paths = galleryData
+    .filter((g) => !g.isHidden)
+    .map((gallery) => ({ params: { gallerySlug: gallery.slug } }));
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
   const gallerySlug = params.gallerySlug;
+
+  // Try GCS config first (source of truth for galleries created with the builder)
+  try {
+    const config = await readGalleriesConfig();
+    if (config) {
+      const gallery = config.galleries.find((g) => g.slug === gallerySlug);
+      if (gallery) {
+        return {
+          props: { gallerySlug, gallery },
+          revalidate: 60,
+        };
+      }
+    }
+  } catch (err) {
+    console.error("[getStaticProps] Error reading GCS galleries config:", err.message);
+  }
+
+  // Fall back to hardcoded galleryData + imagesFolderUrl expansion
   const gallery = galleryData.find((g) => g.slug === gallerySlug);
 
   if (!gallery) {
-    return {
-      notFound: true,
-    };
+    return { notFound: true };
   }
 
-  // Pre-fetch all image URLs server-side at build time
-  // Handle galleries without blocks array (e.g., admin gallery)
   if (!gallery.blocks || !Array.isArray(gallery.blocks)) {
     return {
       props: {
         gallerySlug,
-        gallery: {
-          ...gallery,
-          blocks: [],
-        },
+        gallery: { ...gallery, blocks: [] },
       },
+      revalidate: 60,
     };
   }
 
@@ -187,28 +202,25 @@ export async function getStaticProps({ params }) {
         try {
           console.log(`[getStaticProps] Fetching images for folder: ${block.imagesFolderUrl}`);
           const imageUrls = await fetchImageUrls(block.imagesFolderUrl);
-          // Sort URLs for consistency
-          const sortedUrls = imageUrls.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-          
+          const sortedUrls = imageUrls.sort((a, b) =>
+            a.toLowerCase().localeCompare(b.toLowerCase())
+          );
           if (sortedUrls.length === 0) {
-            console.warn(`[getStaticProps] WARNING: No images found for folder ${block.imagesFolderUrl} in gallery ${gallerySlug}. This may cause images not to appear on the site.`);
+            console.warn(
+              `[getStaticProps] WARNING: No images found for folder ${block.imagesFolderUrl} in gallery ${gallerySlug}.`
+            );
           } else {
-            console.log(`[getStaticProps] Successfully fetched ${sortedUrls.length} images for folder ${block.imagesFolderUrl}`);
+            console.log(
+              `[getStaticProps] Successfully fetched ${sortedUrls.length} images for folder ${block.imagesFolderUrl}`
+            );
           }
-          
-          return {
-            ...block,
-            imageUrls: sortedUrls,
-          };
+          return { ...block, imageUrls: sortedUrls };
         } catch (error) {
-          console.error(`[getStaticProps] ERROR fetching images for ${block.imagesFolderUrl} in gallery ${gallerySlug}:`, error.message || error);
-          console.error(`[getStaticProps] Full error:`, error);
-          // Return block with empty imageUrls array if fetch fails
-          // This will cause images not to appear, but at least the page will load
-          return {
-            ...block,
-            imageUrls: block.imageUrls || [],
-          };
+          console.error(
+            `[getStaticProps] ERROR fetching images for ${block.imagesFolderUrl} in gallery ${gallerySlug}:`,
+            error.message || error
+          );
+          return { ...block, imageUrls: block.imageUrls || [] };
         }
       }
       return block;
@@ -218,11 +230,9 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       gallerySlug,
-      gallery: {
-        ...gallery,
-        blocks: processedBlocks,
-      },
+      gallery: { ...gallery, blocks: processedBlocks },
     },
+    revalidate: 60,
   };
 }
 
