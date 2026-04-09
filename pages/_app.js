@@ -12,7 +12,7 @@ const galleryPaths = galleryData.map((gallery) => `/galleries/${gallery.slug}`);
 const slideshowPaths = galleryData.filter((gallery) => gallery.enableSlideshow).map((gallery) => `/galleries/${gallery.slug}/slideshow`);
 const adminPaths = [...galleryPaths.map((path) => `${path}?admin`), ...slideshowPaths.map((path) => `${path}?admin`)];
 
-const noHeaderPaths = [...slideshowPaths, ...otherNoHeaderPaths, ...adminPaths, "/timemanagement", "/course-platform", "/admin"];
+const noHeaderPaths = [...slideshowPaths, ...otherNoHeaderPaths, ...adminPaths, "/timemanagement", "/course-platform", "/admin", "/admin/galleries", "/admin/galleries/new", "/admin/galleries/[slug]"];
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
