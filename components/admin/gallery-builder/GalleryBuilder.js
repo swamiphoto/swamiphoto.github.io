@@ -48,6 +48,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
     setGallery((prev) => {
       const blocks = [...(prev.blocks || [])];
       const block = blocks[photoPickerBlockIndex];
+      if (!block) return prev;
       if (block.type === "photo") {
         blocks[photoPickerBlockIndex] = { ...block, imageUrl: urls[0] };
       } else if (block.type === "stacked" || block.type === "masonry") {
