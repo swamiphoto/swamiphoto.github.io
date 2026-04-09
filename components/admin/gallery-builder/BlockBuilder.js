@@ -3,6 +3,33 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import BlockCard from "./BlockCard";
 import BlockTypeMenu, { defaultBlock } from "./BlockTypeMenu";
 
+function InsertionZone({ onInsert }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className="relative h-6 flex items-center justify-center cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={onInsert}
+    >
+      <div
+        className={`absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 transition-colors duration-100 ${
+          hovered ? "bg-blue-400" : "bg-transparent"
+        }`}
+      />
+      <div
+        className={`relative z-10 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-100 ${
+          hovered
+            ? "border-blue-400 bg-white text-blue-500 shadow-sm"
+            : "border-transparent bg-transparent text-transparent"
+        }`}
+      >
+        <span className="text-xs font-bold leading-none">+</span>
+      </div>
+    </div>
+  );
+}
+
 export default function BlockBuilder({
   gallery,
   onChange,
@@ -11,11 +38,20 @@ export default function BlockBuilder({
   onAddPhotosToBlock,
 }) {
   const [showBlockMenu, setShowBlockMenu] = useState(false);
+  const [insertAtIndex, setInsertAtIndex] = useState(null);
 
   const updateField = (key, value) => onChange({ ...gallery, [key]: value });
 
-  const addBlock = (block) =>
-    onChange({ ...gallery, blocks: [...(gallery.blocks || []), block] });
+  const addBlock = (block) => {
+    const blocks = [...(gallery.blocks || [])];
+    if (insertAtIndex !== null) {
+      blocks.splice(insertAtIndex, 0, block);
+    } else {
+      blocks.push(block);
+    }
+    onChange({ ...gallery, blocks });
+    setInsertAtIndex(null);
+  };
 
   const updateBlock = (index, updated) => {
     const blocks = [...(gallery.blocks || [])];
@@ -89,27 +125,37 @@ export default function BlockBuilder({
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {(gallery.blocks || []).map((block, index) => (
-                  <Draggable
-                    key={`block-${index}`}
-                    draggableId={`block-${index}`}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                      >
-                        <BlockCard
-                          block={block}
-                          dragHandleProps={provided.dragHandleProps}
-                          onUpdate={(updated) => updateBlock(index, updated)}
-                          onRemove={() => removeBlock(index)}
-                          onAddPhotos={() => onAddPhotosToBlock(index)}
-                          onRemovePhoto={(url) => removePhotoFromBlock(index, url)}
+                  <div key={`slot-${index}`}>
+                    {/* Insertion zone before this block */}
+                    <div className="relative">
+                      {showBlockMenu && insertAtIndex === index && (
+                        <BlockTypeMenu
+                          onAdd={addBlock}
+                          onClose={() => { setShowBlockMenu(false); setInsertAtIndex(null); }}
                         />
-                      </div>
-                    )}
-                  </Draggable>
+                      )}
+                      <InsertionZone
+                        onInsert={() => {
+                          setInsertAtIndex(index);
+                          setShowBlockMenu(true);
+                        }}
+                      />
+                    </div>
+                    <Draggable draggableId={`block-${index}`} index={index}>
+                      {(provided) => (
+                        <div ref={provided.innerRef} {...provided.draggableProps}>
+                          <BlockCard
+                            block={block}
+                            dragHandleProps={provided.dragHandleProps}
+                            onUpdate={(updated) => updateBlock(index, updated)}
+                            onRemove={() => removeBlock(index)}
+                            onAddPhotos={() => onAddPhotosToBlock(index)}
+                            onRemovePhoto={(url) => removePhotoFromBlock(index, url)}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  </div>
                 ))}
                 {provided.placeholder}
               </div>
@@ -125,10 +171,10 @@ export default function BlockBuilder({
           >
             + Add Block
           </button>
-          {showBlockMenu && (
+          {showBlockMenu && insertAtIndex === null && (
             <BlockTypeMenu
               onAdd={addBlock}
-              onClose={() => setShowBlockMenu(false)}
+              onClose={() => { setShowBlockMenu(false); setInsertAtIndex(null); }}
             />
           )}
         </div>
