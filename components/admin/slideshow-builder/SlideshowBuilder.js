@@ -141,8 +141,8 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
         onPickCover={handlePickCover}
       />
 
-      {/* Live Slideshow preview */}
-      <div className="flex-1 relative overflow-hidden">
+      {/* Live Slideshow preview — transform creates a containing block so Slideshow's fixed overlay stays within this panel */}
+      <div className="flex-1 relative overflow-hidden" style={{ transform: "translateZ(0)" }}>
         {slides.length === 0 ? (
           <div className="flex items-center justify-center h-full text-stone-300 text-sm">
             Add photos to your gallery to preview the slideshow
@@ -157,7 +157,6 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
             youtubeUrl={ss.youtubeLink || ""}
             thumbnailUrl={coverUrl || gallery.thumbnailUrl || ""}
             musicCredits={ss.musicCredit ? [ss.musicCredit] : []}
-            initialModalOpen={false}
             slug={gallery.slug}
           />
         )}
