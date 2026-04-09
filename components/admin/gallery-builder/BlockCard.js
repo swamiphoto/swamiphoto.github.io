@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import DesignPopover from "./DesignPopover";
 
 const TYPE_LABELS = {
   photo: "Photo",
@@ -8,25 +9,6 @@ const TYPE_LABELS = {
   video: "Video",
 };
 
-function VariantPicker({ value, options, onChange }) {
-  return (
-    <div className="flex gap-1.5 flex-wrap mt-1">
-      {options.map((opt) => (
-        <button
-          key={opt.value}
-          onClick={() => onChange(opt.value)}
-          className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
-            value === opt.value
-              ? "bg-gray-900 text-white border-gray-900"
-              : "border-gray-200 text-gray-500 hover:border-gray-400"
-          }`}
-        >
-          {opt.label}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 export default function BlockCard({
   block,
@@ -39,6 +21,7 @@ export default function BlockCard({
   const isPhotoBlock = block.type === "stacked" || block.type === "masonry";
 
   const [showMenu, setShowMenu] = useState(false);
+  const [showDesign, setShowDesign] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -90,14 +73,27 @@ export default function BlockCard({
           </button>
         )}
 
-        {/* ✦ design icon — for blocks with variants (placeholder, wired in next task) */}
+        {/* ✦ design icon */}
         {(block.type === "photo" || block.type === "text" || block.type === "video") && (
-          <button
-            title="Design options"
-            className="w-6 h-6 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors text-xs leading-none"
-          >
-            ✦
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setShowDesign((v) => !v)}
+              title="Design options"
+              className={`w-6 h-6 flex items-center justify-center rounded-md transition-colors text-xs leading-none ${
+                showDesign ? "bg-gray-100 text-gray-700" : "text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              ✦
+            </button>
+            {showDesign && (
+              <DesignPopover
+                blockType={block.type}
+                value={block.variant || 1}
+                onChange={(v) => onUpdate({ ...block, variant: v })}
+                onClose={() => setShowDesign(false)}
+              />
+            )}
+          </div>
         )}
 
         {/* ⋯ more menu */}
@@ -165,14 +161,6 @@ export default function BlockCard({
             value={block.caption || ""}
             onChange={(e) => onUpdate({ ...block, caption: e.target.value })}
           />
-          <VariantPicker
-            value={block.variant || 1}
-            options={[
-              { value: 1, label: "Edge to edge" },
-              { value: 2, label: "Centered 72%" },
-            ]}
-            onChange={(v) => onUpdate({ ...block, variant: v })}
-          />
         </div>
       )}
 
@@ -210,14 +198,6 @@ export default function BlockCard({
             value={block.content || ""}
             onChange={(e) => onUpdate({ ...block, content: e.target.value })}
           />
-          <VariantPicker
-            value={block.variant || 1}
-            options={[
-              { value: 1, label: "Sans-serif" },
-              { value: 2, label: "Serif" },
-            ]}
-            onChange={(v) => onUpdate({ ...block, variant: v })}
-          />
         </div>
       )}
 
@@ -235,15 +215,6 @@ export default function BlockCard({
             placeholder="Caption (optional)"
             value={block.caption || ""}
             onChange={(e) => onUpdate({ ...block, caption: e.target.value })}
-          />
-          <VariantPicker
-            value={block.variant || 1}
-            options={[
-              { value: 1, label: "Edge to edge" },
-              { value: 2, label: "85% centered" },
-              { value: 3, label: "Video + caption" },
-            ]}
-            onChange={(v) => onUpdate({ ...block, variant: v })}
           />
         </div>
       )}
