@@ -184,7 +184,7 @@ export default function AdminLibrary() {
   const counts = libraryData?.counts || {};
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden font-sans">
       <AlbumSidebar
         counts={counts}
         selectedAlbum={selectedAlbum}

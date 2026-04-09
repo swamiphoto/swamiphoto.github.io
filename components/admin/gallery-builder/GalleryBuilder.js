@@ -112,7 +112,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50 font-sans">
       {!expanded && (
         <BlockBuilder
           gallery={gallery}

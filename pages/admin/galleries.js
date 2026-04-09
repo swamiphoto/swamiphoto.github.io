@@ -50,7 +50,7 @@ export default function AdminGalleriesPage() {
       <Head>
         <title>Galleries — Admin</title>
       </Head>
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-5xl mx-auto px-6 py-10 font-sans">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-semibold text-gray-900">Galleries</h1>

@@ -5,7 +5,6 @@ import { bucketUrl, getCloudimageUrl } from "../common/images";
 import Head from "next/head";
 
 import { galleryData } from "../common/galleryData";
-export { galleryData };
 
 
 //the gallery stack look
