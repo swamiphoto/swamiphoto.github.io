@@ -71,6 +71,15 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
         galleryToSave.slug = generateSlug(galleryToSave.name || "untitled");
       }
 
+      if (isNew) {
+        const slugExists = allGalleries.some((g) => g.slug === galleryToSave.slug);
+        if (slugExists) {
+          alert(`A gallery with the slug "${galleryToSave.slug}" already exists. Please use a different name.`);
+          setSaving(false);
+          return;
+        }
+      }
+
       if (!galleryToSave.slug) {
         alert("Gallery needs a name before saving.");
         setSaving(false);
@@ -121,6 +130,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
           images={libraryImages || []}
           loading={libraryLoading}
           onPhotoClick={handlePhotoClick}
+          activeBlockIndex={activeBlockIndex}
         />
       )}
 

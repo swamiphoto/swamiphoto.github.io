@@ -7,7 +7,7 @@ function extractFolder(url) {
   return match ? match[1] : "other";
 }
 
-export default function GalleryLibraryPanel({ images, loading, onPhotoClick }) {
+export default function GalleryLibraryPanel({ images, loading, onPhotoClick, activeBlockIndex }) {
   const [search, setSearch] = useState("");
   const [folder, setFolder] = useState("all");
 
@@ -54,6 +54,11 @@ export default function GalleryLibraryPanel({ images, loading, onPhotoClick }) {
 
       {/* Image grid */}
       <div className="flex-1 overflow-y-auto p-2">
+        {activeBlockIndex === null && (
+          <div className="mx-2 mt-2 px-3 py-2 bg-blue-50 border border-blue-100 rounded-lg text-xs text-blue-500">
+            Click "+ Add Photos" on a Stacked or Masonry block to target it, then click photos to add them. You can also drag photos directly onto a block.
+          </div>
+        )}
         {loading ? (
           <div className="text-center text-gray-400 text-xs py-10">Loading photos…</div>
         ) : filtered.length === 0 ? (
