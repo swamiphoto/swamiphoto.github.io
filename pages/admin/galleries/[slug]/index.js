@@ -2,7 +2,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import GalleryBuilder from "../../../components/admin/gallery-builder/GalleryBuilder";
+import GalleryBuilder from "../../../../components/admin/gallery-builder/GalleryBuilder";
 
 export default function EditGalleryPage() {
   const router = useRouter();
