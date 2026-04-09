@@ -73,12 +73,40 @@ export default function BlockCard({
       {/* Photo block */}
       {block.type === "photo" && (
         <div className="space-y-2">
-          <input
-            className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gray-400"
-            placeholder="Image URL"
-            value={block.imageUrl || ""}
-            onChange={(e) => onUpdate({ ...block, imageUrl: e.target.value })}
-          />
+          {/* Image preview / drop zone */}
+          <div
+            className={`rounded-lg overflow-hidden border-2 border-dashed transition-colors ${
+              block.imageUrl ? "border-transparent" : "border-gray-200 hover:border-gray-400 cursor-pointer"
+            }`}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              const url = e.dataTransfer.getData("text/plain");
+              if (url) onUpdate({ ...block, imageUrl: url });
+            }}
+            onClick={() => { if (!block.imageUrl) onAddPhotos(); }}
+          >
+            {block.imageUrl ? (
+              <div className="relative group">
+                <img
+                  src={`/_next/image?url=${encodeURIComponent(block.imageUrl)}&w=400&q=70`}
+                  alt=""
+                  className="w-full aspect-video object-cover rounded-lg"
+                />
+                <button
+                  onClick={(e) => { e.stopPropagation(); onUpdate({ ...block, imageUrl: "" }); }}
+                  className="absolute top-1.5 right-1.5 bg-black/60 text-white text-xs rounded px-2 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  × Remove
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-20 text-gray-400 text-xs text-center px-3 gap-1">
+                <span className="text-lg">🖼</span>
+                Drag a photo here, or click "+ Add Photos" to pick one
+              </div>
+            )}
+          </div>
           <input
             className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gray-400"
             placeholder="Caption (optional)"
@@ -93,6 +121,14 @@ export default function BlockCard({
             ]}
             onChange={(v) => onUpdate({ ...block, variant: v })}
           />
+          {!block.imageUrl && (
+            <button
+              onClick={onAddPhotos}
+              className="text-xs text-gray-600 bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              + Add Photos
+            </button>
+          )}
         </div>
       )}
 
@@ -106,7 +142,7 @@ export default function BlockCard({
             <div className="grid grid-cols-3 gap-1.5">
               {(block.imageUrls || []).map((url) => (
                 <div key={url} className="relative aspect-square rounded overflow-hidden group">
-                  <img src={url} alt="" className="w-full h-full object-cover" loading="lazy" />
+                  <img src={`/_next/image?url=${encodeURIComponent(url)}&w=200&q=65`} alt="" className="w-full h-full object-cover" loading="lazy" />
                   <button
                     onClick={() => onRemovePhoto(url)}
                     className="absolute top-0.5 right-0.5 bg-black/60 text-white text-[10px] rounded px-1 opacity-0 group-hover:opacity-100 transition-opacity"

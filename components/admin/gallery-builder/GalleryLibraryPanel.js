@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import Image from "next/image";
 
 function extractFolder(url) {
   // "https://storage.googleapis.com/swamiphoto/photos/landscapes/arizona/foo.jpg"
@@ -71,18 +70,17 @@ export default function GalleryLibraryPanel({ images, loading, onPhotoClick, act
               return (
                 <div
                   key={url}
-                  className="relative aspect-square rounded overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-400 transition-all"
+                  className="aspect-square rounded overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-400 transition-all"
                   draggable
                   onDragStart={(e) => e.dataTransfer.setData("text/plain", url)}
                   onClick={() => onPhotoClick(url)}
                   title={filename}
                 >
-                  <Image
-                    src={url}
+                  <img
+                    src={`/_next/image?url=${encodeURIComponent(url)}&w=200&q=65`}
                     alt={filename}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               );
