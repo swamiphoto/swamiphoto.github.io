@@ -2,8 +2,8 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import BlockBuilder from "./BlockBuilder";
-import GalleryLibraryPanel from "./GalleryLibraryPanel";
 import GalleryPreview from "./GalleryPreview";
+import PhotoPickerModal from "./PhotoPickerModal";
 
 function generateSlug(name) {
   return name
@@ -17,15 +17,17 @@ function generateSlug(name) {
 export default function GalleryBuilder({ initialGallery, galleryIndex, allGalleries, isNew }) {
   const router = useRouter();
   const [gallery, setGallery] = useState(initialGallery);
-  const [libraryOpen, setLibraryOpen] = useState(false);
-  const [libraryImages, setLibraryImages] = useState(null); // null = not yet fetched
+  const [libraryImages, setLibraryImages] = useState(null);
   const [libraryLoading, setLibraryLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [activeBlockIndex, setActiveBlockIndex] = useState(null);
   const [saving, setSaving] = useState(false);
 
+  // Photo picker modal state
+  const [photoPickerOpen, setPhotoPickerOpen] = useState(false);
+  const [photoPickerBlockIndex, setPhotoPickerBlockIndex] = useState(null);
+
   const fetchLibrary = useCallback(() => {
-    if (libraryImages !== null) return; // already fetched
+    if (libraryImages !== null) return;
     setLibraryLoading(true);
     fetch("/api/admin/library")
       .then((r) => r.json())
@@ -34,33 +36,25 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
       .finally(() => setLibraryLoading(false));
   }, [libraryImages]);
 
-  const handleToggleLibrary = () => {
-    const next = !libraryOpen;
-    setLibraryOpen(next);
-    if (next) fetchLibrary();
-  };
-
   const handleAddPhotosToBlock = (blockIndex) => {
-    setActiveBlockIndex(blockIndex);
-    setLibraryOpen(true);
+    setPhotoPickerBlockIndex(blockIndex);
+    setPhotoPickerOpen(true);
     fetchLibrary();
   };
 
-  const handlePhotoClick = (url) => {
-    if (activeBlockIndex === null) return;
+  const handlePhotoPickerConfirm = (urls) => {
+    setPhotoPickerOpen(false);
+    if (photoPickerBlockIndex === null || urls.length === 0) return;
     setGallery((prev) => {
       const blocks = [...(prev.blocks || [])];
-      const block = blocks[activeBlockIndex];
+      const block = blocks[photoPickerBlockIndex];
       if (block.type === "photo") {
-        blocks[activeBlockIndex] = { ...block, imageUrl: url };
-        return { ...prev, blocks };
+        blocks[photoPickerBlockIndex] = { ...block, imageUrl: urls[0] };
+      } else if (block.type === "stacked" || block.type === "masonry") {
+        const existing = block.imageUrls || [];
+        const merged = [...existing, ...urls.filter((u) => !existing.includes(u))];
+        blocks[photoPickerBlockIndex] = { ...block, imageUrls: merged };
       }
-      if (block.type !== "stacked" && block.type !== "masonry") return prev;
-      if ((block.imageUrls || []).includes(url)) return prev;
-      blocks[activeBlockIndex] = {
-        ...block,
-        imageUrls: [...(block.imageUrls || []), url],
-      };
       return { ...prev, blocks };
     });
   };
@@ -69,12 +63,9 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
     setSaving(true);
     try {
       const galleryToSave = { ...gallery };
-
-      // Auto-generate slug for new galleries
       if (isNew && !galleryToSave.slug) {
         galleryToSave.slug = generateSlug(galleryToSave.name || "untitled");
       }
-
       if (isNew) {
         const slugExists = allGalleries.some((g) => g.slug === galleryToSave.slug);
         if (slugExists) {
@@ -83,13 +74,11 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
           return;
         }
       }
-
       if (!galleryToSave.slug) {
         alert("Gallery needs a name before saving.");
         setSaving(false);
         return;
       }
-
       const updatedGalleries = isNew
         ? [...allGalleries, galleryToSave]
         : allGalleries.map((g, i) => (i === galleryIndex ? galleryToSave : g));
@@ -99,9 +88,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ galleries: updatedGalleries }),
       });
-
       if (!res.ok) throw new Error(`Save failed ${res.status}`);
-
       if (isNew) {
         router.push(`/admin/galleries/${galleryToSave.slug}`);
       } else {
@@ -115,6 +102,10 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
     }
   };
 
+  const currentBlockType = photoPickerBlockIndex !== null
+    ? (gallery.blocks || [])[photoPickerBlockIndex]?.type
+    : null;
+
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50 font-sans">
       {!expanded && (
@@ -123,18 +114,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
           onChange={setGallery}
           onSave={handleSave}
           saving={saving}
-          onToggleLibrary={handleToggleLibrary}
-          libraryOpen={libraryOpen}
           onAddPhotosToBlock={handleAddPhotosToBlock}
-        />
-      )}
-
-      {!expanded && libraryOpen && (
-        <GalleryLibraryPanel
-          images={libraryImages || []}
-          loading={libraryLoading}
-          onPhotoClick={handlePhotoClick}
-          activeBlockIndex={activeBlockIndex}
         />
       )}
 
@@ -143,6 +123,16 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
         expanded={expanded}
         onToggleExpand={() => setExpanded((v) => !v)}
       />
+
+      {photoPickerOpen && (
+        <PhotoPickerModal
+          images={libraryImages || []}
+          loading={libraryLoading}
+          blockType={currentBlockType}
+          onConfirm={handlePhotoPickerConfirm}
+          onClose={() => setPhotoPickerOpen(false)}
+        />
+      )}
     </div>
   );
 }

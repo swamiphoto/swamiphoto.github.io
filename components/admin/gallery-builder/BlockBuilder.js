@@ -8,8 +8,6 @@ export default function BlockBuilder({
   onChange,
   onSave,
   saving,
-  onToggleLibrary,
-  libraryOpen,
   onAddPhotosToBlock,
 }) {
   const [showBlockMenu, setShowBlockMenu] = useState(false);
@@ -50,18 +48,8 @@ export default function BlockBuilder({
   return (
     <div className="w-80 flex-shrink-0 border-r border-gray-200 flex flex-col h-full bg-gray-50">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-200 flex items-center gap-2 flex-shrink-0">
-        <button
-          onClick={onToggleLibrary}
-          className={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${
-            libraryOpen
-              ? "bg-gray-900 text-white border-gray-900"
-              : "border-gray-200 text-gray-600 hover:border-gray-400"
-          }`}
-        >
-          📷 Photos
-        </button>
-        <div className="flex-1" />
+      <div className="px-4 py-3 border-b border-gray-200 bg-white flex items-center gap-2 flex-shrink-0">
+        <span className="text-sm font-semibold text-gray-700 flex-1">Gallery</span>
         <button
           onClick={onSave}
           disabled={saving}
