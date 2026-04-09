@@ -11,7 +11,7 @@ import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlidesh
 import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, musicCredits = [] }) => {
+const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, musicCredits = [], initialModalOpen = true }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -20,7 +20,7 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(initialModalOpen);
   const [showControls, setShowControls] = useState(true);
   const hideControlsTimeout = useRef(null);
   const [currentMusicCredit, setCurrentMusicCredit] = useState("");

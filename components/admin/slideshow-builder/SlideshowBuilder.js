@@ -157,6 +157,7 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
             youtubeUrl={ss.youtubeLink || ""}
             thumbnailUrl={coverUrl || gallery.thumbnailUrl || ""}
             musicCredits={ss.musicCredit ? [ss.musicCredit] : []}
+            initialModalOpen={false}
             slug={gallery.slug}
           />
         )}
