@@ -11,7 +11,7 @@ import KenBurnsSlideshowLayout from "./kenburns-slideshow-layout/KenBurnsSlidesh
 import { TfiClose } from "react-icons/tfi";
 import styles from "./Slideshow.module.css";
 
-const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, musicCredits = [], initialModalOpen = true }) => {
+const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title", youtubeUrl, subtitle = "Subtitle", customDurations = {}, duration = 10000, thumbnailUrl = "", hideCaptionsOnMobile = true, slug, musicCredits = [], initialModalOpen = true, disableFullscreen = false }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [aspectRatios, setAspectRatios] = useState([]);
@@ -281,7 +281,7 @@ const Slideshow = ({ slides = [], layout = "film-stack", title = "Gallery Title"
               <button
                 onClick={() => {
                   setIsModalOpen(false);
-                  handleToggleFullscreen();
+                  if (!disableFullscreen) handleToggleFullscreen();
                   handlePlayPauseSlideshow(); // Start slideshow
                 }}
                 className="px-8 py-4 bg-black hover:opacity-80 text-white font-bold uppercase tracking-wider cursor-pointer">

@@ -158,6 +158,7 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
             thumbnailUrl={coverUrl || gallery.thumbnailUrl || ""}
             musicCredits={ss.musicCredit ? [ss.musicCredit] : []}
             slug={gallery.slug}
+            disableFullscreen
           />
         )}
       </div>
