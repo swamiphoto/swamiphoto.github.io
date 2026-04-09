@@ -4,7 +4,7 @@ import { galleryData } from "../../galleries"; // Import gallery data
 import Slideshow from "../../../components/image-displays/slideshow/Slideshow";
 import SlideshowAdmin from "../../../components/image-displays/slideshow/SlideshowAdmin"; // Import SlideshowAdmin component
 import Head from "next/head";
-import { getCloudimageUrl, getImageResolution, fetchImageUrls } from "../../../common/images";
+import { fetchImageUrls } from "../../../common/images";
 
 const SlideshowPage = ({ gallerySlug, gallery }) => {
   const router = useRouter();
@@ -49,10 +49,6 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
     const excludedSet = new Set(excludedImageUrls);
     return combinedSlides.filter(slide => !slide.url || !excludedSet.has(slide.url));
   }, [gallery.blocks, excludedImageUrls]);
-
-  if (!gallery) {
-    return <div>Gallery not found</div>;
-  }
 
   // Render admin view if ?admin is present in the query string
   if (isAdminView) {
