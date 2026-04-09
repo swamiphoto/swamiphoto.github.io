@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Link from "next/link";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import BlockCard from "./BlockCard";
 import BlockTypeMenu, { defaultBlock } from "./BlockTypeMenu";
 
@@ -7,25 +8,20 @@ function InsertionZone({ onInsert }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className="relative h-6 flex items-center justify-center cursor-pointer"
+      className="relative flex items-center justify-center cursor-pointer transition-all duration-150"
+      style={{ height: hovered ? 28 : 6 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onInsert}
     >
-      <div
-        className={`absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 transition-colors duration-100 ${
-          hovered ? "bg-blue-400" : "bg-transparent"
-        }`}
-      />
-      <div
-        className={`relative z-10 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-100 ${
-          hovered
-            ? "border-blue-400 bg-white text-blue-500 shadow-sm"
-            : "border-transparent bg-transparent text-transparent"
-        }`}
-      >
-        <span className="text-xs font-bold leading-none">+</span>
-      </div>
+      {hovered && (
+        <>
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-stone-300" />
+          <div className="relative z-10 w-4 h-4 rounded-full border border-stone-400 bg-white flex items-center justify-center">
+            <span className="text-[9px] font-bold text-stone-500 leading-none">+</span>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -33,13 +29,20 @@ function InsertionZone({ onInsert }) {
 export default function BlockBuilder({
   gallery,
   onChange,
-  onSave,
-  saving,
+  onPublish,
+  publishing,
+  autosaveStatus,
+  hasDraft,
+  isPublished,
   onAddPhotosToBlock,
   onPickThumbnail,
+  expanded,
+  onToggleExpand,
 }) {
   const [showBlockMenu, setShowBlockMenu] = useState(false);
   const [insertAtIndex, setInsertAtIndex] = useState(null);
+  const [menuAnchorRect, setMenuAnchorRect] = useState(null);
+  const [infoExpanded, setInfoExpanded] = useState(true);
 
   const updateField = (key, value) => onChange({ ...gallery, [key]: value });
 
@@ -83,104 +86,145 @@ export default function BlockBuilder({
   };
 
   return (
-    <div className="w-80 flex-shrink-0 border-r border-gray-200 flex flex-col h-full bg-gray-50">
-      {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-200 bg-white flex items-center gap-2 flex-shrink-0">
-        <span className="text-sm font-semibold text-gray-700 flex-1">Gallery</span>
+    <div
+      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10"
+      style={{ boxShadow: "1px 0 0 #e7e5e3, 4px 0 20px rgba(0,0,0,0.05)" }}
+    >
+      {/* Header bar */}
+      <div className="px-3 pt-3 pb-3 flex items-center gap-2 flex-shrink-0 border-b border-stone-200">
+        <button onClick={onToggleExpand} className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none">←</button>
+        <span className="text-xs tracking-widest font-medium text-stone-400 flex-1">GALLERY</span>
+        {/* Autosave status */}
+        <span className="text-[10px] text-stone-400">
+          {autosaveStatus === "saving" && "Saving…"}
+          {autosaveStatus === "saved" && "Saved"}
+          {autosaveStatus === "unsaved" && "Unsaved"}
+        </span>
         <button
-          onClick={onSave}
-          disabled={saving}
-          className="text-sm bg-gray-900 text-white px-4 py-1.5 rounded-lg hover:bg-gray-700 disabled:opacity-50 transition-colors"
+          onClick={onPublish}
+          disabled={publishing || (isPublished && !hasDraft)}
+          className="text-xs font-semibold bg-stone-900 text-white px-4 py-1.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
         >
-          {saving ? "Saving…" : "Save"}
+          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
         </button>
       </div>
 
-      {/* Gallery meta */}
-      <div className="px-4 py-4 border-b border-gray-100 space-y-3 flex-shrink-0 bg-white">
-        {/* Name */}
-        <input
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm font-medium outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
-          placeholder="Gallery name"
-          value={gallery.name || ""}
-          onChange={(e) => updateField("name", e.target.value)}
-        />
+      {/* All blocks — scrollable */}
+      <div className="flex-1 overflow-y-auto px-3 py-3">
 
-        {/* Slug */}
-        <input
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-500 outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300 font-mono"
-          placeholder="slug (auto-generated from name)"
-          value={gallery.slug || ""}
-          onChange={(e) => updateField("slug", e.target.value)}
-        />
-
-        {/* Description */}
-        <textarea
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors resize-none placeholder:text-gray-300"
-          placeholder="Description (optional)"
-          rows={2}
-          value={gallery.description || ""}
-          onChange={(e) => updateField("description", e.target.value)}
-        />
-
-        {/* Visibility */}
-        <select
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-600 outline-none focus:border-gray-400 focus:bg-white transition-colors"
-          value={gallery.visibility || "public"}
-          onChange={(e) => updateField("visibility", e.target.value)}
-        >
-          <option value="public">Public</option>
-          <option value="unlisted">Unlisted</option>
-          <option value="private">Private</option>
-        </select>
-
-        {/* Thumbnail image picker */}
-        <div>
-          <div className="text-xs text-gray-400 mb-1.5 font-medium">Thumbnail</div>
-          <div
-            onClick={onPickThumbnail}
-            className={`relative w-16 h-16 rounded-xl overflow-hidden cursor-pointer border-2 border-dashed transition-colors flex items-center justify-center ${
-              gallery.thumbnailUrl
-                ? "border-transparent"
-                : "border-gray-200 hover:border-gray-400 bg-gray-50"
-            }`}
+        {/* Gallery Info card */}
+        <div className="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden mb-1.5">
+          <button
+            className="w-full flex items-center gap-2 px-3 py-2.5 text-left hover:bg-stone-50 transition-colors"
+            onClick={() => setInfoExpanded((v) => !v)}
           >
-            {gallery.thumbnailUrl ? (
-              <img
-                src={`/_next/image?url=${encodeURIComponent(gallery.thumbnailUrl)}&w=200&q=70`}
-                alt="Thumbnail"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <span className="text-gray-300 text-xl">🖼</span>
-            )}
-          </div>
-        </div>
-      </div>
+            <span className="text-xs font-semibold text-stone-600 flex-1 tracking-wide">Gallery Info</span>
+            <svg className={`w-3.5 h-3.5 text-stone-400 transition-transform flex-shrink-0 ${infoExpanded ? "" : "rotate-180"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+          </button>
 
-      {/* Block list */}
-      <div className="flex-1 overflow-y-auto p-3">
+          {infoExpanded && (
+            <div className="px-3 pb-3 border-t border-stone-100 pt-3 space-y-2.5">
+              <input
+                className="w-full border-b border-stone-200 pb-1.5 text-sm font-medium text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
+                placeholder="Gallery name"
+                value={gallery.name || ""}
+                onChange={(e) => updateField("name", e.target.value)}
+              />
+              <input
+                className="w-full border-b border-stone-200 pb-1.5 text-xs text-stone-500 font-mono outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
+                placeholder="slug"
+                value={gallery.slug || ""}
+                onChange={(e) => updateField("slug", e.target.value)}
+              />
+              <textarea
+                className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-600 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent resize-none"
+                placeholder="Description"
+                rows={2}
+                value={gallery.description || ""}
+                onChange={(e) => updateField("description", e.target.value)}
+              />
+
+              {/* Thumbnail row */}
+              <div className="flex items-center gap-3 pt-0.5">
+                <div
+                  onClick={onPickThumbnail}
+                  className={`w-12 h-12 overflow-hidden flex-shrink-0 flex items-center justify-center border border-stone-200 cursor-pointer hover:border-stone-400 transition-colors ${gallery.thumbnailUrl ? "" : "bg-stone-50"}`}
+                >
+                  {gallery.thumbnailUrl ? (
+                    <img src={`/_next/image?url=${encodeURIComponent(gallery.thumbnailUrl)}&w=200&q=70`} alt="Cover" className="w-full h-full object-cover" />
+                  ) : (
+                    <svg className="w-4 h-4 text-stone-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5" />
+                    </svg>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <button
+                    onClick={onPickThumbnail}
+                    className="text-xs text-stone-600 hover:text-stone-900 text-left transition-colors leading-none"
+                  >
+                    Select a photo
+                  </button>
+                  <button
+                    onClick={onPickThumbnail}
+                    className="text-xs text-stone-400 hover:text-stone-600 text-left transition-colors leading-none"
+                  >
+                    Upload a new photo
+                  </button>
+                </div>
+              </div>
+
+              {/* Unlisted row — separate */}
+              <div
+                className="flex items-center gap-2 cursor-pointer pt-0.5"
+                onClick={() => updateField("visibility", gallery.visibility === "unlisted" ? "public" : "unlisted")}
+              >
+                <div className={`w-7 h-[14px] rounded-full transition-colors relative flex-shrink-0 ${gallery.visibility === "unlisted" ? "bg-stone-700" : "bg-stone-300"}`}>
+                  <div className={`absolute top-[2px] w-[10px] h-[10px] bg-white rounded-full shadow-sm transition-transform ${gallery.visibility === "unlisted" ? "translate-x-[14px]" : "translate-x-[2px]"}`} />
+                </div>
+                <span className="text-xs text-stone-500 select-none">Unlisted</span>
+              </div>
+
+              {/* Slideshow row */}
+              <div className="flex items-center justify-between pt-0.5">
+                <div
+                  className="flex items-center gap-2 cursor-pointer"
+                  onClick={() => updateField("enableSlideshow", !gallery.enableSlideshow)}
+                >
+                  <div className={`w-7 h-[14px] rounded-full transition-colors relative flex-shrink-0 ${gallery.enableSlideshow ? "bg-stone-700" : "bg-stone-300"}`}>
+                    <div className={`absolute top-[2px] w-[10px] h-[10px] bg-white rounded-full shadow-sm transition-transform ${gallery.enableSlideshow ? "translate-x-[14px]" : "translate-x-[2px]"}`} />
+                  </div>
+                  <span className="text-xs text-stone-500 select-none">Include slideshow</span>
+                </div>
+                {gallery.enableSlideshow && gallery.slug && (
+                  <Link
+                    href={`/admin/galleries/${gallery.slug}/slideshow`}
+                    className="text-xs text-stone-400 hover:text-stone-700 underline underline-offset-2 transition-colors"
+                  >
+                    Customize →
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Content blocks */}
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="blocks">
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {(gallery.blocks || []).map((block, index) => (
                   <div key={`slot-${index}`}>
-                    {/* Insertion zone before this block */}
-                    <div className="relative">
-                      {showBlockMenu && insertAtIndex === index && (
-                        <BlockTypeMenu
-                          onAdd={addBlock}
-                          onClose={() => { setShowBlockMenu(false); setInsertAtIndex(null); }}
-                        />
-                      )}
-                      <InsertionZone
-                        onInsert={() => {
-                          setInsertAtIndex(index);
-                          setShowBlockMenu(true);
-                        }}
-                      />
-                    </div>
+                    <InsertionZone
+                      onInsert={(e) => {
+                        setMenuAnchorRect(e.currentTarget.getBoundingClientRect());
+                        setInsertAtIndex(index);
+                        setShowBlockMenu(true);
+                      }}
+                    />
                     <Draggable draggableId={`block-${index}`} index={index}>
                       {(provided) => (
                         <div ref={provided.innerRef} {...provided.draggableProps}>
@@ -203,22 +247,33 @@ export default function BlockBuilder({
           </Droppable>
         </DragDropContext>
 
-        {/* Add block button */}
-        <div className="relative mt-2">
-          <button
-            onClick={() => setShowBlockMenu((v) => !v)}
-            className="w-full text-sm border-2 border-dashed border-gray-200 text-gray-400 py-2.5 rounded-xl hover:border-gray-400 hover:text-gray-600 transition-colors"
-          >
-            + Add Block
-          </button>
-          {showBlockMenu && insertAtIndex === null && (
-            <BlockTypeMenu
-              onAdd={addBlock}
-              onClose={() => { setShowBlockMenu(false); setInsertAtIndex(null); }}
-            />
-          )}
-        </div>
+        {(gallery.blocks || []).length === 0 && (
+          <p className="text-xs text-stone-400 text-center py-4">No blocks yet</p>
+        )}
       </div>
+
+      {/* Add Block */}
+      <div className="p-3 border-t border-stone-200 flex-shrink-0">
+        <button
+          onClick={(e) => {
+            if (showBlockMenu) { setShowBlockMenu(false); return; }
+            setMenuAnchorRect(e.currentTarget.getBoundingClientRect());
+            setInsertAtIndex(null);
+            setShowBlockMenu(true);
+          }}
+          className="w-full bg-stone-900 text-white text-sm font-medium py-2.5 hover:bg-stone-700 transition-colors"
+        >
+          Add Block
+        </button>
+      </div>
+
+      {showBlockMenu && (
+        <BlockTypeMenu
+          onAdd={addBlock}
+          anchorRect={menuAnchorRect}
+          onClose={() => { setShowBlockMenu(false); setInsertAtIndex(null); }}
+        />
+      )}
     </div>
   );
 }
