@@ -78,6 +78,10 @@ export async function seedConfig(listGcsFolder) {
  * @param {LibraryConfig} config
  * @returns {{ allImages: string[], portfolios: Record<string,string[]>, galleries: Record<string,string[]>, counts: Record<string,number> }}
  */
+/**
+ * allImages is now an array of { url, name, timeCreated, updated, size } objects.
+ * portfolios/galleries remain string[] of URLs in the config.
+ */
 export function mergeLibraryData(allImages, config) {
   const portfolios = config.portfolios || {};
   const galleries = config.galleries || {};
@@ -86,7 +90,13 @@ export function mergeLibraryData(allImages, config) {
   for (const [key, urls] of Object.entries(portfolios)) counts[key] = urls.length;
   for (const [key, urls] of Object.entries(galleries)) counts[key] = urls.length;
 
-  return { allImages, portfolios, galleries, counts };
+  // Build a metadata map keyed by URL for fast lookup in the UI
+  const metadata = {};
+  for (const img of allImages) {
+    metadata[img.url] = { name: img.name, timeCreated: img.timeCreated, updated: img.updated, size: img.size };
+  }
+
+  return { allImages: allImages.map((i) => i.url), portfolios, galleries, counts, metadata };
 }
 
 /**

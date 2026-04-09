@@ -5,9 +5,14 @@ const BUCKET_URL = "https://storage.googleapis.com/swamiphoto";
 
 async function listAllImages() {
   const [files] = await bucket.getFiles({ prefix: "photos/" });
-  return files
-    .filter((f) => /\.(jpg|jpeg|png|gif)$/i.test(f.name))
-    .map((f) => `${BUCKET_URL}/${f.name}`);
+  const imageFiles = files.filter((f) => /\.(jpg|jpeg|png|gif)$/i.test(f.name));
+  return imageFiles.map((f) => ({
+    url: `${BUCKET_URL}/${f.name}`,
+    name: f.name,
+    timeCreated: f.metadata.timeCreated || null,
+    updated: f.metadata.updated || null,
+    size: parseInt(f.metadata.size || "0", 10),
+  }));
 }
 
 async function listFolder(folderPath) {

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
-export default function PhotoTile({ imageUrl, albumType, albumKey, onRemove, onDelete, onCopyUrl, onAddToAlbum }) {
+export default function PhotoTile({ imageUrl, metadata, albumType, albumKey, onRemove, onDelete, onCopyUrl, onAddToAlbum }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -40,16 +41,25 @@ export default function PhotoTile({ imageUrl, albumType, albumKey, onRemove, onD
     onAddToAlbum(imageUrl);
   };
 
+  const sizeLabel = metadata?.size
+    ? metadata.size > 1024 * 1024
+      ? `${(metadata.size / 1024 / 1024).toFixed(1)} MB`
+      : `${(metadata.size / 1024).toFixed(0)} KB`
+    : null;
+
   return (
     <div className="relative rounded-lg overflow-hidden shadow-sm border border-gray-100 group">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imageUrl}
-        alt={filename}
-        className="w-full aspect-square object-cover bg-gray-100"
-        loading="lazy"
-        onError={(e) => { e.target.style.opacity = "0.3"; }}
-      />
+      {/* Thumbnail via Next.js Image (auto-resized + cached) */}
+      <div className="relative w-full aspect-square bg-gray-100">
+        <Image
+          src={imageUrl}
+          alt={filename}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          className="object-cover"
+          loading="lazy"
+        />
+      </div>
 
       {/* ⋯ menu button */}
       <button
@@ -59,8 +69,11 @@ export default function PhotoTile({ imageUrl, albumType, albumKey, onRemove, onD
         ⋯
       </button>
 
-      {/* filename label */}
-      <div className="px-2 py-1 text-xs text-gray-500 bg-white truncate">{filename}</div>
+      {/* filename + size label */}
+      <div className="px-2 py-1 text-xs text-gray-500 bg-white flex items-center gap-1">
+        <span className="truncate flex-1">{filename}</span>
+        {sizeLabel && <span className="text-gray-300 flex-shrink-0">{sizeLabel}</span>}
+      </div>
 
       {/* context menu */}
       {menuOpen && (

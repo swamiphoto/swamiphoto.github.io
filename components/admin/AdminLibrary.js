@@ -193,6 +193,7 @@ export default function AdminLibrary() {
       />
       <PhotoGrid
         images={images}
+        metadata={libraryData?.metadata || {}}
         selectedAlbum={selectedAlbum}
         onRemove={handleRemove}
         onDelete={handleDelete}
