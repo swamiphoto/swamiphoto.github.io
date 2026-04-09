@@ -10,6 +10,24 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
   const router = useRouter();
   const isAdminView = router.query.admin !== undefined; // Detect if the admin query is present
 
+  const { slideshowSettings = {} } = gallery;
+  const {
+    layout = "kenburns",
+    youtubeLinks,
+    youtubeLink,
+    customDurations = {},
+    duration = 10000,
+    captions = {},
+    coverImageUrl = "",
+    musicCredit = "",
+    musicCredits = [],
+    excludedImageUrls = [],
+  } = slideshowSettings;
+
+  // Single track: prefer youtubeLink, fall back to first of youtubeLinks[]
+  const resolvedYoutubeUrl = youtubeLink || (youtubeLinks && youtubeLinks[0]) || "https://www.youtube.com/watch?v=PYujyluMxMU";
+  const resolvedMusicCredits = musicCredit ? [musicCredit] : musicCredits;
+
   // Process slides from pre-fetched gallery blocks (images already fetched server-side)
   const slides = useMemo(() => {
     const combinedSlides = [];
@@ -28,15 +46,13 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
       }
     }
 
-    return combinedSlides;
-  }, [gallery.blocks]);
+    const excludedSet = new Set(excludedImageUrls);
+    return combinedSlides.filter(slide => !slide.url || !excludedSet.has(slide.url));
+  }, [gallery.blocks, excludedImageUrls]);
 
   if (!gallery) {
     return <div>Gallery not found</div>;
   }
-
-  const { slideshowSettings = {} } = gallery;
-  const { layout = "kenburns", youtubeLinks = ["https://www.youtube.com/watch?v=PYujyluMxMU"], customDurations = {}, duration = 10000, captions = {}, coverImageIndex = 0, musicCredits = [] } = slideshowSettings;
 
   // Render admin view if ?admin is present in the query string
   if (isAdminView) {
@@ -62,12 +78,12 @@ const SlideshowPage = ({ gallerySlug, gallery }) => {
         layout={layout}
         title={gallery.name}
         subtitle={gallery.description}
-        youtubeUrl={youtubeLinks[Math.floor(Math.random() * youtubeLinks.length)]}
+        youtubeUrl={resolvedYoutubeUrl}
         customDurations={customDurations}
         duration={duration}
         thumbnailUrl={gallery.thumbnailUrl}
         slug={gallerySlug}
-        musicCredits={musicCredits}
+        musicCredits={resolvedMusicCredits}
       />
     </>
   );

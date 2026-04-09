@@ -10,7 +10,15 @@ const DEFAULT_GALLERY = {
   thumbnailUrl: "",
   enableSlideshow: false,
   showCover: true,
-  slideshowSettings: { youtubeLinks: [], musicCredits: [], layout: "kenburns" },
+  slideshowSettings: {
+    layout: "kenburns",
+    youtubeLink: "",
+    musicCredit: "",
+    coverImageUrl: "",
+    title: "",
+    description: "",
+    excludedImageUrls: [],
+  },
   blocks: [],
 };
 
