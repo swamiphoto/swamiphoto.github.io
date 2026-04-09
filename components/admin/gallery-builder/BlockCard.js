@@ -167,14 +167,21 @@ export default function BlockCard({
       {/* Stacked / Masonry block */}
       {isPhotoBlock && (
         <div className="space-y-2">
-          <div className="text-xs text-gray-400">
-            Drag photos from the library panel, or click + Add Photos
-          </div>
+          {(block.imageUrls || []).length === 0 && (
+            <div className="text-xs text-gray-400">
+              Click + to add photos, or drag from the picker
+            </div>
+          )}
           {(block.imageUrls || []).length > 0 && (
-            <div className="grid grid-cols-3 gap-1.5">
+            <div style={{ columns: "3", gap: "6px" }}>
               {(block.imageUrls || []).map((url) => (
-                <div key={url} className="relative aspect-square rounded overflow-hidden group">
-                  <img src={`/_next/image?url=${encodeURIComponent(url)}&w=200&q=65`} alt="" className="w-full h-full object-cover" loading="lazy" />
+                <div key={url} className="relative rounded overflow-hidden group mb-1.5 break-inside-avoid">
+                  <img
+                    src={`/_next/image?url=${encodeURIComponent(url)}&w=200&q=65`}
+                    alt=""
+                    className="w-full h-auto block"
+                    loading="lazy"
+                  />
                   <button
                     onClick={() => onRemovePhoto(url)}
                     className="absolute top-0.5 right-0.5 bg-black/60 text-white text-[10px] rounded px-1 opacity-0 group-hover:opacity-100 transition-opacity"
