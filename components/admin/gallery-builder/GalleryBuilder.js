@@ -21,6 +21,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
   const [libraryLoading, setLibraryLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [thumbnailPickerOpen, setThumbnailPickerOpen] = useState(false);
 
   // Photo picker modal state
   const [photoPickerOpen, setPhotoPickerOpen] = useState(false);
@@ -58,6 +59,13 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
       }
       return { ...prev, blocks };
     });
+  };
+
+  const handleThumbnailConfirm = (urls) => {
+    setThumbnailPickerOpen(false);
+    if (urls.length > 0) {
+      setGallery((prev) => ({ ...prev, thumbnailUrl: urls[0] }));
+    }
   };
 
   const handleSave = async () => {
@@ -116,6 +124,7 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
           onSave={handleSave}
           saving={saving}
           onAddPhotosToBlock={handleAddPhotosToBlock}
+          onPickThumbnail={() => { fetchLibrary(); setThumbnailPickerOpen(true); }}
         />
       )}
 
@@ -132,6 +141,16 @@ export default function GalleryBuilder({ initialGallery, galleryIndex, allGaller
           blockType={currentBlockType}
           onConfirm={handlePhotoPickerConfirm}
           onClose={() => setPhotoPickerOpen(false)}
+        />
+      )}
+
+      {thumbnailPickerOpen && (
+        <PhotoPickerModal
+          images={libraryImages || []}
+          loading={libraryLoading}
+          blockType="photo"
+          onConfirm={handleThumbnailConfirm}
+          onClose={() => setThumbnailPickerOpen(false)}
         />
       )}
     </div>

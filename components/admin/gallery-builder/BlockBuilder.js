@@ -36,6 +36,7 @@ export default function BlockBuilder({
   onSave,
   saving,
   onAddPhotosToBlock,
+  onPickThumbnail,
 }) {
   const [showBlockMenu, setShowBlockMenu] = useState(false);
   const [insertAtIndex, setInsertAtIndex] = useState(null);
@@ -97,25 +98,64 @@ export default function BlockBuilder({
 
       {/* Gallery meta */}
       <div className="px-4 py-4 border-b border-gray-100 space-y-3 flex-shrink-0 bg-white">
+        {/* Name */}
         <input
           className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm font-medium outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
           placeholder="Gallery name"
           value={gallery.name || ""}
           onChange={(e) => updateField("name", e.target.value)}
         />
+
+        {/* Slug */}
+        <input
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-500 outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300 font-mono"
+          placeholder="slug (auto-generated from name)"
+          value={gallery.slug || ""}
+          onChange={(e) => updateField("slug", e.target.value)}
+        />
+
+        {/* Description */}
         <textarea
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300 resize-none"
-          placeholder="Description"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors resize-none placeholder:text-gray-300"
+          placeholder="Description (optional)"
           rows={2}
           value={gallery.description || ""}
           onChange={(e) => updateField("description", e.target.value)}
         />
-        <input
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-500 outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
-          placeholder="Thumbnail URL"
-          value={gallery.thumbnailUrl || ""}
-          onChange={(e) => updateField("thumbnailUrl", e.target.value)}
-        />
+
+        {/* Visibility */}
+        <select
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-600 outline-none focus:border-gray-400 focus:bg-white transition-colors"
+          value={gallery.visibility || "public"}
+          onChange={(e) => updateField("visibility", e.target.value)}
+        >
+          <option value="public">Public</option>
+          <option value="unlisted">Unlisted</option>
+          <option value="private">Private</option>
+        </select>
+
+        {/* Thumbnail image picker */}
+        <div>
+          <div className="text-xs text-gray-400 mb-1.5 font-medium">Thumbnail</div>
+          <div
+            onClick={onPickThumbnail}
+            className={`relative w-16 h-16 rounded-xl overflow-hidden cursor-pointer border-2 border-dashed transition-colors flex items-center justify-center ${
+              gallery.thumbnailUrl
+                ? "border-transparent"
+                : "border-gray-200 hover:border-gray-400 bg-gray-50"
+            }`}
+          >
+            {gallery.thumbnailUrl ? (
+              <img
+                src={`/_next/image?url=${encodeURIComponent(gallery.thumbnailUrl)}&w=200&q=70`}
+                alt="Thumbnail"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-gray-300 text-xl">🖼</span>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Block list */}
