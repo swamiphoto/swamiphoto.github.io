@@ -47,7 +47,7 @@ export default function BlockCard({
 
   return (
     <div
-      className="bg-white border border-gray-200 rounded-xl p-4 mb-3"
+      className="bg-white rounded-xl p-4 mb-2 shadow-sm ring-1 ring-gray-100"
       onDragOver={isPhotoBlock ? handleDragOver : undefined}
       onDrop={isPhotoBlock ? handleDrop : undefined}
     >
@@ -108,7 +108,7 @@ export default function BlockCard({
             )}
           </div>
           <input
-            className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gray-400"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
             placeholder="Caption (optional)"
             value={block.caption || ""}
             onChange={(e) => onUpdate({ ...block, caption: e.target.value })}
@@ -166,7 +166,7 @@ export default function BlockCard({
       {block.type === "text" && (
         <div className="space-y-2">
           <textarea
-            className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gray-400 resize-none"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300 resize-none"
             placeholder="Text content"
             rows={3}
             value={block.content || ""}
@@ -187,13 +187,13 @@ export default function BlockCard({
       {block.type === "video" && (
         <div className="space-y-2">
           <input
-            className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gray-400"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
             placeholder="YouTube URL"
             value={block.url || ""}
             onChange={(e) => onUpdate({ ...block, url: e.target.value })}
           />
           <input
-            className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gray-400"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
             placeholder="Caption (optional)"
             value={block.caption || ""}
             onChange={(e) => onUpdate({ ...block, caption: e.target.value })}
