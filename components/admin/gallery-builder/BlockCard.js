@@ -1,3 +1,5 @@
+import { useState, useRef, useEffect } from "react";
+
 const TYPE_LABELS = {
   photo: "Photo",
   stacked: "Stacked Gallery",
@@ -36,6 +38,17 @@ export default function BlockCard({
 }) {
   const isPhotoBlock = block.type === "stacked" || block.type === "masonry";
 
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setShowMenu(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
   const handleDragOver = (e) => e.preventDefault();
   const handleDrop = (e) => {
     e.preventDefault();
@@ -53,21 +66,60 @@ export default function BlockCard({
     >
       {/* Header row */}
       <div className="flex items-center gap-2 mb-3">
+        {/* Drag handle */}
         <span
           {...dragHandleProps}
-          className="text-gray-300 cursor-grab hover:text-gray-500 text-base leading-none select-none"
+          className="text-gray-300 cursor-grab hover:text-gray-400 text-base leading-none select-none flex-shrink-0"
         >
           ⠿
         </span>
+
+        {/* Block type label — left-aligned */}
         <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide flex-1">
           {TYPE_LABELS[block.type] || block.type}
         </span>
-        <button
-          onClick={onRemove}
-          className="text-xs text-red-400 hover:text-red-600 transition-colors"
-        >
-          × Remove
-        </button>
+
+        {/* + icon — only for photo/stacked/masonry */}
+        {(block.type === "photo" || isPhotoBlock) && (
+          <button
+            onClick={onAddPhotos}
+            title="Add photos"
+            className="w-6 h-6 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors text-sm font-medium leading-none"
+          >
+            +
+          </button>
+        )}
+
+        {/* ✦ design icon — for blocks with variants (placeholder, wired in next task) */}
+        {(block.type === "photo" || block.type === "text" || block.type === "video") && (
+          <button
+            title="Design options"
+            className="w-6 h-6 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors text-xs leading-none"
+          >
+            ✦
+          </button>
+        )}
+
+        {/* ⋯ more menu */}
+        <div className="relative" ref={menuRef}>
+          <button
+            onClick={() => setShowMenu((v) => !v)}
+            className="w-6 h-6 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors text-sm leading-none"
+            title="More options"
+          >
+            ⋯
+          </button>
+          {showMenu && (
+            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1 w-36">
+              <button
+                onClick={() => { setShowMenu(false); onRemove(); }}
+                className="w-full text-left px-3 py-2 text-xs text-red-500 hover:bg-red-50 transition-colors"
+              >
+                Remove block
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Photo block */}
@@ -103,7 +155,7 @@ export default function BlockCard({
             ) : (
               <div className="flex flex-col items-center justify-center h-20 text-gray-400 text-xs text-center px-3 gap-1">
                 <span className="text-lg">🖼</span>
-                Drag a photo here, or click "+ Add Photos" to pick one
+                Drag a photo here, or click + to pick one
               </div>
             )}
           </div>
@@ -121,14 +173,6 @@ export default function BlockCard({
             ]}
             onChange={(v) => onUpdate({ ...block, variant: v })}
           />
-          {!block.imageUrl && (
-            <button
-              onClick={onAddPhotos}
-              className="text-xs text-gray-600 bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors"
-            >
-              + Add Photos
-            </button>
-          )}
         </div>
       )}
 
@@ -153,12 +197,6 @@ export default function BlockCard({
               ))}
             </div>
           )}
-          <button
-            onClick={onAddPhotos}
-            className="text-xs text-gray-600 bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            + Add Photos
-          </button>
         </div>
       )}
 
