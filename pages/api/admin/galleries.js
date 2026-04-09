@@ -1,7 +1,7 @@
 // pages/api/admin/galleries.js
 import { bucket } from "../../../common/gcsClient";
 import { readGalleriesConfig, writeGalleriesConfig } from "../../../common/galleriesConfig";
-import { galleryData } from "../../galleries";
+import { galleryData } from "../../../common/galleryData";
 
 const BUCKET_URL = "https://storage.googleapis.com/swamiphoto";
 

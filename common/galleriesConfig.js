@@ -9,7 +9,7 @@ export async function readGalleriesConfig() {
     const [contents] = await file.download();
     return JSON.parse(contents.toString());
   } catch {
-    return null;
+    return null; // file doesn't exist yet (normal on first run)
   }
 }
 
