@@ -1,56 +1,96 @@
-// components/admin/gallery-builder/DesignPopover.js
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
-const VARIANT_OPTIONS = {
-  photo: [
-    { value: 1, label: "Edge to edge" },
-    { value: 2, label: "Centered 72%" },
-  ],
-  text: [
-    { value: 1, label: "Sans-serif" },
-    { value: 2, label: "Serif" },
-  ],
-  video: [
-    { value: 1, label: "Edge to edge" },
-    { value: 2, label: "85% centered" },
-    { value: 3, label: "Video + caption" },
-  ],
+// Only include layout options that are actually rendered
+const LAYOUTS = {
+  photo: ["Edge to edge", "Centered"],
+  stacked: ["Stacked", "Masonry"],
+  masonry: ["Stacked", "Masonry"],
+  video: ["Edge to edge", "Centered"],
 };
 
-export default function DesignPopover({ blockType, value, onClose, onChange }) {
+function Section({ label, children }) {
+  return (
+    <div className="py-3 border-b border-stone-100 last:border-0">
+      <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider mb-2 pl-1">{label}</div>
+      {children}
+    </div>
+  );
+}
+
+export default function DesignPopover({ block, onUpdate, onClose, anchorEl }) {
   const ref = useRef(null);
-  const options = VARIANT_OPTIONS[blockType];
+  const [pos, setPos] = useState(null);
+  const blockType = block.type;
+
+  // Position just below the brush icon, left-aligned to it
+  useEffect(() => {
+    if (anchorEl) {
+      const rect = anchorEl.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const popoverHeight = 180;
+      if (spaceBelow < popoverHeight) {
+        setPos({ left: rect.left, bottom: window.innerHeight - rect.top + 4, top: "auto" });
+      } else {
+        setPos({ left: rect.left, top: rect.bottom + 4 });
+      }
+    }
+  }, [anchorEl]);
 
   useEffect(() => {
     const handler = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) onClose();
+      if (ref.current && !ref.current.contains(e.target) &&
+          anchorEl && !anchorEl.contains(e.target)) onClose();
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [onClose]);
+  }, [onClose, anchorEl]);
 
-  if (!options) return null;
+  const layouts = LAYOUTS[blockType] || [];
+  const isPhotos = blockType === "stacked" || blockType === "masonry";
+
+  const currentLayout = isPhotos
+    ? (blockType === "masonry" ? "Masonry" : "Stacked")
+    : (block.layout || layouts[0]);
+
+  const handleLayoutChange = (layout) => {
+    if (isPhotos) {
+      onUpdate({ ...block, type: layout === "Masonry" ? "masonry" : "stacked" });
+    } else {
+      onUpdate({ ...block, layout });
+    }
+  };
+
+  if (layouts.length === 0) return null;
 
   return (
     <div
       ref={ref}
-      className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-20 p-3 w-48"
+      className="fixed bg-white border border-stone-200 shadow-[0_4px_24px_rgba(0,0,0,0.12)] z-[9999]"
+      style={{ width: 200, ...(pos || {}) }}
     >
-      <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Layout</div>
-      <div className="flex flex-col gap-1">
-        {options.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => { onChange(opt.value); onClose(); }}
-            className={`text-left text-xs px-3 py-1.5 rounded-lg transition-colors ${
-              value === opt.value
-                ? "bg-gray-900 text-white"
-                : "text-gray-600 hover:bg-gray-100"
-            }`}
-          >
-            {opt.label}
-          </button>
-        ))}
+      <div className="px-3 pt-2.5 pb-2 border-b border-stone-100 flex items-center justify-between">
+        <span className="text-xs font-semibold text-stone-700 tracking-wide">Design</span>
+        <button onClick={onClose} className="text-stone-400 hover:text-stone-700 text-base leading-none transition-colors">×</button>
+      </div>
+
+      <div className="px-3">
+        <Section label="Layout">
+          <div className="flex flex-wrap gap-1.5 pl-1">
+            {layouts.map((l) => (
+              <button
+                key={l}
+                onClick={() => handleLayoutChange(l)}
+                className={`text-xs px-2.5 py-1 border transition-colors ${
+                  currentLayout === l
+                    ? "border-stone-900 bg-stone-900 text-white"
+                    : "border-stone-200 text-stone-600 hover:border-stone-400"
+                }`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+        </Section>
       </div>
     </div>
   );

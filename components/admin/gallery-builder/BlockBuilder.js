@@ -1,8 +1,31 @@
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import BlockCard from "./BlockCard";
 import BlockTypeMenu, { defaultBlock } from "./BlockTypeMenu";
+
+function AutoGrowTextarea({ className, value, onChange, placeholder, ...props }) {
+  const ref = useRef(null);
+  const adjust = useCallback(() => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  }, []);
+  useEffect(() => { adjust(); }, [value, adjust]);
+  return (
+    <textarea
+      ref={ref}
+      className={className}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={1}
+      style={{ overflow: "hidden", resize: "none" }}
+      {...props}
+    />
+  );
+}
 
 function InsertionZone({ onInsert }) {
   const [hovered, setHovered] = useState(false);
@@ -87,7 +110,7 @@ export default function BlockBuilder({
 
   return (
     <div
-      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10"
+      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10 text-left font-sans"
       style={{ boxShadow: "1px 0 0 #e7e5e3, 4px 0 20px rgba(0,0,0,0.05)" }}
     >
       {/* Header bar */}
@@ -133,28 +156,38 @@ export default function BlockBuilder({
           </button>
 
           {infoExpanded && (
-            <div className="px-3 pb-3 border-t border-stone-100 pt-3 space-y-2.5">
-              <input
-                className="w-full border-b border-stone-200 pb-1.5 text-sm font-medium text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
-                placeholder="Gallery name"
-                value={gallery.name || ""}
-                onChange={(e) => updateField("name", e.target.value)}
-              />
-              <input
-                className="w-full border-b border-stone-200 pb-1.5 text-xs text-stone-500 font-mono outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
-                placeholder="slug"
-                value={gallery.slug || ""}
-                onChange={(e) => updateField("slug", e.target.value)}
-              />
-              <textarea
-                className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-600 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent resize-none"
-                placeholder="Description"
-                rows={2}
-                value={gallery.description || ""}
-                onChange={(e) => updateField("description", e.target.value)}
-              />
+            <div className="px-3 pb-3 border-t border-stone-100 pt-3 space-y-4">
+              <div>
+                <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Name</div>
+                <input
+                  className="w-full border-b border-stone-200 p-0 pb-1 text-sm leading-snug font-medium text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
+                  placeholder="Gallery name"
+                  value={gallery.name || ""}
+                  onChange={(e) => updateField("name", e.target.value)}
+                />
+              </div>
+              <div>
+                <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Slug</div>
+                <input
+                  className="w-full border-b border-stone-200 p-0 pb-1 text-xs leading-snug text-stone-500 font-mono outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
+                  placeholder="slug"
+                  value={gallery.slug || ""}
+                  onChange={(e) => updateField("slug", e.target.value)}
+                />
+              </div>
+              <div>
+                <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Description</div>
+                <AutoGrowTextarea
+                  className="w-full border-b border-stone-200 p-0 pb-1 text-sm leading-snug text-stone-600 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
+                  placeholder="Description"
+                  value={gallery.description || ""}
+                  onChange={(e) => updateField("description", e.target.value)}
+                />
+              </div>
 
               {/* Thumbnail row */}
+              <div>
+              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Thumbnail</div>
               <div className="flex items-center gap-3 pt-0.5">
                 <div
                   onClick={onPickThumbnail}
@@ -168,20 +201,13 @@ export default function BlockBuilder({
                     </svg>
                   )}
                 </div>
-                <div className="flex flex-col gap-1">
-                  <button
-                    onClick={onPickThumbnail}
-                    className="text-xs text-stone-600 hover:text-stone-900 text-left transition-colors leading-none"
-                  >
-                    Select a photo
-                  </button>
-                  <button
-                    onClick={onPickThumbnail}
-                    className="text-xs text-stone-400 hover:text-stone-600 text-left transition-colors leading-none"
-                  >
-                    Upload a new photo
-                  </button>
-                </div>
+                <button
+                  onClick={onPickThumbnail}
+                  className="text-xs text-stone-600 hover:text-stone-900 text-left transition-colors leading-none"
+                >
+                  Select from library
+                </button>
+              </div>
               </div>
 
               {/* Unlisted row — separate */}

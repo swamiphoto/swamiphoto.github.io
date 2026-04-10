@@ -1,5 +1,5 @@
 // components/admin/slideshow-builder/SlideshowSidebar.js
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { MUSIC_PRESETS } from "./musicPresets";
 
@@ -9,7 +9,7 @@ const THEMES = [
   { label: "Film Single", value: "film-single" },
 ];
 
-const INPUT = "w-full border-b border-stone-200 pb-1.5 text-sm text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent";
+const INPUT = "w-full border-b border-stone-200 p-0 pb-1 text-sm leading-snug text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent";
 
 function ChevronIcon({ expanded }) {
   return (
@@ -42,6 +42,29 @@ function Card({ title, children, defaultExpanded = true }) {
   );
 }
 
+function AutoGrowTextarea({ className, value, onChange, placeholder, ...props }) {
+  const ref = useRef(null);
+  const adjust = useCallback(() => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  }, []);
+  useEffect(() => { adjust(); }, [value, adjust]);
+  return (
+    <textarea
+      ref={ref}
+      className={className}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={1}
+      style={{ overflow: "hidden", resize: "none" }}
+      {...props}
+    />
+  );
+}
+
 function collectGalleryImages(blocks) {
   const urls = [];
   for (const block of blocks || []) {
@@ -65,7 +88,7 @@ export default function SlideshowSidebar({
   onCollapse,
 }) {
   const ss = gallery.slideshowSettings || {};
-  const [contextMenu, setContextMenu] = useState(null); // { x, y, url }
+  const [contextMenu, setContextMenu] = useState(null);
 
   useEffect(() => {
     if (!contextMenu) return;
@@ -81,9 +104,13 @@ export default function SlideshowSidebar({
 
   const isCustomMusic = ss.youtubeLink !== undefined && ss.youtubeLink !== "" && !MUSIC_PRESETS.some(p => p.url === ss.youtubeLink);
 
+  // Title and description: show the actual value if set, otherwise fall back to gallery name/description
+  const titleValue = ss.title !== undefined && ss.title !== "" ? ss.title : gallery.name || "";
+  const descValue = ss.description !== undefined && ss.description !== "" ? ss.description : gallery.description || "";
+
   return (
     <div
-      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10 text-left"
+      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10 text-left font-sans"
       style={{ boxShadow: "1px 0 0 #e7e5e3, 4px 0 20px rgba(0,0,0,0.05)" }}
     >
       {/* Header */}
@@ -114,24 +141,25 @@ export default function SlideshowSidebar({
       {/* Scrollable body */}
       <div className="flex-1 overflow-y-auto px-3 py-3">
 
+        {/* Theme card */}
+        <Card title="Theme">
+          <select
+            className="w-full border-b border-stone-200 pb-0.5 text-sm text-stone-800 outline-none focus:border-stone-500 bg-transparent transition-colors"
+            value={ss.layout || "kenburns"}
+            onChange={e => updateSS("layout", e.target.value)}
+          >
+            {THEMES.map(t => (
+              <option key={t.value} value={t.value}>{t.label}</option>
+            ))}
+          </select>
+        </Card>
+
         {/* Cover card */}
         <Card title="Cover">
-          <div className="space-y-3">
-            {/* Theme */}
-            <div>
-              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider mb-1.5">Theme</div>
-              <select
-                className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-800 outline-none focus:border-stone-500 bg-transparent transition-colors"
-                value={ss.layout || "kenburns"}
-                onChange={e => updateSS("layout", e.target.value)}
-              >
-                {THEMES.map(t => (
-                  <option key={t.value} value={t.value}>{t.label}</option>
-                ))}
-              </select>
-            </div>
-
+          <div className="space-y-4">
             {/* Cover photo */}
+            <div>
+            <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Cover Photo</div>
             <div className="flex items-center gap-3 pt-0.5">
               <div
                 onClick={onPickCover}
@@ -145,27 +173,36 @@ export default function SlideshowSidebar({
                   </svg>
                 )}
               </div>
-              <button onClick={onPickCover} className="text-xs text-stone-600 hover:text-stone-900 transition-colors underline underline-offset-2">
-                Select cover photo
+              <button
+                onClick={onPickCover}
+                className="text-xs text-stone-600 hover:text-stone-900 text-left transition-colors leading-none"
+              >
+                Select from library
               </button>
+            </div>
             </div>
 
             {/* Title */}
-            <input
-              className={INPUT}
-              placeholder={gallery.name || "Slideshow title"}
-              value={ss.title || ""}
-              onChange={e => updateSS("title", e.target.value)}
-            />
+            <div>
+              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Title</div>
+              <input
+                className={INPUT}
+                placeholder="Slideshow title"
+                value={titleValue}
+                onChange={e => updateSS("title", e.target.value)}
+              />
+            </div>
 
             {/* Description */}
-            <textarea
-              className={`${INPUT} resize-none`}
-              placeholder={gallery.description || "Slideshow description"}
-              rows={2}
-              value={ss.description || ""}
-              onChange={e => updateSS("description", e.target.value)}
-            />
+            <div>
+              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Description</div>
+              <AutoGrowTextarea
+                className={INPUT}
+                placeholder="Slideshow description"
+                value={descValue}
+                onChange={e => updateSS("description", e.target.value)}
+              />
+            </div>
           </div>
         </Card>
 
@@ -212,11 +249,11 @@ export default function SlideshowSidebar({
 
         {/* Music card */}
         <Card title="Music">
-          <div className="space-y-2.5">
+          <div className="space-y-4">
             <div>
-              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider mb-1.5">Track</div>
+              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Track</div>
               <select
-                className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-800 outline-none focus:border-stone-500 bg-transparent transition-colors"
+                className="w-full border-b border-stone-200 pb-0.5 text-sm text-stone-800 outline-none focus:border-stone-500 bg-transparent transition-colors"
                 value={MUSIC_PRESETS.some(p => p.url === ss.youtubeLink) ? ss.youtubeLink : (ss.youtubeLink ? "__custom__" : "")}
                 onChange={e => {
                   if (e.target.value === "__custom__" || e.target.value === "") {
@@ -253,12 +290,15 @@ export default function SlideshowSidebar({
             )}
 
             {/* Music credit */}
-            <input
-              className={INPUT}
-              placeholder="Music credit (e.g. Music: Song — Artist)"
-              value={ss.musicCredit || ""}
-              onChange={e => updateSS("musicCredit", e.target.value)}
-            />
+            <div>
+              <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider">Credit</div>
+              <input
+                className={INPUT}
+                placeholder="e.g. Music: Song — Artist"
+                value={ss.musicCredit || ""}
+                onChange={e => updateSS("musicCredit", e.target.value)}
+              />
+            </div>
           </div>
         </Card>
 
@@ -271,7 +311,7 @@ export default function SlideshowSidebar({
           disabled={publishing || (isPublished && !hasDraft)}
           className="w-full text-xs font-semibold bg-stone-900 text-white px-3 py-2.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
         >
-          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
+          {publishing ? "Publishing…" : "Publish"}
         </button>
       </div>
 

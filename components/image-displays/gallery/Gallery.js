@@ -44,6 +44,7 @@ const Gallery = ({ name, description, blocks, enableSlideshow, enableClientView,
               );
 
             case "photo":
+              if (!block.imageUrl) return null;
               return (
                 <div key={`block-${index}`} className="photo-block">
                   <PhotoBlock imageUrl={block.imageUrl} caption={block.caption} variant={block.variant || 1} />

@@ -1,5 +1,4 @@
-// components/admin/gallery-builder/PhotoPickerModal.js
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 
 const KNOWN_FOLDERS = [
   "photos/library",
@@ -19,11 +18,10 @@ function extractFolder(url) {
   return match ? match[1] : "other";
 }
 
-function LibraryTab({ images, loading, blockType, onConfirm }) {
+function LibraryTab({ images, loading, blockType, onConfirm, defaultFolder }) {
   const [search, setSearch] = useState("");
-  const [folder, setFolder] = useState("all");
+  const [folder, setFolder] = useState(defaultFolder || "all");
   const [selected, setSelected] = useState([]);
-
   const isMulti = blockType === "stacked" || blockType === "masonry";
 
   const folders = useMemo(() => {
@@ -35,34 +33,26 @@ function LibraryTab({ images, loading, blockType, onConfirm }) {
   const filtered = useMemo(() => {
     let result = images;
     if (folder !== "all") result = result.filter((url) => extractFolder(url) === folder);
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      result = result.filter((url) => url.toLowerCase().includes(q));
-    }
+    if (search.trim()) result = result.filter((url) => url.toLowerCase().includes(search.toLowerCase()));
     return result;
   }, [images, folder, search]);
 
   const toggle = (url) => {
-    if (!isMulti) {
-      onConfirm([url]);
-      return;
-    }
-    setSelected((prev) =>
-      prev.includes(url) ? prev.filter((u) => u !== url) : [...prev, url]
-    );
+    if (!isMulti) { onConfirm([url]); return; }
+    setSelected((prev) => prev.includes(url) ? prev.filter((u) => u !== url) : [...prev, url]);
   };
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-gray-100 space-y-2 flex-shrink-0">
+      <div className="px-3 py-3 border-b border-stone-100 space-y-2 flex-shrink-0">
         <input
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors placeholder:text-gray-300"
+          className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
           placeholder="Search photos…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-600 outline-none"
+          className="w-full border-b border-stone-200 pb-1.5 text-xs text-stone-600 outline-none bg-transparent focus:border-stone-500 transition-colors"
           value={folder}
           onChange={(e) => setFolder(e.target.value)}
         >
@@ -72,25 +62,24 @@ function LibraryTab({ images, loading, blockType, onConfirm }) {
         </select>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto p-2">
         {loading ? (
-          <div className="text-center text-gray-400 text-sm py-16">Loading photos…</div>
+          <div className="text-center text-stone-400 text-xs py-12">Loading…</div>
         ) : filtered.length === 0 ? (
-          <div className="text-center text-gray-400 text-sm py-16">No photos found</div>
+          <div className="text-center text-stone-400 text-xs py-12">No photos found</div>
         ) : (
-          <div style={{ columns: "4", gap: "6px" }}>
+          <div style={{ columns: "3", gap: "4px" }}>
             {filtered.map((url) => {
               const isSelected = selected.includes(url);
               return (
                 <div
                   key={url}
-                  className={`relative rounded-lg overflow-hidden cursor-pointer mb-1.5 break-inside-avoid ring-2 transition-all ${
-                    isSelected ? "ring-blue-500" : "ring-transparent hover:ring-gray-300"
+                  className={`relative overflow-hidden cursor-pointer mb-1 break-inside-avoid ring-2 transition-all ${
+                    isSelected ? "ring-stone-700" : "ring-transparent hover:ring-stone-300"
                   }`}
                   onClick={() => toggle(url)}
                   draggable
                   onDragStart={(e) => e.dataTransfer.setData("text/plain", url)}
-                  title={url.split("/").pop()}
                 >
                   <img
                     src={`/_next/image?url=${encodeURIComponent(url)}&w=256&q=65`}
@@ -99,8 +88,8 @@ function LibraryTab({ images, loading, blockType, onConfirm }) {
                     loading="lazy"
                   />
                   {isSelected && (
-                    <div className="absolute top-1.5 right-1.5 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-[10px] font-bold">✓</span>
+                    <div className="absolute top-1 right-1 w-4 h-4 bg-stone-900 rounded-full flex items-center justify-center">
+                      <span className="text-white text-[8px] font-bold">✓</span>
                     </div>
                   )}
                 </div>
@@ -111,14 +100,14 @@ function LibraryTab({ images, loading, blockType, onConfirm }) {
       </div>
 
       {isMulti && (
-        <div className="px-4 py-3 border-t border-gray-100 flex items-center justify-between flex-shrink-0">
-          <span className="text-xs text-gray-400">
+        <div className="px-3 py-2.5 border-t border-stone-100 flex items-center justify-between flex-shrink-0">
+          <span className="text-xs text-stone-400">
             {selected.length > 0 ? `${selected.length} selected` : `${filtered.length} photos`}
           </span>
           <button
             onClick={() => onConfirm(selected)}
             disabled={selected.length === 0}
-            className="bg-gray-900 text-white text-sm px-4 py-1.5 rounded-lg disabled:opacity-40 hover:bg-gray-700 transition-colors"
+            className="bg-stone-900 text-white text-xs px-3 py-1.5 disabled:opacity-40 hover:bg-stone-700 transition-colors"
           >
             Add {selected.length > 0 ? selected.length : ""} photo{selected.length !== 1 ? "s" : ""}
           </button>
@@ -170,31 +159,30 @@ function UploadTab({ onUploaded }) {
   };
 
   return (
-    <div className="flex flex-col h-full p-4 space-y-4">
+    <div className="flex flex-col h-full p-3 space-y-3">
       <div
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
         onDrop={(e) => { e.preventDefault(); setDragging(false); addFiles(e.dataTransfer.files); }}
         onClick={() => inputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors ${
-          dragging ? "border-blue-400 bg-blue-50" : "border-gray-200 hover:border-gray-400 bg-gray-50"
+        className={`border border-dashed p-6 text-center cursor-pointer transition-colors ${
+          dragging ? "border-stone-500 bg-stone-50" : "border-stone-200 hover:border-stone-400"
         }`}
       >
         <input ref={inputRef} type="file" multiple accept=".jpg,.jpeg,.png,.gif" className="hidden" onChange={(e) => addFiles(e.target.files)} />
-        <div className="text-3xl mb-2">📁</div>
-        <div className="text-sm font-medium text-gray-700">Drop photos here or click to browse</div>
-        <div className="text-xs text-gray-400 mt-1">JPG, PNG — multiple files supported</div>
+        <div className="text-xs font-medium text-stone-600 mb-0.5">Drop photos here</div>
+        <div className="text-xs text-stone-400">or click to browse</div>
       </div>
 
       {files.length > 0 && (
-        <div className="max-h-32 overflow-y-auto space-y-1">
+        <div className="max-h-24 overflow-y-auto space-y-1">
           {files.map((f) => (
             <div key={f.name} className="flex items-center gap-2">
-              <span className="flex-1 truncate text-xs text-gray-600">{f.name}</span>
+              <span className="flex-1 truncate text-xs text-stone-600">{f.name}</span>
               <span className={
                 progress[f.name] === "done" ? "text-green-500 text-xs" :
                 progress[f.name] === "error" ? "text-red-500 text-xs" :
-                progress[f.name] === "pending" ? "text-blue-400 text-xs" : "text-gray-300 text-xs"
+                progress[f.name] === "pending" ? "text-stone-400 text-xs" : "text-stone-300 text-xs"
               }>
                 {progress[f.name] === "done" ? "✓" : progress[f.name] === "error" ? "✗" : progress[f.name] === "pending" ? "↑" : "·"}
               </span>
@@ -204,15 +192,13 @@ function UploadTab({ onUploaded }) {
       )}
 
       <div>
-        <label className="block text-xs font-medium text-gray-500 mb-1">
-          Folder <span className="text-gray-400 font-normal">(optional — blank = photos/library)</span>
-        </label>
+        <div className="text-xs text-stone-400 mb-1">Folder <span className="text-stone-300">(optional)</span></div>
         <input
           list="upload-folder-options"
           value={folder}
           onChange={(e) => setFolder(e.target.value)}
           placeholder="photos/landscapes"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-gray-400 focus:bg-white transition-colors"
+          className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-800 outline-none focus:border-stone-500 transition-colors placeholder:text-stone-300 bg-transparent"
         />
         <datalist id="upload-folder-options">
           {KNOWN_FOLDERS.map((f) => <option key={f} value={f} />)}
@@ -222,7 +208,7 @@ function UploadTab({ onUploaded }) {
       <button
         onClick={handleUpload}
         disabled={files.length === 0 || uploading}
-        className="bg-gray-900 text-white text-sm py-2.5 rounded-xl disabled:opacity-40 hover:bg-gray-700 transition-colors"
+        className="w-full bg-stone-900 text-white text-xs font-medium py-2 disabled:opacity-40 hover:bg-stone-700 transition-colors"
       >
         {uploading ? "Uploading…" : `Upload ${files.length} photo${files.length !== 1 ? "s" : ""}`}
       </button>
@@ -230,56 +216,72 @@ function UploadTab({ onUploaded }) {
   );
 }
 
-export default function PhotoPickerModal({ images, loading, blockType, onConfirm, onClose }) {
+export default function PhotoPickerModal({ images, loading, blockType, onConfirm, onClose, defaultFolder }) {
   const [tab, setTab] = useState("library");
 
-  const handleUploadDone = (uploadedUrls) => {
-    onConfirm(uploadedUrls);
+  // Dragging state
+  const panelRef = useRef(null);
+  const dragState = useRef(null);
+  const [pos, setPos] = useState({ x: 300, y: 60 }); // initial: just right of sidebar
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (!dragState.current) return;
+      const dx = e.clientX - dragState.current.startX;
+      const dy = e.clientY - dragState.current.startY;
+      setPos({ x: dragState.current.origX + dx, y: dragState.current.origY + dy });
+    };
+    const onUp = () => { dragState.current = null; };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+  }, []);
+
+  const startDrag = (e) => {
+    if (e.target.closest("button,input,select,textarea,img")) return;
+    dragState.current = { startX: e.clientX, startY: e.clientY, origX: pos.x, origY: pos.y };
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-6 font-sans">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col" style={{ height: "80vh" }}>
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-100 flex-shrink-0">
-          <div className="flex gap-1 bg-gray-100 rounded-lg p-0.5">
-            <button
-              onClick={() => setTab("library")}
-              className={`text-xs px-3 py-1.5 rounded-md transition-colors ${
-                tab === "library" ? "bg-white shadow-sm text-gray-900 font-medium" : "text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              Library
-            </button>
-            <button
-              onClick={() => setTab("upload")}
-              className={`text-xs px-3 py-1.5 rounded-md transition-colors ${
-                tab === "upload" ? "bg-white shadow-sm text-gray-900 font-medium" : "text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              Upload
-            </button>
-          </div>
-          <div className="flex-1" />
-          <button
-            onClick={onClose}
-            className="w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors text-lg leading-none"
-          >
-            ×
-          </button>
-        </div>
+    <div
+      ref={panelRef}
+      className="fixed z-50 bg-white border border-stone-200 shadow-xl flex flex-col"
+      style={{ left: pos.x, top: pos.y, width: 300, height: 520 }}
+    >
+      {/* Title bar — drag handle */}
+      <div
+        className="flex items-center gap-2 px-3 py-2.5 border-b border-stone-100 cursor-grab select-none flex-shrink-0"
+        onMouseDown={startDrag}
+      >
+        {/* Tabs */}
+        <button
+          onClick={() => setTab("library")}
+          className={`text-xs font-medium transition-colors ${tab === "library" ? "text-stone-900" : "text-stone-400 hover:text-stone-600"}`}
+        >
+          Library
+        </button>
+        <span className="text-stone-200 text-xs">|</span>
+        <button
+          onClick={() => setTab("upload")}
+          className={`text-xs font-medium transition-colors ${tab === "upload" ? "text-stone-900" : "text-stone-400 hover:text-stone-600"}`}
+        >
+          Upload
+        </button>
+        <div className="flex-1" />
+        <button
+          onClick={onClose}
+          className="text-stone-400 hover:text-stone-700 transition-colors text-base leading-none"
+        >
+          ×
+        </button>
+      </div>
 
-        <div className="flex-1 min-h-0">
-          {tab === "library" ? (
-            <LibraryTab
-              images={images}
-              loading={loading}
-              blockType={blockType}
-              onConfirm={onConfirm}
-            />
-          ) : (
-            <UploadTab onUploaded={handleUploadDone} />
-          )}
-        </div>
+      <div className="flex-1 min-h-0">
+        {tab === "library" ? (
+          <LibraryTab images={images} loading={loading} blockType={blockType} onConfirm={onConfirm} defaultFolder={defaultFolder} />
+        ) : (
+          <UploadTab onUploaded={onConfirm} />
+        )}
       </div>
     </div>
   );

@@ -130,7 +130,7 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
   const isPublished = initialGallery.status === "published";
 
   return (
-    <div className="flex h-screen bg-stone-50 font-sans">
+    <div className="flex h-screen bg-stone-50">
       {!collapsed ? (
         <SlideshowSidebar
           gallery={gallery}
@@ -160,7 +160,7 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
           </div>
         ) : (
           <Slideshow
-            key={ss.youtubeLink || "no-music"}
+            key={`${ss.layout || "kenburns"}-${ss.youtubeLink || "no-music"}`}
             slides={slides}
             layout={ss.layout || "kenburns"}
             title={ss.title || gallery.name || ""}
@@ -181,6 +181,12 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
           blockType="photo"
           onConfirm={handleCoverConfirm}
           onClose={() => setCoverPickerOpen(false)}
+          defaultFolder={(() => {
+            const firstImg = collectGalleryImages(gallery.blocks)[0];
+            if (!firstImg) return undefined;
+            const match = firstImg.match(/\/photos\/(.+)\/[^/]+$/);
+            return match ? match[1] : undefined;
+          })()}
         />
       )}
     </div>
