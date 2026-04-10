@@ -101,7 +101,7 @@ export default function SlideshowSidebar({
             className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none"
             title="Collapse sidebar"
           >
-            →
+            ←
           </button>
           <span className="text-[10px] text-stone-400 flex-1 text-right">
             {autosaveStatus === "saving" && "Saving…"}
