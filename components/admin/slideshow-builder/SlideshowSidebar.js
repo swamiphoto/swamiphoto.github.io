@@ -83,7 +83,7 @@ export default function SlideshowSidebar({
 
   return (
     <div
-      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10"
+      className="w-72 flex-shrink-0 flex flex-col h-full bg-stone-50 relative z-10 text-left"
       style={{ boxShadow: "1px 0 0 #e7e5e3, 4px 0 20px rgba(0,0,0,0.05)" }}
     >
       {/* Header */}
