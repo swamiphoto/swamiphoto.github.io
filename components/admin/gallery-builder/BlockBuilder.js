@@ -108,6 +108,13 @@ export default function BlockBuilder({
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
           </svg>
         </button>
+        <button
+          onClick={onPublish}
+          disabled={publishing || (isPublished && !hasDraft)}
+          className="text-xs font-semibold bg-stone-900 text-white px-4 py-1.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
+        >
+          {publishing ? "Publishing…" : "Publish"}
+        </button>
       </div>
 
       {/* All blocks — scrollable */}
@@ -252,7 +259,10 @@ export default function BlockBuilder({
           <p className="text-xs text-stone-400 text-center py-4">No blocks yet</p>
         )}
 
-        {/* Add Block — inline after last block */}
+      </div>
+
+      {/* Add Block */}
+      <div className="p-3 border-t border-stone-200 flex-shrink-0">
         <button
           onClick={(e) => {
             if (showBlockMenu) { setShowBlockMenu(false); return; }
@@ -260,20 +270,9 @@ export default function BlockBuilder({
             setInsertAtIndex(null);
             setShowBlockMenu(true);
           }}
-          className="w-full bg-white border border-stone-300 text-stone-700 text-sm font-medium py-2.5 hover:bg-stone-50 hover:border-stone-400 transition-colors mt-1"
+          className="w-full bg-white border border-stone-300 text-stone-700 text-sm font-medium py-2.5 hover:bg-stone-50 hover:border-stone-400 transition-colors"
         >
           Add Block
-        </button>
-      </div>
-
-      {/* Publish — fixed at bottom */}
-      <div className="p-3 border-t border-stone-200 flex-shrink-0">
-        <button
-          onClick={onPublish}
-          disabled={publishing || (isPublished && !hasDraft)}
-          className="w-full text-xs font-semibold bg-stone-900 text-white px-3 py-2.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
-        >
-          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
         </button>
       </div>
 
