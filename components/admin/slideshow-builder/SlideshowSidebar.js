@@ -87,35 +87,27 @@ export default function SlideshowSidebar({
       style={{ boxShadow: "1px 0 0 #e7e5e3, 4px 0 20px rgba(0,0,0,0.05)" }}
     >
       {/* Header */}
-      <div className="px-3 pt-3 pb-2.5 flex-shrink-0 border-b border-stone-200">
-        <div className="flex items-center gap-2">
-          <Link
-            href={`/admin/galleries/${gallery.slug}`}
-            className="text-xs text-stone-400 hover:text-stone-700 transition-colors leading-none"
-          >
-            ← Gallery
-          </Link>
-          <button
-            onClick={onCollapse}
-            className="text-stone-400 hover:text-stone-700 transition-colors flex-shrink-0"
-            title="Collapse sidebar"
-          >
-            <svg className="w-3.5 h-3.5 rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
-          <span className="text-[10px] text-stone-400 flex-1 text-right">
-            {autosaveStatus === "saving" && "Saving…"}
-            {autosaveStatus === "saved" && "Saved"}
-            {autosaveStatus === "unsaved" && "Unsaved"}
-          </span>
-        </div>
-        <button
-          onClick={onPublish}
-          disabled={publishing || (isPublished && !hasDraft)}
-          className="mt-2 w-full text-xs font-semibold bg-stone-900 text-white px-3 py-1.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
+      <div className="px-3 pt-3 pb-3 flex items-center gap-2 flex-shrink-0 border-b border-stone-200">
+        <Link
+          href={`/admin/galleries/${gallery.slug}`}
+          className="text-xs text-stone-400 hover:text-stone-700 transition-colors leading-none"
         >
-          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
+          ← Gallery
+        </Link>
+        <span className="flex-1" />
+        <span className="text-[10px] text-stone-400">
+          {autosaveStatus === "saving" && "Saving…"}
+          {autosaveStatus === "saved" && "Saved"}
+          {autosaveStatus === "unsaved" && "Unsaved"}
+        </span>
+        <button
+          onClick={onCollapse}
+          className="text-stone-400 hover:text-stone-700 transition-colors flex-shrink-0"
+          title="Collapse sidebar"
+        >
+          <svg className="w-3.5 h-3.5 -rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
         </button>
       </div>
 
@@ -270,6 +262,17 @@ export default function SlideshowSidebar({
           </div>
         </Card>
 
+      </div>
+
+      {/* Publish — bottom */}
+      <div className="p-3 border-t border-stone-200 flex-shrink-0">
+        <button
+          onClick={onPublish}
+          disabled={publishing || (isPublished && !hasDraft)}
+          className="w-full text-xs font-semibold bg-stone-900 text-white px-3 py-2.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
+        >
+          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
+        </button>
       </div>
 
       {/* Context menu for image exclude/include */}

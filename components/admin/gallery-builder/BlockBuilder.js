@@ -94,18 +94,19 @@ export default function BlockBuilder({
       <div className="px-3 pt-3 pb-3 flex items-center gap-2 flex-shrink-0 border-b border-stone-200">
         <button onClick={onToggleExpand} className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none">←</button>
         <span className="text-xs tracking-widest font-medium text-stone-400 flex-1">GALLERY</span>
-        {/* Autosave status */}
         <span className="text-[10px] text-stone-400">
           {autosaveStatus === "saving" && "Saving…"}
           {autosaveStatus === "saved" && "Saved"}
           {autosaveStatus === "unsaved" && "Unsaved"}
         </span>
         <button
-          onClick={onPublish}
-          disabled={publishing || (isPublished && !hasDraft)}
-          className="text-xs font-semibold bg-stone-900 text-white px-4 py-1.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
+          onClick={onToggleExpand}
+          className="text-stone-400 hover:text-stone-700 transition-colors flex-shrink-0"
+          title="Collapse sidebar"
         >
-          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
+          <svg className="w-3.5 h-3.5 -rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
         </button>
       </div>
 
@@ -252,8 +253,8 @@ export default function BlockBuilder({
         )}
       </div>
 
-      {/* Add Block */}
-      <div className="p-3 border-t border-stone-200 flex-shrink-0">
+      {/* Bottom actions */}
+      <div className="p-3 border-t border-stone-200 flex-shrink-0 space-y-2">
         <button
           onClick={(e) => {
             if (showBlockMenu) { setShowBlockMenu(false); return; }
@@ -261,9 +262,16 @@ export default function BlockBuilder({
             setInsertAtIndex(null);
             setShowBlockMenu(true);
           }}
-          className="w-full bg-stone-900 text-white text-sm font-medium py-2.5 hover:bg-stone-700 transition-colors"
+          className="w-full bg-white border border-stone-300 text-stone-700 text-sm font-medium py-2.5 hover:bg-stone-50 hover:border-stone-400 transition-colors"
         >
           Add Block
+        </button>
+        <button
+          onClick={onPublish}
+          disabled={publishing || (isPublished && !hasDraft)}
+          className="w-full text-xs font-semibold bg-stone-900 text-white px-3 py-2.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
+        >
+          {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
         </button>
       </div>
 
