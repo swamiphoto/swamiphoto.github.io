@@ -24,6 +24,7 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
   const [publishing, setPublishing] = useState(false);
   const [autosaveStatus, setAutosaveStatus] = useState("idle");
   const [hasDraft, setHasDraft] = useState(!!initialGallery.draft);
+  const [collapsed, setCollapsed] = useState(false);
   const [coverPickerOpen, setCoverPickerOpen] = useState(false);
   const [libraryImages, setLibraryImages] = useState(null);
   const [libraryLoading, setLibraryLoading] = useState(false);
@@ -130,16 +131,26 @@ export default function SlideshowBuilder({ initialGallery, galleryIndex, allGall
 
   return (
     <div className="flex h-screen bg-stone-50 font-sans">
-      <SlideshowSidebar
-        gallery={gallery}
-        onChange={setGallery}
-        onPublish={handlePublish}
-        publishing={publishing}
-        autosaveStatus={autosaveStatus}
-        hasDraft={hasDraft}
-        isPublished={isPublished}
-        onPickCover={handlePickCover}
-      />
+      {!collapsed ? (
+        <SlideshowSidebar
+          gallery={gallery}
+          onChange={setGallery}
+          onPublish={handlePublish}
+          publishing={publishing}
+          autosaveStatus={autosaveStatus}
+          hasDraft={hasDraft}
+          isPublished={isPublished}
+          onPickCover={handlePickCover}
+          onCollapse={() => setCollapsed(true)}
+        />
+      ) : (
+        <button
+          onClick={() => setCollapsed(false)}
+          className="absolute left-3 top-3 z-20 w-7 h-7 flex items-center justify-center bg-white border border-stone-200 text-stone-400 hover:text-stone-800 shadow-sm transition-colors text-sm leading-none"
+        >
+          →
+        </button>
+      )}
 
       {/* Live Slideshow preview — transform creates a containing block so Slideshow's fixed overlay stays within this panel */}
       <div className="flex-1 relative overflow-hidden" style={{ transform: "translateZ(0)" }}>

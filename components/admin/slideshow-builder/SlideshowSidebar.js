@@ -62,6 +62,7 @@ export default function SlideshowSidebar({
   hasDraft,
   isPublished,
   onPickCover,
+  onCollapse,
 }) {
   const ss = gallery.slideshowSettings || {};
   const [contextMenu, setContextMenu] = useState(null); // { x, y, url }
@@ -86,23 +87,32 @@ export default function SlideshowSidebar({
       style={{ boxShadow: "1px 0 0 #e7e5e3, 4px 0 20px rgba(0,0,0,0.05)" }}
     >
       {/* Header */}
-      <div className="px-3 pt-3 pb-3 flex items-center gap-2 flex-shrink-0 border-b border-stone-200">
-        <Link
-          href={`/admin/galleries/${gallery.slug}`}
-          className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none"
-        >
-          ←
-        </Link>
-        <span className="text-xs tracking-widest font-medium text-stone-400 flex-1">SLIDESHOW</span>
-        <span className="text-[10px] text-stone-400">
-          {autosaveStatus === "saving" && "Saving…"}
-          {autosaveStatus === "saved" && "Saved"}
-          {autosaveStatus === "unsaved" && "Unsaved"}
-        </span>
+      <div className="px-3 pt-3 pb-2.5 flex-shrink-0 border-b border-stone-200">
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/admin/galleries/${gallery.slug}`}
+            className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none"
+            title="Back to gallery"
+          >
+            ←
+          </Link>
+          <button
+            onClick={onCollapse}
+            className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none"
+            title="Collapse sidebar"
+          >
+            →
+          </button>
+          <span className="text-[10px] text-stone-400 flex-1 text-right">
+            {autosaveStatus === "saving" && "Saving…"}
+            {autosaveStatus === "saved" && "Saved"}
+            {autosaveStatus === "unsaved" && "Unsaved"}
+          </span>
+        </div>
         <button
           onClick={onPublish}
           disabled={publishing || (isPublished && !hasDraft)}
-          className="text-xs font-semibold bg-stone-900 text-white px-4 py-1.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
+          className="mt-2 w-full text-xs font-semibold bg-stone-900 text-white px-3 py-1.5 hover:bg-stone-700 disabled:opacity-40 transition-colors"
         >
           {publishing ? "Publishing…" : isPublished && !hasDraft ? "Published ✓" : isPublished && hasDraft ? "Publish changes" : "Publish"}
         </button>
@@ -117,21 +127,15 @@ export default function SlideshowSidebar({
             {/* Theme */}
             <div>
               <div className="text-[10px] font-medium text-stone-400 uppercase tracking-wider mb-1.5">Theme</div>
-              <div className="flex gap-1.5 flex-wrap">
+              <select
+                className="w-full border-b border-stone-200 pb-1.5 text-sm text-stone-800 outline-none focus:border-stone-500 bg-transparent transition-colors"
+                value={ss.layout || "kenburns"}
+                onChange={e => updateSS("layout", e.target.value)}
+              >
                 {THEMES.map(t => (
-                  <button
-                    key={t.value}
-                    onClick={() => updateSS("layout", t.value)}
-                    className={`text-xs px-2.5 py-1 border transition-colors ${
-                      (ss.layout || "kenburns") === t.value
-                        ? "border-stone-900 bg-stone-900 text-white"
-                        : "border-stone-200 text-stone-600 hover:border-stone-400"
-                    }`}
-                  >
-                    {t.label}
-                  </button>
+                  <option key={t.value} value={t.value}>{t.label}</option>
                 ))}
-              </div>
+              </select>
             </div>
 
             {/* Cover photo */}
