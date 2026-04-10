@@ -251,10 +251,8 @@ export default function BlockBuilder({
         {(gallery.blocks || []).length === 0 && (
           <p className="text-xs text-stone-400 text-center py-4">No blocks yet</p>
         )}
-      </div>
 
-      {/* Bottom actions */}
-      <div className="p-3 border-t border-stone-200 flex-shrink-0 space-y-2">
+        {/* Add Block — inline after last block */}
         <button
           onClick={(e) => {
             if (showBlockMenu) { setShowBlockMenu(false); return; }
@@ -262,10 +260,14 @@ export default function BlockBuilder({
             setInsertAtIndex(null);
             setShowBlockMenu(true);
           }}
-          className="w-full bg-white border border-stone-300 text-stone-700 text-sm font-medium py-2.5 hover:bg-stone-50 hover:border-stone-400 transition-colors"
+          className="w-full bg-white border border-stone-300 text-stone-700 text-sm font-medium py-2.5 hover:bg-stone-50 hover:border-stone-400 transition-colors mt-1"
         >
           Add Block
         </button>
+      </div>
+
+      {/* Publish — fixed at bottom */}
+      <div className="p-3 border-t border-stone-200 flex-shrink-0">
         <button
           onClick={onPublish}
           disabled={publishing || (isPublished && !hasDraft)}
