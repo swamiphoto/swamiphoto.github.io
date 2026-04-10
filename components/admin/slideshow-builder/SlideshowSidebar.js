@@ -91,17 +91,18 @@ export default function SlideshowSidebar({
         <div className="flex items-center gap-2">
           <Link
             href={`/admin/galleries/${gallery.slug}`}
-            className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none"
-            title="Back to gallery"
+            className="text-xs text-stone-400 hover:text-stone-700 transition-colors leading-none"
           >
-            ←
+            ← Gallery
           </Link>
           <button
             onClick={onCollapse}
-            className="text-stone-400 hover:text-stone-700 transition-colors text-sm leading-none"
+            className="text-stone-400 hover:text-stone-700 transition-colors flex-shrink-0"
             title="Collapse sidebar"
           >
-            ←
+            <svg className="w-3.5 h-3.5 rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
           </button>
           <span className="text-[10px] text-stone-400 flex-1 text-right">
             {autosaveStatus === "saving" && "Saving…"}
