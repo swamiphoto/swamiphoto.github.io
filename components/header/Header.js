@@ -40,11 +40,11 @@ const Header = () => {
                   Galleries
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/course-platform" className={linkStyle("/course-platform")} onClick={closeMenu}>
                   12-Week Program
                 </Link>
-              </li>
+              </li> */}
               {/* <li>
                 <Link href="/wallprints" className={linkStyle("/wallprints")} onClick={closeMenu}>
                   Wall Prints
