@@ -1,0 +1,128 @@
+<h2>Admin Photo Library — Layout Options</h2>
+<p class="subtitle">How should the two-panel library be structured?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;height:200px;gap:4px;background:#f5f5f5;padding:8px;border-radius:4px;font-size:11px;">
+        <div style="width:220px;background:#1a1a1a;border-radius:3px;padding:8px;color:#eee;flex-shrink:0;">
+          <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Library</div>
+          <div style="background:#333;padding:5px 8px;border-radius:2px;margin-bottom:2px;color:#fff;">All Photos</div>
+          <div style="padding:5px 8px;margin-bottom:6px;color:#aaa;">─────────────</div>
+          <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Portfolios</div>
+          <div style="padding:4px 8px;color:#ccc;margin-bottom:1px;">Landscapes</div>
+          <div style="padding:4px 8px;color:#ccc;margin-bottom:1px;">Portraits</div>
+          <div style="padding:4px 8px;color:#ccc;margin-bottom:1px;">Bollywood</div>
+          <div style="padding:4px 8px;color:#ccc;margin-bottom:6px;">Tennis</div>
+          <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Galleries</div>
+          <div style="padding:4px 8px;color:#ccc;margin-bottom:1px;">Arizona</div>
+          <div style="padding:4px 8px;color:#ccc;margin-bottom:1px;">Sunol Ridge</div>
+          <div style="padding:4px 8px;color:#ccc;">···</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:3px;padding:8px;">
+          <div style="font-size:11px;font-weight:600;margin-bottom:6px;">Landscapes <span style="font-size:9px;color:#888;font-weight:400;">18 photos</span></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+            <div style="background:#ddd;aspect-ratio:1;border-radius:2px;"></div>
+            <div style="background:#ccc;aspect-ratio:1;border-radius:2px;"></div>
+            <div style="background:#d5d5d5;aspect-ratio:1;border-radius:2px;"></div>
+            <div style="background:#c8c8c8;aspect-ratio:1;border-radius:2px;"></div>
+            <div style="background:#ddd;aspect-ratio:1;border-radius:2px;"></div>
+            <div style="background:#d0d0d0;aspect-ratio:1;border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Dark Sidebar + Grid</h3>
+      <p>Dark sidebar nav on the left, photo grid on the right. Sections labeled "Portfolios" and "Galleries" in sidebar. Clean, editor-feel, like Lightroom or Capture One.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;flex-direction:column;height:200px;gap:4px;background:#f5f5f5;padding:8px;border-radius:4px;font-size:11px;">
+        <div style="background:#fff;border-radius:3px;padding:6px 8px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:12px;">
+          <span style="font-weight:600;font-size:12px;">Photo Library</span>
+          <span style="background:#f0f0f0;padding:3px 8px;border-radius:12px;font-size:10px;color:#333;">All Photos</span>
+          <span style="padding:3px 8px;font-size:10px;color:#888;">Portfolios</span>
+          <span style="padding:3px 8px;font-size:10px;color:#888;">Galleries</span>
+          <span style="padding:3px 8px;font-size:10px;color:#888;">Upload</span>
+        </div>
+        <div style="display:flex;flex:1;gap:4px;">
+          <div style="width:160px;background:#fff;border-radius:3px;padding:6px;flex-shrink:0;">
+            <div style="font-size:9px;color:#888;margin-bottom:4px;text-transform:uppercase;">Portfolios</div>
+            <div style="background:#f0f0f0;padding:3px 6px;border-radius:2px;margin-bottom:1px;font-size:10px;">Landscapes</div>
+            <div style="padding:3px 6px;margin-bottom:1px;font-size:10px;color:#666;">Portraits</div>
+            <div style="padding:3px 6px;margin-bottom:1px;font-size:10px;color:#666;">Bollywood</div>
+            <div style="padding:3px 6px;margin-bottom:6px;font-size:10px;color:#666;">Tennis</div>
+            <div style="font-size:9px;color:#888;margin-bottom:4px;text-transform:uppercase;">Galleries</div>
+            <div style="padding:3px 6px;margin-bottom:1px;font-size:10px;color:#666;">Arizona</div>
+            <div style="padding:3px 6px;font-size:10px;color:#666;">Sunol Ridge</div>
+          </div>
+          <div style="flex:1;background:#fff;border-radius:3px;padding:6px;">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;">
+              <div style="background:#ddd;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#ccc;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#d5d5d5;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#c8c8c8;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#ddd;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#d0d0d0;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#d8d8d8;aspect-ratio:1;border-radius:2px;"></div>
+              <div style="background:#ccc;aspect-ratio:1;border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Top Nav + White Panels</h3>
+      <p>Top navigation bar (All Photos / Portfolios / Galleries / Upload), white left panel for sets, photo grid to the right. Brighter, more app-like feel.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;height:200px;gap:4px;background:#f5f5f5;padding:8px;border-radius:4px;font-size:11px;">
+        <div style="width:190px;background:#fff;border-radius:3px;padding:8px;flex-shrink:0;border-right:1px solid #eee;">
+          <div style="font-size:11px;font-weight:600;margin-bottom:8px;">📁 Photo Library</div>
+          <div style="background:#f0f0f0;padding:4px 6px;border-radius:2px;margin-bottom:8px;font-size:10px;color:#555;">🔍 All Photos (142)</div>
+          <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Portfolios</div>
+          <div style="display:flex;align-items:center;padding:3px 6px;margin-bottom:1px;border-radius:2px;background:#e8f0fe;">
+            <span style="font-size:10px;flex:1;">Landscapes</span><span style="font-size:9px;color:#888;">18</span>
+          </div>
+          <div style="display:flex;align-items:center;padding:3px 6px;margin-bottom:1px;">
+            <span style="font-size:10px;flex:1;color:#666;">Portraits</span><span style="font-size:9px;color:#bbb;">9</span>
+          </div>
+          <div style="display:flex;align-items:center;padding:3px 6px;margin-bottom:6px;">
+            <span style="font-size:10px;flex:1;color:#666;">Bollywood</span><span style="font-size:9px;color:#bbb;">12</span>
+          </div>
+          <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Galleries</div>
+          <div style="display:flex;align-items:center;padding:3px 6px;margin-bottom:1px;">
+            <span style="font-size:10px;flex:1;color:#666;">Arizona</span><span style="font-size:9px;color:#bbb;">47</span>
+          </div>
+          <div style="display:flex;align-items:center;padding:3px 6px;">
+            <span style="font-size:10px;flex:1;color:#666;">Sunol Ridge</span><span style="font-size:9px;color:#bbb;">35</span>
+          </div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:3px;padding:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:11px;font-weight:600;">Landscapes</span>
+            <button style="font-size:9px;background:#1a73e8;color:#fff;border:none;padding:3px 8px;border-radius:2px;">+ Add Photo</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+            <div style="position:relative;"><div style="background:#ddd;aspect-ratio:1;border-radius:2px;"></div><div style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.5);color:white;font-size:7px;padding:1px 3px;border-radius:1px;">⋯</div></div>
+            <div style="position:relative;"><div style="background:#ccc;aspect-ratio:1;border-radius:2px;"></div><div style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.5);color:white;font-size:7px;padding:1px 3px;border-radius:1px;">⋯</div></div>
+            <div style="position:relative;"><div style="background:#d5d5d5;aspect-ratio:1;border-radius:2px;"></div><div style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.5);color:white;font-size:7px;padding:1px 3px;border-radius:1px;">⋯</div></div>
+            <div style="position:relative;"><div style="background:#c8c8c8;aspect-ratio:1;border-radius:2px;"></div><div style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.5);color:white;font-size:7px;padding:1px 3px;border-radius:1px;">⋯</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Light Two-Panel with Counts</h3>
+      <p>White two-panel layout with photo counts per section. "Add Photo" button top-right of grid, "⋯" menu on each image for remove/delete. Most compact and app-like.</p>
+    </div>
+  </div>
+
+</div>
